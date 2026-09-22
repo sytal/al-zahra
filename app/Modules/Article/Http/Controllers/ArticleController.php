@@ -15,16 +15,6 @@ class ArticleController extends Controller
         private readonly ArticleService $service,
     ) {}
 
-    public function index(Request $request): View
-    {
-        $articles = $this->repository->paginatePublished(
-            categoryId: $request->integer('category') ?: null,
-            search: $request->string('search')->value() ?: null,
-        );
-
-        return view('articles.index', compact('articles'));
-    }
-
     public function show(string $slug, Request $request): View
     {
         $article = $this->repository->findPublishedBySlug($slug) ?? abort(404);
