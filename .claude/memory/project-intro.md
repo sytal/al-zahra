@@ -37,16 +37,24 @@ not yet merged to `main` (user reviews manually per Section 23).
   required because `tailwindcss-rtl` only works with v3's JS plugin
   system. Section 8.1 allows either.
 
+## Branching convention
+One branch per major blueprint Part (docs/CLAUDE.md Section 23), stacked
+on the previous, not squashed into a single phase branch:
+- `phase-0-foundation`: Part A (DB), Part B (components), seeders,
+  Article backend layer.
+- `phase-1-public-pages` (current): public layout + Article C3/C4 pages,
+  locale routing, Newsletter component.
+
 ## Next up
-- Article module backend done. Need the actual views next:
-  articles/index.blade.php (Livewire ArticleIndex, C3) and
-  articles/show.blade.php (C4) — routes/controller already work, just
-  missing views (confirmed via live request: 500 "view not found").
-- Same backend pattern (Repository/Service/Policy) still needed for
-  Course, Research, Resource, Consultation, Contact, Newsletter modules
-  — Article is now the reference implementation to copy.
-- Newsletter Livewire component (`livewire:newsletter.newsletter-form`)
-  still needs building — footer references it as a stub.
-- i18n pass: `common.php` only has `en` so far; need ur/hi/fa/ur-roman.
+- Article module (C3/C4) fully working end-to-end, verified live
+  (/en/, /en/login, /en/articles all 200).
+- No demo content yet — ArticleSeeder (Part F2 demo seeder) needed to see
+  real cards instead of the empty state.
+- Same backend+frontend pattern now needs copying for Course, Research,
+  Resource, Consultation, Contact modules — Article is the reference
+  implementation.
+- i18n pass: only `en` locale files exist so far (common, nav, articles,
+  newsletter); need ur/hi/fa/ur-roman per Section 11.
 - Convert Breeze's Blade auth views (login/register/forgot/reset) to
   Livewire 4 components using shared components, per blueprint C21.
+- Home page (C1) — needs director-profile + settings data, both seeded.
