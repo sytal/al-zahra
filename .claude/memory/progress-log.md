@@ -15,3 +15,6 @@
   dompdf config/migrations published; all migrate cleanly on sqlite.
 - Tailwind v3 wired with RTL + forms plugins, brand color variables,
   dark mode; AOS initialized in app.js.
+- `directors` + `settings` migrations added and migrated. `HasUuid` trait
+  + `Director`/`Setting` models added (app/Modules/Director,
+  app/Modules/Setting).
