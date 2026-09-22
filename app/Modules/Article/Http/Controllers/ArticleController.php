@@ -16,7 +16,7 @@ class ArticleController extends Controller
         private readonly ArticleService $service,
     ) {}
 
-    public function show(string $slug, Request $request): View
+    public function show(Request $request, string $locale, string $slug): View
     {
         $article = $this->repository->findPublishedBySlug($slug) ?? abort(404);
 
