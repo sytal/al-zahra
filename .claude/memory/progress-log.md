@@ -25,6 +25,11 @@
   app/Modules/*/Models and app/Support/Enums.
 - users table updated with uuid/preferred_locale/phone/is_active/
   last_login_at/soft-deletes; User model wired with HasUuid + HasRoles.
+- Docs audit found 2 gaps in Part A models: added HasActivityLog trait
+  (didn't exist) and wired HasMedia/InteractsWithMedia on all models with
+  blueprint media collections. Caught a real bug along the way: Spatie
+  activitylog's dontSubmitEmptyLogs() doesn't exist in the installed
+  version — it's dontLogEmptyChanges(). Verified with migrate:fresh --seed.
 - Removed all hardcoded Tailwind gray/indigo/red/green classes from
   Breeze's auth/nav/profile views and stock components — recolored to
   semantic tokens (text-ink, bg-surface, text-brand-primary, etc.).
