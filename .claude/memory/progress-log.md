@@ -25,6 +25,13 @@
   app/Modules/*/Models and app/Support/Enums.
 - users table updated with uuid/preferred_locale/phone/is_active/
   last_login_at/soft-deletes; User model wired with HasUuid + HasRoles.
+- Demo seeders added: CategorySeeder (16), TagSeeder (10), ArticleSeeder
+  (15 mixed published/draft) — /en/articles now shows real cards.
+- Fixed a real routing bug: controller methods on {locale}-group routes
+  with another URI param must declare $locale explicitly, or Laravel
+  swaps the locale value into that param. articles.show was 404ing
+  silently (abort() isn't logged). Documented in docs/CLAUDE.md Section
+  11 so it doesn't repeat for Course/Research/Resource modules.
 - SEO (Section 12) completed for Article module: SeoSchema class (JSON-LD
   builders), $seo array pattern from controller, fixed broken hreflang
   (was pointing every locale at the same URL), sitemap:generate command

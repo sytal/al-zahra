@@ -45,14 +45,22 @@ on the previous, not squashed into a single phase branch:
 - `phase-1-public-pages` (current): public layout + Article C3/C4 pages,
   locale routing, Newsletter component.
 
+## Known bug pattern (fixed once, watch for it elsewhere)
+Any controller method on a route inside the `{locale}` group MUST
+declare `string $locale` in its signature if the route has another URI
+parameter — otherwise Laravel silently swaps the locale value into that
+other parameter. Hit this on articles.show (see docs/CLAUDE.md Section
+11). Will recur for courses.show, research.show, resources.show etc.
+unless each one declares $locale explicitly.
+
 ## Next up
-- Article module (C3/C4) fully working end-to-end, verified live
-  (/en/, /en/login, /en/articles all 200).
-- No demo content yet — ArticleSeeder (Part F2 demo seeder) needed to see
-  real cards instead of the empty state.
+- Article module (C3/C4) fully working end-to-end with real demo content
+  — verified live (/en/, /en/login, /en/articles, /en/articles/{slug}
+  all 200, SEO/schema/hreflang all correct).
 - Same backend+frontend pattern now needs copying for Course, Research,
   Resource, Consultation, Contact modules — Article is the reference
-  implementation.
+  implementation. Remember the $locale signature pitfall above for each
+  one's show()/detail route.
 - i18n pass: only `en` locale files exist so far (common, nav, articles,
   newsletter); need ur/hi/fa/ur-roman per Section 11.
 - Convert Breeze's Blade auth views (login/register/forgot/reset) to
