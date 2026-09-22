@@ -23,8 +23,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         if (! app()->isProduction()) {
-            // Demo seeders (CategorySeeder, ArticleSeeder, etc.) will be
-            // added here as each module's content is built.
+            $this->call([
+                CategorySeeder::class,
+                TagSeeder::class,
+                ArticleSeeder::class,
+            ]);
         }
     }
 }
