@@ -94,6 +94,12 @@ At the START of every new chat session, Claude must read:
 `memory/project-intro.md` + `memory/progress-log.md` ONLY (not the whole repo)
 to restore context cheaply.
 
+Claude updates `memory/project-intro.md` (Current phase / Done so far / Next
+up) and appends to `memory/progress-log.md` on its own, silently, whenever a
+unit of work completes — never ask the user for permission first. Same for
+`.claude/memory/deferred-scope.md`: log anything explicitly deferred there
+without being asked.
+
 ---
 
 ## 3. GLOBAL NAMING STANDARDS
