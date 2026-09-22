@@ -38,9 +38,11 @@ not yet merged to `main` (user reviews manually per Section 23).
   system. Section 8.1 allows either.
 
 ## Next up
+- Part B: build the shared component library (x-button, x-icon, x-card,
+  x-input, etc.) before any page work.
 - Convert Breeze's Blade auth views (login/register/forgot/reset) to
   Livewire 4 components using shared components, per blueprint C21.
-- `architect` agent: plan Part A tables in build order (start with
-  `directors` + `settings` since Home/About depend on them).
-- Build the shared component library (Part B of blueprint) before any
-  page work — `x-button`, `x-icon`, `x-card`, etc.
+- Backend layer (Requests/Policies/Repositories/Services/Controllers) for
+  each module, per Section 7.
+- RolePermissionSeeder + SettingSeeder + DirectorSeeder (essential
+  seeders, Section 22B) before any page can render real content.

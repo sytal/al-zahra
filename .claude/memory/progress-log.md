@@ -18,3 +18,10 @@
 - `directors` + `settings` migrations added and migrated. `HasUuid` trait
   + `Director`/`Setting` models added (app/Modules/Director,
   app/Modules/Setting).
+- All 16 Part A tables now migrated (categories, articles/tags/pivot,
+  research_papers, resources, courses/course_lessons,
+  enrollments/lesson_progress, consultations, certificates,
+  newsletter_subscribers, contact_messages) with models + enums under
+  app/Modules/*/Models and app/Support/Enums.
+- users table updated with uuid/preferred_locale/phone/is_active/
+  last_login_at/soft-deletes; User model wired with HasUuid + HasRoles.
