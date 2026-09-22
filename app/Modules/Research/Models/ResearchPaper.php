@@ -5,15 +5,20 @@ namespace App\Modules\Research\Models;
 use App\Models\User;
 use App\Modules\Category\Models\Category;
 use App\Support\Enums\FullPaperType;
+use App\Support\Traits\HasActivityLog;
 use App\Support\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 
-class ResearchPaper extends Model
+class ResearchPaper extends Model implements HasMedia
 {
-    use HasUuid, HasTranslations, SoftDeletes;
+    use HasActivityLog, HasTranslations, HasUuid, InteractsWithMedia, SoftDeletes;
+
+    protected string $activityLogLabel = 'Research paper';
 
     protected $fillable = [
         'author_id',
@@ -50,6 +55,12 @@ class ResearchPaper extends Model
             'co_authors' => 'array',
             'is_published' => 'boolean',
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('paper_file')->singleFile();
+        $this->addMediaCollection('cover_image')->singleFile();
     }
 
     public function author(): BelongsTo

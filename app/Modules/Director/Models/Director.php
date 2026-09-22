@@ -3,15 +3,20 @@
 namespace App\Modules\Director\Models;
 
 use App\Models\User;
+use App\Support\Traits\HasActivityLog;
 use App\Support\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 
-class Director extends Model
+class Director extends Model implements HasMedia
 {
-    use HasUuid, HasTranslations, SoftDeletes;
+    use HasActivityLog, HasTranslations, HasUuid, InteractsWithMedia, SoftDeletes;
+
+    protected string $activityLogLabel = 'Director profile';
 
     protected $fillable = [
         'user_id',
@@ -41,6 +46,12 @@ class Director extends Model
             'social_links' => 'array',
             'is_published' => 'boolean',
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('profile_photo')->singleFile();
+        $this->addMediaCollection('cover_photo')->singleFile();
     }
 
     public function user(): BelongsTo

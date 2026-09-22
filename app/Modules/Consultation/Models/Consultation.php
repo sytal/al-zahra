@@ -5,6 +5,7 @@ namespace App\Modules\Consultation\Models;
 use App\Models\User;
 use App\Support\Enums\ConsultationStatus;
 use App\Support\Enums\ConsultationType;
+use App\Support\Traits\HasActivityLog;
 use App\Support\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,7 +13,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Consultation extends Model
 {
-    use HasUuid, SoftDeletes;
+    use HasActivityLog, HasUuid, SoftDeletes;
+
+    protected string $activityLogLabel = 'Consultation';
 
     protected $fillable = [
         'user_id',

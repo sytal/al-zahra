@@ -6,16 +6,23 @@ use App\Models\User;
 use App\Modules\Category\Models\Category;
 use App\Support\Enums\CourseAudience;
 use App\Support\Enums\CourseLevel;
+use App\Support\Traits\HasActivityLog;
 use App\Support\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 
-class Course extends Model
+class Course extends Model implements HasMedia
 {
-    use HasUuid, HasTranslations, SoftDeletes;
+    use HasActivityLog, HasTranslations, HasUuid, InteractsWithMedia, SoftDeletes;
+
+    protected string $activityLogLabel = 'Course';
 
     protected $fillable = [
         'category_id',
@@ -54,6 +61,17 @@ class Course extends Model
             'is_published' => 'boolean',
             'price' => 'decimal:2',
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('cover_image')->singleFile();
+    }
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('card')->fit(Fit::Crop, 600, 400);
+        $this->addMediaConversion('hero')->fit(Fit::Crop, 1200, 630);
     }
 
     public function instructor(): BelongsTo
