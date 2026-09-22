@@ -610,6 +610,11 @@ Urdu (`ur-roman` — custom locale, not a real ISO code but treated as one).
   (Section 24) — "Initial project setup".
 - Branch per Phase (from the phase roadmap given separately), e.g.
   `phase-1-foundation`, `phase-2-content`, named exactly after the phase.
+  In practice this also means one branch per major blueprint Part (Part A
+  migrations, Part B components, Part C pages, ...) when a phase spans
+  several of them — each new Part gets its own branch, stacked on top of
+  the previous one (branched from it, not from `main`), so the user can
+  review and merge each chunk independently.
 - Within a phase branch, commit after each logically complete unit of work
   (e.g. "Add Article module migrations+model", "Add Article admin CRUD")
   — small, frequent, auto-committed by Claude once that unit is verified
