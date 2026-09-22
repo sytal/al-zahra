@@ -28,8 +28,7 @@
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
         "pestphp/pest": "^4.7",
-        "pestphp/pest-plugin-laravel": "^4.1",
-        "phpunit/phpunit": "^12.5.12"
+        "pestphp/pest-plugin-laravel": "^4.1"
     },
     "autoload": {
         "psr-4": {
@@ -62,7 +61,8 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
