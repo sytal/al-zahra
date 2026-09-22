@@ -27,9 +27,20 @@ not yet merged to `main` (user reviews manually per Section 23).
   (10 Composer prod + Pest/pest-plugin-laravel dev + 4 npm dev) and
   committed in 2 commits.
 
+## Known deviations from plan
+- Breeze installed with the **Blade** stack, not Livewire — Breeze pins
+  Livewire ^3.6.4 which conflicts with Filament v5's Livewire ^4.1
+  requirement. Auth pages (C21) are currently Breeze's stock Blade
+  views/controllers; still need conversion to Livewire 4 + shared
+  `x-input`/`x-button` components per blueprint.
+- Tailwind is v3 (classic PostCSS, `tailwind.config.js`), not v4 —
+  required because `tailwindcss-rtl` only works with v3's JS plugin
+  system. Section 8.1 allows either.
+
 ## Next up
-- Publish vendor configs (Breeze, Livewire, Filament panel, Spatie
-  packages) and run their install commands (Filament panel install,
-  Breeze scaffolding, Tailwind config wiring).
+- Convert Breeze's Blade auth views (login/register/forgot/reset) to
+  Livewire 4 components using shared components, per blueprint C21.
 - `architect` agent: plan Part A tables in build order (start with
   `directors` + `settings` since Home/About depend on them).
+- Build the shared component library (Part B of blueprint) before any
+  page work — `x-button`, `x-icon`, `x-card`, etc.

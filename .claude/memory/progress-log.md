@@ -9,3 +9,9 @@
 - `.claude/skills/seeders/SKILL.md` added.
 - Branch `phase-0-foundation` created; all Phase 0 packages installed and
   committed (2 commits: scaffolding+docs, package install).
+- Filament admin panel installed; Breeze Blade stack installed (Livewire
+  stack skipped — conflicts with Filament v5's Livewire ^4.1 requirement).
+- Spatie packages (permission, medialibrary, activitylog, sitemap) +
+  dompdf config/migrations published; all migrate cleanly on sqlite.
+- Tailwind v3 wired with RTL + forms plugins, brand color variables,
+  dark mode; AOS initialized in app.js.
