@@ -5,6 +5,7 @@ namespace App\Modules\Article\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\Article\Repositories\ArticleRepositoryInterface;
 use App\Modules\Article\Services\ArticleService;
+use App\Support\SeoSchema;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -26,6 +27,14 @@ class ArticleController extends Controller
 
         $related = $this->repository->relatedTo($article);
 
-        return view('articles.show', compact('article', 'related'));
+        $seo = [
+            'title' => $article->meta_title ?: $article->title,
+            'description' => $article->meta_description ?: $article->excerpt,
+            'image' => $article->getFirstMediaUrl('featured_image', 'hero') ?: null,
+            'type' => 'article',
+            'schema' => SeoSchema::article($article),
+        ];
+
+        return view('articles.show', compact('article', 'related', 'seo'));
     }
 }

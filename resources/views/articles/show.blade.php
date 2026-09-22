@@ -1,6 +1,6 @@
 <x-layouts.public>
     <x-slot name="seo">
-        <x-seo :title="$article->title" :description="$article->excerpt" :image="$article->getFirstMediaUrl('featured_image', 'hero')" type="article" />
+        <x-seo :title="$seo['title']" :description="$seo['description']" :image="$seo['image']" :type="$seo['type']" :schema="$seo['schema']" />
     </x-slot>
 
     <x-detail-layout :title="$article->title">
