@@ -25,6 +25,11 @@
   app/Modules/*/Models and app/Support/Enums.
 - users table updated with uuid/preferred_locale/phone/is_active/
   last_login_at/soft-deletes; User model wired with HasUuid + HasRoles.
+- SEO (Section 12) completed for Article module: SeoSchema class (JSON-LD
+  builders), $seo array pattern from controller, fixed broken hreflang
+  (was pointing every locale at the same URL), sitemap:generate command
+  scheduled daily. Was previously only half-done (meta tags inline in
+  the view, no schema/sitemap) — user caught the gap by asking directly.
 - Article module backend layer built (Repository+Interface, Service,
   Policy) and bound via new RepositoryServiceProvider. Controller only
   has public index/show — admin CRUD is Filament's job (Part D), so
