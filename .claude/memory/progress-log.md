@@ -25,6 +25,15 @@
   app/Modules/*/Models and app/Support/Enums.
 - users table updated with uuid/preferred_locale/phone/is_active/
   last_login_at/soft-deletes; User model wired with HasUuid + HasRoles.
+- Article module backend layer built (Repository+Interface, Service,
+  Policy) and bound via new RepositoryServiceProvider. Controller only
+  has public index/show — admin CRUD is Filament's job (Part D), so
+  Store/UpdateArticleRequest + ArticleResource were dropped as unused.
+- Locale-prefixed routing wired: {locale} route group (en/ur/hi/fa/
+  ur-roman) + SetLocale middleware (sets app locale + URL::defaults).
+  All existing routes (auth, dashboard, profile, articles) now live
+  under /{locale}/... per blueprint Part E. Verified with route:list,
+  route:cache, and live requests.
 - Docs audit found 2 gaps in Part A models: added HasActivityLog trait
   (didn't exist) and wired HasMedia/InteractsWithMedia on all models with
   blueprint media collections. Caught a real bug along the way: Spatie

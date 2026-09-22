@@ -38,12 +38,15 @@ not yet merged to `main` (user reviews manually per Section 23).
   system. Section 8.1 allows either.
 
 ## Next up
-- Essential seeders done — director-profile/footer components now have
-  real data to render.
+- Article module backend done. Need the actual views next:
+  articles/index.blade.php (Livewire ArticleIndex, C3) and
+  articles/show.blade.php (C4) — routes/controller already work, just
+  missing views (confirmed via live request: 500 "view not found").
+- Same backend pattern (Repository/Service/Policy) still needed for
+  Course, Research, Resource, Consultation, Contact, Newsletter modules
+  — Article is now the reference implementation to copy.
 - Newsletter Livewire component (`livewire:newsletter.newsletter-form`)
   still needs building — footer references it as a stub.
 - i18n pass: `common.php` only has `en` so far; need ur/hi/fa/ur-roman.
 - Convert Breeze's Blade auth views (login/register/forgot/reset) to
   Livewire 4 components using shared components, per blueprint C21.
-- Backend layer (Requests/Policies/Repositories/Services/Controllers) for
-  each module, per Section 7 — then first real page (Home, C1).
