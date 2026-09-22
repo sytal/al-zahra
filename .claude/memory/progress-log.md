@@ -25,3 +25,8 @@
   app/Modules/*/Models and app/Support/Enums.
 - users table updated with uuid/preferred_locale/phone/is_active/
   last_login_at/soft-deletes; User model wired with HasUuid + HasRoles.
+- Part B shared component library built (resources/views/components/*):
+  button, icon, card, badge, form inputs, table, modal, dropdown,
+  accordion, pagination, seo, language-switcher, footer, empty-state,
+  breadcrumbs, progress-bar, stat-card, share-buttons, newsletter-form
+  (stub), director-profile, instructor-card, detail-layout.
