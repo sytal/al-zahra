@@ -1,0 +1,1 @@
+<livewire:newsletter.newsletter-form />
