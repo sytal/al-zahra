@@ -370,6 +370,17 @@ Urdu (`ur-roman` — custom locale, not a real ISO code but treated as one).
   utilities; always use logical properties.
 - URL structure: locale prefix (`/en/articles`, `/ur/articles`) via route
   group middleware `SetLocale`.
+- **Every controller method bound to a route inside the `{locale}` group
+  MUST declare `string $locale` as a parameter**, even if unused, when
+  the route has any other URI parameter (e.g. `{slug}`, `{uuid}`).
+  Laravel's controller-method dependency resolution matches route
+  parameters against the method signature; if `$locale` is omitted, the
+  locale value silently lands in the next scalar parameter instead (e.g.
+  `show(string $slug)` on `/{locale}/articles/{slug}` receives the
+  locale's value, not the slug) — a real bug hit while building the
+  Article module. It fails as a 404 via `abort()`, which Laravel doesn't
+  log, so it's easy to miss. Order parameters to match the URI:
+  `show(Request $request, string $locale, string $slug)`.
 - Every new UI string added by any agent MUST be added to all 5
   `lang/{locale}/*.php` files in the same commit (i18n-agent's job,
   Section 1) — English + Roman Urdu content can be auto-translated by
