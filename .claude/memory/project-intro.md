@@ -38,13 +38,11 @@ not yet merged to `main` (user reviews manually per Section 23).
   system. Section 8.1 allows either.
 
 ## Next up
-- Part B shared component library done. Newsletter Livewire component
-  (`livewire:newsletter.newsletter-form`) still needs building — footer
-  references it as a stub.
+- Essential seeders done — director-profile/footer components now have
+  real data to render.
+- Newsletter Livewire component (`livewire:newsletter.newsletter-form`)
+  still needs building — footer references it as a stub.
 - i18n pass: `common.php` only has `en` so far; need ur/hi/fa/ur-roman.
-- RolePermissionSeeder + SettingSeeder + DirectorSeeder (essential
-  seeders, Section 22B) needed before any page shows real content —
-  director-profile/footer components query these tables directly.
 - Convert Breeze's Blade auth views (login/register/forgot/reset) to
   Livewire 4 components using shared components, per blueprint C21.
 - Backend layer (Requests/Policies/Repositories/Services/Controllers) for
