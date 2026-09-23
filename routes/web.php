@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Modules\Page\Http\Controllers\DashboardController;
 use App\Modules\Page\Http\Controllers\HomeController;
 use App\Modules\Page\Http\Controllers\PageController;
@@ -30,12 +29,6 @@ Route::group([
 
             require __DIR__.'/modules/dashboard-courses.php';
             require __DIR__.'/modules/dashboard-account.php';
-        });
-
-        Route::middleware('auth')->group(function () {
-            Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-            Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-            Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
         });
 
         require __DIR__.'/auth.php';

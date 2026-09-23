@@ -17,7 +17,13 @@ use App\Modules\Newsletter\Livewire\NewsletterForm;
 use App\Modules\Research\Livewire\ResearchIndex;
 use App\Modules\Resource\Livewire\ResourceIndex;
 use App\Modules\User\Listeners\SendWelcomeEmail;
+use App\Modules\User\Livewire\ConfirmPassword;
+use App\Modules\User\Livewire\ForgotPassword;
+use App\Modules\User\Livewire\Login;
 use App\Modules\User\Livewire\ProfileEdit;
+use App\Modules\User\Livewire\Register;
+use App\Modules\User\Livewire\ResetPassword;
+use App\Modules\User\Livewire\VerifyEmailNotice;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
@@ -43,9 +49,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
-    Schema::defaultStringLength(191);
-
+        Schema::defaultStringLength(191);
 
         Livewire::component('articles.article-index', ArticleIndex::class);
         Livewire::component('certificates.certificate-verify', CertificateVerify::class);
@@ -60,6 +64,12 @@ class AppServiceProvider extends ServiceProvider
         Livewire::component('dashboard.consultation-index', DashboardConsultationIndex::class);
         Livewire::component('dashboard.certificate-index', DashboardCertificateIndex::class);
         Livewire::component('dashboard.profile-edit', ProfileEdit::class);
+        Livewire::component('user.login', Login::class);
+        Livewire::component('user.register', Register::class);
+        Livewire::component('user.forgot-password', ForgotPassword::class);
+        Livewire::component('user.reset-password', ResetPassword::class);
+        Livewire::component('user.confirm-password', ConfirmPassword::class);
+        Livewire::component('user.verify-email-notice', VerifyEmailNotice::class);
 
         Event::listen(Registered::class, SendWelcomeEmail::class);
         Event::listen(CourseCompleted::class, IssueCertificateListener::class);
