@@ -637,6 +637,11 @@ Urdu (`ur-roman` — custom locale, not a real ISO code but treated as one).
 - `.gitignore` standard Laravel + `.env`, `node_modules`, `vendor`,
   `storage/*.key` etc. (default Laravel `.gitignore` is sufficient, verify
   once at setup).
+- `/compact` is NOT run automatically after every single commit — only
+  when conversation context is actually getting long / a `/autocompact`
+  warning would otherwise fire. Small frequent commits (per the bullet
+  above) should not each trigger a compact; batch several units of work
+  before compacting so context isn't thrown away needlessly.
 
 ---
 
