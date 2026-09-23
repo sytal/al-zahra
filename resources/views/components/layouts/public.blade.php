@@ -10,6 +10,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
+    @stack('head')
 </head>
 <body class="bg-white dark:bg-surface font-sans text-ink antialiased">
     <header class="border-b border-ink/10 bg-white dark:bg-surface" x-data="{ mobileOpen: false }">

@@ -1,11 +1,11 @@
-@props(['title', 'description' => null, 'image' => null, 'type' => 'website', 'schema' => null])
+@props(['title', 'description' => null, 'image' => null, 'type' => 'website', 'schema' => null, 'titleTag' => true])
 
 @php
 $segments = explode('/', trim(request()->path(), '/'));
 $currentLocale = app()->getLocale();
 @endphp
 
-<title>{{ $title }} — {{ config('app.name') }}</title>
+@if ($titleTag)<title>{{ $title }} — {{ config('app.name') }}</title>@endif
 @if ($description)<meta name="description" content="{{ $description }}">@endif
 <link rel="canonical" href="{{ url()->current() }}">
 

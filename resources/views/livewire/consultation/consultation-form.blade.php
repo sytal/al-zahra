@@ -1,3 +1,14 @@
+@push('head')
+    <x-seo
+        :title="$seo['title']"
+        :description="$seo['description']"
+        :image="$seo['image']"
+        :type="$seo['type']"
+        :schema="$seo['schema']"
+        :title-tag="false"
+    />
+@endpush
+
 <div class="mx-auto max-w-2xl px-4 py-10" data-aos="fade-up">
     <header class="mb-8 text-center">
         <h1 class="text-3xl font-bold text-ink">{{ __('consultation.page_title') }}</h1>

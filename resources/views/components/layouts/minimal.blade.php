@@ -10,6 +10,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
+    @stack('head')
 </head>
 <body class="flex min-h-screen flex-col bg-surface font-sans text-ink antialiased">
     <header class="border-b border-ink/10 bg-white">

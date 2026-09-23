@@ -54,6 +54,14 @@ class ContactForm extends Component
 
     public function render()
     {
-        return view('livewire.contact.contact-form');
+        $seo = [
+            'title' => __('contact.page_title'),
+            'description' => __('contact.page_intro'),
+            'image' => null,
+            'type' => 'website',
+            'schema' => null,
+        ];
+
+        return view('livewire.contact.contact-form', compact('seo'));
     }
 }

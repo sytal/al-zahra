@@ -3,12 +3,16 @@
 namespace App\Providers;
 
 use App\Modules\Article\Livewire\ArticleIndex;
+use App\Modules\Certificate\Livewire\CertificateVerify;
 use App\Modules\Consultation\Livewire\ConsultationForm;
 use App\Modules\Contact\Livewire\ContactForm;
 use App\Modules\Course\Livewire\CourseIndex;
 use App\Modules\Newsletter\Livewire\NewsletterForm;
 use App\Modules\Research\Livewire\ResearchIndex;
 use App\Modules\Resource\Livewire\ResourceIndex;
+use App\Modules\User\Listeners\SendWelcomeEmail;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
@@ -32,11 +36,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Livewire::component('articles.article-index', ArticleIndex::class);
+        Livewire::component('certificates.certificate-verify', CertificateVerify::class);
         Livewire::component('courses.course-index', CourseIndex::class);
         Livewire::component('consultation.consultation-form', ConsultationForm::class);
         Livewire::component('contact.contact-form', ContactForm::class);
         Livewire::component('newsletter.newsletter-form', NewsletterForm::class);
         Livewire::component('research.research-index', ResearchIndex::class);
         Livewire::component('resources.resource-index', ResourceIndex::class);
+
+        Event::listen(Registered::class, SendWelcomeEmail::class);
     }
 }

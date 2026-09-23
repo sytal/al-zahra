@@ -4,6 +4,17 @@ $contactPhone = \App\Modules\Setting\Models\Setting::where('key', 'contact_phone
 $socialLinks = \App\Modules\Setting\Models\Setting::where('key', 'social_links')->value('value') ?? [];
 @endphp
 
+@push('head')
+    <x-seo
+        :title="$seo['title']"
+        :description="$seo['description']"
+        :image="$seo['image']"
+        :type="$seo['type']"
+        :schema="$seo['schema']"
+        :title-tag="false"
+    />
+@endpush
+
 <div class="mx-auto max-w-6xl px-4 py-16" data-aos="fade-up">
     <header class="mb-10 text-center">
         <h1 class="text-3xl font-bold text-ink">{{ __('contact.page_title') }}</h1>

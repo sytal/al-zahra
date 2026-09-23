@@ -78,6 +78,14 @@ class ConsultationForm extends Component
 
     public function render()
     {
-        return view('livewire.consultation.consultation-form');
+        $seo = [
+            'title' => __('consultation.page_title'),
+            'description' => __('consultation.page_intro'),
+            'image' => null,
+            'type' => 'website',
+            'schema' => null,
+        ];
+
+        return view('livewire.consultation.consultation-form', compact('seo'));
     }
 }
