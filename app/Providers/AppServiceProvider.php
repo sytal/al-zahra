@@ -6,6 +6,7 @@ use App\Modules\Article\Livewire\ArticleIndex;
 use App\Modules\Course\Livewire\CourseIndex;
 use App\Modules\Newsletter\Livewire\NewsletterForm;
 use App\Modules\Research\Livewire\ResearchIndex;
+use App\Modules\Resource\Livewire\ResourceIndex;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
@@ -32,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
         Livewire::component('courses.course-index', CourseIndex::class);
         Livewire::component('newsletter.newsletter-form', NewsletterForm::class);
         Livewire::component('research.research-index', ResearchIndex::class);
+        Livewire::component('resources.resource-index', ResourceIndex::class);
     }
 }

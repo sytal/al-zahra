@@ -22,6 +22,7 @@
                 <a href="{{ route('articles.index', app()->getLocale()) }}" wire:navigate class="text-sm text-ink/70 hover:text-brand-primary">{{ __('nav.articles') }}</a>
                 <a href="{{ route('courses.index', app()->getLocale()) }}" wire:navigate class="text-sm text-ink/70 hover:text-brand-primary">{{ __('nav.courses') }}</a>
                 <a href="{{ route('research.index', app()->getLocale()) }}" wire:navigate class="text-sm text-ink/70 hover:text-brand-primary">{{ __('nav.research') }}</a>
+                <a href="{{ route('resources.index', app()->getLocale()) }}" wire:navigate class="text-sm text-ink/70 hover:text-brand-primary">{{ __('nav.resources') }}</a>
             </nav>
 
             <x-language-switcher />

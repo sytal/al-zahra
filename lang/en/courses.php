@@ -9,8 +9,6 @@ return [
     'all_audiences' => 'All audiences',
     'all_levels' => 'All levels',
     'all_pricing' => 'All',
-    'free' => 'Free',
-    'paid' => 'Paid',
     'search_label' => 'Search',
     'empty_title' => 'No courses found',
     'empty_message' => 'Try a different filter or search term.',

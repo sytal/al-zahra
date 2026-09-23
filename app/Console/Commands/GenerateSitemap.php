@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Modules\Article\Models\Article;
 use App\Modules\Course\Models\Course;
 use App\Modules\Research\Models\ResearchPaper;
+use App\Modules\Resource\Models\Resource;
 use Illuminate\Console\Command;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
@@ -24,6 +25,7 @@ class GenerateSitemap extends Command
             $sitemap->add(Url::create("/{$locale}/articles")->setPriority(0.8));
             $sitemap->add(Url::create("/{$locale}/courses")->setPriority(0.8));
             $sitemap->add(Url::create("/{$locale}/research")->setPriority(0.8));
+            $sitemap->add(Url::create("/{$locale}/resources")->setPriority(0.8));
 
             Article::query()
                 ->where('is_published', true)
@@ -52,6 +54,16 @@ class GenerateSitemap extends Command
                         Url::create("/{$locale}/research/{$paper->slug}")
                             ->setLastModificationDate($paper->updated_at)
                             ->setPriority(0.6)
+                    );
+                });
+
+            Resource::query()
+                ->where('is_published', true)
+                ->each(function (Resource $resource) use ($sitemap, $locale) {
+                    $sitemap->add(
+                        Url::create("/{$locale}/resources/{$resource->slug}")
+                            ->setLastModificationDate($resource->updated_at)
+                            ->setPriority(0.5)
                     );
                 });
         }

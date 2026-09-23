@@ -11,7 +11,7 @@
             ]" />
             <x-badge color="brand" :text="ucfirst($course->level->value)" />
             <x-badge color="neutral" :text="ucfirst($course->audience->value)" />
-            <x-badge :color="$course->is_free ? 'success' : 'warning'" :text="$course->is_free ? __('courses.free') : __('courses.paid')" />
+            <x-badge :color="$course->is_free ? 'success' : 'warning'" :text="$course->is_free ? __('common.free') : __('common.paid')" />
         </x-slot>
 
         @if ($course->hasMedia('cover_image'))

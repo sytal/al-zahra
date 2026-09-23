@@ -21,8 +21,8 @@
 
         <x-select name="pricing" :label="__('courses.filter_pricing')" wire:model.live="pricing" class="w-36">
             <option value="">{{ __('courses.all_pricing') }}</option>
-            <option value="free">{{ __('courses.free') }}</option>
-            <option value="paid">{{ __('courses.paid') }}</option>
+            <option value="free">{{ __('common.free') }}</option>
+            <option value="paid">{{ __('common.paid') }}</option>
         </x-select>
 
         <x-input name="search" :label="__('courses.search_label')" wire:model.live.debounce.400ms="search" class="flex-1" />
@@ -44,7 +44,7 @@
                             <div class="mb-2 flex flex-wrap gap-1.5">
                                 <x-badge color="brand" :text="ucfirst($course->level->value)" />
                                 <x-badge color="neutral" :text="ucfirst($course->audience->value)" />
-                                <x-badge :color="$course->is_free ? 'success' : 'warning'" :text="$course->is_free ? __('courses.free') : __('courses.paid')" />
+                                <x-badge :color="$course->is_free ? 'success' : 'warning'" :text="$course->is_free ? __('common.free') : __('common.paid')" />
                             </div>
                             <h2 class="font-semibold text-ink">{{ $course->title }}</h2>
                             <p class="mt-1 text-sm text-ink/60">{{ $course->short_description }}</p>

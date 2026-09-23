@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
                 ArticleSeeder::class,
                 CourseSeeder::class,
                 ResearchPaperSeeder::class,
+                ResourceSeeder::class,
             ]);
         }
     }
