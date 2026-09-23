@@ -1,0 +1,24 @@
+<?php
+
+return [
+    'page_title' => 'Courses',
+    'page_intro' => 'Zaban aur zehan par mahaz-e-nazam seekhne ke raaste.',
+    'filter_audience' => 'Audience',
+    'filter_level' => 'Level',
+    'filter_pricing' => 'Qeemat',
+    'all_audiences' => 'Tamam Audiences',
+    'all_levels' => 'Tamam Levels',
+    'all_pricing' => 'Sab',
+    'search_label' => 'Talash Karein',
+    'empty_title' => 'Koi course nahi mila',
+    'empty_message' => 'Koi doosra filter ya search term azmayein.',
+    'students_enrolled' => 'students enroll hain',
+    'what_youll_learn' => 'Aap Kya Seekhenge',
+    'curriculum' => 'Curriculum',
+    'instructor' => 'Ustad',
+    'enroll_now' => 'Abhi Enroll Karein',
+    'continue_learning' => 'Seekhna Jari Rakhein',
+    'login_to_enroll' => 'Enroll Karne Ke Liye Login Karein',
+    'enrolled_success' => 'Aap enroll ho gaye! Course mein khush amdeed.',
+    'related_title' => 'Mutalliqa Courses',
+];
