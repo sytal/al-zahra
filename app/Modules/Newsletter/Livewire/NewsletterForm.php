@@ -2,8 +2,8 @@
 
 namespace App\Modules\Newsletter\Livewire;
 
+use App\Modules\Newsletter\Jobs\SendNewsletterConfirmationEmailJob;
 use App\Modules\Newsletter\Models\NewsletterSubscriber;
-use Illuminate\Support\Str;
 use Livewire\Component;
 
 class NewsletterForm extends Component
@@ -18,10 +18,14 @@ class NewsletterForm extends Component
             'email' => ['required', 'email', 'max:255'],
         ]);
 
-        NewsletterSubscriber::firstOrCreate(
+        $subscriber = NewsletterSubscriber::firstOrCreate(
             ['email' => $this->email],
             ['locale' => app()->getLocale()]
         );
+
+        if ($subscriber->wasRecentlyCreated) {
+            SendNewsletterConfirmationEmailJob::dispatch($subscriber);
+        }
 
         $this->subscribed = true;
         $this->email = '';

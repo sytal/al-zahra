@@ -21,6 +21,8 @@ Route::group([
         require __DIR__.'/modules/resources.php';
         require __DIR__.'/modules/consultation.php';
         require __DIR__.'/modules/contact.php';
+        require __DIR__.'/modules/certificates.php';
+        require __DIR__.'/modules/newsletter.php';
 
         Route::get('/dashboard', function () {
             return view('dashboard');
