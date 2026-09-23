@@ -94,6 +94,12 @@ At the START of every new chat session, Claude must read:
 `memory/project-intro.md` + `memory/progress-log.md` ONLY (not the whole repo)
 to restore context cheaply.
 
+Claude updates `memory/project-intro.md` (Current phase / Done so far / Next
+up) and appends to `memory/progress-log.md` on its own, silently, whenever a
+unit of work completes — never ask the user for permission first. Same for
+`.claude/memory/deferred-scope.md`: log anything explicitly deferred there
+without being asked.
+
 ---
 
 ## 3. GLOBAL NAMING STANDARDS
@@ -430,6 +436,11 @@ Urdu (`ur-roman` — custom locale, not a real ISO code but treated as one).
   `certificates` table for the public `/certificates/verify` lookup —
   never store raw binary in the database, always filesystem/S3-style disk
   reference through Media Library.
+- Disk: local/dev uses `FILESYSTEM_DISK=public` (`php artisan
+  storage:link`); production uses `FILESYSTEM_DISK=s3` pointed at any
+  S3-compatible provider (e.g. Cloudflare R2 free tier). Disk name is
+  never hardcoded anywhere in code — always read from the `FILESYSTEM_DISK`
+  env var via config, so switching environments requires no code change.
 
 ---
 
@@ -534,6 +545,17 @@ Urdu (`ur-roman` — custom locale, not a real ISO code but treated as one).
   (routes/console.php or a `Console/Kernel`-equivalent) — the SINGLE cron
   entry mentioned in Section 12 runs all of them.
 
+### 21.1 Mail & Notifications
+
+- Mailable classes: `app/Modules/{Module}/Mail/{Purpose}Mail.php` (e.g.
+  `app/Modules/Consultation/Mail/ConsultationAnsweredMail.php`).
+- A Job only dispatches/queues — it never builds email content itself. The
+  Job's `handle()` sends the Mailable (`Mail::to(...)->send(new
+  {Purpose}Mail(...))`); all subject/body/markup lives in the Mailable
+  class + its Blade view.
+- Notification classes (for future in-app notifications), same module
+  placement pattern: `app/Modules/{Module}/Notifications/{Purpose}Notification.php`.
+
 ---
 
 ## 22. TESTING STANDARD
@@ -548,6 +570,37 @@ Urdu (`ur-roman` — custom locale, not a real ISO code but treated as one).
   triggered.
 - Minimum coverage per feature: happy path + one authorization-denied case
   + one validation-failure case.
+
+---
+
+## 22B. SEEDERS & FACTORIES STANDARD
+
+- Seeder naming: `{Model}Seeder`, living in root `database/seeders/`
+  (Laravel's official convention — module-splitting seeders breaks
+  artisan's seeder auto-discovery/ordering, so this is the one place we
+  intentionally deviate from the module-folder rule in Section 4).
+- `DatabaseSeeder.php` calls seeders in this exact order (dependency
+  order — later seeders reference earlier ones):
+  ```
+  RolePermissionSeeder -> UserSeeder -> DirectorSeeder -> CategorySeeder ->
+  TagSeeder -> ArticleSeeder -> ResearchPaperSeeder -> ResourceSeeder ->
+  CourseSeeder (creates lessons too) -> SettingSeeder
+  ```
+- Two distinct kinds of seeder, never mixed in one class:
+  - **Essential** (`RolePermissionSeeder`, `SettingSeeder`,
+    `DirectorSeeder`, `UserSeeder` for the director's own account) — these
+    run in production too, required for the app to function.
+  - **Demo** (`ArticleSeeder`, `ResearchPaperSeeder`, `ResourceSeeder`,
+    `CourseSeeder`, `CategorySeeder`/`TagSeeder` sample rows) — fake
+    content for local/staging only, excluded from the production seed
+    command. `DatabaseSeeder` gates demo seeders behind
+    `if (! app()->isProduction())`.
+- Factories live in root `database/factories/` (Laravel default) — never
+  inside a module folder, so Laravel's factory auto-discovery
+  (`Model::factory()`) keeps working without manual registration.
+- Factory naming: `{Model}Factory`. Use realistic Urdu/English mixed fake
+  data (e.g. Faker's `ur_PK`/custom word lists for names/titles) so the dev
+  environment's content looks close to real, not generic lorem ipsum.
 
 ---
 
@@ -669,3 +722,47 @@ relevant sub-agent per step, minimal file reads:
 10. Commit (Section 23).
 
 No step is skipped, but each step touches ONLY the files it needs.
+
+---
+
+## 28. ENVIRONMENT VARIABLES CHECKLIST
+
+Every `.env` (and `.env.example`) must define these — never hardcode any of
+them in code, always read via `config()`:
+
+```
+APP_NAME=Al Zahra Institute
+APP_LOCALE=en
+APP_FALLBACK_LOCALE=en
+APP_DEBUG=false        # true only in local
+
+DB_CONNECTION=mysql
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+
+REDIS_HOST=
+REDIS_PASSWORD=
+REDIS_PORT=
+
+CACHE_STORE=redis
+SESSION_DRIVER=redis
+QUEUE_CONNECTION=redis
+
+MAIL_MAILER=
+MAIL_FROM_ADDRESS=
+MAIL_FROM_NAME="${APP_NAME}"
+
+FILESYSTEM_DISK=public   # local/dev; 's3' in production (Section 14)
+AWS_ACCESS_KEY_ID=       # or R2 equivalent, only needed when FILESYSTEM_DISK=s3
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=
+AWS_BUCKET=
+AWS_ENDPOINT=            # Cloudflare R2 endpoint or other S3-compatible URL
+AWS_USE_PATH_STYLE_ENDPOINT=true
+```
+
+Out of scope for now (add post-launch, not part of current phases): backup
+strategy, health-check endpoint, CI/CD pipeline.

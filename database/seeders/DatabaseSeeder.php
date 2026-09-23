@@ -2,24 +2,29 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
+     *
+     * Essential seeders run in every environment. Demo seeders (fake
+     * articles/courses/research etc., see docs/PROJECT-BLUEPRINT.md
+     * Part F2) are gated to non-production per docs/CLAUDE.md 22B.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            RolePermissionSeeder::class,
+            UserSeeder::class,
+            DirectorSeeder::class,
+            SettingSeeder::class,
         ]);
+
+        if (! app()->isProduction()) {
+            // Demo seeders (CategorySeeder, ArticleSeeder, etc.) will be
+            // added here as each module's content is built.
+        }
     }
 }

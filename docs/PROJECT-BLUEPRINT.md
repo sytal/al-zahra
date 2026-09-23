@@ -505,6 +505,39 @@ PUT  /{locale}/dashboard/profile/password                              dashboard
 
 ---
 
+# PART F2 — SEEDERS: EXACT LIST (essential vs demo, per docs/CLAUDE.md 22B)
+
+**Essential (run in every environment, including production):**
+
+| Seeder | What it creates |
+|---|---|
+| `RolePermissionSeeder` | 4 roles (director/admin/editor/student) + full permission set per module |
+| `UserSeeder` | 1 director account (wife's login), 1 admin account |
+| `DirectorSeeder` | 1 `directors` row linked to the director user — real bio/credentials, `is_published=true` |
+| `SettingSeeder` | all seeded `settings` keys from Part A3 with real launch copy (site_name, tagline, contact info, mission/vision text, footer links) |
+
+**Demo (local/staging only — gated behind `! app()->isProduction()`):**
+
+| Seeder | What it creates |
+|---|---|
+| `CategorySeeder` | 4 categories per type (article/research/resource/course) = 16 rows |
+| `TagSeeder` | 10 generic tags |
+| `ArticleSeeder` | 15 demo articles spread across categories/tags, mixed published/draft, realistic reading_time |
+| `ResearchPaperSeeder` | 6 demo research papers, mix of `pdf_upload`/`external_link`, varied published_year |
+| `ResourceSeeder` | 8 demo resources, mix of all 4 resource_type values, mostly `is_free=true` |
+| `CourseSeeder` | 3 demo courses (one per audience: students/teachers/parents), each with 5 `course_lessons` (mixed text/video, 1 marked `is_preview`) |
+| `EnrollmentSeeder` | a couple of demo enrollments (with `lesson_progress` rows) tied to the demo student user, for dashboard screenshots |
+| `ConsultationSeeder` | 5 demo consultations across all statuses |
+| `ContactMessageSeeder` | 3 demo contact messages across all statuses |
+
+Goal: after `php artisan migrate --seed` on local/staging, every public list
+page and the dashboard have believable content — never an empty-state
+screen during development or client demos. Production seed command
+(`php artisan db:seed --class=DatabaseSeeder` gated by the `isProduction()`
+check in Section 22B) only runs the essential seeders.
+
+---
+
 # PART G — EXPLICITLY OUT OF SCOPE (do not build unless asked)
 Payments/checkout, community/discussion forum, multi-instructor
 marketplace, mobile app, comment system on articles, live video/webinar
