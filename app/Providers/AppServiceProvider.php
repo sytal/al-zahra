@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Modules\Article\Livewire\ArticleIndex;
 use App\Modules\Course\Livewire\CourseIndex;
 use App\Modules\Newsletter\Livewire\NewsletterForm;
+use App\Modules\Research\Livewire\ResearchIndex;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
@@ -30,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
         Livewire::component('articles.article-index', ArticleIndex::class);
         Livewire::component('courses.course-index', CourseIndex::class);
         Livewire::component('newsletter.newsletter-form', NewsletterForm::class);
+        Livewire::component('research.research-index', ResearchIndex::class);
     }
 }
