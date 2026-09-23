@@ -1,9 +1,8 @@
-<x-layouts.minimal>
-    <x-slot name="seo">
-        <x-seo :title="$seo['title']" :description="$seo['description']" :image="$seo['image']" :type="$seo['type']" :schema="$seo['schema']" />
-    </x-slot>
+@push('head')
+    <x-seo :title="$seo['title']" :description="$seo['description']" :image="$seo['image']" :type="$seo['type']" :schema="$seo['schema']" :title-tag="false" />
+@endpush
 
-    <div class="mx-auto w-full max-w-2xl px-4 py-10" data-aos="fade-up">
+<div class="mx-auto w-full max-w-2xl px-4 py-10" data-aos="fade-up">
         <header class="mb-8 text-center">
             <h1 class="text-3xl font-bold text-ink">{{ __('certificates.page_title') }}</h1>
             <p class="mt-2 text-ink/60">{{ __('certificates.page_intro') }}</p>
@@ -48,5 +47,4 @@
                 </x-card>
             @endif
         @endif
-    </div>
-</x-layouts.minimal>
+</div>

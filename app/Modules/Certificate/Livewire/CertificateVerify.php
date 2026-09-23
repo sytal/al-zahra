@@ -4,9 +4,11 @@ namespace App\Modules\Certificate\Livewire;
 
 use App\Modules\Certificate\Models\Certificate;
 use Illuminate\Support\Facades\RateLimiter;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Layout('components.layouts.minimal')]
 #[Title('Verify a Certificate')]
 class CertificateVerify extends Component
 {
