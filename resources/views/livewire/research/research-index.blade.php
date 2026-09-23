@@ -23,7 +23,7 @@
                 <x-card hoverable class="flex gap-4">
                     <a href="{{ route('research.show', ['locale' => app()->getLocale(), 'slug' => $paper->slug]) }}" wire:navigate class="flex gap-4">
                         <img
-                            src="{{ $paper->getFirstMediaUrl('cover_image') ?: asset('images/research-placeholder.png') }}"
+                            src="{{ $paper->getFirstMediaUrl('cover_image') ?: asset('images/research-placeholder.svg') }}"
                             alt="{{ $paper->title }}"
                             class="size-24 shrink-0 rounded-lg object-cover"
                         >

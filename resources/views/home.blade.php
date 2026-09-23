@@ -43,7 +43,7 @@ $tagline = is_array($tagline) ? ($tagline[app()->getLocale()] ?? $tagline['en'] 
                         <x-card hoverable class="flex flex-col overflow-hidden !p-0">
                             <a href="{{ route('articles.show', ['locale' => app()->getLocale(), 'slug' => $article->slug]) }}" wire:navigate>
                                 <img
-                                    src="{{ $article->getFirstMediaUrl('featured_image', 'card') ?: asset('images/article-placeholder.png') }}"
+                                    src="{{ $article->getFirstMediaUrl('featured_image', 'card') ?: asset('images/article-placeholder.svg') }}"
                                     alt="{{ $article->title }}"
                                     class="aspect-video w-full object-cover"
                                 >
@@ -72,7 +72,7 @@ $tagline = is_array($tagline) ? ($tagline[app()->getLocale()] ?? $tagline['en'] 
                     <x-card hoverable class="flex flex-col overflow-hidden !p-0">
                         <a href="{{ route('courses.show', ['locale' => app()->getLocale(), 'slug' => $course->slug]) }}" wire:navigate>
                             <img
-                                src="{{ $course->getFirstMediaUrl('cover_image', 'card') ?: asset('images/course-placeholder.png') }}"
+                                src="{{ $course->getFirstMediaUrl('cover_image', 'card') ?: asset('images/course-placeholder.svg') }}"
                                 alt="{{ $course->title }}"
                                 class="aspect-video w-full object-cover"
                             >
@@ -101,7 +101,7 @@ $tagline = is_array($tagline) ? ($tagline[app()->getLocale()] ?? $tagline['en'] 
                     <x-card hoverable class="flex gap-4">
                         <a href="{{ route('research.show', ['locale' => app()->getLocale(), 'slug' => $paper->slug]) }}" wire:navigate class="flex gap-4">
                             <img
-                                src="{{ $paper->getFirstMediaUrl('cover_image') ?: asset('images/research-placeholder.png') }}"
+                                src="{{ $paper->getFirstMediaUrl('cover_image') ?: asset('images/research-placeholder.svg') }}"
                                 alt="{{ $paper->title }}"
                                 class="size-20 shrink-0 rounded-lg object-cover"
                             >

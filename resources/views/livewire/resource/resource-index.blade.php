@@ -23,7 +23,7 @@
                 <x-card hoverable class="flex flex-col overflow-hidden !p-0">
                     <a href="{{ route('resources.show', ['locale' => app()->getLocale(), 'slug' => $resource->slug]) }}" wire:navigate>
                         <img
-                            src="{{ $resource->getFirstMediaUrl('thumbnail') ?: asset('images/resource-placeholder.png') }}"
+                            src="{{ $resource->getFirstMediaUrl('thumbnail') ?: asset('images/resource-placeholder.svg') }}"
                             alt="{{ $resource->title }}"
                             class="aspect-video w-full object-cover"
                         >

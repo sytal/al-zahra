@@ -36,7 +36,7 @@
                 <x-card hoverable class="flex flex-col overflow-hidden !p-0">
                     <a href="{{ route('courses.show', ['locale' => app()->getLocale(), 'slug' => $course->slug]) }}" wire:navigate>
                         <img
-                            src="{{ $course->getFirstMediaUrl('cover_image', 'card') ?: asset('images/course-placeholder.png') }}"
+                            src="{{ $course->getFirstMediaUrl('cover_image', 'card') ?: asset('images/course-placeholder.svg') }}"
                             alt="{{ $course->title }}"
                             class="aspect-video w-full object-cover"
                         >
