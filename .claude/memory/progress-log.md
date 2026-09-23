@@ -25,6 +25,13 @@
   app/Modules/*/Models and app/Support/Enums.
 - users table updated with uuid/preferred_locale/phone/is_active/
   last_login_at/soft-deletes; User model wired with HasUuid + HasRoles.
+- Resource module built end-to-end (C7/C8): Repository/Service
+  (recordDownload)/Policy, ResourceIndex Livewire, show+download routes
+  (paid resources show "Coming soon", download redirects to media URL —
+  disk-agnostic for local/s3), disclaimer for questionnaire/guide types,
+  SEO+sitemap, ResourceSeeder (8 resources). Moved free/paid labels to
+  common.php (shared with Course). Verified live incl. paid + disclaimer
+  states.
 - Research module built end-to-end (C5/C6): Repository/Policy (no
   Service — no business logic to hold), ResearchIndex Livewire,
   show route with all 6 blueprint sections, SEO+sitemap,

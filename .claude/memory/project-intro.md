@@ -54,14 +54,16 @@ other parameter. Hit this on articles.show (see docs/CLAUDE.md Section
 unless each one declares $locale explicitly.
 
 ## Next up
-- Article (C3/C4), Course (C9/C10), Research (C5/C6) modules all fully
-  working end-to-end with real demo content, SEO, sitemap — verified
-  live. Research had no Service class (no business logic beyond CRUD) —
-  don't add an empty one to Resource either unless it turns out to need
-  one (e.g. download_count increment might warrant a thin Service).
-- Same pattern still needs copying for Resource (C7/C8), Consultation,
-  Contact, Newsletter-confirm, Certificate-verify modules. Remember the
-  $locale signature pitfall for each detail/show route.
+- All 4 public content modules done: Article (C3/C4), Course (C9/C10),
+  Research (C5/C6), Resource (C7/C8) — full backend+frontend+SEO+demo
+  data, all verified live. `nav.php` now links all 4 in the public
+  header.
+- Remaining public pages: Home (C1), About (C2), Consultation form
+  (C17), Contact (C18), Certificate verify (C19), signed consultation
+  view (C20) — none built yet.
+- Dashboard (C11-C16) and auth Livewire conversion (C21) not started.
+- Remember the $locale signature pitfall for every detail/show route
+  going forward.
 - Course module still missing: dashboard.courses.* routes (My Courses,
   lesson viewer C13, lesson completion) — enroll() works but there's no
   "Continue Learning" destination yet (C10's button links to '#').
