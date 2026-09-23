@@ -100,21 +100,74 @@ on the previous, not squashed into a single phase branch:
 6. **`@alpinejs/collapse` wasn't installed** despite `x-collapse` being
    used in `accordion.blade.php` from Part B onward — now installed and
    registered in `app.js` before `Alpine.start()`.
+7. **`[x-cloak] { display: none !important; }` was never defined in
+   app.css** — without it, `x-cloak` is a complete no-op (it's just a
+   marker attribute Alpine removes after hydration; the actual hiding is
+   the app's own CSS responsibility). Affected every x-cloak usage since
+   Part B (mobile nav, dropdown, modal, accordion), not just the theme
+   toggle that surfaced it (both sun/moon icons stayed visible at once).
+   Now fixed in app.css. When debugging "element flashes visible" or
+   "two conditionally-shown things both show", check this rule exists
+   before assuming the Alpine logic itself is wrong.
+8. **`<x-icon>` silently dropped every attribute except `class`** —
+   icon.blade.php only ever read `$attributes->get('class')`; anything
+   else passed to it (`x-show`, `x-cloak`, `x-bind:class`, etc.) was
+   discarded before reaching the `svg()` helper call, so those
+   directives never existed in the rendered HTML at all. This broke the
+   theme toggle (both icons always visible — found via a screenshot
+   after the [x-cloak] CSS fix alone didn't help) AND
+   `accordion.blade.php`'s chevron rotation, silently, since Part B.
+   Fixed by passing `$attributes->except('class')->getAttributes()`
+   through to `svg()`'s third parameter (it explicitly supports this).
+   When an Alpine directive on `<x-icon>` "does nothing," check the
+   rendered HTML for whether the attribute even exists on the `<svg>`
+   tag before debugging the Alpine expression itself.
+9. **Don't assume an app bug when local manual testing fails after a
+   `migrate:fresh --seed` re-run** — a manually-set tinker test password
+   gets wiped by reseeding, and a stale login session then fails
+   `Auth::attempt()` silently while the surrounding symptoms (auth
+   middleware redirecting to `route('login')` without a locale, since
+   URL generation for an unauthenticated redirect doesn't get
+   `URL::defaults()`) look exactly like a real routing/session bug. Spent
+   real effort chasing this as a framework issue before checking
+   `Auth::attempt()` directly in tinker — check credentials first.
+
+- **Dashboard (C11-C16) — fully built**: sidebar layout, home (stats +
+  continue-learning + recent consultations), My Courses (tabs, progress,
+  certificate link), Lesson Viewer (two-column, curriculum sidebar,
+  mark-complete), Consultations list (table + modal), Certificates list
+  + download, Profile edit (avatar/basic-info/preferences/password, 4
+  separate wire:submit cards). Course's "Continue Learning" button now
+  goes to a real destination instead of `#`.
+- **Certificate PDF generation wired end-to-end** (was listed as
+  "not built" before this push): `CourseCompleted` event fires at 100%
+  lesson progress, `IssueCertificateListener` generates a unique
+  `AZ-{year}-{6digit}` code and a real dompdf-rendered PDF attached to
+  the certificate_pdf media collection. Verified with a full real flow
+  (enroll → complete 5 lessons → 100% → certificate + PDF on disk).
+- **Global loading bar** (Section 9 requirement) — existed only as a
+  concept before, now a real `<x-loading-bar>` in all 3 layouts.
+- **Dark/light mode toggle** — CSS variables + `darkMode:'class'` existed
+  since the very first color-system pass but had zero actual toggle
+  mechanism. Built: `<x-theme-init-script>` (blocking, in `<head>`, avoids
+  flash), `<x-theme-toggle>` (self-contained Alpine `x-data`, no global
+  store — see bug #7 below for why), wired into all 3 layouts.
+- **Language switcher URL bug fixed**: was building
+  `/{new-locale}/{request()->path()}`, but `request()->path()` already
+  includes the current locale segment, producing `/ur/en`-style
+  duplicated URLs. Now strips the current locale segment first.
+- **Missing placeholder images fixed**: `public/images/` never existed —
+  every card's fallback image (`article/course/research/resource/avatar
+  -placeholder.png`) 404'd since Part B. Added branded SVG placeholders,
+  updated all 8 references from `.png` to `.svg`.
 
 ## Next up
-- **Dashboard (C11-C16)** — not started. Needed for: "Continue Learning"
-  destination (Course detail's enrolled-state button currently links to
-  `#`), My Courses, lesson viewer, consultations list, certificates
-  list, profile edit.
 - **Auth Livewire conversion (C21)** — Breeze's stock Blade views still
   in place; convert to Livewire 4 + shared components.
 - RTL and responsive-breakpoint verification (Section 26) — never done
   with actual rendering, only curl+grep. Worth a real check on `/ur/`
   and `/fa/` locales, and at 375/768/1280px.
-- `Certificate` model's PDF generation (barryvdh/laravel-dompdf,
-  Section 14) not wired yet — CertificateResource can revoke but
-  nothing generates the actual PDF on course completion
-  (`IssueCertificateListener` / `CourseCompleted` event, Part F, not
-  built).
 - `RecentActivityWidget` (Filament) explicitly skipped by the ops-agent,
   reads `activity_log` — pick up later if wanted.
+- MustVerifyEmail isn't wired on the User model (noted, not built —
+  profile email-change code has a guard for it but it's a no-op today).

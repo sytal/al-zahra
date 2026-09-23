@@ -1,5 +1,17 @@
 # Progress log (bullet points only)
 
+- **Dashboard push**: built the dashboard foundation (layout+home)
+  myself, then 2 parallel agents built C12-C16 (My Courses, Lesson
+  Viewer + certificate PDF issuance; Consultations, Certificates,
+  Profile) with i18n done alongside per explicit user reminder. Fixed 3
+  polish bugs found afterward: language-switcher URL duplication, dark
+  mode had no toggle mechanism at all (built one, then found and fixed
+  a missing [x-cloak] CSS rule that broke it and everything else using
+  x-cloak since Part B), and public/images/ never existed so every
+  placeholder image 404'd. Full supervision pass (fresh login, all 5
+  dashboard pages hit authenticated) initially looked like a broken-auth
+  bug but was my own stale test password after a migrate:fresh re-run —
+  see project-intro.md bug #8.
 - **Major parallel push**: 6 background agents dispatched simultaneously
   (non-overlapping files, no migrate:fresh/serve conflicts) to close
   gaps found in a full docs audit: 3 agents built all 13 Filament admin
