@@ -54,18 +54,19 @@ other parameter. Hit this on articles.show (see docs/CLAUDE.md Section
 unless each one declares $locale explicitly.
 
 ## Next up
-- Home (C1) and About (C2) both built and verified live. All 4 content
-  modules (C3-C10) done. Public nav now has About/Articles/Courses/
-  Research/Resources.
-- Home page's "Ask Al Zahra" CTA currently falls back to '#'
-  (Route::has('consultation.show') guard) — building Consultation
-  (C17) next will complete that link automatically, no need to touch
-  home.blade.php again.
-- Remaining: Consultation (C17), Contact (C18), Certificate verify
-  (C19), signed consultation view (C20), Dashboard (C11-C16), auth
-  Livewire conversion (C21).
-- Remember the $locale signature pitfall for every detail/show route
-  going forward.
+- Home (C1), About (C2), Consultation (C17) + signed view (C20) all
+  built and verified live (incl. real queued-job email + signature
+  tamper rejection). All 4 content modules (C3-C10) done too.
+- `components/layouts/minimal.blade.php` now exists (header+footer, no
+  nav) — reuse it for Contact/Certificate-verify and later for
+  converting Breeze's auth views (C21), don't rebuild it.
+- Remaining: Contact (C18), Certificate verify (C19), Dashboard
+  (C11-C16), auth Livewire conversion (C21).
+- Remember the $locale signature pitfall for every detail/show route.
+- Signed-URL routes: don't take a literal {signature} URI segment from
+  the blueprint literally — temporarySignedRoute() puts it in the query
+  string. See routes/modules/consultation.php for the pattern to copy
+  for certificates.verify.
 - Course module still missing: dashboard.courses.* routes (My Courses,
   lesson viewer C13, lesson completion) — enroll() works but there's no
   "Continue Learning" destination yet (C10's button links to '#').

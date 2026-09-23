@@ -25,6 +25,11 @@
   app/Modules/*/Models and app/Support/Enums.
 - users table updated with uuid/preferred_locale/phone/is_active/
   last_login_at/soft-deletes; User model wired with HasUuid + HasRoles.
+- Consultation module built (C17) + signed guest view (C20):
+  ConsultationForm Livewire, ConsultationService+Job+Mail (fixed a real
+  ->view()-vs-->markdown() bug for mail components), signed-URL
+  controller, minimal layout. Verified live end-to-end including a real
+  processed queue job and signature tamper rejection.
 - About page built (C2): PageController::about(), full director-profile,
   Mission/Vision, social links (added sample data to DirectorSeeder).
   Home page (C1) built same session before this. Both verified live.
