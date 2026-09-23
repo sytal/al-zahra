@@ -15,7 +15,7 @@
 </head>
 <body class="flex min-h-screen bg-surface font-sans text-ink antialiased" x-data="{ sidebarOpen: false }">
     <!-- Mobile sidebar backdrop -->
-    <div x-show="sidebarOpen" x-cloak x-on:click="sidebarOpen = false" class="fixed inset-0 z-40 bg-ink/50 md:hidden"></div>
+    <div x-show="sidebarOpen" x-cloak x-on:click="sidebarOpen = false" class="fixed inset-0 z-40 bg-slate-900/50 md:hidden"></div>
 
     <aside
         class="fixed inset-y-0 start-0 z-50 w-64 -translate-x-full border-e border-ink/10 bg-white dark:bg-surface transition-transform duration-200 ease-in-out md:static md:translate-x-0"

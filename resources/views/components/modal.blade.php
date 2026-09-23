@@ -13,7 +13,7 @@ $maxWidths = ['sm' => 'sm:max-w-sm', 'md' => 'sm:max-w-md', 'lg' => 'sm:max-w-lg
     x-cloak
     class="fixed inset-0 z-50 flex items-center justify-center p-4"
 >
-    <div x-show="show" x-transition.opacity class="fixed inset-0 bg-ink/50" x-on:click="show = false"></div>
+    <div x-show="show" x-transition.opacity class="fixed inset-0 bg-slate-900/50" x-on:click="show = false"></div>
 
     <div
         x-show="show"

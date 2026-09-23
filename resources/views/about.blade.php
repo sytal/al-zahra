@@ -5,7 +5,7 @@
 
     @if ($director)
         <!-- 1. Hero: cover photo + name/title overlay -->
-        <section class="relative flex h-72 items-end justify-center overflow-hidden bg-ink text-white" data-aos="fade-up">
+        <section class="relative flex h-72 items-end justify-center overflow-hidden bg-slate-900 text-white" data-aos="fade-up">
             @if ($director->hasMedia('cover_photo'))
                 <img src="{{ $director->getFirstMediaUrl('cover_photo') }}" alt="" class="absolute inset-0 size-full object-cover opacity-50">
             @endif
