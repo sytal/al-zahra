@@ -15,6 +15,7 @@ Route::group([
         })->name('home');
 
         require __DIR__.'/modules/articles.php';
+        require __DIR__.'/modules/courses.php';
 
         Route::get('/dashboard', function () {
             return view('dashboard');

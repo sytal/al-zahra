@@ -20,6 +20,7 @@
 
             <nav class="hidden items-center gap-6 md:flex">
                 <a href="{{ route('articles.index', app()->getLocale()) }}" wire:navigate class="text-sm text-ink/70 hover:text-brand-primary">{{ __('nav.articles') }}</a>
+                <a href="{{ route('courses.index', app()->getLocale()) }}" wire:navigate class="text-sm text-ink/70 hover:text-brand-primary">{{ __('nav.courses') }}</a>
             </nav>
 
             <x-language-switcher />

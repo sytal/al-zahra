@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'page_title' => 'Courses',
+    'page_intro' => 'Structured learning paths on language and the mind.',
+    'filter_audience' => 'Audience',
+    'filter_level' => 'Level',
+    'filter_pricing' => 'Price',
+    'all_audiences' => 'All audiences',
+    'all_levels' => 'All levels',
+    'all_pricing' => 'All',
+    'free' => 'Free',
+    'paid' => 'Paid',
+    'search_label' => 'Search',
+    'empty_title' => 'No courses found',
+    'empty_message' => 'Try a different filter or search term.',
+    'students_enrolled' => 'students enrolled',
+    'what_youll_learn' => "What You'll Learn",
+    'curriculum' => 'Curriculum',
+    'instructor' => 'Instructor',
+    'enroll_now' => 'Enroll Now',
+    'continue_learning' => 'Continue Learning',
+    'login_to_enroll' => 'Log In to Enroll',
+    'enrolled_success' => 'You are enrolled! Welcome to the course.',
+    'related_title' => 'Related Courses',
+];
