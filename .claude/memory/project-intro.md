@@ -54,9 +54,12 @@ other parameter. Hit this on articles.show (see docs/CLAUDE.md Section
 unless each one declares $locale explicitly.
 
 ## Next up
-- Article (C3/C4) and Course (C9/C10) modules both fully working
-  end-to-end with real demo content, SEO, sitemap — verified live.
-- Same pattern still needs copying for Research, Resource, Consultation,
+- Article (C3/C4), Course (C9/C10), Research (C5/C6) modules all fully
+  working end-to-end with real demo content, SEO, sitemap — verified
+  live. Research had no Service class (no business logic beyond CRUD) —
+  don't add an empty one to Resource either unless it turns out to need
+  one (e.g. download_count increment might warrant a thin Service).
+- Same pattern still needs copying for Resource (C7/C8), Consultation,
   Contact, Newsletter-confirm, Certificate-verify modules. Remember the
   $locale signature pitfall for each detail/show route.
 - Course module still missing: dashboard.courses.* routes (My Courses,

@@ -25,6 +25,10 @@
   app/Modules/*/Models and app/Support/Enums.
 - users table updated with uuid/preferred_locale/phone/is_active/
   last_login_at/soft-deletes; User model wired with HasUuid + HasRoles.
+- Research module built end-to-end (C5/C6): Repository/Policy (no
+  Service — no business logic to hold), ResearchIndex Livewire,
+  show route with all 6 blueprint sections, SEO+sitemap,
+  ResearchPaperSeeder (6 papers). Verified live.
 - Course module built end-to-end (C9/C10): Repository/Service/Policy
   (policy auto-discovered via Models->Policies convention, no manual
   Gate::policy() needed), CourseIndex Livewire, show+enroll routes,
