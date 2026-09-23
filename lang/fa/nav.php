@@ -9,4 +9,8 @@ return [
     'research' => 'پژوهش',
     'resources' => 'منابع',
     'contact' => 'تماس',
+    'login' => 'ورود',
+    'register' => 'ثبت‌نام',
+    'dashboard' => 'داشبورد',
+    'logout' => 'خروج',
 ];

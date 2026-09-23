@@ -33,6 +33,21 @@
                 </nav>
 
                 <div class="flex items-center gap-3">
+                    @guest
+                        <div class="hidden items-center gap-2 sm:flex">
+                            <a href="{{ route('login', app()->getLocale()) }}" wire:navigate class="rounded-lg px-4 py-2 text-sm font-medium text-ink/70 transition duration-200 ease-in-out hover:text-ink">
+                                {{ __('nav.login') }}
+                            </a>
+                            <a href="{{ route('register', app()->getLocale()) }}" wire:navigate class="rounded-lg bg-brand-primary px-4 py-2 text-sm font-medium text-white transition duration-200 ease-in-out hover:bg-brand-primary/90">
+                                {{ __('nav.register') }}
+                            </a>
+                        </div>
+                    @else
+                        <a href="{{ route('dashboard', app()->getLocale()) }}" wire:navigate class="hidden rounded-lg bg-brand-primary px-4 py-2 text-sm font-medium text-white transition duration-200 ease-in-out hover:bg-brand-primary/90 sm:block">
+                            {{ __('nav.dashboard') }}
+                        </a>
+                    @endguest
+
                     <x-theme-toggle />
                     <x-language-switcher />
 
@@ -56,6 +71,14 @@
                 <li><a href="{{ route('research.index', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.research') }}</a></li>
                 <li><a href="{{ route('resources.index', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.resources') }}</a></li>
                 <li><a href="{{ route('contact.show', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.contact') }}</a></li>
+                <li class="mt-2 border-t border-ink/10 pt-2">
+                    @guest
+                        <a href="{{ route('login', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.login') }}</a>
+                        <a href="{{ route('register', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.register') }}</a>
+                    @else
+                        <a href="{{ route('dashboard', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.dashboard') }}</a>
+                    @endguest
+                </li>
             </ul>
         </nav>
     </header>

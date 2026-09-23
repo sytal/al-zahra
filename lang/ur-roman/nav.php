@@ -7,4 +7,8 @@ return [
     'research' => 'Research',
     'resources' => 'Resources',
     'contact' => 'Rabta',
+    'login' => 'Login',
+    'register' => 'Register Karein',
+    'dashboard' => 'Dashboard',
+    'logout' => 'Logout',
 ];
