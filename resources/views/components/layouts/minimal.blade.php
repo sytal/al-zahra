@@ -28,6 +28,8 @@
 
     <x-footer :minimal="true" />
 
+    <x-loading-bar />
+
     @livewireScripts
 </body>
 </html>

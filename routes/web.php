@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Modules\Page\Http\Controllers\DashboardController;
 use App\Modules\Page\Http\Controllers\HomeController;
 use App\Modules\Page\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
@@ -24,9 +25,12 @@ Route::group([
         require __DIR__.'/modules/certificates.php';
         require __DIR__.'/modules/newsletter.php';
 
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->middleware(['auth', 'verified'])->name('dashboard');
+        Route::middleware(['auth', 'verified'])->group(function () {
+            Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+            require __DIR__.'/modules/dashboard-courses.php';
+            require __DIR__.'/modules/dashboard-account.php';
+        });
 
         Route::middleware('auth')->group(function () {
             Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
