@@ -7,18 +7,11 @@ import 'aos/dist/aos.css';
 
 Alpine.plugin(collapse);
 
-Alpine.store('theme', {
-    dark: localStorage.getItem('theme') === 'dark'
-        || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches),
-
-    toggle() {
-        this.dark = !this.dark;
-        localStorage.setItem('theme', this.dark ? 'dark' : 'light');
-        document.documentElement.classList.toggle('dark', this.dark);
-    },
-});
-
-document.documentElement.classList.toggle('dark', Alpine.store('theme').dark);
+// Dark mode: <x-theme-init-script> (in <head>, before this script loads)
+// already applies/removes the .dark class on document.documentElement
+// based on localStorage/prefers-color-scheme to avoid a flash of the
+// wrong theme. <x-theme-toggle> reads/toggles that class directly via
+// its own local x-data — no global store needed for either.
 
 window.Alpine = Alpine;
 
