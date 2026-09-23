@@ -25,6 +25,9 @@
   app/Modules/*/Models and app/Support/Enums.
 - users table updated with uuid/preferred_locale/phone/is_active/
   last_login_at/soft-deletes; User model wired with HasUuid + HasRoles.
+- About page built (C2): PageController::about(), full director-profile,
+  Mission/Vision, social links (added sample data to DirectorSeeder).
+  Home page (C1) built same session before this. Both verified live.
 - Resource module built end-to-end (C7/C8): Repository/Service
   (recordDownload)/Policy, ResourceIndex Livewire, show+download routes
   (paid resources show "Coming soon", download redirects to media URL —

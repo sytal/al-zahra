@@ -54,14 +54,16 @@ other parameter. Hit this on articles.show (see docs/CLAUDE.md Section
 unless each one declares $locale explicitly.
 
 ## Next up
-- All 4 public content modules done: Article (C3/C4), Course (C9/C10),
-  Research (C5/C6), Resource (C7/C8) — full backend+frontend+SEO+demo
-  data, all verified live. `nav.php` now links all 4 in the public
-  header.
-- Remaining public pages: Home (C1), About (C2), Consultation form
-  (C17), Contact (C18), Certificate verify (C19), signed consultation
-  view (C20) — none built yet.
-- Dashboard (C11-C16) and auth Livewire conversion (C21) not started.
+- Home (C1) and About (C2) both built and verified live. All 4 content
+  modules (C3-C10) done. Public nav now has About/Articles/Courses/
+  Research/Resources.
+- Home page's "Ask Al Zahra" CTA currently falls back to '#'
+  (Route::has('consultation.show') guard) — building Consultation
+  (C17) next will complete that link automatically, no need to touch
+  home.blade.php again.
+- Remaining: Consultation (C17), Contact (C18), Certificate verify
+  (C19), signed consultation view (C20), Dashboard (C11-C16), auth
+  Livewire conversion (C21).
 - Remember the $locale signature pitfall for every detail/show route
   going forward.
 - Course module still missing: dashboard.courses.* routes (My Courses,
