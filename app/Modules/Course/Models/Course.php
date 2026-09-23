@@ -4,6 +4,7 @@ namespace App\Modules\Course\Models;
 
 use App\Models\User;
 use App\Modules\Category\Models\Category;
+use App\Support\CacheService;
 use App\Support\Enums\CourseAudience;
 use App\Support\Enums\CourseLevel;
 use App\Support\Traits\HasActivityLog;
@@ -87,5 +88,21 @@ class Course extends Model implements HasMedia
     public function lessons(): HasMany
     {
         return $this->hasMany(CourseLesson::class);
+    }
+
+    /**
+     * Explicit cache invalidation on save/delete (docs/CLAUDE.md Section 13).
+     * Only the slug-detail key is forgotten here since list-cache keys are
+     * combinatorial (per filter/search/page) and not practically
+     * enumerable; list staleness is instead bounded by CacheService::LIST_TTL.
+     */
+    protected static function booted(): void
+    {
+        $forget = function (self $course): void {
+            app(CacheService::class)->forget("courses:slug:{$course->slug}");
+        };
+
+        static::saved($forget);
+        static::deleted($forget);
     }
 }

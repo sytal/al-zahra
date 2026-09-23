@@ -5,6 +5,7 @@ namespace App\Modules\Article\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\Article\Repositories\ArticleRepositoryInterface;
 use App\Modules\Article\Services\ArticleService;
+use App\Support\SeoSchema;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -15,17 +16,7 @@ class ArticleController extends Controller
         private readonly ArticleService $service,
     ) {}
 
-    public function index(Request $request): View
-    {
-        $articles = $this->repository->paginatePublished(
-            categoryId: $request->integer('category') ?: null,
-            search: $request->string('search')->value() ?: null,
-        );
-
-        return view('articles.index', compact('articles'));
-    }
-
-    public function show(string $slug, Request $request): View
+    public function show(Request $request, string $locale, string $slug): View
     {
         $article = $this->repository->findPublishedBySlug($slug) ?? abort(404);
 
@@ -36,6 +27,14 @@ class ArticleController extends Controller
 
         $related = $this->repository->relatedTo($article);
 
-        return view('articles.show', compact('article', 'related'));
+        $seo = [
+            'title' => $article->meta_title ?: $article->title,
+            'description' => $article->meta_description ?: $article->excerpt,
+            'image' => $article->getFirstMediaUrl('featured_image', 'hero') ?: null,
+            'type' => 'article',
+            'schema' => SeoSchema::article($article),
+        ];
+
+        return view('articles.show', compact('article', 'related', 'seo'));
     }
 }

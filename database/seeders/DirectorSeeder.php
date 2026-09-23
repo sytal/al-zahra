@@ -22,7 +22,12 @@ class DirectorSeeder extends Seeder
                 'bio_full' => ['en' => 'Full biography to be finalized with the director — placeholder content pending real copy.'],
                 'credentials' => ['PhD in Neurolinguistics'],
                 'research_interests' => ['en' => ['Language acquisition', 'Bilingual cognition']],
-                'social_links' => [],
+                'social_links' => [
+                    'linkedin' => 'https://linkedin.com/in/alzahra-director',
+                    'researchgate' => 'https://researchgate.net/profile/alzahra-director',
+                    'twitter' => null,
+                    'email' => 'director@alzahra.institute',
+                ],
                 'is_published' => true,
             ]
         );

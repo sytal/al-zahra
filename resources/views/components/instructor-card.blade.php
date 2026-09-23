@@ -2,7 +2,7 @@
 
 <x-card class="flex items-center gap-4">
     <img
-        src="{{ $instructor->getFirstMediaUrl('avatar') ?: asset('images/avatar-placeholder.png') }}"
+        src="{{ $instructor->getFirstMediaUrl('avatar') ?: asset('images/avatar-placeholder.svg') }}"
         alt="{{ $instructor->name }}"
         class="size-14 rounded-full object-cover"
     >

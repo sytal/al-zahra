@@ -1,6 +1,11 @@
-@props(['title', 'description' => null, 'image' => null, 'type' => 'website', 'schema' => null])
+@props(['title', 'description' => null, 'image' => null, 'type' => 'website', 'schema' => null, 'titleTag' => true])
 
-<title>{{ $title }} — {{ config('app.name') }}</title>
+@php
+$segments = explode('/', trim(request()->path(), '/'));
+$currentLocale = app()->getLocale();
+@endphp
+
+@if ($titleTag)<title>{{ $title }} — {{ config('app.name') }}</title>@endif
 @if ($description)<meta name="description" content="{{ $description }}">@endif
 <link rel="canonical" href="{{ url()->current() }}">
 
@@ -9,8 +14,16 @@
 @if ($description)<meta property="og:description" content="{{ $description }}">@endif
 @if ($image)<meta property="og:image" content="{{ $image }}">@endif
 
-@foreach (config('app.locales', ['en', 'ur', 'hi', 'fa', 'ur-roman']) as $locale)
-    <link rel="alternate" hreflang="{{ $locale }}" href="{{ url()->current() }}">
+@foreach (config('app.locales') as $locale)
+    @php
+    $localeSegments = $segments;
+    if (($localeSegments[0] ?? null) === $currentLocale) {
+        $localeSegments[0] = $locale;
+    } else {
+        array_unshift($localeSegments, $locale);
+    }
+    @endphp
+    <link rel="alternate" hreflang="{{ $locale }}" href="{{ url(implode('/', $localeSegments)) }}">
 @endforeach
 
 @if ($schema)

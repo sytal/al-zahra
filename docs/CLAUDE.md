@@ -49,7 +49,8 @@ per Claude Code's sub-agent spec. Keep each agent's job narrow.
 | `model-builder` | Creates Eloquent models, relationships, casts, UUID setup. |
 | `backend-builder` | Controllers, Services, Repositories, Requests, Policies. |
 | `frontend-builder` | Blade/Livewire components, following Section 8 design system. |
-| `seo-agent` | Meta tags, sitemap entries, schema.org JSON-LD for any new public page. |
+| `admin-builder` | Filament Resource for any model listed in blueprint Part D — built in the SAME pass as the model, not deferred. |
+| `seo-agent` | Meta tags, sitemap entries, schema.org JSON-LD for any new public page — including Livewire-only pages, not just classic-Controller pages. |
 | `i18n-agent` | Adds/updates translation keys across all 5 locales whenever new UI text is introduced. |
 | `security-auditor` | Reviews signed URLs, policies, mass-assignment, query safety after a feature is built. |
 | `test-writer` | Writes Pest tests only for the feature just built (never full-suite by default). |
@@ -370,6 +371,17 @@ Urdu (`ur-roman` — custom locale, not a real ISO code but treated as one).
   utilities; always use logical properties.
 - URL structure: locale prefix (`/en/articles`, `/ur/articles`) via route
   group middleware `SetLocale`.
+- **Every controller method bound to a route inside the `{locale}` group
+  MUST declare `string $locale` as a parameter**, even if unused, when
+  the route has any other URI parameter (e.g. `{slug}`, `{uuid}`).
+  Laravel's controller-method dependency resolution matches route
+  parameters against the method signature; if `$locale` is omitted, the
+  locale value silently lands in the next scalar parameter instead (e.g.
+  `show(string $slug)` on `/{locale}/articles/{slug}` receives the
+  locale's value, not the slug) — a real bug hit while building the
+  Article module. It fails as a 404 via `abort()`, which Laravel doesn't
+  log, so it's easy to miss. Order parameters to match the URI:
+  `show(Request $request, string $locale, string $slug)`.
 - Every new UI string added by any agent MUST be added to all 5
   `lang/{locale}/*.php` files in the same commit (i18n-agent's job,
   Section 1) — English + Roman Urdu content can be auto-translated by
@@ -610,6 +622,11 @@ Urdu (`ur-roman` — custom locale, not a real ISO code but treated as one).
   (Section 24) — "Initial project setup".
 - Branch per Phase (from the phase roadmap given separately), e.g.
   `phase-1-foundation`, `phase-2-content`, named exactly after the phase.
+  In practice this also means one branch per major blueprint Part (Part A
+  migrations, Part B components, Part C pages, ...) when a phase spans
+  several of them — each new Part gets its own branch, stacked on top of
+  the previous one (branched from it, not from `main`), so the user can
+  review and merge each chunk independently.
 - Within a phase branch, commit after each logically complete unit of work
   (e.g. "Add Article module migrations+model", "Add Article admin CRUD")
   — small, frequent, auto-committed by Claude once that unit is verified
@@ -712,16 +729,39 @@ relevant sub-agent per step, minimal file reads:
 2. `migration-builder`: migration(s) per Section 5.
 3. `model-builder`: model + relationships + traits per Section 6.
 4. `backend-builder`: Request → Policy → Repository → Service → Controller
-   → routes, per Section 7.
+   → routes, per Section 7. Repository list methods that return cached
+   collections/pages must go through `CacheService` per Section 13 —
+   never query the DB directly for a public list/detail page without it.
 5. `frontend-builder`: Livewire component(s) reusing shared Blade
-   components from Section 8, per Sections 9–10.
-6. `i18n-agent`: add any new UI strings to all 5 locale files.
-7. `seo-agent`: if public-facing, add `$seo` data + sitemap entry.
-8. `test-writer` + `qa-runner`: test just this feature.
-9. Update `memory/progress-log.md` with one bullet line.
-10. Commit (Section 23).
+   components from Section 8, per Sections 9–10. Page-level design
+   blocks sourced via WebFetch per Section 8.3.
+6. **`admin-builder`: if the model needs admin management (check Part D
+   of the blueprint), build its Filament Resource now — not later, not
+   bundled into a future "admin phase". Every module with a Part D
+   entry gets its Resource in the SAME pass as steps 1-5, before moving
+   to the next module.**
+7. `i18n-agent`: add any new UI strings to all 5 locale files, in the
+   same commit as the feature — never as a deferred follow-up. This
+   applies equally to classic Controller pages and Livewire-only pages
+   (`#[Title]` alone is not sufficient i18n).
+8. `seo-agent`: if public-facing, add `$seo` data + sitemap entry, even
+   for Livewire-only full-page components — don't skip SEO just because
+   there's no classic Controller to hold the `$seo` array; build it in
+   the Livewire component's `render()` and pass it through, or give the
+   layout a way to receive it.
+9. `test-writer` + `qa-runner`: test just this feature.
+10. **Verify, don't just curl:** confirm the page actually renders at
+    the `sm`/`md`/`lg` breakpoints (Section 26) and, if it has
+    user-facing text, load it once under `/ur/` or `/fa/` to confirm
+    `dir="rtl"` actually applies — an HTTP 200 + a text grep is not a
+    verification of layout, only of routing.
+11. Update `memory/progress-log.md` with one bullet line.
+12. Commit (Section 23).
 
-No step is skipped, but each step touches ONLY the files it needs.
+No step is skipped, but each step touches ONLY the files it needs. If a
+step in this list turns out not to exist as a named sub-agent yet,
+that's a signal the agent roster (Section 1) is stale — fix it there,
+don't silently skip the step.
 
 ---
 

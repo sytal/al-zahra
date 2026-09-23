@@ -1,0 +1,77 @@
+<?php
+
+// TODO: verify native translation
+
+return [
+    'nav_dashboard' => 'داشبورد',
+    'nav_my_courses' => 'دوره‌های من',
+    'nav_consultations' => 'مشاوره‌ها',
+    'nav_certificates' => 'گواهینامه‌ها',
+    'nav_profile' => 'پروفایل',
+    'nav_logout' => 'خروج',
+    'toggle_menu' => 'باز کردن منو',
+    'welcome_back' => 'خوش برگشتید، :name',
+    'stat_courses_in_progress' => 'دوره‌های در حال انجام',
+    'stat_certificates_earned' => 'گواهینامه‌های دریافتی',
+    'stat_consultations' => 'مشاوره‌ها',
+    'continue_learning' => 'ادامه یادگیری',
+    'no_courses_in_progress' => 'در حال حاضر دوره‌ای در حال انجام نیست.',
+    'browse_courses_cta' => 'مشاهده دوره‌ها',
+    'recent_consultations' => 'مشاوره‌های اخیر',
+    'no_consultations_yet' => 'هنوز مشاوره‌ای وجود ندارد.',
+    'ask_question_cta' => 'پرسش بپرسید',
+
+    // My Courses (C12)
+    'my_courses_title' => 'دوره‌های من',
+    'tab_all' => 'همه',
+    'tab_in_progress' => 'در حال انجام',
+    'tab_completed' => 'تکمیل شده',
+    'continue_btn' => 'ادامه',
+    'review_btn' => 'مرور',
+    'view_certificate' => 'مشاهده گواهینامه',
+    'no_enrollments_title' => 'شما هنوز در هیچ دوره‌ای ثبت‌نام نکرده‌اید.',
+
+    // Consultations index (C14)
+    'consultations_page_title' => 'مشاوره‌های من',
+    'consultations_ask_new' => 'پرسش جدید بپرسید',
+    'consultations_col_topic' => 'موضوع',
+    'consultations_col_type' => 'نوع',
+    'consultations_col_status' => 'وضعیت',
+    'consultations_col_date' => 'تاریخ',
+    'consultations_view' => 'مشاهده',
+    'consultations_your_question' => 'پرسش شما',
+    'consultations_answer' => 'پاسخ',
+    'consultations_not_answered_yet' => 'هنوز پاسخ داده نشده است.',
+    'close' => 'بستن',
+
+    // Certificates index (C15)
+    'certificates_page_title' => 'گواهینامه‌های من',
+    'certificates_empty_title' => 'هنوز گواهینامه‌ای وجود ندارد.',
+    'certificates_empty_message' => 'برای دریافت اولین گواهینامه خود، یک دوره را تکمیل کنید.',
+    'certificates_browse_courses_cta' => 'مشاهده دوره‌های من',
+    'certificates_issued_on' => 'تاریخ صدور',
+    'certificates_verification_code' => 'کد تأیید',
+    'certificates_download_cta' => 'دانلود PDF',
+    'certificates_pdf_preparing' => 'گواهینامه شما در حال آماده‌سازی است. لطفاً کمی بعد دوباره بررسی کنید.',
+
+    // Profile edit (C16)
+    'profile_page_title' => 'پروفایل',
+    'profile_avatar_heading' => 'عکس پروفایل',
+    'profile_avatar_upload' => 'بارگذاری',
+    'profile_avatar_remove' => 'حذف',
+    'profile_avatar_updated' => 'عکس پروفایل شما به‌روزرسانی شد.',
+    'profile_avatar_removed' => 'عکس پروفایل شما حذف شد.',
+    'profile_basic_info_heading' => 'اطلاعات پایه',
+    'profile_name' => 'نام',
+    'profile_email' => 'ایمیل',
+    'profile_phone' => 'تلفن',
+    'profile_preferred_locale' => 'زبان ترجیحی',
+    'profile_save_changes' => 'ذخیره تغییرات',
+    'profile_updated' => 'پروفایل شما به‌روزرسانی شد.',
+    'profile_password_heading' => 'تغییر رمز عبور',
+    'profile_current_password' => 'رمز عبور فعلی',
+    'profile_new_password' => 'رمز عبور جدید',
+    'profile_confirm_password' => 'تأیید رمز عبور جدید',
+    'profile_update_password_cta' => 'به‌روزرسانی رمز عبور',
+    'profile_password_updated' => 'رمز عبور شما به‌روزرسانی شد.',
+];

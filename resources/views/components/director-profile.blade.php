@@ -7,7 +7,7 @@ $director = \App\Modules\Director\Models\Director::where('is_published', true)->
 @if ($director)
     <div class="flex {{ $compact ? 'items-center gap-4' : 'flex-col gap-6' }}" {{ $attributes }}>
         <img
-            src="{{ $director->getFirstMediaUrl('profile_photo') ?: asset('images/avatar-placeholder.png') }}"
+            src="{{ $director->getFirstMediaUrl('profile_photo') ?: asset('images/avatar-placeholder.svg') }}"
             alt="{{ $director->full_name }}"
             class="{{ $compact ? 'size-16' : 'size-40' }} rounded-full object-cover"
         >

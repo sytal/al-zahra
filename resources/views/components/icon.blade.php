@@ -1,3 +1,3 @@
 @props(['name', 'size' => 'size-5'])
 
-<x-dynamic-component :component="'heroicon-o-' . $name" :class="$size . ' ' . $attributes->get('class')" />
+{!! svg('heroicon-o-' . $name, trim($size . ' ' . $attributes->get('class')), $attributes->except('class')->getAttributes())->toHtml() !!}

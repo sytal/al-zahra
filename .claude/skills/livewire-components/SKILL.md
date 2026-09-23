@@ -28,6 +28,16 @@ description: How to write Blade/Livewire components for this project, including 
 - Detail pages use the shared `<x-detail-layout>` component.
 - Responsive: mobile-first, test at 375px/768px/1280px; sidebar collapses
   to bottom-sheet/hamburger below `md`.
+- **Page-level design blocks (hero, nav, footer, contact-form layout,
+  CTA bands) MUST be sourced via WebFetch from one of the approved free
+  libraries** (HyperUI, Flowbite, Preline, tailwindawesome.com) per
+  docs/CLAUDE.md Section 8.3 — never hand-written from scratch. Pull
+  ONLY the HTML/Tailwind markup, then rewire it to use our color
+  variables and shared Blade components (drop the source's hardcoded
+  colors/icons/logo). Pick ONE primary source per component type across
+  the whole project for visual consistency — this project uses HyperUI.
+  This does NOT apply to small atomic components (buttons, inputs,
+  badges) which are fine to hand-write.
 
 Exact page/section layout for every page is in `docs/PROJECT-BLUEPRINT.md`
 Part C — follow it literally, do not invent structure.

@@ -19,3 +19,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Alpine.js requires this rule for x-cloak to actually hide anything —
+   without it, every x-cloak usage in the app (mobile nav, dropdown,
+   modal, accordion, theme toggle) renders visible until Alpine
+   hydrates, or stays visible if a directive fails to bind. */
+[x-cloak] {
+    display: none !important;
+}

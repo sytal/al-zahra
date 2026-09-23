@@ -4,6 +4,7 @@ namespace App\Modules\Research\Models;
 
 use App\Models\User;
 use App\Modules\Category\Models\Category;
+use App\Support\CacheService;
 use App\Support\Enums\FullPaperType;
 use App\Support\Traits\HasActivityLog;
 use App\Support\Traits\HasUuid;
@@ -71,5 +72,21 @@ class ResearchPaper extends Model implements HasMedia
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * Explicit cache invalidation on save/delete (docs/CLAUDE.md Section 13).
+     * Only the slug-detail key is forgotten here since list-cache keys are
+     * combinatorial (per filter/search/page) and not practically
+     * enumerable; list staleness is instead bounded by CacheService::LIST_TTL.
+     */
+    protected static function booted(): void
+    {
+        $forget = function (self $paper): void {
+            app(CacheService::class)->forget("research-papers:slug:{$paper->slug}");
+        };
+
+        static::saved($forget);
+        static::deleted($forget);
     }
 }

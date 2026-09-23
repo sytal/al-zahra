@@ -19,6 +19,7 @@ class RolePermissionSeeder extends Seeder
             'certificates.manage',
             'settings.manage',
             'users.manage',
+            'contact.manage',
         ];
 
         foreach ($permissions as $permission) {
