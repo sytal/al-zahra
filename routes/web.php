@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Modules\Page\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/'.config('app.locale'));
@@ -10,9 +11,7 @@ Route::group([
     'where' => ['locale' => implode('|', config('app.locales'))],
     'middleware' => 'setlocale',
 ], function () {
-        Route::get('/', function () {
-            return view('welcome');
-        })->name('home');
+        Route::get('/', [HomeController::class, 'index'])->name('home');
 
         require __DIR__.'/modules/articles.php';
         require __DIR__.'/modules/courses.php';
