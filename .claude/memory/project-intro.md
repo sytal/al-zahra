@@ -145,6 +145,29 @@ on the previous, not squashed into a single phase branch:
     "verified" or "email confirmation required" feature seems to not be
     enforcing anywhere, check the model implements the contract, not
     just that the trait methods exist.
+11. **Never self-manage a separate Alpine instance alongside Livewire** —
+    `app.js` had `import Alpine from 'alpinejs'; Alpine.start()`. Livewire
+    bundles its own Alpine instance (via `@livewireScripts`), registers
+    the Navigate/Morph plugins onto it, and calls `Alpine.start()` itself
+    right after firing `livewire:init`. Two competing instances/starts
+    meant Livewire's own Navigate plugin never attached correctly, so
+    every `redirectRoute(..., navigate: true)` (e.g. after login/register)
+    threw `Alpine.navigate is not a function` in the browser console and
+    silently failed to redirect — this was the real cause behind
+    "login not working" reports, not credentials/seeding. `curl` cannot
+    catch this class of bug since it never executes client-side JS. Fix:
+    never import/start Alpine yourself; register any plugins you need
+    (e.g. `@alpinejs/collapse`) onto Livewire's instance via
+    `document.addEventListener('livewire:init', () => window.Alpine.plugin(pluginName))`.
+12. **A layout can have zero guest-facing auth links and nothing will
+    error** — `public.blade.php`'s header had no Login/Register links at
+    all since it was first built; there was no way for a guest to
+    navigate to the login page from the public site. Nothing throws for
+    this (routes existed, pages worked when hit directly), so it only
+    surfaces via a live user actually looking for the button. When
+    building any public layout with auth routes registered, explicitly
+    check the header/footer for `@guest`/`@auth` (or `@else`) link blocks
+    — don't assume they exist just because the routes and pages do.
 
 - **Dashboard (C11-C16) — fully built**: sidebar layout, home (stats +
   continue-learning + recent consultations), My Courses (tabs, progress,
