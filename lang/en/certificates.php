@@ -11,4 +11,10 @@ return [
     'invalid_title' => 'Not Found',
     'invalid_message' => 'We could not find a valid certificate with that verification code.',
     'rate_limited' => 'You have submitted too many requests. Please try again later.',
+    'pdf_title' => 'Certificate of Completion',
+    'pdf_heading' => 'Certificate of Completion',
+    'pdf_awarded_to' => 'This certificate is proudly presented to',
+    'pdf_for_completing' => 'for successfully completing the course',
+    'pdf_issued_on' => 'Issued on :date',
+    'pdf_verification_code' => 'Verification Code',
 ];

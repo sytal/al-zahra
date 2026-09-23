@@ -21,4 +21,5 @@ return [
     'login_to_enroll' => 'Enroll Karne Ke Liye Login Karein',
     'enrolled_success' => 'Aap enroll ho gaye! Course mein khush amdeed.',
     'related_title' => 'Mutalliqa Courses',
+    'not_enrolled_error' => 'Lessons tak rasai se pehle aap ko is course mein enroll karna hoga.',
 ];

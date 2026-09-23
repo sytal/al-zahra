@@ -11,4 +11,10 @@ return [
     'invalid_title' => 'Nahi Mila',
     'invalid_message' => 'Humein is verification code ke saath koi valid certificate nahi mila.',
     'rate_limited' => 'Aap ne bohat zyada requests bheji hain. Baad mein dobara koshish karein.',
+    'pdf_title' => 'Takmeel ka Certificate',
+    'pdf_heading' => 'Takmeel ka Certificate',
+    'pdf_awarded_to' => 'Yeh certificate fakhar ke saath pesh kiya jata hai',
+    'pdf_for_completing' => 'is course ki kamyabi se takmeel par',
+    'pdf_issued_on' => 'Jaari karne ki tareekh: :date',
+    'pdf_verification_code' => 'Verification Code',
 ];

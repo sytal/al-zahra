@@ -21,4 +21,5 @@ return [
     'login_to_enroll' => 'Log In to Enroll',
     'enrolled_success' => 'You are enrolled! Welcome to the course.',
     'related_title' => 'Related Courses',
+    'not_enrolled_error' => 'You need to enroll in this course before accessing the lessons.',
 ];

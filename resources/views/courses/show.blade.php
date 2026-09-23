@@ -58,7 +58,7 @@
         <div class="mt-8">
             @auth
                 @if ($isEnrolled)
-                    <x-button href="#" variant="primary">{{ __('courses.continue_learning') }}</x-button>
+                    <x-button :href="route('dashboard.courses.learn', ['locale' => app()->getLocale(), 'course' => $course->slug])" variant="primary">{{ __('courses.continue_learning') }}</x-button>
                 @else
                     <form method="POST" action="{{ route('courses.enroll', ['locale' => app()->getLocale(), 'slug' => $course->slug]) }}">
                         @csrf
