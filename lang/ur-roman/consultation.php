@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'page_title' => 'Sawal Poochein',
+    'page_intro' => 'Zaban, seekhne, ya nashonuma ke baray mein sawal hai? Seedha poochein ya consultation book karein.',
+    'type_free' => 'Muft Sawal',
+    'type_paid' => 'Consultation Book Karein',
+    'name' => 'Naam',
+    'email' => 'Email',
+    'topic' => 'Topic',
+    'question' => 'Aapka Sawal',
+    'preferred_datetime' => 'Pasandeeda Tareekh aur Waqt',
+    'submit' => 'Jama Karein',
+    'success_title' => 'Shukriya!',
+    'success_message' => 'Humein aapka sawal mil gaya hai aur jald hi email par rabta karenge.',
+    'rate_limited' => 'Aap ne bohat zyada requests bheji hain. Baad mein dobara koshish karein.',
+    'mail_subject' => 'Humein aapka sawal mil gaya',
+    'mail_greeting' => 'Rabta karne ka shukriya',
+    'mail_body' => 'Humein aapki consultation request mil gayi hai aur jald jawab denge.',
+    'mail_no_topic' => 'Aam sawal',
+    'mail_view_button' => 'Apna Sawal Dekhein',
+    'mail_footer' => 'Jawab milne par hum aapko email se batayenge.',
+    'answer' => 'Jawab',
+    'answered_mail_subject' => 'Aapke sawal ka jawab de diya gaya hai',
+    'answered_mail_greeting' => 'Aapke sawal ka jawab de diya gaya hai',
+    'answered_mail_body' => 'Humne aapki consultation request ka jaiza le kar neeche jawab diya hai.',
+    'answered_mail_footer' => 'Aap upar diye gaye link se poori guftagu dekh sakte hain.',
+];

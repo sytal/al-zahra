@@ -20,4 +20,9 @@ return [
     'mail_no_topic' => 'General question',
     'mail_view_button' => 'View Your Question',
     'mail_footer' => "We'll notify you by email once it's answered.",
+    'answer' => 'Answer',
+    'answered_mail_subject' => 'Your question has been answered',
+    'answered_mail_greeting' => 'Your question has been answered',
+    'answered_mail_body' => 'We have reviewed your consultation request and provided an answer below.',
+    'answered_mail_footer' => 'You can view the full conversation using the link above.',
 ];
