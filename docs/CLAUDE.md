@@ -49,7 +49,8 @@ per Claude Code's sub-agent spec. Keep each agent's job narrow.
 | `model-builder` | Creates Eloquent models, relationships, casts, UUID setup. |
 | `backend-builder` | Controllers, Services, Repositories, Requests, Policies. |
 | `frontend-builder` | Blade/Livewire components, following Section 8 design system. |
-| `seo-agent` | Meta tags, sitemap entries, schema.org JSON-LD for any new public page. |
+| `admin-builder` | Filament Resource for any model listed in blueprint Part D — built in the SAME pass as the model, not deferred. |
+| `seo-agent` | Meta tags, sitemap entries, schema.org JSON-LD for any new public page — including Livewire-only pages, not just classic-Controller pages. |
 | `i18n-agent` | Adds/updates translation keys across all 5 locales whenever new UI text is introduced. |
 | `security-auditor` | Reviews signed URLs, policies, mass-assignment, query safety after a feature is built. |
 | `test-writer` | Writes Pest tests only for the feature just built (never full-suite by default). |
@@ -728,16 +729,39 @@ relevant sub-agent per step, minimal file reads:
 2. `migration-builder`: migration(s) per Section 5.
 3. `model-builder`: model + relationships + traits per Section 6.
 4. `backend-builder`: Request → Policy → Repository → Service → Controller
-   → routes, per Section 7.
+   → routes, per Section 7. Repository list methods that return cached
+   collections/pages must go through `CacheService` per Section 13 —
+   never query the DB directly for a public list/detail page without it.
 5. `frontend-builder`: Livewire component(s) reusing shared Blade
-   components from Section 8, per Sections 9–10.
-6. `i18n-agent`: add any new UI strings to all 5 locale files.
-7. `seo-agent`: if public-facing, add `$seo` data + sitemap entry.
-8. `test-writer` + `qa-runner`: test just this feature.
-9. Update `memory/progress-log.md` with one bullet line.
-10. Commit (Section 23).
+   components from Section 8, per Sections 9–10. Page-level design
+   blocks sourced via WebFetch per Section 8.3.
+6. **`admin-builder`: if the model needs admin management (check Part D
+   of the blueprint), build its Filament Resource now — not later, not
+   bundled into a future "admin phase". Every module with a Part D
+   entry gets its Resource in the SAME pass as steps 1-5, before moving
+   to the next module.**
+7. `i18n-agent`: add any new UI strings to all 5 locale files, in the
+   same commit as the feature — never as a deferred follow-up. This
+   applies equally to classic Controller pages and Livewire-only pages
+   (`#[Title]` alone is not sufficient i18n).
+8. `seo-agent`: if public-facing, add `$seo` data + sitemap entry, even
+   for Livewire-only full-page components — don't skip SEO just because
+   there's no classic Controller to hold the `$seo` array; build it in
+   the Livewire component's `render()` and pass it through, or give the
+   layout a way to receive it.
+9. `test-writer` + `qa-runner`: test just this feature.
+10. **Verify, don't just curl:** confirm the page actually renders at
+    the `sm`/`md`/`lg` breakpoints (Section 26) and, if it has
+    user-facing text, load it once under `/ur/` or `/fa/` to confirm
+    `dir="rtl"` actually applies — an HTTP 200 + a text grep is not a
+    verification of layout, only of routing.
+11. Update `memory/progress-log.md` with one bullet line.
+12. Commit (Section 23).
 
-No step is skipped, but each step touches ONLY the files it needs.
+No step is skipped, but each step touches ONLY the files it needs. If a
+step in this list turns out not to exist as a named sub-agent yet,
+that's a signal the agent roster (Section 1) is stale — fix it there,
+don't silently skip the step.
 
 ---
 

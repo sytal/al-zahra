@@ -18,3 +18,10 @@ description: How to add SEO meta tags, sitemap entries, and structured data for 
   `::breadcrumb()`) — reused, not hand-written per page.
 - Multi-language SEO: `hreflang` alternates auto-generated inside
   `<x-seo>`, looping over the 5 locales — do not duplicate per page.
+- **Livewire full-page components need the same `$seo` array as classic
+  Controller pages** — build it inside `render()` (or a dedicated method)
+  and pass it to the view alongside the rest of the data. A Livewire
+  `#[Title]` attribute only sets `<title>`; it is NOT a substitute for
+  `$seo` (meta description, OG tags, canonical, hreflang, schema). Every
+  public-facing page gets full SEO regardless of whether it's rendered
+  via a Controller or a Livewire component.
