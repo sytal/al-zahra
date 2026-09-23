@@ -7,4 +7,5 @@ return [
     'paid' => 'Paid',
     'explore' => 'Explore',
     'stay_updated' => 'Stay Updated',
+    'phone' => 'Phone',
 ];

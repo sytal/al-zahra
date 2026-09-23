@@ -26,6 +26,7 @@
                         <li><a href="{{ route('courses.index', app()->getLocale()) }}" wire:navigate class="text-ink/70 transition duration-200 ease-in-out hover:text-brand-primary">{{ __('nav.courses') }}</a></li>
                         <li><a href="{{ route('research.index', app()->getLocale()) }}" wire:navigate class="text-ink/70 transition duration-200 ease-in-out hover:text-brand-primary">{{ __('nav.research') }}</a></li>
                         <li><a href="{{ route('resources.index', app()->getLocale()) }}" wire:navigate class="text-ink/70 transition duration-200 ease-in-out hover:text-brand-primary">{{ __('nav.resources') }}</a></li>
+                        <li><a href="{{ route('contact.show', app()->getLocale()) }}" wire:navigate class="text-ink/70 transition duration-200 ease-in-out hover:text-brand-primary">{{ __('nav.contact') }}</a></li>
                     </ul>
                 </nav>
 
@@ -51,6 +52,7 @@
                 <li><a href="{{ route('courses.index', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.courses') }}</a></li>
                 <li><a href="{{ route('research.index', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.research') }}</a></li>
                 <li><a href="{{ route('resources.index', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.resources') }}</a></li>
+                <li><a href="{{ route('contact.show', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.contact') }}</a></li>
             </ul>
         </nav>
     </header>

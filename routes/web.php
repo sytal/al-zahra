@@ -20,6 +20,7 @@ Route::group([
         require __DIR__.'/modules/research.php';
         require __DIR__.'/modules/resources.php';
         require __DIR__.'/modules/consultation.php';
+        require __DIR__.'/modules/contact.php';
 
         Route::get('/dashboard', function () {
             return view('dashboard');

@@ -6,4 +6,5 @@ return [
     'courses' => 'Courses',
     'research' => 'Research',
     'resources' => 'Resources',
+    'contact' => 'Contact',
 ];
