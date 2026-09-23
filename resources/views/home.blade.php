@@ -9,13 +9,15 @@ $tagline = is_array($tagline) ? ($tagline[app()->getLocale()] ?? $tagline['en'] 
     </x-slot>
 
     <!-- 1. Hero -->
-    <section class="bg-gradient-to-br from-brand-primary to-brand-primary/70 px-4 py-20 text-white" data-aos="fade-up">
-        <div class="mx-auto max-w-3xl text-center">
-            <h1 class="text-4xl font-bold md:text-5xl">{{ $tagline }}</h1>
-            <p class="mt-4 text-lg text-white/90">{{ __('home.hero_subtext') }}</p>
-            <div class="mt-8 flex flex-wrap justify-center gap-4">
-                <x-button :href="route('articles.index', app()->getLocale())" variant="secondary" size="lg">{{ __('home.explore_articles') }}</x-button>
-                <x-button :href="route('courses.index', app()->getLocale())" variant="outline" size="lg" class="!border-white !text-white hover:!bg-white/10">{{ __('home.browse_courses') }}</x-button>
+    <section class="bg-gradient-to-br from-brand-primary to-brand-primary/70 text-white" data-aos="fade-up">
+        <div class="p-8 md:p-12 lg:px-16 lg:py-24">
+            <div class="mx-auto max-w-lg text-center">
+                <h1 class="text-3xl font-bold md:text-4xl">{{ $tagline }}</h1>
+                <p class="mt-4 text-white/90">{{ __('home.hero_subtext') }}</p>
+                <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+                    <x-button :href="route('articles.index', app()->getLocale())" variant="secondary" size="lg">{{ __('home.explore_articles') }}</x-button>
+                    <x-button :href="route('courses.index', app()->getLocale())" variant="outline" size="lg" class="!border-white !text-white hover:!bg-white/10">{{ __('home.browse_courses') }}</x-button>
+                </div>
             </div>
         </div>
     </section>

@@ -12,22 +12,47 @@
     @livewireStyles
 </head>
 <body class="bg-white dark:bg-surface font-sans text-ink antialiased">
-    <header class="border-b border-ink/10">
-        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-            <a href="{{ route('home', app()->getLocale()) }}" wire:navigate class="text-lg font-semibold text-ink">
+    <header class="border-b border-ink/10 bg-white dark:bg-surface" x-data="{ mobileOpen: false }">
+        <div class="mx-auto flex h-16 max-w-6xl items-center gap-8 px-4">
+            <a href="{{ route('home', app()->getLocale()) }}" wire:navigate class="block text-lg font-semibold text-ink">
                 {{ config('app.name') }}
             </a>
 
-            <nav class="hidden items-center gap-6 md:flex">
-                <a href="{{ route('about', app()->getLocale()) }}" wire:navigate class="text-sm text-ink/70 hover:text-brand-primary">{{ __('nav.about') }}</a>
-                <a href="{{ route('articles.index', app()->getLocale()) }}" wire:navigate class="text-sm text-ink/70 hover:text-brand-primary">{{ __('nav.articles') }}</a>
-                <a href="{{ route('courses.index', app()->getLocale()) }}" wire:navigate class="text-sm text-ink/70 hover:text-brand-primary">{{ __('nav.courses') }}</a>
-                <a href="{{ route('research.index', app()->getLocale()) }}" wire:navigate class="text-sm text-ink/70 hover:text-brand-primary">{{ __('nav.research') }}</a>
-                <a href="{{ route('resources.index', app()->getLocale()) }}" wire:navigate class="text-sm text-ink/70 hover:text-brand-primary">{{ __('nav.resources') }}</a>
-            </nav>
+            <div class="flex flex-1 items-center justify-end gap-4 md:justify-between">
+                <nav aria-label="Global" class="hidden md:block">
+                    <ul class="flex items-center gap-6 text-sm">
+                        <li><a href="{{ route('about', app()->getLocale()) }}" wire:navigate class="text-ink/70 transition duration-200 ease-in-out hover:text-brand-primary">{{ __('nav.about') }}</a></li>
+                        <li><a href="{{ route('articles.index', app()->getLocale()) }}" wire:navigate class="text-ink/70 transition duration-200 ease-in-out hover:text-brand-primary">{{ __('nav.articles') }}</a></li>
+                        <li><a href="{{ route('courses.index', app()->getLocale()) }}" wire:navigate class="text-ink/70 transition duration-200 ease-in-out hover:text-brand-primary">{{ __('nav.courses') }}</a></li>
+                        <li><a href="{{ route('research.index', app()->getLocale()) }}" wire:navigate class="text-ink/70 transition duration-200 ease-in-out hover:text-brand-primary">{{ __('nav.research') }}</a></li>
+                        <li><a href="{{ route('resources.index', app()->getLocale()) }}" wire:navigate class="text-ink/70 transition duration-200 ease-in-out hover:text-brand-primary">{{ __('nav.resources') }}</a></li>
+                    </ul>
+                </nav>
 
-            <x-language-switcher />
+                <div class="flex items-center gap-3">
+                    <x-language-switcher />
+
+                    <button
+                        type="button"
+                        x-on:click="mobileOpen = !mobileOpen"
+                        class="block rounded-sm bg-surface p-2.5 text-ink/70 transition duration-200 ease-in-out hover:text-ink md:hidden"
+                    >
+                        <span class="sr-only">Toggle menu</span>
+                        <x-icon name="bars-3" class="size-5" />
+                    </button>
+                </div>
+            </div>
         </div>
+
+        <nav x-show="mobileOpen" x-collapse x-cloak class="border-t border-ink/10 md:hidden">
+            <ul class="space-y-1 px-4 py-3 text-sm">
+                <li><a href="{{ route('about', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.about') }}</a></li>
+                <li><a href="{{ route('articles.index', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.articles') }}</a></li>
+                <li><a href="{{ route('courses.index', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.courses') }}</a></li>
+                <li><a href="{{ route('research.index', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.research') }}</a></li>
+                <li><a href="{{ route('resources.index', app()->getLocale()) }}" wire:navigate class="block py-1.5 text-ink/70 hover:text-brand-primary">{{ __('nav.resources') }}</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
