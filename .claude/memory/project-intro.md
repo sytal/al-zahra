@@ -54,13 +54,16 @@ other parameter. Hit this on articles.show (see docs/CLAUDE.md Section
 unless each one declares $locale explicitly.
 
 ## Next up
-- Article module (C3/C4) fully working end-to-end with real demo content
-  — verified live (/en/, /en/login, /en/articles, /en/articles/{slug}
-  all 200, SEO/schema/hreflang all correct).
-- Same backend+frontend pattern now needs copying for Course, Research,
-  Resource, Consultation, Contact modules — Article is the reference
-  implementation. Remember the $locale signature pitfall above for each
-  one's show()/detail route.
+- Article (C3/C4) and Course (C9/C10) modules both fully working
+  end-to-end with real demo content, SEO, sitemap — verified live.
+- Same pattern still needs copying for Research, Resource, Consultation,
+  Contact, Newsletter-confirm, Certificate-verify modules. Remember the
+  $locale signature pitfall for each detail/show route.
+- Course module still missing: dashboard.courses.* routes (My Courses,
+  lesson viewer C13, lesson completion) — enroll() works but there's no
+  "Continue Learning" destination yet (C10's button links to '#').
+- Home page (C1) and About page (C2) not built yet — both need
+  director-profile + settings, which are seeded and ready.
 - i18n pass: only `en` locale files exist so far (common, nav, articles,
   newsletter); need ur/hi/fa/ur-roman per Section 11.
 - Convert Breeze's Blade auth views (login/register/forgot/reset) to

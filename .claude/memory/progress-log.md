@@ -25,6 +25,11 @@
   app/Modules/*/Models and app/Support/Enums.
 - users table updated with uuid/preferred_locale/phone/is_active/
   last_login_at/soft-deletes; User model wired with HasUuid + HasRoles.
+- Course module built end-to-end (C9/C10): Repository/Service/Policy
+  (policy auto-discovered via Models->Policies convention, no manual
+  Gate::policy() needed), CourseIndex Livewire, show+enroll routes,
+  SEO+sitemap, CourseSeeder (3 courses x 5 lessons). Verified live +
+  enroll()/isEnrolled() via tinker.
 - Demo seeders added: CategorySeeder (16), TagSeeder (10), ArticleSeeder
   (15 mixed published/draft) — /en/articles now shows real cards.
 - Fixed a real routing bug: controller methods on {locale}-group routes
