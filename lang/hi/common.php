@@ -10,4 +10,5 @@ return [
     'explore' => 'देखें',
     'stay_updated' => 'अपडेट रहें',
     'phone' => 'फ़ोन',
+    'toggle_theme' => 'डार्क मोड बदलें',
 ];

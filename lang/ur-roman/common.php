@@ -8,4 +8,5 @@ return [
     'explore' => 'Dekhein',
     'stay_updated' => 'Updates Hasil Karein',
     'phone' => 'Phone',
+    'toggle_theme' => 'Dark Mode Tabdeel Karein',
 ];

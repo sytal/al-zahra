@@ -10,4 +10,5 @@ return [
     'explore' => 'دیکھیں',
     'stay_updated' => 'اپ ڈیٹ رہیں',
     'phone' => 'فون',
+    'toggle_theme' => 'ڈارک موڈ تبدیل کریں',
 ];

@@ -8,4 +8,5 @@ return [
     'explore' => 'Explore',
     'stay_updated' => 'Stay Updated',
     'phone' => 'Phone',
+    'toggle_theme' => 'Toggle dark mode',
 ];

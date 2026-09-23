@@ -8,6 +8,7 @@
     {{ $seo ?? '' }}
     @if (!isset($seo))<title>{{ config('app.name') }}</title>@endif
 
+    <x-theme-init-script />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     @stack('head')
@@ -32,6 +33,7 @@
                 </nav>
 
                 <div class="flex items-center gap-3">
+                    <x-theme-toggle />
                     <x-language-switcher />
 
                     <button

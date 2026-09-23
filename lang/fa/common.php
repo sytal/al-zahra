@@ -10,4 +10,5 @@ return [
     'explore' => 'مشاهده',
     'stay_updated' => 'به‌روز بمانید',
     'phone' => 'تلفن',
+    'toggle_theme' => 'تغییر حالت تاریک',
 ];

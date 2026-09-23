@@ -1,5 +1,11 @@
 @php
 $locales = ['en' => 'English', 'ur' => 'اردو', 'hi' => 'हिन्दी', 'fa' => 'فارسی', 'ur-roman' => 'Roman Urdu'];
+
+$segments = explode('/', trim(request()->path(), '/'));
+if (in_array($segments[0] ?? null, config('app.locales'), true)) {
+    array_shift($segments);
+}
+$pathWithoutLocale = implode('/', $segments);
 @endphp
 
 <x-dropdown>
@@ -13,7 +19,7 @@ $locales = ['en' => 'English', 'ur' => 'اردو', 'hi' => 'हिन्दी',
     <x-slot name="content">
         @foreach ($locales as $code => $label)
             <a
-                href="{{ url()->to('/' . $code . '/' . request()->path()) }}"
+                href="{{ url('/' . $code . ($pathWithoutLocale ? '/' . $pathWithoutLocale : '')) }}"
                 wire:navigate
                 class="block px-4 py-2 text-sm text-ink hover:bg-surface"
             >

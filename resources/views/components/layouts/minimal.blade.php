@@ -8,17 +8,21 @@
     {{ $seo ?? '' }}
     @if (!isset($seo))<title>{{ config('app.name') }}</title>@endif
 
+    <x-theme-init-script />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     @stack('head')
 </head>
 <body class="flex min-h-screen flex-col bg-surface font-sans text-ink antialiased">
-    <header class="border-b border-ink/10 bg-white">
+    <header class="border-b border-ink/10 bg-white dark:bg-surface">
         <div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-4">
             <a href="{{ route('home', app()->getLocale()) }}" wire:navigate class="text-lg font-semibold text-ink">
                 {{ config('app.name') }}
             </a>
-            <x-language-switcher />
+            <div class="flex items-center gap-3">
+                <x-theme-toggle />
+                <x-language-switcher />
+            </div>
         </div>
     </header>
 

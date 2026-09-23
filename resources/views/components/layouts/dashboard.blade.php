@@ -8,6 +8,7 @@
     {{ $seo ?? '' }}
     @if (!isset($seo))<title>{{ config('app.name') }}</title>@endif
 
+    <x-theme-init-script />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
     @stack('head')
@@ -17,7 +18,7 @@
     <div x-show="sidebarOpen" x-cloak x-on:click="sidebarOpen = false" class="fixed inset-0 z-40 bg-ink/50 md:hidden"></div>
 
     <aside
-        class="fixed inset-y-0 start-0 z-50 w-64 -translate-x-full border-e border-ink/10 bg-white transition-transform duration-200 ease-in-out md:static md:translate-x-0"
+        class="fixed inset-y-0 start-0 z-50 w-64 -translate-x-full border-e border-ink/10 bg-white dark:bg-surface transition-transform duration-200 ease-in-out md:static md:translate-x-0"
         x-bind:class="sidebarOpen && '!translate-x-0'"
     >
         <div class="flex h-16 items-center px-6">
@@ -60,13 +61,16 @@
     </aside>
 
     <div class="flex min-h-screen flex-1 flex-col md:ms-0">
-        <header class="flex h-16 items-center justify-between border-b border-ink/10 bg-white px-4 md:justify-end">
+        <header class="flex h-16 items-center justify-between border-b border-ink/10 bg-white dark:bg-surface px-4 md:justify-end">
             <button type="button" x-on:click="sidebarOpen = true" class="rounded-sm bg-surface p-2.5 text-ink/70 md:hidden">
                 <span class="sr-only">{{ __('dashboard.toggle_menu') }}</span>
                 <x-icon name="bars-3" class="size-5" />
             </button>
 
-            <x-language-switcher />
+            <div class="flex items-center gap-3">
+                <x-theme-toggle />
+                <x-language-switcher />
+            </div>
         </header>
 
         <main class="flex-1">
