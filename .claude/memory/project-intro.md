@@ -6,74 +6,115 @@ brand name "Al Zahra Institute". Modules: Articles, Research, Courses,
 Resources, Consultations, Certificates. No payment gateway yet.
 
 ## Stack
-Laravel + Livewire (wire:navigate, no page reloads) + Filament (admin) +
-MySQL + Redis + Tailwind. 5 locales: en, ur, hi, fa, ur-roman. UUID public
-IDs everywhere. See docs/CLAUDE.md for full standards — do not repeat them
-here, just follow them.
-
-## Current phase
-Phase 0 — foundation (branch `phase-0-foundation`). Packages installed,
-not yet merged to `main` (user reviews manually per Section 23).
-
-## Done so far
-- Initial commit on `main` (Laravel skeleton + docs/CLAUDE.md +
-  docs/PROJECT-BLUEPRINT.md).
-- `.claude/` folder scaffolded: 10 agents, 9 skills, 4 rules files, memory.
-- docs/CLAUDE.md expanded: seeders/factories standard (22B),
-  mail/notifications (21.1), storage disk note (14), env vars checklist
-  (28), autonomous-memory-update rule.
-- docs/PROJECT-BLUEPRINT.md expanded: Part F2 seeder exact list.
-- Branch `phase-0-foundation` created; all Phase 0 packages installed
-  (10 Composer prod + Pest/pest-plugin-laravel dev + 4 npm dev) and
-  committed in 2 commits.
-
-## Known deviations from plan
-- Breeze installed with the **Blade** stack, not Livewire — Breeze pins
-  Livewire ^3.6.4 which conflicts with Filament v5's Livewire ^4.1
-  requirement. Auth pages (C21) are currently Breeze's stock Blade
-  views/controllers; still need conversion to Livewire 4 + shared
-  `x-input`/`x-button` components per blueprint.
-- Tailwind is v3 (classic PostCSS, `tailwind.config.js`), not v4 —
-  required because `tailwindcss-rtl` only works with v3's JS plugin
-  system. Section 8.1 allows either.
+Laravel 12 + Livewire 3 (wire:navigate, no page reloads) + Filament v5
+(admin) + SQLite (dev) + Tailwind v3 (classic PostCSS, needed for
+tailwindcss-rtl's JS plugin system) + Redis config-ready (Section 13). 5
+locales: en, ur, hi, fa, ur-roman. UUID public IDs everywhere. See
+docs/CLAUDE.md for full standards — do not repeat them here, just follow.
 
 ## Branching convention
 One branch per major blueprint Part (docs/CLAUDE.md Section 23), stacked
 on the previous, not squashed into a single phase branch:
-- `phase-0-foundation`: Part A (DB), Part B (components), seeders,
-  Article backend layer.
-- `phase-1-public-pages` (current): public layout + Article C3/C4 pages,
-  locale routing, Newsletter component.
+- `phase-0-foundation`: Part A (DB, 16 tables), Part B (24 shared
+  components), essential+demo seeders, Article backend layer.
+- `phase-1-public-pages` (current): everything below.
 
-## Known bug pattern (fixed once, watch for it elsewhere)
-Any controller method on a route inside the `{locale}` group MUST
-declare `string $locale` in its signature if the route has another URI
-parameter — otherwise Laravel silently swaps the locale value into that
-other parameter. Hit this on articles.show (see docs/CLAUDE.md Section
-11). Will recur for courses.show, research.show, resources.show etc.
-unless each one declares $locale explicitly.
+## Done so far (phase-1-public-pages)
+- **All 4 public content modules** (C3-C10): Article, Course, Research,
+  Resource — Repository/Service(where needed)/Policy, Livewire index
+  pages, detail pages, full SEO ($seo array + SeoSchema + sitemap),
+  demo seeders. All verified live.
+- **Home (C1), About (C2), Consultation (C17) + signed view (C20),
+  Contact (C18), Certificate verify (C19)** — all built, all verified
+  live (incl. real queued-job emails, signed-URL tamper rejection).
+- **Newsletter confirm flow** (Part E/F) — was a silent gap (only
+  subscribe existed), now has confirm route + job + mail.
+- **Filament admin panel (Part D) — fully built**: 13 Resources
+  (Article, ResearchPaper, Resource, Course w/ Lessons relation manager,
+  Director, Category, Tag, User, Consultation, Certificate,
+  NewsletterSubscriber, ContactMessage) + ManageSettings custom page +
+  5 dashboard widgets. 34 admin routes registered. No
+  filament-spatie-media-library-plugin installed — media uploads use a
+  plain FileUpload + afterCreate/afterSave `addMediaFromDisk` pattern
+  instead (edit-page previews of already-saved files don't render yet,
+  functionally correct for upload/replace though — flagged as a known
+  simplification if full round-trip fidelity is wanted later).
+- **Caching layer (Section 13)**: `App\Support\CacheService` +
+  Article/Course/ResearchPaper/Resource repositories retrofitted
+  (slug-detail 24h, lists 1h, invalidated on save/delete via model
+  `booted()` hooks). Verified hit + invalidation via tinker.
+- **SendWelcomeEmailJob** (Part F) wired to `Registered` event.
+- **i18n**: all 5 locales (en, ur, hi, fa, ur-roman) complete for every
+  UI string introduced this session — en/ur-roman written directly,
+  ur/hi/fa machine-translated with `// TODO: verify native translation`.
+- **`.claude` itself was audited and fixed** — Section 27 checklist now
+  has a mandatory Filament-resource step, a new `admin-builder` agent, a
+  new `caching` skill, and an SEO-skill callout for Livewire-only pages.
+  See `deferred-scope.md` for what's still intentionally out of scope.
+
+## Known deviations from blueprint (all deliberate, documented at point of use)
+- Breeze installed with the **Blade** stack, not Livewire — Breeze pins
+  Livewire ^3.6.4 which conflicts with Filament v5's Livewire ^4.1
+  requirement. Auth pages (C21) are still Breeze's stock Blade
+  views/controllers — not yet converted to Livewire 4.
+- Signed-URL routes (`consultations.signed-view`, `newsletter.confirm`)
+  drop the blueprint's literal `/view/{signature}` URI segment —
+  `temporarySignedRoute()` puts the signature in the query string, a
+  literal path segment would never match. Comment left in each
+  `routes/modules/*.php` file. Same pattern needed for any future
+  signed route — don't take `{signature}` literally from blueprint text.
+- Research/Contact-message-adjacent modules skip a Service class where
+  there's no real business logic beyond CRUD (e.g. ResearchPaper) —
+  avoids empty pass-through classes.
+
+## Known bug patterns (fixed once each, watch for recurrence)
+1. **`{locale}` + extra URI param**: any controller method on a route
+   inside the `{locale}` group MUST declare `string $locale` explicitly
+   if the route has another parameter (e.g. `{slug}`) — otherwise
+   Laravel silently swaps the locale value into that other parameter.
+   `abort(404)` isn't logged, so this fails silently. Hit on
+   articles.show originally; documented in docs/CLAUDE.md Section 11.
+2. **Livewire full-page components need `#[Layout(...)]`, never a
+   hand-wrapped `<x-layouts.*>` tag around their own view** — wrapping
+   causes "Multiple root elements detected" (a full HTML doc has more
+   than one top-level node). Use `#[Layout('components.layouts.public'
+   |'minimal')]` + `@push('head')` for SEO tags (see
+   `components/layouts/public.blade.php`'s `@stack('head')`).
+3. **`config/cache.php`'s `'serializable_classes' => false`** (Laravel
+   12's new secure default) silently breaks unserializing ANY cached
+   object (Eloquent models/collections/paginators) regardless of cache
+   driver. If something introduces object caching again, check this
+   config is `true` (already fixed) rather than reaching for a runtime
+   `config()` override in a ServiceProvider — `CacheManager` reads it
+   once via `?? null`, and `false` isn't `null`, so a runtime override
+   set during `register()` doesn't take effect against the already
+   file-configured `false` default.
+4. **blade-icons registers its own `<x-icon>` tag** — collides with our
+   shared component. `config/blade-icons.php`'s `default` is set to
+   `null` to disable it; our `x-icon` component calls the `svg()`
+   helper directly instead of `<x-dynamic-component>` (which doesn't
+   trigger blade-icons' compile-time resolution).
+5. **Mailables using `<x-mail::message>` must use `->markdown()`, never
+   `->view()`** — Laravel only registers the `mail::` view namespace
+   inside `Markdown::render()`, which only `->markdown()` calls.
+6. **`@alpinejs/collapse` wasn't installed** despite `x-collapse` being
+   used in `accordion.blade.php` from Part B onward — now installed and
+   registered in `app.js` before `Alpine.start()`.
 
 ## Next up
-- Home (C1), About (C2), Consultation (C17) + signed view (C20) all
-  built and verified live (incl. real queued-job email + signature
-  tamper rejection). All 4 content modules (C3-C10) done too.
-- `components/layouts/minimal.blade.php` now exists (header+footer, no
-  nav) — reuse it for Contact/Certificate-verify and later for
-  converting Breeze's auth views (C21), don't rebuild it.
-- Remaining: Contact (C18), Certificate verify (C19), Dashboard
-  (C11-C16), auth Livewire conversion (C21).
-- Remember the $locale signature pitfall for every detail/show route.
-- Signed-URL routes: don't take a literal {signature} URI segment from
-  the blueprint literally — temporarySignedRoute() puts it in the query
-  string. See routes/modules/consultation.php for the pattern to copy
-  for certificates.verify.
-- Course module still missing: dashboard.courses.* routes (My Courses,
-  lesson viewer C13, lesson completion) — enroll() works but there's no
-  "Continue Learning" destination yet (C10's button links to '#').
-- Home page (C1) and About page (C2) not built yet — both need
-  director-profile + settings, which are seeded and ready.
-- i18n pass: only `en` locale files exist so far (common, nav, articles,
-  newsletter); need ur/hi/fa/ur-roman per Section 11.
-- Convert Breeze's Blade auth views (login/register/forgot/reset) to
-  Livewire 4 components using shared components, per blueprint C21.
-- Home page (C1) — needs director-profile + settings data, both seeded.
+- **Dashboard (C11-C16)** — not started. Needed for: "Continue Learning"
+  destination (Course detail's enrolled-state button currently links to
+  `#`), My Courses, lesson viewer, consultations list, certificates
+  list, profile edit.
+- **Auth Livewire conversion (C21)** — Breeze's stock Blade views still
+  in place; convert to Livewire 4 + shared components.
+- RTL and responsive-breakpoint verification (Section 26) — never done
+  with actual rendering, only curl+grep. Worth a real check on `/ur/`
+  and `/fa/` locales, and at 375/768/1280px.
+- `Certificate` model's PDF generation (barryvdh/laravel-dompdf,
+  Section 14) not wired yet — CertificateResource can revoke but
+  nothing generates the actual PDF on course completion
+  (`IssueCertificateListener` / `CourseCompleted` event, Part F, not
+  built).
+- `RecentActivityWidget` (Filament) explicitly skipped by the ops-agent,
+  reads `activity_log` — pick up later if wanted.

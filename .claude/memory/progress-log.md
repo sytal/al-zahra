@@ -1,5 +1,24 @@
 # Progress log (bullet points only)
 
+- **Major parallel push**: 6 background agents dispatched simultaneously
+  (non-overlapping files, no migrate:fresh/serve conflicts) to close
+  gaps found in a full docs audit: 3 agents built all 13 Filament admin
+  Resources + ManageSettings page + 5 widgets (Part D, previously 0%
+  done); 1 built Certificate verify (C19) + Newsletter confirm flow
+  (previously missing entirely); 1 built SendWelcomeEmailJob + full SEO
+  for Consultation/Contact Livewire pages; 1 built the Section 13
+  caching layer (CacheService + 4 repositories retrofitted). All 6
+  committed independently, then a supervision pass found and fixed 2
+  cross-cutting bugs the parallel work surfaced: config/cache.php's new
+  Laravel 12 `serializable_classes => false` default silently broke
+  every cached page, and CertificateVerify's Livewire component wrapped
+  its own layout instead of using #[Layout(...)] causing a 500 on every
+  request. Also completed hi/fa i18n for all 11 page-string files plus
+  ur/hi/fa for two files agents had left at en+ur-roman only
+  (user.php, certificates.php). Full verification: migrate:fresh --seed,
+  34 admin routes confirmed, live curl sweep of all 9 public pages +
+  admin login all 200/302 as expected. See project-intro.md for the
+  full current-state summary (rewritten this session, was stale).
 - Initial commit created (Laravel skeleton, docs/).
 - `.claude/` folder structure created: 10 agents, 9 skills, 4 rules files,
   memory files (this file + project-intro.md).
