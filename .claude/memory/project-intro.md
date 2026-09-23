@@ -131,6 +131,20 @@ on the previous, not squashed into a single phase branch:
    `URL::defaults()`) look exactly like a real routing/session bug. Spent
    real effort chasing this as a framework issue before checking
    `Auth::attempt()` directly in tinker — check credentials first.
+10. **`App\Models\User` never implemented `MustVerifyEmail`** — the
+    import was commented out from the original Breeze scaffold and
+    never revisited. Laravel's `EnsureEmailIsVerified` middleware
+    checks `$user instanceof MustVerifyEmail` and silently passes
+    through for anything that doesn't implement it, so the `verified`
+    middleware on every dashboard route did nothing this whole time —
+    no error, no hint, just a no-op check. The trait's methods
+    (`hasVerifiedEmail()` etc.) were still callable throughout (inherited
+    from `Illuminate\Foundation\Auth\User`), which is why nothing ever
+    threw — only the interface (the actual thing middleware checks) was
+    missing. Fixed when building VerifyEmailNotice for C21. If a
+    "verified" or "email confirmation required" feature seems to not be
+    enforcing anywhere, check the model implements the contract, not
+    just that the trait methods exist.
 
 - **Dashboard (C11-C16) — fully built**: sidebar layout, home (stats +
   continue-learning + recent consultations), My Courses (tabs, progress,
@@ -161,13 +175,35 @@ on the previous, not squashed into a single phase branch:
   -placeholder.png`) 404'd since Part B. Added branded SVG placeholders,
   updated all 8 references from `.png` to `.svg`.
 
+- **Auth Livewire conversion (C21) — done**: all 6 pages
+  (Login/Register/ForgotPassword/ResetPassword/ConfirmPassword/
+  VerifyEmailNotice) converted to Livewire under
+  `app/Modules/User/Livewire/`, `components.layouts.minimal`, full SEO,
+  i18n in all 5 locales. Removed the whole dead Breeze scaffold this
+  superseded (old ProfileController + /profile routes + profile views —
+  dashboard.profile.edit already replaced it; layouts/{app,guest,
+  navigation}.blade.php + View\Components\{AppLayout,GuestLayout} —
+  nothing referenced them anymore; the 7 old Auth/*Controller classes +
+  LoginRequest; the stock root dashboard.blade.php placeholder).
+  `MustVerifyEmail` is now properly implemented on the User model (was a
+  silent no-op gap — see bug #9 below for detail).
+- **Fixed dev login**: `UserSeeder` used a random password every seed
+  run (unusable for repeat manual testing) — now fixed to `password` for
+  all seeded accounts outside production (director/admin/editor/student
+  — added the latter two so every role has a working login), random in
+  production. Credentials after any `migrate:fresh --seed`:
+  `director@alzahra.institute` / `password` (also admin@, editor@,
+  student@ — same password, different role).
+
 ## Next up
-- **Auth Livewire conversion (C21)** — Breeze's stock Blade views still
-  in place; convert to Livewire 4 + shared components.
 - RTL and responsive-breakpoint verification (Section 26) — never done
   with actual rendering, only curl+grep. Worth a real check on `/ur/`
   and `/fa/` locales, and at 375/768/1280px.
 - `RecentActivityWidget` (Filament) explicitly skipped by the ops-agent,
   reads `activity_log` — pick up later if wanted.
-- MustVerifyEmail isn't wired on the User model (noted, not built —
-  profile email-change code has a guard for it but it's a no-op today).
+- Blueprint's out-of-scope list (Part G) is fully respected so far —
+  no payments/forum/marketplace/mobile-app/comments/live-video built.
+  Nothing else known to be missing from Parts A-F at this point; next
+  session should re-audit against the full blueprint before assuming
+  so, per the "full docs compliance" habit this project has needed
+  enforced more than once.

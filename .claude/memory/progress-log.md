@@ -1,5 +1,16 @@
 # Progress log (bullet points only)
 
+- **C21 Auth Livewire conversion**: all 6 Breeze auth pages converted
+  to Livewire (Login/Register/ForgotPassword/ResetPassword/
+  ConfirmPassword/VerifyEmailNotice), i18n done alongside in all 5
+  locales. Removed the entire dead Breeze scaffold this superseded
+  (old ProfileController+views, old layouts, stock dashboard
+  placeholder). Fixed a real bug: User model never implemented
+  MustVerifyEmail, so the 'verified' middleware was a silent no-op on
+  every dashboard route. Also fixed dev-login friction (user request):
+  UserSeeder now sets a fixed 'password' for all 4 seeded roles
+  (director/admin/editor/student) outside production instead of a
+  random one every seed run.
 - **Dashboard push**: built the dashboard foundation (layout+home)
   myself, then 2 parallel agents built C12-C16 (My Courses, Lesson
   Viewer + certificate PDF issuance; Consultations, Certificates,
