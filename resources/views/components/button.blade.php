@@ -3,7 +3,7 @@
 @php
 $variants = [
     'primary' => 'bg-brand-primary text-on-brand hover:bg-brand-primary/90 focus-visible:outline-brand-primary',
-    'secondary' => 'bg-brand-secondary text-ink hover:bg-brand-secondary/90 focus-visible:outline-brand-secondary',
+    'secondary' => 'bg-brand-secondary text-slate-900 hover:bg-brand-secondary/90 focus-visible:outline-brand-secondary',
     'outline' => 'border border-brand-primary text-brand-primary hover:bg-brand-primary/10',
     'danger' => 'bg-danger text-on-brand hover:bg-danger/90',
     'ghost' => 'text-ink hover:bg-ink/5',
