@@ -34,7 +34,7 @@ $statusColors = [
                             {{ $consultation->type->value === 'paid_booking' ? __('consultation.type_paid') : __('consultation.type_free') }}
                         </td>
                         <td class="px-4 py-3">
-                            <x-badge :color="$statusColors[$consultation->status->value] ?? 'neutral'" :text="ucfirst($consultation->status->value)" />
+                            <x-badge :color="$statusColors[$consultation->status->value] ?? 'neutral'" :text="__('enums.consultation_status.'.$consultation->status->value)" />
                         </td>
                         <td class="px-4 py-3 text-sm text-ink/70">{{ $consultation->created_at->format('M d, Y') }}</td>
                         <td class="px-4 py-3 text-end">

@@ -47,7 +47,7 @@
                     @foreach ($recentConsultations as $consultation)
                         <x-card class="flex items-center justify-between">
                             <span class="text-ink">{{ $consultation->topic ?: __('consultation.mail_no_topic') }}</span>
-                            <x-badge color="neutral" :text="ucfirst($consultation->status->value)" />
+                            <x-badge color="neutral" :text="__('enums.consultation_status.'.$consultation->status->value)" />
                         </x-card>
                     @endforeach
                 </div>
