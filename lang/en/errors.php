@@ -1,8 +1,5 @@
 <?php
-
-// Reviewed by AI (Claude); native-speaker review recommended before launch.
-
-return [
+return [
     'home' => 'Back to Home',
     'refresh' => 'Refresh',
     't403' => 'You do not have access to this page',

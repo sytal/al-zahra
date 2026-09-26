@@ -1,8 +1,5 @@
 <?php
-
-// Reviewed by AI (Claude); native-speaker review recommended before launch.
-
-return [
+return [
     'course_level' => [
         'beginner' => 'Beginner',
         'intermediate' => 'Intermediate',

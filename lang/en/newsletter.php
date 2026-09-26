@@ -1,8 +1,5 @@
 <?php
-
-// Reviewed by AI (Claude); native-speaker review recommended before launch.
-
-return [
+return [
     'placeholder' => 'Your email address',
     'subscribe' => 'Subscribe',
     'thanks' => 'Thanks for subscribing!',

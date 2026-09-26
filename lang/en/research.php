@@ -1,8 +1,5 @@
 <?php
-
-// Reviewed by AI (Claude); native-speaker review recommended before launch.
-
-return [
+return [
     'page_title' => 'Research',
     'page_intro' => 'Peer-reviewed and original research on language and cognition.',
     'filter_category' => 'Category',

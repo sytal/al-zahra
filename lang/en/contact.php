@@ -1,8 +1,5 @@
 <?php
-
-// Reviewed by AI (Claude); native-speaker review recommended before launch.
-
-return [
+return [
     'page_title' => 'Contact',
     'page_intro' => 'Have a general question or feedback? Send us a message.',
     'name' => 'Name',

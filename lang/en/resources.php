@@ -1,8 +1,5 @@
 <?php
-
-// Reviewed by AI (Claude); native-speaker review recommended before launch.
-
-return [
+return [
     'page_title' => 'Resources',
     'page_intro' => 'Free and premium tools, guides, and worksheets.',
     'filter_category' => 'Category',

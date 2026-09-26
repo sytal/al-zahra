@@ -1,8 +1,5 @@
 <?php
-
-// Reviewed by AI (Claude); native-speaker review recommended before launch.
-
-return [
+return [
     'viewer_title' => 'Lesson',
     'curriculum' => 'Curriculum',
     'attachments' => 'Attachments',

@@ -1,8 +1,5 @@
 <?php
-
-// Reviewed by AI (Claude); native-speaker review recommended before launch.
-
-return [
+return [
     'page_title' => 'About',
     'mission_title' => 'Mission',
     'vision_title' => 'Vision',

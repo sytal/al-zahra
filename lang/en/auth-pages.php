@@ -1,8 +1,5 @@
 <?php
-
-// Reviewed by AI (Claude); native-speaker review recommended before launch.
-
-return [
+return [
     'login_title' => 'Log In',
     'login_email' => 'Email',
     'login_password' => 'Password',
