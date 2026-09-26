@@ -1,0 +1,37 @@
+<?php
+
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
+return [
+    'show_password' => 'نمایش گذرواژه',
+    'hide_password' => 'پنهان کردن گذرواژه',
+    'close' => 'بستن',
+    'dismiss' => 'حذف',
+    'loading' => 'در حال بارگذاری',
+    'clear' => 'پاک کردن',
+    'search' => 'جستجو',
+    'optional' => 'اختیاری',
+    'required' => 'الزامی',
+    'characters' => ':count از :max نویسه',
+    'choose_file' => 'انتخاب فایل',
+    'choose_files' => 'انتخاب فایل‌ها',
+    'drop_hint' => 'یا اینجا بکشید و رها کنید',
+    'remove_file' => 'حذف :name',
+    'clear_files' => 'پاک کردن انتخاب',
+    'no_file' => 'فایلی انتخاب نشده است',
+    'notifications' => 'اعلان‌ها',
+    'step_of' => 'مرحله :current از :total',
+    'step_completed' => 'تکمیل شده',
+    'step_current' => 'مرحله فعلی',
+    'steps' => 'مراحل پیشرفت',
+    'pagination_label' => 'صفحه‌بندی',
+    'page_of' => 'صفحه :current از :total',
+    'go_to_page' => 'رفتن به صفحه :page',
+    'current_page' => 'صفحه :page، صفحه فعلی',
+    'previous_page' => 'صفحه قبلی',
+    'next_page' => 'صفحه بعدی',
+    'showing' => 'نمایش :from تا :to از :total',
+    'no_results' => 'نتیجه‌ای برای نمایش وجود ندارد',
+    'menu' => 'منو',
+    'more' => 'بیشتر',
+];

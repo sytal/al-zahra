@@ -1,0 +1,37 @@
+<?php
+
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
+return [
+    'show_password' => 'پاس ورڈ دکھائیں',
+    'hide_password' => 'پاس ورڈ چھپائیں',
+    'close' => 'بند کریں',
+    'dismiss' => 'ہٹائیں',
+    'loading' => 'لوڈ ہو رہا ہے',
+    'clear' => 'صاف کریں',
+    'search' => 'تلاش',
+    'optional' => 'اختیاری',
+    'required' => 'ضروری',
+    'characters' => ':max میں سے :count حروف',
+    'choose_file' => 'فائل منتخب کریں',
+    'choose_files' => 'فائلیں منتخب کریں',
+    'drop_hint' => 'یا یہاں کھینچ کر چھوڑیں',
+    'remove_file' => ':name ہٹائیں',
+    'clear_files' => 'انتخاب صاف کریں',
+    'no_file' => 'کوئی فائل منتخب نہیں',
+    'notifications' => 'اطلاعات',
+    'step_of' => 'مرحلہ :current از :total',
+    'step_completed' => 'مکمل',
+    'step_current' => 'موجودہ مرحلہ',
+    'steps' => 'پیش رفت کے مراحل',
+    'pagination_label' => 'صفحہ بندی',
+    'page_of' => 'صفحہ :current از :total',
+    'go_to_page' => 'صفحہ :page پر جائیں',
+    'current_page' => 'صفحہ :page، موجودہ صفحہ',
+    'previous_page' => 'پچھلا صفحہ',
+    'next_page' => 'اگلا صفحہ',
+    'showing' => ':total میں سے :from تا :to دکھائے جا رہے ہیں',
+    'no_results' => 'دکھانے کے لیے کوئی نتیجہ نہیں',
+    'menu' => 'مینو',
+    'more' => 'مزید',
+];

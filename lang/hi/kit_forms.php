@@ -1,0 +1,37 @@
+<?php
+
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
+return [
+    'show_password' => 'पासवर्ड दिखाएँ',
+    'hide_password' => 'पासवर्ड छिपाएँ',
+    'close' => 'बंद करें',
+    'dismiss' => 'हटाएँ',
+    'loading' => 'लोड हो रहा है',
+    'clear' => 'साफ़ करें',
+    'search' => 'खोजें',
+    'optional' => 'वैकल्पिक',
+    'required' => 'आवश्यक',
+    'characters' => ':max में से :count अक्षर',
+    'choose_file' => 'फ़ाइल चुनें',
+    'choose_files' => 'फ़ाइलें चुनें',
+    'drop_hint' => 'या यहाँ खींचकर छोड़ें',
+    'remove_file' => ':name हटाएँ',
+    'clear_files' => 'चयन साफ़ करें',
+    'no_file' => 'कोई फ़ाइल चुनी नहीं गई',
+    'notifications' => 'सूचनाएँ',
+    'step_of' => 'चरण :current / :total',
+    'step_completed' => 'पूरा हुआ',
+    'step_current' => 'वर्तमान चरण',
+    'steps' => 'प्रगति के चरण',
+    'pagination_label' => 'पृष्ठ संख्या',
+    'page_of' => 'पृष्ठ :current / :total',
+    'go_to_page' => 'पृष्ठ :page पर जाएँ',
+    'current_page' => 'पृष्ठ :page, वर्तमान पृष्ठ',
+    'previous_page' => 'पिछला पृष्ठ',
+    'next_page' => 'अगला पृष्ठ',
+    'showing' => ':total में से :from से :to दिख रहे हैं',
+    'no_results' => 'दिखाने के लिए कोई परिणाम नहीं',
+    'menu' => 'मेनू',
+    'more' => 'और',
+];

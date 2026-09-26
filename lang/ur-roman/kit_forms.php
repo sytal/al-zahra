@@ -1,0 +1,37 @@
+<?php
+
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
+return [
+    'show_password' => 'Password dikhayen',
+    'hide_password' => 'Password chhupayen',
+    'close' => 'Band karen',
+    'dismiss' => 'Hatayen',
+    'loading' => 'Load ho raha hai',
+    'clear' => 'Saaf karen',
+    'search' => 'Talash',
+    'optional' => 'ikhtiyari',
+    'required' => 'zaroori',
+    'characters' => ':max mein se :count huroof',
+    'choose_file' => 'File muntakhib karen',
+    'choose_files' => 'Files muntakhib karen',
+    'drop_hint' => 'ya yahan kheench kar chhoren',
+    'remove_file' => ':name hatayen',
+    'clear_files' => 'Intikhab saaf karen',
+    'no_file' => 'Koi file muntakhib nahin',
+    'notifications' => 'Itlaaat',
+    'step_of' => 'Marhala :current az :total',
+    'step_completed' => 'mukammal',
+    'step_current' => 'mojooda marhala',
+    'steps' => 'Pesh raft ke marahil',
+    'pagination_label' => 'Safha bandi',
+    'page_of' => 'Safha :current az :total',
+    'go_to_page' => 'Safha :page par jayen',
+    'current_page' => 'Safha :page, mojooda safha',
+    'previous_page' => 'Pichhla safha',
+    'next_page' => 'Agla safha',
+    'showing' => ':total mein se :from ta :to dikhaye ja rahe hain',
+    'no_results' => 'Dikhane ke liye koi nateeja nahin',
+    'menu' => 'Menu',
+    'more' => 'Mazeed',
+];
