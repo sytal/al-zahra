@@ -11,9 +11,11 @@
             ]" />
             <span>{{ $article->author->name }}</span>
             <span>&middot;</span>
-            <span>{{ $article->published_at?->format('M d, Y') }}</span>
-            <span>&middot;</span>
-            <span>{{ $article->reading_time_minutes }} {{ __('articles.min_read') }}</span>
+            <span>{{ $article->published_at?->translatedFormat('M d, Y') }}</span>
+            @if ($article->reading_time_minutes)
+                <span>&middot;</span>
+                <span>{{ $article->reading_time_minutes }} {{ __('articles.min_read') }}</span>
+            @endif
             @if ($article->category)
                 <x-badge color="brand" :text="$article->category->name" />
             @endif

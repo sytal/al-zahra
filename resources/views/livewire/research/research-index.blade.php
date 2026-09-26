@@ -1,7 +1,7 @@
 <div class="mx-auto max-w-6xl px-4 py-10" data-aos="fade-up">
     <header class="mb-8">
         <h1 class="text-3xl font-bold text-ink">{{ __('research.page_title') }}</h1>
-        <p class="mt-2 text-ink/60">{{ __('research.page_intro') }}</p>
+        <p class="mt-2 text-ink/70">{{ __('research.page_intro') }}</p>
     </header>
 
     <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end">
@@ -37,7 +37,7 @@
                                 @endif
                             </div>
                             <h2 class="font-semibold text-ink">{{ $paper->title }}</h2>
-                            <p class="mt-1 text-sm text-ink/60">{{ \Illuminate\Support\Str::limit($paper->findings_summary, 100) }}</p>
+                            <p class="mt-1 text-sm text-ink/70">{{ \Illuminate\Support\Str::limit($paper->findings_summary, 100) }}</p>
                         </div>
                     </a>
                 </x-card>

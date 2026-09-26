@@ -1,7 +1,7 @@
 <div class="mx-auto max-w-6xl px-4 py-10" data-aos="fade-up">
     <header class="mb-8">
         <h1 class="text-3xl font-bold text-ink">{{ __('articles.page_title') }}</h1>
-        <p class="mt-2 text-ink/60">{{ __('articles.page_intro') }}</p>
+        <p class="mt-2 text-ink/70">{{ __('articles.page_intro') }}</p>
     </header>
 
     <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end">
@@ -32,8 +32,10 @@
                                 <x-badge color="brand" :text="$article->category->name" class="mb-2" />
                             @endif
                             <h2 class="font-semibold text-ink">{{ $article->title }}</h2>
-                            <p class="mt-1 text-sm text-ink/60">{{ $article->excerpt }}</p>
-                            <p class="mt-3 text-xs text-ink/60">{{ $article->reading_time_minutes }} {{ __('articles.min_read') }}</p>
+                            <p class="mt-1 text-sm text-ink/70">{{ $article->excerpt }}</p>
+                            @if ($article->reading_time_minutes)
+                                <p class="mt-3 text-xs text-ink/70">{{ $article->reading_time_minutes }} {{ __('articles.min_read') }}</p>
+                            @endif
                         </div>
                     </a>
                 </x-card>

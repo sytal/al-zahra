@@ -1,21 +1,21 @@
 <div class="mx-auto max-w-6xl px-4 py-10" data-aos="fade-up">
     <header class="mb-8">
         <h1 class="text-3xl font-bold text-ink">{{ __('courses.page_title') }}</h1>
-        <p class="mt-2 text-ink/60">{{ __('courses.page_intro') }}</p>
+        <p class="mt-2 text-ink/70">{{ __('courses.page_intro') }}</p>
     </header>
 
     <div class="mb-8 flex flex-wrap gap-4">
         <x-select name="audience" :label="__('courses.filter_audience')" wire:model.live="audience" class="w-full sm:w-44">
             <option value="">{{ __('courses.all_audiences') }}</option>
             @foreach (\App\Support\Enums\CourseAudience::cases() as $case)
-                <option value="{{ $case->value }}">{{ ucfirst($case->value) }}</option>
+                <option value="{{ $case->value }}">{{ __('enums.course_audience.'.$case->value) }}</option>
             @endforeach
         </x-select>
 
         <x-select name="level" :label="__('courses.filter_level')" wire:model.live="level" class="w-full sm:w-44">
             <option value="">{{ __('courses.all_levels') }}</option>
             @foreach (\App\Support\Enums\CourseLevel::cases() as $case)
-                <option value="{{ $case->value }}">{{ ucfirst($case->value) }}</option>
+                <option value="{{ $case->value }}">{{ __('enums.course_level.'.$case->value) }}</option>
             @endforeach
         </x-select>
 
@@ -42,13 +42,13 @@
                         >
                         <div class="p-5">
                             <div class="mb-2 flex flex-wrap gap-1.5">
-                                <x-badge color="brand" :text="ucfirst($course->level->value)" />
-                                <x-badge color="neutral" :text="ucfirst($course->audience->value)" />
+                                <x-badge color="brand" :text="__('enums.course_level.'.$course->level->value)" />
+                                <x-badge color="neutral" :text="__('enums.course_audience.'.$course->audience->value)" />
                                 <x-badge :color="$course->is_free ? 'success' : 'warning'" :text="$course->is_free ? __('common.free') : __('common.paid')" />
                             </div>
                             <h2 class="font-semibold text-ink">{{ $course->title }}</h2>
-                            <p class="mt-1 text-sm text-ink/60">{{ $course->short_description }}</p>
-                            <p class="mt-3 text-xs text-ink/60">{{ $course->enrolled_count }} {{ __('courses.students_enrolled') }}</p>
+                            <p class="mt-1 text-sm text-ink/70">{{ $course->short_description }}</p>
+                            <p class="mt-3 text-xs text-ink/70">{{ $course->enrolled_count }} {{ __('courses.students_enrolled') }}</p>
                         </div>
                     </a>
                 </x-card>

@@ -12,7 +12,7 @@
             @if ($resource->category)
                 <x-badge color="brand" :text="$resource->category->name" />
             @endif
-            <x-badge color="neutral" :text="ucfirst($resource->resource_type->value)" />
+            <x-badge color="neutral" :text="__('enums.resource_type.'.$resource->resource_type->value)" />
             <x-badge :color="$resource->is_free ? 'success' : 'warning'" :text="$resource->is_free ? __('common.free') : __('common.paid')" />
         </x-slot>
 

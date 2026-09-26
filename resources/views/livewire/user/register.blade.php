@@ -17,7 +17,7 @@
             </x-button>
         </form>
 
-        <p class="mt-6 text-center text-sm text-ink/60">
+        <p class="mt-6 text-center text-sm text-ink/70">
             {{ __('auth-pages.register_have_account') }}
             <a href="{{ route('login', app()->getLocale()) }}" wire:navigate class="text-brand-primary hover:underline">
                 {{ __('auth-pages.register_login_link') }}

@@ -12,14 +12,14 @@
 <div class="mx-auto max-w-2xl px-4 py-10" data-aos="fade-up">
     <header class="mb-8 text-center">
         <h1 class="text-3xl font-bold text-ink">{{ __('consultation.page_title') }}</h1>
-        <p class="mt-2 text-ink/60">{{ __('consultation.page_intro') }}</p>
+        <p class="mt-2 text-ink/70">{{ __('consultation.page_intro') }}</p>
     </header>
 
     @if ($submitted)
         <x-card class="text-center" role="status">
             <x-icon name="check-circle" class="mx-auto size-10 text-success" />
             <h2 class="mt-3 text-xl font-semibold text-ink">{{ __('consultation.success_title') }}</h2>
-            <p class="mt-1 text-ink/60">{{ __('consultation.success_message') }}</p>
+            <p class="mt-1 text-ink/70">{{ __('consultation.success_message') }}</p>
         </x-card>
     @else
         <x-card>
@@ -27,14 +27,14 @@
                 <button
                     type="button"
                     wire:click="$set('type', 'free_question')" aria-pressed="{{ $type === 'free_question' ? 'true' : 'false' }}"
-                    class="flex-1 rounded-lg border px-4 py-2 text-sm font-medium transition duration-200 ease-in-out {{ $type === 'free_question' ? 'border-brand-primary bg-brand-primary/10 text-brand-primary' : 'border-ink/20 text-ink/60' }}"
+                    class="flex-1 min-h-11 rounded-lg border px-4 py-2 text-sm font-medium transition duration-200 ease-in-out {{ $type === 'free_question' ? 'border-brand-primary bg-brand-primary/10 text-brand-primary' : 'border-ink/20 text-ink/70' }}"
                 >
                     {{ __('consultation.type_free') }}
                 </button>
                 <button
                     type="button"
                     wire:click="$set('type', 'paid_booking')" aria-pressed="{{ $type === 'paid_booking' ? 'true' : 'false' }}"
-                    class="flex-1 rounded-lg border px-4 py-2 text-sm font-medium transition duration-200 ease-in-out {{ $type === 'paid_booking' ? 'border-brand-primary bg-brand-primary/10 text-brand-primary' : 'border-ink/20 text-ink/60' }}"
+                    class="flex-1 min-h-11 rounded-lg border px-4 py-2 text-sm font-medium transition duration-200 ease-in-out {{ $type === 'paid_booking' ? 'border-brand-primary bg-brand-primary/10 text-brand-primary' : 'border-ink/20 text-ink/70' }}"
                 >
                     {{ __('consultation.type_paid') }}
                 </button>

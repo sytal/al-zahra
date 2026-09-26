@@ -7,7 +7,7 @@
                 type="email" name="email" autocomplete="email" aria-label="{{ __('newsletter.placeholder') }}" @error('email') aria-invalid="true" @enderror
                 wire:model="email"
                 placeholder="{{ __('newsletter.placeholder') }}"
-                class="min-w-0 flex-1 rounded-lg border-ink/20 bg-white dark:bg-surface text-sm text-ink shadow-sm focus:border-brand-primary focus:ring-brand-primary"
+                class="min-w-0 flex-1 rounded-lg border-ink/20 bg-white dark:bg-surface text-base sm:text-sm text-ink shadow-sm focus:border-brand-primary focus:ring-brand-primary"
             >
             <x-button type="submit" size="sm">{{ __('newsletter.subscribe') }}</x-button>
         </form>

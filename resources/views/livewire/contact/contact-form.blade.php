@@ -18,7 +18,7 @@ $socialLinks = \App\Modules\Setting\Models\Setting::where('key', 'social_links')
 <div class="mx-auto max-w-6xl px-4 py-16" data-aos="fade-up">
     <header class="mb-10 text-center">
         <h1 class="text-3xl font-bold text-ink">{{ __('contact.page_title') }}</h1>
-        <p class="mt-2 text-ink/60">{{ __('contact.page_intro') }}</p>
+        <p class="mt-2 text-ink/70">{{ __('contact.page_intro') }}</p>
     </header>
 
     <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -49,10 +49,10 @@ $socialLinks = \App\Modules\Setting\Models\Setting::where('key', 'social_links')
                 @foreach ($socialLinks as $platform => $url)
                     @if ($url)
                         <div>
-                            <dt class="sr-only">{{ ucfirst($platform) }}</dt>
+                            <dt class="sr-only">{{ trans()->has('enums.social.'.$platform) ? __('enums.social.'.$platform) : ucfirst($platform) }}</dt>
                             <dd class="grid grid-cols-[24px_1fr] items-center gap-2 text-ink/70">
                                 <x-icon name="link" class="size-5 text-brand-primary" />
-                                <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-brand-primary">{{ ucfirst($platform) }}</a>
+                                <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-brand-primary">{{ trans()->has('enums.social.'.$platform) ? __('enums.social.'.$platform) : ucfirst($platform) }}</a>
                             </dd>
                         </div>
                     @endif
@@ -65,7 +65,7 @@ $socialLinks = \App\Modules\Setting\Models\Setting::where('key', 'social_links')
                 <x-card class="text-center" role="status">
                     <x-icon name="check-circle" class="mx-auto size-10 text-success" />
                     <h2 class="mt-3 text-xl font-semibold text-ink">{{ __('contact.success_title') }}</h2>
-                    <p class="mt-1 text-ink/60">{{ __('contact.success_message') }}</p>
+                    <p class="mt-1 text-ink/70">{{ __('contact.success_message') }}</p>
                 </x-card>
             @else
                 <form wire:submit="submit" class="space-y-4 rounded-lg border border-ink/10 bg-surface p-6">
