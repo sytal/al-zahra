@@ -17,6 +17,8 @@ class RecentActivityWidget extends TableWidget
     {
         return $table
             ->heading(__('activity.heading'))
+            ->description(__('admin_ui.activity_desc'))
+            ->striped()
             ->query(fn () => Activity::query()->with(['causer', 'subject'])->latest()->limit(10))
             ->paginated(false)
             ->emptyStateHeading(__('activity.empty'))

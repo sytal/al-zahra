@@ -1,0 +1,56 @@
+@import '@fontsource/figtree/latin-400.css';
+@import '@fontsource/figtree/latin-500.css';
+@import '@fontsource/figtree/latin-600.css';
+@import '@fontsource/figtree/latin-700.css';
+@import '@fontsource/playfair-display/latin-600.css';
+@import '@fontsource/playfair-display/latin-700.css';
+@import '@fontsource/noto-naskh-arabic/arabic-400.css';
+@import '@fontsource/noto-naskh-arabic/arabic-600.css';
+@import '@fontsource/noto-naskh-arabic/arabic-700.css';
+@import '@fontsource/vazirmatn/arabic-400.css';
+@import '@fontsource/vazirmatn/arabic-600.css';
+@import '@fontsource/vazirmatn/arabic-700.css';
+@import '@fontsource/noto-sans-devanagari/devanagari-400.css';
+@import '@fontsource/noto-sans-devanagari/devanagari-600.css';
+@import '@fontsource/noto-sans-devanagari/devanagari-700.css';
+
+html:lang(ur) { --font-family: 'Noto Naskh Arabic', 'Figtree'; }
+html:lang(fa) { --font-family: 'Vazirmatn', 'Figtree'; }
+html:lang(hi) { --font-family: 'Noto Sans Devanagari', 'Figtree'; }
+
+
+.fi-header-heading,
+.fi-simple-header-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: -0.01em;
+}
+html:lang(ur) .fi-header-heading, html:lang(ur) .fi-simple-header-heading,
+html:lang(fa) .fi-header-heading, html:lang(fa) .fi-simple-header-heading,
+html:lang(hi) .fi-header-heading, html:lang(hi) .fi-simple-header-heading {
+    font-family: var(--font-family);
+    letter-spacing: 0;
+}
+html:lang(ur) body { line-height: 1.9; }
+
+.fi-sidebar-item-btn { border-radius: 0.75rem; }
+.fi-section, .fi-ta-ctn, .fi-wi-stats-overview-stat { border-radius: 1rem; }
+
+.az-auth { display: grid; min-height: 100dvh; grid-template-columns: 1fr; background: var(--gray-50); }
+.dark .az-auth { background: var(--gray-950); }
+.az-auth-aside { display: none; position: relative; overflow: hidden; isolation: isolate; color: #fff;
+    background: linear-gradient(160deg, var(--primary-800), var(--primary-950)); padding: 3rem; flex-direction: column; justify-content: space-between; }
+.az-auth-aside::before { content: ''; position: absolute; inset-inline-end: -8rem; top: -8rem; width: 26rem; height: 26rem; border-radius: 9999px;
+    background: radial-gradient(closest-side, var(--warning-400), transparent 70%); opacity: .35; z-index: -1; }
+.az-auth-aside img.az-illus { width: 100%; max-width: 30rem; margin-inline: auto; }
+.az-auth-main { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem 1rem; }
+.az-auth-main .fi-simple-main-ctn { width: 100%; }
+.az-auth-mobile-logo { margin-bottom: 1.5rem; }
+.az-logo-dark { display: none; }
+.dark .az-logo-dark { display: block; }
+.dark .az-logo-light { display: none; }
+.az-auth-aside > img:first-child { align-self: flex-start; }
+@media (min-width: 1024px) {
+    .az-auth { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+    .az-auth-aside { display: flex; }
+    .az-auth-mobile-logo { display: none; }
+}
