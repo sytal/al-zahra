@@ -5,6 +5,7 @@
     --color-surface: #F8FAFC;
     --color-success: #15803D;
     --color-danger: #B91C1C;
+    --color-on-brand: #FFFFFF;
 }
 
 .dark {
@@ -14,6 +15,7 @@
     --color-surface: #0F172A;
     --color-success: #4ADE80;
     --color-danger: #FCA5A5;
+    --color-on-brand: #0F172A;
 }
 
 @tailwind base;
