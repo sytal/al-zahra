@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'page_title' => 'Verify a Certificate',
     'page_intro' => 'Enter a certificate verification code to confirm it was issued by us.',

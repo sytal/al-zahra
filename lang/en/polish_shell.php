@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'toggle_menu' => 'Toggle menu',
     'mobile_nav' => 'Main menu',

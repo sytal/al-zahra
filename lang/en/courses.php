@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'page_title' => 'Courses',
     'page_intro' => 'Structured learning paths on language and the mind.',

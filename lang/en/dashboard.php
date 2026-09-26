@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'nav_dashboard' => 'Dashboard',
     'nav_my_courses' => 'My Courses',

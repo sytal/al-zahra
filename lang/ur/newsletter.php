@@ -1,9 +1,17 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'placeholder' => 'آپ کا ای میل پتہ',
     'subscribe' => 'سبسکرائب کریں',
     'thanks' => 'سبسکرائب کرنے کا شکریہ!',
+    'mail_subject' => 'براہ کرم اپنی نیوز لیٹر سبسکرپشن کی تصدیق کریں',
+    'mail_greeting' => 'اپنی سبسکرپشن کی تصدیق کریں',
+    'mail_body' => 'ہمارے نیوز لیٹر کو سبسکرائب کرنے کا شکریہ۔ اپ ڈیٹس وصول کرنا شروع کرنے کے لیے براہ کرم اپنے ای میل پتے کی تصدیق کریں۔',
+    'mail_button' => 'سبسکرپشن کی تصدیق کریں',
+    'mail_footer' => 'اگر آپ نے یہ درخواست نہیں کی تھی تو آپ اس ای میل کو نظر انداز کر سکتے ہیں۔',
+    'confirm_title' => 'آپ کی تصدیق ہو گئی ہے!',
+    'confirm_message' => 'آپ کے نیوز لیٹر کی سبسکرپشن کی تصدیق ہو گئی ہے۔ ہمارے ساتھ جڑنے کا شکریہ۔',
+    'confirm_home_link' => 'ہوم پر واپس جائیں',
 ];

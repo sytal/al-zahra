@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'page_title' => 'Ask a Question',
     'page_intro' => 'Have a question about language, learning, or development? Ask directly or book a consultation.',

@@ -1,6 +1,6 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'hero_subtext' => 'زبان، سیکھنے، اور ذہن پر شواہد پر مبنی بصیرت، کورسز، اور تحقیق۔',

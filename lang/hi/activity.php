@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'heading' => 'हाल की गतिविधि',
     'description' => 'गतिविधि',

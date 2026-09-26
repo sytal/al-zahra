@@ -1,6 +1,6 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'hero_subtext' => 'بینش‌ها، دوره‌ها، و پژوهش‌های مبتنی بر شواهد درباره زبان، یادگیری، و ذهن.',

@@ -1,6 +1,6 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'page_title' => 'کورسز',
@@ -14,7 +14,7 @@ return [
     'search_label' => 'تلاش کریں',
     'empty_title' => 'کوئی کورس نہیں ملا',
     'empty_message' => 'کوئی دوسرا فلٹر یا تلاش کی اصطلاح آزمائیں۔',
-    'students_enrolled' => 'طلباء داخل ہیں',
+    'students_enrolled' => 'طلبہ داخل ہیں',
     'what_youll_learn' => 'آپ کیا سیکھیں گے',
     'curriculum' => 'نصاب',
     'instructor' => 'استاد',

@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'page_title' => 'Resources',
     'page_intro' => 'Muft aur premium tools, guides, aur worksheets.',

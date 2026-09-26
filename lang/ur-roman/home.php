@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'hero_subtext' => 'Zaban, seekhne, aur zehan par tehqeeq par mabni maloomat, courses, aur research.',
     'explore_articles' => 'Articles Dekhein',

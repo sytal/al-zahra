@@ -1,20 +1,20 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'page_title' => 'कोर्स',
     'page_intro' => 'भाषा और दिमाग़ पर संरचित सीखने के रास्ते।',
-    'filter_audience' => 'दर्शक वर्ग',
+    'filter_audience' => 'लक्षित वर्ग',
     'filter_level' => 'स्तर',
     'filter_pricing' => 'मूल्य',
-    'all_audiences' => 'सभी दर्शक वर्ग',
+    'all_audiences' => 'सभी लक्षित वर्ग',
     'all_levels' => 'सभी स्तर',
     'all_pricing' => 'सभी',
     'search_label' => 'खोजें',
     'empty_title' => 'कोई कोर्स नहीं मिला',
     'empty_message' => 'कोई दूसरा फ़िल्टर या खोज शब्द आज़माएँ।',
-    'students_enrolled' => 'छात्र नामांकित',
+    'students_enrolled' => 'विद्यार्थी नामांकित',
     'what_youll_learn' => 'आप क्या सीखेंगे',
     'curriculum' => 'पाठ्यक्रम',
     'instructor' => 'प्रशिक्षक',

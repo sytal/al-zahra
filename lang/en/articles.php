@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'page_title' => 'Articles',
     'page_intro' => 'Insights on language, learning, and the mind.',

@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'placeholder' => 'Your email address',
     'subscribe' => 'Subscribe',

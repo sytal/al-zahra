@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'instructor' => 'Ustad',
     'all_rights_reserved' => 'Tamam huqooq mahfooz hain.',

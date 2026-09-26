@@ -1,6 +1,6 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'viewer_title' => 'سبق',

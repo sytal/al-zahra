@@ -1,6 +1,6 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'page_title' => 'प्रश्न पूछें',
@@ -11,7 +11,7 @@ return [
     'email' => 'ईमेल',
     'topic' => 'विषय',
     'question' => 'आपका प्रश्न',
-    'preferred_datetime' => 'पसंदीदा तारीख़ और समय',
+    'preferred_datetime' => 'पसंदीदा तारीख़़ और समय',
     'submit' => 'जमा करें',
     'success_title' => 'धन्यवाद!',
     'success_message' => 'हमें आपका प्रश्न मिल गया है और जल्द ही ईमेल से संपर्क करेंगे।',

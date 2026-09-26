@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'page_title' => 'Research',
     'page_intro' => 'Peer-reviewed and original research on language and cognition.',

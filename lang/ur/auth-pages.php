@@ -1,6 +1,6 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'login_title' => 'لاگ ان',
@@ -39,7 +39,7 @@ return [
     'confirm_password_submit' => 'تصدیق کریں',
 
     'verify_email_title' => 'ای میل کی تصدیق کریں',
-    'verify_email_intro' => 'سائن اپ کرنے کا شکریہ! شروع کرنے سے پہلے، براہ کرم اپنا ای میل ایڈریس تصدیق کریں جو ہم نے آپ کو بھیجا ہے۔ اگر ای میل موصول نہیں ہوا تو ہم خوشی سے دوبارہ بھیج دیں گے۔',
+    'verify_email_intro' => 'سائن اپ کرنے کا شکریہ! شروع کرنے سے پہلے، براہ کرم اس لنک پر کلک کر کے اپنے ای میل ایڈریس کی تصدیق کریں جو ہم نے آپ کو بھیجا ہے۔ اگر ای میل موصول نہیں ہوا تو ہم خوشی سے دوبارہ بھیج دیں گے۔',
     'verify_email_resent' => 'ایک نیا تصدیقی لنک آپ کے دیے گئے ای میل ایڈریس پر بھیج دیا گیا ہے۔',
     'verify_email_resend' => 'تصدیقی ای میل دوبارہ بھیجیں',
     'verify_email_logout' => 'لاگ آؤٹ',

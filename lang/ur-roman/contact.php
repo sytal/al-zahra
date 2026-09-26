@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'page_title' => 'Rabta Karein',
     'page_intro' => 'Koi aam sawal ya feedback hai? Humein message bhejein.',

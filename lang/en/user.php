@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'welcome_mail_subject' => 'Welcome to :app_name',
     'welcome_mail_greeting' => 'Welcome, :name!',

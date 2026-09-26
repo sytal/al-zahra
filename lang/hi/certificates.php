@@ -1,6 +1,6 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'page_title' => 'प्रमाणपत्र सत्यापित करें',
@@ -9,7 +9,7 @@ return [
     'code_placeholder' => 'उदाहरण: AZI-2024-000123',
     'submit' => 'सत्यापित करें',
     'valid_title' => 'प्रमाणपत्र सत्यापित',
-    'issued_on' => 'जारी करने की तारीख़',
+    'issued_on' => 'जारी करने की तारीख़़',
     'invalid_title' => 'नहीं मिला',
     'invalid_message' => 'हमें उस सत्यापन कोड के साथ कोई वैध प्रमाणपत्र नहीं मिला।',
     'rate_limited' => 'आपने बहुत सारे अनुरोध भेजे हैं। कृपया बाद में पुनः प्रयास करें।',
@@ -17,6 +17,6 @@ return [
     'pdf_heading' => 'पूर्णता प्रमाणपत्र',
     'pdf_awarded_to' => 'यह प्रमाणपत्र गर्व के साथ प्रस्तुत किया जाता है',
     'pdf_for_completing' => 'इस कोर्स को सफलतापूर्वक पूरा करने के लिए',
-    'pdf_issued_on' => 'जारी करने की तारीख़: :date',
+    'pdf_issued_on' => 'जारी करने की तारीख़़: :date',
     'pdf_verification_code' => 'सत्यापन कोड',
 ];

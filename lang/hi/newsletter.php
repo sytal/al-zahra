@@ -1,9 +1,17 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'placeholder' => 'आपका ईमेल पता',
     'subscribe' => 'सब्सक्राइब करें',
     'thanks' => 'सब्सक्राइब करने के लिए धन्यवाद!',
+    'mail_subject' => 'कृपया अपनी न्यूज़लेटर सदस्यता की पुष्टि करें',
+    'mail_greeting' => 'अपनी सदस्यता की पुष्टि करें',
+    'mail_body' => 'हमारे न्यूज़लेटर की सदस्यता लेने के लिए धन्यवाद। अपडेट पाना शुरू करने के लिए कृपया अपने ईमेल पते की पुष्टि करें।',
+    'mail_button' => 'सदस्यता की पुष्टि करें',
+    'mail_footer' => 'यदि आपने यह अनुरोध नहीं किया था, तो आप इस ईमेल को अनदेखा कर सकते हैं।',
+    'confirm_title' => 'आपकी पुष्टि हो गई है!',
+    'confirm_message' => 'आपके न्यूज़लेटर की सदस्यता की पुष्टि हो गई है। हमारे साथ जुड़ने के लिए धन्यवाद।',
+    'confirm_home_link' => 'होम पर वापस जाएँ',
 ];
