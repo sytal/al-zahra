@@ -1,21 +1,19 @@
 # Color system (docs/CLAUDE.md Section 8.1)
 
-Single source: `resources/css/app.css` `@theme` block (Tailwind v4) or
-`tailwind.config.js` `theme.extend.colors` (Tailwind v3) — whichever the
-installed version uses. NEVER hardcode a hex code inside a Blade file.
+Single source: `resources/theme/theme.json` (palettes, light/dark/band roles,
+gradients, shadows, presets). Tailwind (`tailwind.config.js` via
+`resources/theme/build.js`) and PHP (`config/theme.php`) both read it.
+NEVER hardcode a hex code in Blade, CSS or PHP (`tests/Feature/ThemeTest.php`
+enforces this; whitelist entries need a documented reason).
 
-```css
---color-brand-primary: #0F766E;   /* deep teal */
---color-brand-secondary: #D4A24C; /* warm gold */
---color-ink: #1E293B;             /* headings/text */
---color-surface: #F8FAFC;         /* light bg */
---color-success: #22C55E;
---color-danger: #F87171;
-```
+Use roles and palettes: `bg-primary-700`, `text-strong`, `bg-surface-raised`,
+`text-on-brand` on brand fills, `text-on-secondary` on gold, `text-secondary-text`
+for gold text. Legacy `brand-primary`, `brand-secondary`, `ink`, `surface`
+keep working as aliases. Dark values come from `roles.dark`; components do
+not need `dark:` for role colors.
 
-Dark mode overrides declared under `.dark` class variant, same variable
-names, different values. Every component (button, card, badge) references
-`bg-brand-primary`, `text-ink`, etc. — never raw hex.
+Re-theme: edit theme.json, `npm run build`. Details: docs/DESIGN-SYSTEM.md
+("Theming: one file").
 
-RTL: never hardcode `ml-`/`pl-`/`text-left` directional utilities — always
-use logical properties (`ps-4`, `pe-4`, etc. via `tailwindcss-rtl`).
+RTL: never hardcode `ml-`/`pl-`/`text-left` directional utilities; use
+logical properties (`ps-4`, `pe-4`, `text-start`, via `tailwindcss-rtl`).

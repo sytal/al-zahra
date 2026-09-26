@@ -1,0 +1,464 @@
+{
+  "$comment": "Single source of truth for every color, gradient and shadow. Edit here, then run npm run build. See docs/DESIGN-SYSTEM.md, section Theming: one file. Roles reference palette steps like primary.700 or raw hex. Gradients and shadows use {palette.step/alphaPercent}, {role:name/alphaPercent} or {#RRGGBB/alphaPercent}.",
+  "activePreset": "default",
+  "base": {
+    "palettes": {
+      "primary": {
+        "50": "#F0FDFA",
+        "100": "#CCFBF1",
+        "200": "#99F6E4",
+        "300": "#5EEAD4",
+        "400": "#2DD4BF",
+        "500": "#14B8A6",
+        "600": "#0D9488",
+        "700": "#0F766E",
+        "800": "#115E59",
+        "900": "#134E4A",
+        "950": "#042F2E"
+      },
+      "secondary": {
+        "50": "#FBF6EA",
+        "100": "#F5EAD0",
+        "200": "#EDD6A4",
+        "300": "#E3BD76",
+        "400": "#D4A24C",
+        "500": "#BE8A36",
+        "600": "#9C6E29",
+        "700": "#7A5522",
+        "800": "#5C4020",
+        "900": "#3F2C17",
+        "950": "#26190C"
+      },
+      "accent": {
+        "50": "#FEF3EF",
+        "100": "#FDE4DB",
+        "200": "#FBC8B7",
+        "300": "#F7A48B",
+        "400": "#F0805F",
+        "500": "#E4623F",
+        "600": "#C94A2B",
+        "700": "#A63B22",
+        "800": "#86321F",
+        "900": "#6C2C1E",
+        "950": "#3B140C"
+      },
+      "neutral": {
+        "50": "#F7F8F8",
+        "100": "#EEF1F1",
+        "200": "#DDE2E3",
+        "300": "#C3CBCD",
+        "400": "#96A1A5",
+        "500": "#646F75",
+        "600": "#515D63",
+        "700": "#3B464C",
+        "800": "#1F2A33",
+        "900": "#131C24",
+        "950": "#0B1219"
+      },
+      "deep": {
+        "50": "#EEF5F4",
+        "100": "#D3E3E1",
+        "200": "#A9C8C5",
+        "300": "#7FA9A5",
+        "400": "#4F7F7B",
+        "500": "#35615E",
+        "600": "#1F4F50",
+        "700": "#143A3B",
+        "800": "#0D2A2B",
+        "900": "#061819",
+        "950": "#041011"
+      },
+      "success": {
+        "50": "#F0FDF4",
+        "100": "#DCFCE7",
+        "200": "#BBF7D0",
+        "300": "#86EFAC",
+        "400": "#4ADE80",
+        "500": "#22C55E",
+        "600": "#16A34A",
+        "700": "#15803D",
+        "800": "#166534",
+        "900": "#14532D",
+        "950": "#052E16"
+      },
+      "warning": {
+        "50": "#FFFBEB",
+        "100": "#FEF3C7",
+        "200": "#FDE68A",
+        "300": "#FCD34D",
+        "400": "#FBBF24",
+        "500": "#F59E0B",
+        "600": "#D97706",
+        "700": "#B45309",
+        "800": "#92400E",
+        "900": "#78350F",
+        "950": "#451A03"
+      },
+      "danger": {
+        "50": "#FEF2F2",
+        "100": "#FEE2E2",
+        "200": "#FECACA",
+        "300": "#FCA5A5",
+        "400": "#F87171",
+        "500": "#EF4444",
+        "600": "#DC2626",
+        "700": "#B91C1C",
+        "800": "#991B1B",
+        "900": "#7F1D1D",
+        "950": "#450A0A"
+      },
+      "info": {
+        "50": "#F0F9FF",
+        "100": "#E0F2FE",
+        "200": "#BAE6FD",
+        "300": "#7DD3FC",
+        "400": "#38BDF8",
+        "500": "#0EA5E9",
+        "600": "#0284C7",
+        "700": "#0369A1",
+        "800": "#075985",
+        "900": "#0C4A6E",
+        "950": "#082F49"
+      }
+    },
+    "roles": {
+      "light": {
+        "page": "neutral.50",
+        "surface": "neutral.50",
+        "surface-raised": "#FFFFFF",
+        "surface-sunken": "neutral.100",
+        "overlay": "neutral.950",
+        "tint": "primary.50",
+        "text-strong": "neutral.800",
+        "text-body": "neutral.700",
+        "text-muted": "neutral.600",
+        "text-subtle": "neutral.500",
+        "text-inverse": "#FFFFFF",
+        "on-brand": "#FFFFFF",
+        "on-secondary": "neutral.800",
+        "border": "neutral.200",
+        "border-strong": "neutral.300",
+        "border-subtle": "neutral.100",
+        "ring": "primary.600",
+        "link": "primary.700",
+        "link-hover": "primary.800",
+        "link-active": "primary.900",
+        "brand": "primary.700",
+        "brand-hover": "primary.800",
+        "brand-active": "primary.900",
+        "brand-secondary": "secondary.400",
+        "brand-secondary-hover": "secondary.500",
+        "brand-secondary-active": "secondary.600",
+        "secondary-text": "secondary.700",
+        "accent": "accent.700",
+        "accent-hover": "accent.800",
+        "accent-active": "accent.900",
+        "success": "success.800",
+        "warning": "warning.800",
+        "danger": "danger.700",
+        "info": "info.700"
+      },
+      "dark": {
+        "page": "deep.900",
+        "surface": "deep.900",
+        "surface-raised": "deep.800",
+        "surface-sunken": "deep.950",
+        "overlay": "deep.950",
+        "tint": "deep.800",
+        "text-strong": "deep.50",
+        "text-body": "deep.100",
+        "text-muted": "deep.200",
+        "text-subtle": "deep.300",
+        "text-inverse": "deep.950",
+        "on-brand": "deep.950",
+        "on-secondary": "deep.950",
+        "border": "deep.700",
+        "border-strong": "deep.600",
+        "border-subtle": "deep.800",
+        "ring": "primary.400",
+        "link": "primary.300",
+        "link-hover": "primary.200",
+        "link-active": "primary.100",
+        "brand": "primary.500",
+        "brand-hover": "primary.400",
+        "brand-active": "primary.300",
+        "brand-secondary": "secondary.300",
+        "brand-secondary-hover": "secondary.200",
+        "brand-secondary-active": "secondary.100",
+        "secondary-text": "secondary.300",
+        "accent": "accent.400",
+        "accent-hover": "accent.300",
+        "accent-active": "accent.200",
+        "success": "success.400",
+        "warning": "warning.400",
+        "danger": "danger.300",
+        "info": "info.400"
+      },
+      "band": {
+        "page": "primary.950",
+        "surface": "primary.950",
+        "surface-raised": "primary.900",
+        "surface-sunken": "primary.950",
+        "tint": "primary.900",
+        "text-strong": "deep.50",
+        "text-body": "deep.100",
+        "text-muted": "deep.200",
+        "text-subtle": "deep.300",
+        "text-inverse": "deep.950",
+        "on-brand": "deep.950",
+        "on-secondary": "deep.950",
+        "border": "primary.800",
+        "border-strong": "primary.700",
+        "border-subtle": "primary.900",
+        "ring": "primary.300",
+        "link": "primary.300",
+        "link-hover": "primary.200",
+        "link-active": "primary.100",
+        "brand": "primary.300",
+        "brand-hover": "primary.200",
+        "brand-active": "primary.100",
+        "brand-secondary": "secondary.300",
+        "brand-secondary-hover": "secondary.200",
+        "brand-secondary-active": "secondary.100",
+        "secondary-text": "secondary.300",
+        "accent": "accent.300",
+        "accent-hover": "accent.200",
+        "accent-active": "accent.100",
+        "success": "success.300",
+        "warning": "warning.300",
+        "danger": "danger.300",
+        "info": "info.300"
+      }
+    },
+    "aliases": {
+      "brand-primary": "brand",
+      "ink": "text-strong"
+    },
+    "paletteDefaults": {
+      "primary": "brand",
+      "secondary": "brand-secondary",
+      "accent": "accent",
+      "success": "success",
+      "warning": "warning",
+      "danger": "danger",
+      "info": "info"
+    },
+    "gradients": {
+      "light": {
+        "hero": "radial-gradient(55% 60% at var(--hero-x1) 0%, {primary.500/16}, transparent 70%), radial-gradient(40% 45% at var(--hero-x2) 35%, {secondary.400/14}, transparent 70%), linear-gradient(180deg, {role:page}, {role:surface-sunken})",
+        "section-tint": "linear-gradient(180deg, {primary.50}, {role:page})",
+        "card-highlight": "linear-gradient(145deg, {primary.50}, {role:surface-raised} 60%)",
+        "brand-text": "linear-gradient(90deg, {primary.700}, {secondary.500})",
+        "cta-band": "linear-gradient(135deg, {primary.700}, {primary.900})",
+        "brand": "linear-gradient(135deg, {primary.700}, {primary.900})",
+        "gold": "linear-gradient(135deg, {secondary.300}, {secondary.500})",
+        "border": "linear-gradient(135deg, {primary.600/70}, {secondary.400/70})",
+        "glow-primary": "radial-gradient(closest-side, {primary.500/30}, transparent)",
+        "glow-secondary": "radial-gradient(closest-side, {secondary.400/32}, transparent)",
+        "light-rays": "repeating-conic-gradient(from 0deg at 50% 0%, {secondary.400/16} 0deg 3deg, transparent 3deg 11deg)",
+        "shimmer": "linear-gradient(105deg, transparent 35%, {#FFFFFF/45} 50%, transparent 65%)",
+        "skeleton": "linear-gradient(90deg, transparent, {role:text-strong/8}, transparent)",
+        "band": "radial-gradient(60% 80% at 80% 0%, {primary.800}, transparent 70%), linear-gradient(180deg, {primary.950}, {primary.950})"
+      },
+      "dark": {
+        "hero": "radial-gradient(55% 60% at var(--hero-x1) 0%, {primary.500/14}, transparent 70%), radial-gradient(40% 45% at var(--hero-x2) 35%, {secondary.300/10}, transparent 70%), linear-gradient(180deg, {role:page}, {role:surface-sunken})",
+        "section-tint": "linear-gradient(180deg, {deep.800}, {role:page})",
+        "card-highlight": "linear-gradient(145deg, {deep.700}, {role:surface-raised} 60%)",
+        "brand-text": "linear-gradient(90deg, {primary.300}, {secondary.300})",
+        "cta-band": "linear-gradient(135deg, {primary.500}, {primary.700})",
+        "brand": "linear-gradient(135deg, {primary.500}, {primary.600})",
+        "gold": "linear-gradient(135deg, {secondary.200}, {secondary.400})",
+        "border": "linear-gradient(135deg, {primary.400/60}, {secondary.300/60})",
+        "glow-primary": "radial-gradient(closest-side, {primary.500/34}, transparent)",
+        "glow-secondary": "radial-gradient(closest-side, {secondary.300/30}, transparent)",
+        "light-rays": "repeating-conic-gradient(from 0deg at 50% 0%, {secondary.300/12} 0deg 3deg, transparent 3deg 11deg)",
+        "shimmer": "linear-gradient(105deg, transparent 35%, {#FFFFFF/18} 50%, transparent 65%)",
+        "skeleton": "linear-gradient(90deg, transparent, {role:text-strong/8}, transparent)",
+        "band": "radial-gradient(60% 80% at 80% 0%, {primary.900}, transparent 70%), linear-gradient(180deg, {deep.900}, {deep.950})"
+      }
+    },
+    "shadows": {
+      "light": {
+        "soft": "0 1px 2px {neutral.800/5}, 0 4px 12px {neutral.800/6}",
+        "lift": "0 2px 4px {neutral.800/5}, 0 12px 28px {neutral.800/10}, 0 24px 48px {neutral.800/6}",
+        "float": "0 4px 8px {neutral.800/6}, 0 24px 56px {neutral.800/16}",
+        "glow": "0 0 0 1px {primary.600/30}, 0 8px 32px {primary.600/28}",
+        "gold": "0 0 0 1px {secondary.400/40}, 0 8px 28px {secondary.400/26}"
+      },
+      "dark": {
+        "soft": "0 1px 2px {#000000/25}, 0 4px 12px {#000000/30}",
+        "lift": "0 2px 4px {#000000/25}, 0 12px 28px {#000000/50}, 0 24px 48px {#000000/30}",
+        "float": "0 4px 8px {#000000/30}, 0 24px 56px {#000000/80}",
+        "glow": "0 0 0 1px {primary.500/40}, 0 8px 32px {primary.500/30}",
+        "gold": "0 0 0 1px {secondary.300/35}, 0 8px 32px {secondary.300/22}"
+      }
+    },
+    "status": {
+      "light": {
+        "published": {
+          "bg": "success.100",
+          "text": "success.800"
+        },
+        "draft": {
+          "bg": "neutral.100",
+          "text": "neutral.700"
+        },
+        "pending": {
+          "bg": "warning.100",
+          "text": "warning.800"
+        },
+        "archived": {
+          "bg": "neutral.200",
+          "text": "neutral.700"
+        },
+        "rejected": {
+          "bg": "danger.100",
+          "text": "danger.800"
+        },
+        "info": {
+          "bg": "info.100",
+          "text": "info.800"
+        },
+        "featured": {
+          "bg": "secondary.100",
+          "text": "secondary.800"
+        }
+      },
+      "dark": {
+        "published": {
+          "bg": "success.900",
+          "text": "success.200"
+        },
+        "draft": {
+          "bg": "deep.800",
+          "text": "deep.100"
+        },
+        "pending": {
+          "bg": "warning.900",
+          "text": "warning.200"
+        },
+        "archived": {
+          "bg": "deep.700",
+          "text": "deep.100"
+        },
+        "rejected": {
+          "bg": "danger.900",
+          "text": "danger.200"
+        },
+        "info": {
+          "bg": "info.900",
+          "text": "info.200"
+        },
+        "featured": {
+          "bg": "secondary.900",
+          "text": "secondary.200"
+        }
+      }
+    },
+    "chart": {
+      "light": [
+        "primary.600",
+        "secondary.500",
+        "accent.500",
+        "info.600",
+        "success.600",
+        "danger.500",
+        "neutral.500",
+        "primary.400"
+      ],
+      "dark": [
+        "primary.400",
+        "secondary.300",
+        "accent.400",
+        "info.400",
+        "success.400",
+        "danger.400",
+        "deep.300",
+        "primary.200"
+      ]
+    }
+  },
+  "presets": {
+    "default": {},
+    "sapphire": {
+      "roles": {
+        "dark": {
+          "brand": "primary.400",
+          "brand-hover": "primary.300",
+          "brand-active": "primary.200"
+        }
+      },
+      "palettes": {
+        "primary": {
+          "50": "#EFF6FF",
+          "100": "#DBEAFE",
+          "200": "#BFDBFE",
+          "300": "#93C5FD",
+          "400": "#60A5FA",
+          "500": "#3B82F6",
+          "600": "#2563EB",
+          "700": "#1D4ED8",
+          "800": "#1E40AF",
+          "900": "#1E3A8A",
+          "950": "#172554"
+        },
+        "deep": {
+          "50": "#EEF2F8",
+          "100": "#D5DEEE",
+          "200": "#AABBDA",
+          "300": "#7F97C4",
+          "400": "#5273A5",
+          "500": "#3A5687",
+          "600": "#28406A",
+          "700": "#1A2E52",
+          "800": "#111F3B",
+          "900": "#0A1428",
+          "950": "#060C1A"
+        }
+      }
+    },
+    "rose": {
+      "palettes": {
+        "primary": {
+          "50": "#FFF1F2",
+          "100": "#FFE4E6",
+          "200": "#FECDD3",
+          "300": "#FDA4AF",
+          "400": "#FB7185",
+          "500": "#F43F5E",
+          "600": "#E11D48",
+          "700": "#BE123C",
+          "800": "#9F1239",
+          "900": "#881337",
+          "950": "#4C0519"
+        },
+        "deep": {
+          "50": "#F8EFF1",
+          "100": "#EBD5DA",
+          "200": "#D6ABB4",
+          "300": "#BF818E",
+          "400": "#9C5966",
+          "500": "#783C49",
+          "600": "#5A2A36",
+          "700": "#421D28",
+          "800": "#2C121B",
+          "900": "#1B0A11",
+          "950": "#12060A"
+        },
+        "accent": {
+          "50": "#F0FDFA",
+          "100": "#CCFBF1",
+          "200": "#99F6E4",
+          "300": "#5EEAD4",
+          "400": "#2DD4BF",
+          "500": "#14B8A6",
+          "600": "#0D9488",
+          "700": "#0F766E",
+          "800": "#115E59",
+          "900": "#134E4A",
+          "950": "#042F2E"
+        }
+      }
+    }
+  }
+}
