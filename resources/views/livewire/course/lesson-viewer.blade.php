@@ -74,7 +74,7 @@
                     <x-card class="mt-4 text-center">
                         <x-icon name="trophy" class="mx-auto size-10 text-brand-secondary" />
                         <p class="mt-2 font-medium text-ink">{{ __('lessons.course_complete_title') }}</p>
-                        <p class="mt-1 text-sm text-ink/60">{{ __('lessons.course_complete_message') }}</p>
+                        <p class="mt-1 text-sm text-ink/70">{{ __('lessons.course_complete_message') }}</p>
                         <div class="mt-4">
                             <x-button :href="route('dashboard.courses.index', app()->getLocale())" variant="primary" size="sm">
                                 {{ __('lessons.back_to_my_courses') }}
@@ -94,7 +94,7 @@
                                 <a
                                     href="{{ route('dashboard.courses.lesson', ['locale' => app()->getLocale(), 'course' => $course->slug, 'lesson' => $item->uuid]) }}"
                                     wire:navigate
-                                    class="flex items-center gap-2 rounded-lg px-2 py-2 text-sm transition duration-200 ease-in-out {{ $item->id === $lesson->id ? 'bg-brand-primary/10 text-brand-primary font-medium' : 'text-ink/70 hover:bg-surface hover:text-ink' }}"
+                                    class="flex items-center gap-2 rounded-lg px-2 py-2 text-sm transition duration-200 ease-in-out {{ $item->id === $lesson->id ? 'bg-brand-primary/10 text-brand-primary font-medium' : 'text-ink/70 hover:bg-ink/5 hover:text-ink' }}"
                                 >
                                     <x-icon :name="$done ? 'check-circle' : 'play-circle'" class="size-4 shrink-0 {{ $done ? 'text-success' : 'text-ink/30' }}" />
                                     <span class="truncate">{{ $item->title }}</span>

@@ -14,7 +14,7 @@
     @stack('head')
 </head>
 <body class="bg-white dark:bg-surface font-sans text-ink antialiased">
-    <a href="#main" class="sr-only rounded-lg bg-brand-primary px-4 py-2 text-white focus:not-sr-only focus:absolute focus:start-4 focus:top-4 focus:z-50">{{ __('polish_shell.skip_to_content') }}</a>
+    <a href="#main" class="sr-only rounded-lg bg-brand-primary px-4 py-2 text-on-brand focus:not-sr-only focus:absolute focus:start-4 focus:top-4 focus:z-50">{{ __('polish_shell.skip_to_content') }}</a>
     <header x-on:keydown.escape.window="mobileOpen = false" class="border-b border-ink/10 bg-white dark:bg-surface" x-data="{ mobileOpen: false }">
         <div class="mx-auto flex h-16 max-w-6xl items-center gap-4 px-4 lg:gap-8">
             <a href="{{ route('home', app()->getLocale()) }}" wire:navigate class="block rounded-sm text-lg font-semibold text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary">
@@ -39,13 +39,13 @@
                             <a href="{{ route('login', app()->getLocale()) }}" wire:navigate class="rounded-lg px-4 py-2 text-sm font-medium text-ink/70 transition duration-200 ease-in-out hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary">
                                 {{ __('nav.login') }}
                             </a>
-                            <a href="{{ route('register', app()->getLocale()) }}" wire:navigate class="rounded-lg bg-brand-primary px-4 py-2 text-sm font-medium text-white transition duration-200 ease-in-out hover:bg-brand-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary">
+                            <a href="{{ route('register', app()->getLocale()) }}" wire:navigate class="rounded-lg bg-brand-primary px-4 py-2 text-sm font-medium text-on-brand transition duration-200 ease-in-out hover:bg-brand-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary">
                                 {{ __('nav.register') }}
                             </a>
                         </div>
                     @else
                         <div class="hidden items-center gap-2 lg:flex">
-                            <a href="{{ route('dashboard', app()->getLocale()) }}" wire:navigate class="rounded-lg bg-brand-primary px-4 py-2 text-sm font-medium text-white transition duration-200 ease-in-out hover:bg-brand-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary">
+                            <a href="{{ route('dashboard', app()->getLocale()) }}" wire:navigate class="rounded-lg bg-brand-primary px-4 py-2 text-sm font-medium text-on-brand transition duration-200 ease-in-out hover:bg-brand-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary">
                                 {{ __('nav.dashboard') }}
                             </a>
                             <form method="POST" action="{{ route('logout', app()->getLocale()) }}">

@@ -12,7 +12,7 @@ $aboutText = is_array($aboutTextRaw) ? ($aboutTextRaw[$locale] ?? $aboutTextRaw[
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div>
                 <p class="text-lg font-semibold text-ink">{{ config('app.name') }}</p>
-                @if ($aboutText)<p class="mt-4 max-w-xs text-sm text-ink/60">{{ $aboutText }}</p>@endif
+                @if ($aboutText)<p class="mt-4 max-w-xs text-sm text-ink/70">{{ $aboutText }}</p>@endif
             </div>
 
             @unless ($minimal)
@@ -42,6 +42,6 @@ $aboutText = is_array($aboutTextRaw) ? ($aboutTextRaw[$locale] ?? $aboutTextRaw[
             @endunless
         </div>
 
-        <p class="text-xs text-ink/40">&copy; {{ date('Y') }} {{ config('app.name') }}. {{ __('common.all_rights_reserved') }}</p>
+        <p class="text-xs text-ink/70">&copy; {{ date('Y') }} {{ config('app.name') }}. {{ __('common.all_rights_reserved') }}</p>
     </div>
 </footer>

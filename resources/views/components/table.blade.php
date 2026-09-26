@@ -5,7 +5,7 @@
         <thead class="bg-surface">
             <tr>
                 @foreach ($headers as $header)
-                    <th class="px-4 py-3 text-start text-xs font-semibold uppercase tracking-wide text-ink/60">{{ $header }}</th>
+                    <th class="px-4 py-3 text-start text-xs font-semibold uppercase tracking-wide text-ink/70">{{ $header }}</th>
                 @endforeach
             </tr>
         </thead>

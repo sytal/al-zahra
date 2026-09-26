@@ -23,6 +23,7 @@ document.addEventListener('livewire:init', () => {
 AOS.init({
     duration: 600,
     once: true,
+    disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
 });
 
 document.addEventListener('livewire:navigated', () => AOS.refreshHard());

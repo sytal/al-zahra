@@ -53,16 +53,16 @@ $statusColors = [
             <h3 class="text-lg font-semibold text-ink">{{ $activeConsultation->topic ?: __('consultation.mail_no_topic') }}</h3>
 
             <div class="mt-4">
-                <p class="text-xs font-semibold uppercase tracking-wide text-ink/50">{{ __('dashboard.consultations_your_question') }}</p>
+                <p class="text-xs font-semibold uppercase tracking-wide text-ink/70">{{ __('dashboard.consultations_your_question') }}</p>
                 <p class="mt-1 whitespace-pre-line text-sm text-ink">{{ $activeConsultation->question }}</p>
             </div>
 
             <div class="mt-4">
-                <p class="text-xs font-semibold uppercase tracking-wide text-ink/50">{{ __('dashboard.consultations_answer') }}</p>
+                <p class="text-xs font-semibold uppercase tracking-wide text-ink/70">{{ __('dashboard.consultations_answer') }}</p>
                 @if ($activeConsultation->answer)
                     <p class="mt-1 whitespace-pre-line text-sm text-ink">{{ $activeConsultation->answer }}</p>
                 @else
-                    <p class="mt-1 text-sm text-ink/60">{{ __('dashboard.consultations_not_answered_yet') }}</p>
+                    <p class="mt-1 text-sm text-ink/70">{{ __('dashboard.consultations_not_answered_yet') }}</p>
                 @endif
             </div>
 

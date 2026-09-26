@@ -11,16 +11,16 @@
 
         <div class="mt-4 flex items-center gap-4">
             @if (auth()->user()->getFirstMediaUrl('avatar'))
-                <img src="{{ auth()->user()->getFirstMediaUrl('avatar') }}" alt="{{ auth()->user()->name }}" class="size-16 rounded-full object-cover" />
+                <img src="{{ auth()->user()->getFirstMediaUrl('avatar') }}" alt="{{ auth()->user()->name }}" class="size-16 shrink-0 rounded-full object-cover" />
             @else
-                <div class="flex size-16 items-center justify-center rounded-full bg-surface text-ink/40">
+                <div class="flex size-16 shrink-0 items-center justify-center rounded-full bg-surface text-ink/70">
                     <x-icon name="user-circle" class="size-10" />
                 </div>
             @endif
 
-            <div class="flex-1">
+            <div class="min-w-0 flex-1">
                 <form wire:submit="updateAvatar" class="flex flex-wrap items-center gap-3">
-                    <input type="file" wire:model="avatar" accept="image/*" class="block text-sm text-ink/70" />
+                    <input type="file" wire:model="avatar" accept="image/*" class="block max-w-full text-sm text-ink/70 file:me-3 file:cursor-pointer file:rounded-lg file:border-0 file:bg-ink/10 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-ink hover:file:bg-ink/20" />
                     <x-button type="submit" variant="primary" size="sm">{{ __('dashboard.profile_avatar_upload') }}</x-button>
                     @if (auth()->user()->getFirstMediaUrl('avatar'))
                         <x-button type="button" wire:click="removeAvatar" variant="ghost" size="sm">{{ __('dashboard.profile_avatar_remove') }}</x-button>

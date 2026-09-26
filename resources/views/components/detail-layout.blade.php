@@ -4,7 +4,7 @@
     <h1 class="text-3xl font-bold text-ink md:text-4xl">{{ $title }}</h1>
 
     @isset($meta)
-        <div class="mt-3 flex flex-wrap items-center gap-3 text-sm text-ink/60">{{ $meta }}</div>
+        <div class="mt-3 flex flex-wrap items-center gap-3 text-sm text-ink/70">{{ $meta }}</div>
     @endisset
 
     <div class="prose prose-ink mt-8 max-w-none">

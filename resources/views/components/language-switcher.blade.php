@@ -10,7 +10,7 @@ $pathWithoutLocale = implode('/', $segments);
 
 <x-dropdown>
     <x-slot name="trigger">
-        <button type="button" class="flex items-center gap-1 text-sm text-ink hover:text-brand-primary">
+        <button type="button" aria-haspopup="true" x-bind:aria-expanded="open.toString()" class="flex min-h-10 items-center gap-1 rounded-lg px-2 text-sm text-ink transition duration-200 ease-in-out hover:text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary">
             <x-icon name="language" class="size-4" />
             {{ $locales[app()->getLocale()] ?? app()->getLocale() }}
         </button>
@@ -21,7 +21,7 @@ $pathWithoutLocale = implode('/', $segments);
             <a
                 href="{{ url('/' . $code . ($pathWithoutLocale ? '/' . $pathWithoutLocale : '')) }}"
                 wire:navigate
-                class="block px-4 py-2 text-sm text-ink hover:bg-surface"
+                @if (app()->getLocale() === $code) aria-current="true" @endif class="block px-4 py-2.5 text-sm text-ink hover:bg-ink/5 focus-visible:bg-ink/5 focus-visible:outline-none {{ app()->getLocale() === $code ? 'font-semibold text-brand-primary' : '' }}"
             >
                 {{ $label }}
             </a>
