@@ -88,6 +88,12 @@ States for every page: loading (skeleton), empty (illustration + CTA), error (re
 
 Accessibility (WCAG AA: contrast, focus rings, 44px targets, aria, landmarks, reduced motion, no color-only meaning, keyboard menus). Performance (LCP < 2.5s local, CSS < 80KB gz, JS < 60KB gz, fonts subset, lazy images, no layout shift). SEO (keep $seo, structured data intact, headings order). i18n (all strings in 5 locales, RTL mirrored icons/arrows, numerals per locale where sensible, dates translatedFormat). Dark mode parity. Tests (Pest stays green; add tests where PHP changes). Real-browser QA with the CDP helper: en+ur (spot fa, hi), 375/768/1280, light/dark, zero overflow and console errors, screenshots READ by the agent.
 
+## 6b. Responsive standard (owner requirement) and agent/skill usage
+
+Mobile-first. Every page and component is verified at 320, 375, 414, 768, 1024, 1280, 1536 and landscape phone 667x375, in en and ur (RTL), light and dark, plus 200% zoom/large text, long translated strings, 1 and 20 item lists, empty/loading/error states, touch (hover effects gated by hover:hover), 44px targets, safe-area insets, no horizontal scroll, tables to cards on mobile, modals/drawers that scroll on short screens, fluid display typography (clamp), correct inputmode/autocomplete. A page with any failing cell is not done. Full text lives in the agent brief and is repeated in DESIGN-SYSTEM.md.
+
+Skills and agents are used wherever they apply: taste-skill, redesign-skill, impeccable (audit, polish, layout, typeset, colorize, adapt, harden, delight, optimize), emil-design-eng, animate, find-animation-opportunities, review-animations, output-skill, token-reducer, and the project skills (i18n, livewire-components, forms, seo, security, ...). Project agents: frontend-builder for Blade/Livewire UI work, i18n-agent for string audits, seo-agent for head/schema checks, security-auditor for forms/auth/downloads, admin-builder for the Filament theme, test-writer + qa-runner for tests, architect for structure questions.
+
 ## 7. Execution plan
 
 | Phase | Agents (parallel) | Owns | Gate |
