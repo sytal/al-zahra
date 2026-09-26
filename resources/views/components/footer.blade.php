@@ -50,7 +50,7 @@ $linkClass = 'link-underline inline-flex min-h-11 items-center text-body/85 tran
     <div class="mx-auto max-w-7xl px-4 pb-safe sm:px-6 lg:px-8">
         @unless ($minimal)
             <div class="relative -mt-px py-10 sm:py-14">
-                <div class="glass overflow-hidden rounded-3xl border p-6 sm:p-8 lg:p-10" data-aos="fade-up">
+                <div class="glass overflow-hidden rounded-3xl border p-6 sm:p-8 lg:p-10">
                     <div class="grid items-center gap-6 md:grid-cols-2 md:gap-10">
                         <div class="min-w-0">
                             <p class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-secondary-text">
