@@ -3,6 +3,7 @@
 namespace App\Modules\Certificate\Services;
 
 use App\Modules\Certificate\Models\Certificate;
+use App\Modules\Director\Models\Director;
 use Mpdf\Mpdf;
 
 /**
@@ -19,6 +20,7 @@ class CertificatePdfRenderer
             'certificate' => $certificate,
             'user' => $certificate->user,
             'course' => $certificate->course,
+            'director' => $this->director(),
         ])->render();
 
         $tempDir = storage_path('app/mpdf');
@@ -42,5 +44,20 @@ class CertificatePdfRenderer
         $mpdf->WriteHTML($html);
 
         return $mpdf->Output('', 'S');
+    }
+
+    /** @return array{name: string, title: string}|null */
+    private function director(): ?array
+    {
+        $director = Director::query()->where('is_published', true)->oldest('id')->first();
+
+        if (! $director || ! $director->full_name) {
+            return null;
+        }
+
+        return [
+            'name' => (string) $director->full_name,
+            'title' => (string) ($director->getTranslation('professional_title', app()->getLocale(), true) ?? ''),
+        ];
     }
 }

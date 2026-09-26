@@ -5,11 +5,8 @@ use Symfony\Component\Finder\Finder;
 /*
  * Colors live only in resources/theme/theme.json (docs/DESIGN-SYSTEM.md, "Theming: one file").
  * Whitelist: paths that cannot read the theme at runtime. Each needs a reason.
- * TODO owners: convert mail css to a Blade theme and the PDF template to config('theme.*').
  */
 const THEME_HEX_WHITELIST = [
-    'resources/views/vendor/mail/html/themes/default.css' => 'Laravel mail CSS is a static file inlined by CssToInlineStyles',
-    'resources/views/certificates/pdf.blade.php' => 'mPDF template, pending migration to config(theme.*)',
 ];
 
 it('exposes theme config from theme.json', function () {

@@ -10,4 +10,8 @@
 {{ __('newsletter.mail_footer') }}
 
 {{ config('app.name') }}
+
+<x-slot:subcopy>
+{{ __('mail_ui.link_fallback') }} [{{ $signedUrl }}]({{ $signedUrl }})
+</x-slot:subcopy>
 </x-mail::message>
