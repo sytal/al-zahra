@@ -1,5 +1,20 @@
-@props(['padding' => 'p-5', 'hoverable' => false])
+{{-- Props: padding (tailwind class), hoverable, variant default|flat|glass|gold, optional named slot "media" (rendered flush above the padded body). --}}
+@props(['padding' => 'p-5', 'hoverable' => false, 'variant' => 'default'])
 
-<div {{ $attributes->merge(['class' => 'rounded-xl border border-ink/10 bg-white dark:bg-surface ' . $padding . ' ' . ($hoverable ? 'transition duration-200 ease-in-out hover:shadow-lg hover:-translate-y-0.5' : '')]) }}>
-    {{ $slot }}
+@php
+$base = match ($variant) {
+    'flat' => 'rounded-card border bg-surface-sunken',
+    'glass' => 'glass',
+    'gold' => 'gradient-border-gold shadow-soft',
+    default => 'card-surface',
+};
+@endphp
+
+<div {{ $attributes->merge(['class' => 'relative min-w-0 ' . $base . ' ' . ($hoverable ? 'card-hover ' : '') . (isset($media) ? 'overflow-hidden' : $padding)]) }}>
+    @isset($media)
+        <div class="img-zoom">{{ $media }}</div>
+        <div class="{{ $padding }}">{{ $slot }}</div>
+    @else
+        {{ $slot }}
+    @endisset
 </div>

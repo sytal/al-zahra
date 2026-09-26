@@ -1,14 +1,16 @@
+{{-- Props: items = [['label' => string, 'url' => ?string], ...]; last item is the current page. --}}
 @props(['items' => []])
 
-<nav aria-label="Breadcrumb" class="mb-4 text-sm text-ink/70">
-    <ol class="flex flex-wrap items-center gap-1.5">
+<nav aria-label="{{ __('kit_sections.breadcrumb') }}" {{ $attributes->merge(['class' => 'mb-4 min-w-0 text-sm text-muted']) }}>
+    <ol class="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
         @foreach ($items as $item)
-            <li class="flex min-w-0 items-center gap-1.5">
-                @if (!$loop->first)<x-icon name="chevron-right" class="size-3.5 rtl:rotate-180" />@endif
-                @if (!empty($item['url']) && !$loop->last)
-                    <a href="{{ $item['url'] }}" wire:navigate class="hover:text-brand-primary whitespace-nowrap">{{ $item['label'] }}</a>
+            @php $isLast = $loop->last; @endphp
+            <li class="flex min-w-0 items-center gap-2 {{ $isLast ? 'max-w-full' : '' }}">
+                @if (!$loop->first)<span class="star-mark text-[0.5rem] opacity-70" aria-hidden="true"></span>@endif
+                @if (!empty($item['url']) && !$isLast)
+                    <a href="{{ $item['url'] }}" wire:navigate class="focus-ring link-underline whitespace-nowrap py-1 text-body [@media(hover:hover)]:hover:text-brand-primary">{{ $item['label'] }}</a>
                 @else
-                    <span class="truncate text-ink">{{ $item['label'] }}</span>
+                    <span class="block max-w-[14rem] truncate font-medium text-strong sm:max-w-md" @if ($isLast) aria-current="page" @endif title="{{ $item['label'] }}">{{ $item['label'] }}</span>
                 @endif
             </li>
         @endforeach
