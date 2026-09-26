@@ -1,4 +1,5 @@
 <x-layouts.minimal>
+    <x-slot:seo><title>{{ __('newsletter.confirm_title') }} | {{ config('app.name') }}</title></x-slot:seo>
     <x-card class="w-full max-w-xl text-center">
         <x-icon name="check-circle" class="mx-auto size-10 text-success" />
         <h1 class="mt-3 text-xl font-semibold text-ink">{{ __('newsletter.confirm_title') }}</h1>

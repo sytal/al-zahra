@@ -1,4 +1,5 @@
 <x-layouts.minimal>
+    <x-slot:seo><title>{{ __('consultation.question') }} | {{ config('app.name') }}</title></x-slot:seo>
     <x-card class="w-full max-w-xl">
         <p class="text-sm text-ink/70">{{ __('consultation.question') }}</p>
         <p dir="auto" class="mt-1 whitespace-pre-line break-words text-ink">{{ $consultation->question }}</p>

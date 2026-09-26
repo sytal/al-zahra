@@ -17,7 +17,7 @@
                         <x-icon name="document-check" class="size-8 text-brand-primary" />
                         <h3 class="mt-3 font-medium text-ink">{{ $certificate->course?->title }}</h3>
                         <p class="mt-1 text-sm text-ink/70">
-                            {{ __('dashboard.certificates_issued_on') }} {{ $certificate->issued_at?->format('M d, Y') }}
+                            {{ __('dashboard.certificates_issued_on') }} {{ $certificate->issued_at?->translatedFormat('M d, Y') }}
                         </p>
                         <p class="mt-1 text-xs text-ink/70">
                             {{ __('dashboard.certificates_verification_code') }}: {{ $certificate->verification_code }}

@@ -24,7 +24,7 @@ $classes = 'inline-flex items-center justify-center rounded-lg font-medium trans
     </a>
 @else
     <button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }} wire:loading.attr="disabled">
-        <span wire:loading.remove>
+        <span wire:loading.remove class="inline-flex items-center gap-2">
             @if ($icon)<x-icon :name="$icon" class="size-4" />@endif
             {{ $slot }}
         </span>
