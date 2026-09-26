@@ -20,56 +20,42 @@ class GenerateSitemap extends Command
     {
         $sitemap = Sitemap::create();
 
-        foreach (config('app.locales') as $locale) {
-            $sitemap->add(Url::create("/{$locale}")->setPriority(1.0));
-            $sitemap->add(Url::create("/{$locale}/articles")->setPriority(0.8));
-            $sitemap->add(Url::create("/{$locale}/courses")->setPriority(0.8));
-            $sitemap->add(Url::create("/{$locale}/research")->setPriority(0.8));
-            $sitemap->add(Url::create("/{$locale}/resources")->setPriority(0.8));
+        foreach (['' => 1.0, '/about' => 0.7, '/articles' => 0.8, '/courses' => 0.8, '/research' => 0.8, '/resources' => 0.8, '/consultation' => 0.6, '/contact' => 0.5, '/certificates/verify' => 0.3] as $path => $priority) {
+            $this->addLocalized($sitemap, $path, $priority);
+        }
 
-            Article::query()
-                ->where('is_published', true)
-                ->each(function (Article $article) use ($sitemap, $locale) {
-                    $sitemap->add(
-                        Url::create("/{$locale}/articles/{$article->slug}")
-                            ->setLastModificationDate($article->updated_at)
-                            ->setPriority(0.6)
-                    );
-                });
+        $groups = [
+            ['articles', Article::class, 0.6],
+            ['courses', Course::class, 0.7],
+            ['research', ResearchPaper::class, 0.6],
+            ['resources', Resource::class, 0.5],
+        ];
 
-            Course::query()
-                ->where('is_published', true)
-                ->each(function (Course $course) use ($sitemap, $locale) {
-                    $sitemap->add(
-                        Url::create("/{$locale}/courses/{$course->slug}")
-                            ->setLastModificationDate($course->updated_at)
-                            ->setPriority(0.7)
-                    );
-                });
-
-            ResearchPaper::query()
-                ->where('is_published', true)
-                ->each(function (ResearchPaper $paper) use ($sitemap, $locale) {
-                    $sitemap->add(
-                        Url::create("/{$locale}/research/{$paper->slug}")
-                            ->setLastModificationDate($paper->updated_at)
-                            ->setPriority(0.6)
-                    );
-                });
-
-            Resource::query()
-                ->where('is_published', true)
-                ->each(function (Resource $resource) use ($sitemap, $locale) {
-                    $sitemap->add(
-                        Url::create("/{$locale}/resources/{$resource->slug}")
-                            ->setLastModificationDate($resource->updated_at)
-                            ->setPriority(0.5)
-                    );
-                });
+        foreach ($groups as [$segment, $model, $priority]) {
+            $model::query()->where('is_published', true)->each(
+                fn ($item) => $this->addLocalized($sitemap, "/{$segment}/{$item->slug}", $priority, $item->updated_at)
+            );
         }
 
         $sitemap->writeToFile(public_path('sitemap.xml'));
 
         $this->info('Sitemap generated.');
+    }
+
+    private function addLocalized(Sitemap $sitemap, string $path, float $priority, $modified = null): void
+    {
+        foreach (config('app.locales') as $locale) {
+            $url = Url::create("/{$locale}{$path}")->setPriority($priority);
+
+            if ($modified) {
+                $url->setLastModificationDate($modified);
+            }
+
+            foreach (config('app.locales') as $alt) {
+                $url->addAlternate("/{$alt}{$path}", $alt);
+            }
+
+            $sitemap->add($url);
+        }
     }
 }
