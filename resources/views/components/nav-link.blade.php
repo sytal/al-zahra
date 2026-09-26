@@ -1,11 +1,10 @@
-@props(['active'])
+@props(['active' => false])
 
-@php
-$classes = ($active ?? false)
-            ? 'inline-flex items-center px-1 pt-1 border-b-2 border-brand-primary text-sm font-medium leading-5 text-ink focus:outline-none transition duration-200 ease-in-out'
-            : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-ink/70 hover:text-ink hover:border-ink/20 focus:outline-none focus:text-ink focus:border-ink/20 transition duration-200 ease-in-out';
-@endphp
-
-<a {{ $attributes->merge(['class' => $classes]) }}>
+<a {{ $attributes->class([
+    'relative inline-flex min-h-11 items-center px-3 text-sm font-medium transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary rounded-full',
+    'after:pointer-events-none after:absolute after:inset-x-3 after:bottom-1.5 after:h-0.5 after:origin-center after:scale-x-0 after:rounded-full after:bg-brand-secondary after:transition-transform after:duration-base after:ease-enter hover:after:scale-x-100 focus-visible:after:scale-x-100',
+    'text-strong after:scale-x-100' => $active,
+    'text-body/80 hover:text-strong' => ! $active,
+]) }} @if ($active) aria-current="page" @endif>
     {{ $slot }}
 </a>
