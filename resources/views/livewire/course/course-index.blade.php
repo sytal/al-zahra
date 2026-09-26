@@ -1,4 +1,4 @@
-<div class="mx-auto max-w-6xl px-4 py-10" data-aos="fade-up">
+<div class="mx-auto max-w-6xl px-4 py-10">
     <header class="mb-8">
         <h1 class="text-3xl font-bold text-ink">{{ __('courses.page_title') }}</h1>
         <p class="mt-2 text-ink/70">{{ __('courses.page_intro') }}</p>

@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
                 CourseSeeder::class,
                 ResearchPaperSeeder::class,
                 ResourceSeeder::class,
+                EnrollmentSeeder::class,
             ]);
         }
     }

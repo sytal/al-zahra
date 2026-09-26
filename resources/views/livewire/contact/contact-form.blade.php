@@ -15,7 +15,7 @@ $socialLinks = \App\Modules\Setting\Models\Setting::where('key', 'social_links')
     />
 @endpush
 
-<div class="mx-auto max-w-6xl px-4 py-16" data-aos="fade-up">
+<div class="mx-auto max-w-6xl px-4 py-16">
     <header class="mb-10 text-center">
         <h1 class="text-3xl font-bold text-ink">{{ __('contact.page_title') }}</h1>
         <p class="mt-2 text-ink/70">{{ __('contact.page_intro') }}</p>
@@ -68,7 +68,7 @@ $socialLinks = \App\Modules\Setting\Models\Setting::where('key', 'social_links')
                     <p class="mt-1 text-ink/70">{{ __('contact.success_message') }}</p>
                 </x-card>
             @else
-                <form wire:submit="submit" class="space-y-4 rounded-lg border border-ink/10 bg-surface p-6">
+                <form x-data x-on:submit.prevent="$wire.submit().then(() => $nextTick(() => $el.querySelector('.border-danger')?.focus()))" class="space-y-4 rounded-lg border border-ink/10 bg-surface p-6">
                     <x-input name="name" :label="__('contact.name')" wire:model="name" autocomplete="name" />
                     <x-input name="email" type="email" :label="__('contact.email')" wire:model="email" autocomplete="email" />
                     <x-input name="subject" :label="__('contact.subject')" wire:model="subject" />

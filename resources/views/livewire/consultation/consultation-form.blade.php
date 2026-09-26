@@ -9,7 +9,7 @@
     />
 @endpush
 
-<div class="mx-auto max-w-2xl px-4 py-10" data-aos="fade-up">
+<div class="mx-auto max-w-2xl px-4 py-10">
     <header class="mb-8 text-center">
         <h1 class="text-3xl font-bold text-ink">{{ __('consultation.page_title') }}</h1>
         <p class="mt-2 text-ink/70">{{ __('consultation.page_intro') }}</p>
@@ -40,7 +40,7 @@
                 </button>
             </div>
 
-            <form wire:submit="submit" class="space-y-4">
+            <form x-data x-on:submit.prevent="$wire.submit().then(() => $nextTick(() => $el.querySelector('.border-danger')?.focus()))" class="space-y-4">
                 @guest
                     <x-input name="guest_name" :label="__('consultation.name')" wire:model="guest_name" autocomplete="name" />
                     <x-input name="guest_email" type="email" :label="__('consultation.email')" wire:model="guest_email" autocomplete="email" />

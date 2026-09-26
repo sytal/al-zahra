@@ -1,12 +1,12 @@
 <x-layouts.minimal>
     <x-card class="w-full max-w-xl">
         <p class="text-sm text-ink/70">{{ __('consultation.question') }}</p>
-        <p class="mt-1 text-ink">{{ $consultation->question }}</p>
+        <p dir="auto" class="mt-1 whitespace-pre-line break-words text-ink">{{ $consultation->question }}</p>
 
         @if ($consultation->answer)
             <div class="mt-6 border-t border-ink/10 pt-6">
                 <p class="text-sm text-ink/70">{{ __('consultation.mail_view_button') }}</p>
-                <p class="mt-1 text-ink">{{ $consultation->answer }}</p>
+                <p dir="auto" class="mt-1 whitespace-pre-line break-words text-ink">{{ $consultation->answer }}</p>
                 @if ($consultation->answered_at)
                     <p class="mt-2 text-xs text-ink/70">{{ $consultation->answered_at->translatedFormat('M d, Y') }}</p>
                 @endif

@@ -16,7 +16,7 @@
                 {{ __('auth-pages.verify_email_resend') }}
             </x-button>
 
-            <button type="button" wire:click="logout" class="text-sm text-ink/70 hover:text-ink">
+            <button type="button" wire:click="logout" class="inline-flex min-h-10 items-center px-2 text-sm text-ink/70 hover:text-ink">
                 {{ __('auth-pages.verify_email_logout') }}
             </button>
         </div>

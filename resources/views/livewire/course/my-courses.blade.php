@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="mt-3">
-                            <x-progress-bar :percent="$enrollment->progress_percent" />
+                            <x-progress-bar :percent="$enrollment->progress_percent" :label="__('polish_forms.progress')" />
                         </div>
 
                         <div class="mt-4">

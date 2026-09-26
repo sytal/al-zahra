@@ -55,8 +55,8 @@
                         @if ($isCompleted)
                             <x-badge color="success" :text="__('lessons.completed')" />
                         @else
-                            <x-button wire:click="markComplete" variant="primary" size="sm" icon="check">
-                                {{ __('lessons.mark_complete') }}
+                            <x-button wire:click="markComplete" variant="primary" size="sm">
+                                <span class="inline-flex items-center gap-1.5"><x-icon name="check" class="size-4" />{{ __('lessons.mark_complete') }}</span>
                             </x-button>
                         @endif
                     </div>
@@ -64,8 +64,8 @@
                     @if ($courseJustCompleted)
                         <x-badge color="brand" :text="__('lessons.course_complete_title')" />
                     @elseif ($hasNext)
-                        <x-button wire:click="goToNextLesson" variant="outline" size="sm" icon="arrow-right">
-                            {{ __('lessons.next_lesson') }}
+                        <x-button wire:click="goToNextLesson" variant="outline" size="sm">
+                            <span class="inline-flex items-center gap-1.5">{{ __('lessons.next_lesson') }}<x-icon name="arrow-right" class="size-4 rtl:-scale-x-100" /></span>
                         </x-button>
                     @endif
                 </div>

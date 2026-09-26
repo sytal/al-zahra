@@ -2,7 +2,7 @@
     @if ($subscribed)
         <p role="status" class="text-sm text-ink">{{ __('newsletter.thanks') }}</p>
     @else
-        <form wire:submit="subscribe" class="flex flex-wrap gap-2">
+        <form x-data x-on:submit.prevent="$wire.subscribe().then(() => $nextTick(() => $el.querySelector('[aria-invalid=true]')?.focus()))" class="flex flex-wrap gap-2">
             <input
                 type="email" name="email" autocomplete="email" aria-label="{{ __('newsletter.placeholder') }}" @error('email') aria-invalid="true" @enderror
                 wire:model="email"
