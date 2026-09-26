@@ -2,11 +2,11 @@
 
 @php
 $variants = [
-    'primary' => 'bg-brand-primary text-white hover:bg-brand-primary/90 focus-visible:outline-brand-primary',
-    'secondary' => 'bg-brand-secondary text-ink hover:bg-brand-secondary/90 focus-visible:outline-brand-secondary',
+    'primary' => 'bg-brand-primary text-on-brand hover:bg-brand-primary/90 focus-visible:outline-brand-primary',
+    'secondary' => 'bg-brand-secondary text-slate-900 hover:bg-brand-secondary/90 focus-visible:outline-brand-secondary',
     'outline' => 'border border-brand-primary text-brand-primary hover:bg-brand-primary/10',
-    'danger' => 'bg-danger text-white hover:bg-danger/90',
-    'ghost' => 'text-ink hover:bg-surface',
+    'danger' => 'bg-danger text-on-brand hover:bg-danger/90',
+    'ghost' => 'text-ink hover:bg-ink/5',
 ];
 $sizes = [
     'sm' => 'px-3 py-1.5 text-sm gap-1.5',
@@ -24,7 +24,7 @@ $classes = 'inline-flex items-center justify-center rounded-lg font-medium trans
     </a>
 @else
     <button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }} wire:loading.attr="disabled">
-        <span wire:loading.remove>
+        <span wire:loading.remove class="inline-flex items-center gap-2">
             @if ($icon)<x-icon :name="$icon" class="size-4" />@endif
             {{ $slot }}
         </span>

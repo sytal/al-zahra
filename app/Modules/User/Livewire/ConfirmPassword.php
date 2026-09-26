@@ -26,7 +26,7 @@ class ConfirmPassword extends Component
             return;
         }
 
-        request()->session()->put('auth.password_confirmed_at', time());
+        session()->put('auth.password_confirmed_at', time());
 
         $this->redirectRoute('dashboard', ['locale' => app()->getLocale()], navigate: true);
     }

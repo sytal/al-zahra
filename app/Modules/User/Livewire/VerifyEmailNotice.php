@@ -30,8 +30,8 @@ class VerifyEmailNotice extends Component
     {
         Auth::guard('web')->logout();
 
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
+        session()->invalidate();
+        session()->regenerateToken();
 
         $this->redirectRoute('home', ['locale' => app()->getLocale()], navigate: true);
     }

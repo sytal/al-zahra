@@ -23,6 +23,12 @@ document.addEventListener('livewire:init', () => {
 AOS.init({
     duration: 600,
     once: true,
+    disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
 });
 
 document.addEventListener('livewire:navigated', () => AOS.refreshHard());
+
+// Livewire morphs strip the classes AOS adds, leaving elements at opacity 0.
+document.addEventListener('livewire:init', () => {
+    window.Livewire.hook('morphed', () => AOS.refreshHard());
+});

@@ -1,6 +1,6 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'nav_dashboard' => 'डैशबोर्ड',
@@ -37,7 +37,7 @@ return [
     'consultations_col_topic' => 'विषय',
     'consultations_col_type' => 'प्रकार',
     'consultations_col_status' => 'स्थिति',
-    'consultations_col_date' => 'तारीख',
+    'consultations_col_date' => 'तारीख़',
     'consultations_view' => 'देखें',
     'consultations_your_question' => 'आपका प्रश्न',
     'consultations_answer' => 'उत्तर',
@@ -49,7 +49,7 @@ return [
     'certificates_empty_title' => 'अभी कोई प्रमाणपत्र नहीं है।',
     'certificates_empty_message' => 'अपना पहला प्रमाणपत्र पाने के लिए एक कोर्स पूरा करें।',
     'certificates_browse_courses_cta' => 'मेरे कोर्स देखें',
-    'certificates_issued_on' => 'जारी करने की तारीख',
+    'certificates_issued_on' => 'जारी करने की तारीख़',
     'certificates_verification_code' => 'सत्यापन कोड',
     'certificates_download_cta' => 'PDF डाउनलोड करें',
     'certificates_pdf_preparing' => 'आपका प्रमाणपत्र तैयार किया जा रहा है। कृपया थोड़ी देर बाद दोबारा जांचें।',
@@ -58,7 +58,7 @@ return [
     'profile_page_title' => 'प्रोफ़ाइल',
     'profile_avatar_heading' => 'प्रोफ़ाइल फ़ोटो',
     'profile_avatar_upload' => 'अपलोड करें',
-    'profile_avatar_remove' => 'हटाएं',
+    'profile_avatar_remove' => 'हटाएँ',
     'profile_avatar_updated' => 'आपकी प्रोफ़ाइल फ़ोटो अपडेट हो गई है।',
     'profile_avatar_removed' => 'आपकी प्रोफ़ाइल फ़ोटो हटा दी गई है।',
     'profile_basic_info_heading' => 'बुनियादी जानकारी',

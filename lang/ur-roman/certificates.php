@@ -1,8 +1,10 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'page_title' => 'Certificate Verify Karein',
-    'page_intro' => 'Certificate ka verification code darj karein taake tasdeeq ho sakay ke yeh hamare taraf se jaari kiya gaya hai.',
+    'page_intro' => 'Certificate ka verification code darj karein taake tasdeeq ho sakay ke yeh humare taraf se jaari kiya gaya hai.',
     'code_label' => 'Verification Code',
     'code_placeholder' => 'misal ke taur par AZI-2024-000123',
     'submit' => 'Verify Karein',

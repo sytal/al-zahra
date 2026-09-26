@@ -1,6 +1,6 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'viewer_title' => 'पाठ',
@@ -11,5 +11,5 @@ return [
     'next_lesson' => 'अगला पाठ',
     'course_complete_title' => 'कोर्स पूर्ण!',
     'course_complete_message' => 'बधाई हो, आपने यह कोर्स पूरा कर लिया है। आपका प्रमाणपत्र जारी कर दिया गया है।',
-    'back_to_my_courses' => 'मेरे कोर्स पर वापस जाएं',
+    'back_to_my_courses' => 'मेरे कोर्स पर वापस जाएँ',
 ];

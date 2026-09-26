@@ -15,7 +15,7 @@ $networks = [
             href="{{ $shareUrl }}"
             target="_blank"
             rel="noopener noreferrer"
-            class="flex size-9 items-center justify-center rounded-full border border-ink/10 text-ink/60 transition duration-200 ease-in-out hover:border-brand-primary hover:text-brand-primary"
+            class="flex size-9 items-center justify-center rounded-full border border-ink/10 text-ink/70 transition duration-200 ease-in-out hover:border-brand-primary hover:text-brand-primary"
         >
             <x-icon :name="$name === 'twitter' ? 'x-mark' : 'share'" class="size-4" />
         </a>

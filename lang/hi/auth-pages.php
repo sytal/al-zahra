@@ -1,6 +1,6 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'login_title' => 'लॉगिन',
@@ -25,7 +25,7 @@ return [
     'forgot_password_intro' => 'अपना ईमेल दर्ज करें, हम आपको पासवर्ड रीसेट लिंक भेजेंगे।',
     'forgot_password_email' => 'ईमेल',
     'forgot_password_submit' => 'पासवर्ड रीसेट लिंक भेजें',
-    'forgot_password_back_to_login' => 'लॉगिन पर वापस जाएं',
+    'forgot_password_back_to_login' => 'लॉगिन पर वापस जाएँ',
 
     'reset_password_title' => 'पासवर्ड रीसेट करें',
     'reset_password_email' => 'ईमेल',
@@ -39,7 +39,7 @@ return [
     'confirm_password_submit' => 'पुष्टि करें',
 
     'verify_email_title' => 'ईमेल सत्यापित करें',
-    'verify_email_intro' => 'साइन अप करने के लिए धन्यवाद! शुरू करने से पहले, कृपया अपना ईमेल पता सत्यापित करें जो हमने आपको भेजा है। यदि ईमेल नहीं मिला तो हम खुशी से दोबारा भेज देंगे।',
+    'verify_email_intro' => 'साइन अप करने के लिए धन्यवाद! शुरू करने से पहले, कृपया हमारे भेजे गए लिंक पर क्लिक करके अपने ईमेल पते की पुष्टि करें। यदि ईमेल नहीं मिला तो हम खुशी से दोबारा भेज देंगे।',
     'verify_email_resent' => 'एक नया सत्यापन लिंक आपके दिए गए ईमेल पते पर भेज दिया गया है।',
     'verify_email_resend' => 'सत्यापन ईमेल पुनः भेजें',
     'verify_email_logout' => 'लॉगआउट',

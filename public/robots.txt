@@ -1,2 +1,4 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /*/dashboard
+# Deploy: add a line 'Sitemap: <APP_URL>/sitemap.xml' (absolute URL required)

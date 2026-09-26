@@ -5,14 +5,14 @@
 <div class="w-full max-w-sm">
     <x-card>
         <h1 class="mb-2 text-center text-xl font-semibold text-ink">{{ __('auth-pages.forgot_password_title') }}</h1>
-        <p class="mb-6 text-center text-sm text-ink/60">{{ __('auth-pages.forgot_password_intro') }}</p>
+        <p class="mb-6 text-center text-sm text-ink/70">{{ __('auth-pages.forgot_password_intro') }}</p>
 
         @if ($status)
-            <p class="mb-4 text-center text-sm text-success">{{ $status }}</p>
+            <p role="status" class="mb-4 rounded-lg border border-success/40 bg-success/10 p-3 text-center text-sm text-ink">{{ $status }}</p>
         @endif
 
         <form wire:submit="sendResetLink" class="space-y-4">
-            <x-input name="email" type="email" :label="__('auth-pages.forgot_password_email')" wire:model="email" autofocus />
+            <x-input name="email" type="email" :label="__('auth-pages.forgot_password_email')" wire:model="email" autofocus autocomplete="email" inputmode="email" />
 
             <x-button type="submit" variant="primary" class="w-full justify-center">
                 {{ __('auth-pages.forgot_password_submit') }}

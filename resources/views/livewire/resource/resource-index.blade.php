@@ -1,7 +1,7 @@
 <div class="mx-auto max-w-6xl px-4 py-10" data-aos="fade-up">
     <header class="mb-8">
         <h1 class="text-3xl font-bold text-ink">{{ __('resources.page_title') }}</h1>
-        <p class="mt-2 text-ink/60">{{ __('resources.page_intro') }}</p>
+        <p class="mt-2 text-ink/70">{{ __('resources.page_intro') }}</p>
     </header>
 
     <div class="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end">
@@ -22,18 +22,18 @@
             @foreach ($resources as $resource)
                 <x-card hoverable class="flex flex-col overflow-hidden !p-0">
                     <a href="{{ route('resources.show', ['locale' => app()->getLocale(), 'slug' => $resource->slug]) }}" wire:navigate>
-                        <img
+                        <img loading="lazy"
                             src="{{ $resource->getFirstMediaUrl('thumbnail') ?: asset('images/resource-placeholder.svg') }}"
                             alt="{{ $resource->title }}"
-                            class="aspect-video w-full object-cover"
+                            class="aspect-video w-full object-cover dark:brightness-75"
                         >
                         <div class="p-5">
                             <div class="mb-2 flex flex-wrap gap-1.5">
-                                <x-badge color="brand" :text="ucfirst($resource->resource_type->value)" />
+                                <x-badge color="brand" :text="__('enums.resource_type.'.$resource->resource_type->value)" />
                                 <x-badge :color="$resource->is_free ? 'success' : 'warning'" :text="$resource->is_free ? __('common.free') : __('common.paid')" />
                             </div>
                             <h2 class="font-semibold text-ink">{{ $resource->title }}</h2>
-                            <p class="mt-1 text-sm text-ink/60">{{ $resource->description }}</p>
+                            <p class="mt-1 text-sm text-ink/70">{{ $resource->description }}</p>
                         </div>
                     </a>
                 </x-card>

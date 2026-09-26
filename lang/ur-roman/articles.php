@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'page_title' => 'Articles',
     'page_intro' => 'Zaban, seekhne, aur zehan ke baray mein maloomat.',

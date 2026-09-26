@@ -12,7 +12,7 @@
                 <button
                     type="button"
                     wire:click="setTab('{{ $key }}')"
-                    class="border-b-2 px-4 py-2 text-sm font-medium transition duration-200 ease-in-out {{ $tab === $key ? 'border-brand-primary text-brand-primary' : 'border-transparent text-ink/60 hover:text-ink' }}"
+                    class="border-b-2 px-4 py-2 text-sm font-medium transition duration-200 ease-in-out {{ $tab === $key ? 'border-brand-primary text-brand-primary' : 'border-transparent text-ink/70 hover:text-ink' }}"
                 >
                     {{ $label }}
                 </button>
@@ -41,15 +41,16 @@
                                     href="{{ route('dashboard.certificates.index', app()->getLocale()) }}"
                                     wire:navigate
                                     title="{{ __('dashboard.view_certificate') }}"
-                                    class="shrink-0 text-brand-secondary hover:text-brand-secondary/80"
+                                    class="shrink-0 rounded-sm p-1 text-brand-primary hover:text-brand-primary/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
                                 >
+                                    <span class="sr-only">{{ __('dashboard.view_certificate') }}</span>
                                     <x-icon name="document-check" class="size-5" />
                                 </a>
                             @endif
                         </div>
 
                         <div class="mt-3">
-                            <x-progress-bar :percent="$enrollment->progress_percent" />
+                            <x-progress-bar :percent="$enrollment->progress_percent" :label="__('polish_forms.progress')" />
                         </div>
 
                         <div class="mt-4">

@@ -1,6 +1,6 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'hero_subtext' => 'भाषा, सीखने, और दिमाग़ पर प्रमाण-आधारित जानकारी, कोर्स, और अनुसंधान।',

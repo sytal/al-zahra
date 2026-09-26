@@ -1,6 +1,6 @@
 <?php
 
-// TODO: verify native translation
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
 
 return [
     'nav_dashboard' => 'ڈیش بورڈ',
@@ -49,7 +49,7 @@ return [
     'certificates_empty_title' => 'ابھی کوئی سرٹیفکیٹ نہیں ہے۔',
     'certificates_empty_message' => 'اپنا پہلا سرٹیفکیٹ حاصل کرنے کے لیے ایک کورس مکمل کریں۔',
     'certificates_browse_courses_cta' => 'میرے کورسز دیکھیں',
-    'certificates_issued_on' => 'اجراء کی تاریخ',
+    'certificates_issued_on' => 'جاری کرنے کی تاریخ',
     'certificates_verification_code' => 'تصدیقی کوڈ',
     'certificates_download_cta' => 'PDF ڈاؤن لوڈ کریں',
     'certificates_pdf_preparing' => 'آپ کا سرٹیفکیٹ تیار کیا جا رہا ہے۔ براہ کرم تھوڑی دیر بعد دوبارہ چیک کریں۔',

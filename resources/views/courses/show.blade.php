@@ -9,13 +9,13 @@
                 ['label' => __('nav.courses'), 'url' => route('courses.index', app()->getLocale())],
                 ['label' => $course->title],
             ]" />
-            <x-badge color="brand" :text="ucfirst($course->level->value)" />
-            <x-badge color="neutral" :text="ucfirst($course->audience->value)" />
+            <x-badge color="brand" :text="__('enums.course_level.'.$course->level->value)" />
+            <x-badge color="neutral" :text="__('enums.course_audience.'.$course->audience->value)" />
             <x-badge :color="$course->is_free ? 'success' : 'warning'" :text="$course->is_free ? __('common.free') : __('common.paid')" />
         </x-slot>
 
         @if ($course->hasMedia('cover_image'))
-            <img src="{{ $course->getFirstMediaUrl('cover_image', 'hero') }}" alt="{{ $course->title }}" class="mb-8 w-full rounded-xl">
+            <img src="{{ $course->getFirstMediaUrl('cover_image', 'hero') }}" alt="{{ $course->title }}" class="mb-8 w-full rounded-xl" loading="lazy">
         @endif
 
         <p class="text-lg text-ink/80">{{ $course->short_description }}</p>
@@ -38,7 +38,7 @@
             <h2 class="mt-8 text-xl font-semibold text-ink">{{ __('courses.curriculum') }}</h2>
             <div class="mt-3">
                 <x-accordion :items="$course->lessons->map(fn ($lesson) => [
-                    'title' => $lesson->title . ($lesson->duration_minutes ? ' · ' . $lesson->duration_minutes . ' min' : ''),
+                    'title' => $lesson->title . ($lesson->duration_minutes ? ' · ' . __('polish_public.lesson_minutes', ['count' => $lesson->duration_minutes]) : ''),
                     'content' => ($lesson->is_preview || $isEnrolled)
                         ? ($lesson->body ?? '')
                         : __('courses.login_to_enroll'),

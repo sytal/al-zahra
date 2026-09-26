@@ -12,12 +12,12 @@
             @if ($resource->category)
                 <x-badge color="brand" :text="$resource->category->name" />
             @endif
-            <x-badge color="neutral" :text="ucfirst($resource->resource_type->value)" />
+            <x-badge color="neutral" :text="__('enums.resource_type.'.$resource->resource_type->value)" />
             <x-badge :color="$resource->is_free ? 'success' : 'warning'" :text="$resource->is_free ? __('common.free') : __('common.paid')" />
         </x-slot>
 
         @if ($resource->hasMedia('thumbnail'))
-            <img src="{{ $resource->getFirstMediaUrl('thumbnail') }}" alt="{{ $resource->title }}" class="mb-8 w-full rounded-xl">
+            <img src="{{ $resource->getFirstMediaUrl('thumbnail') }}" alt="{{ $resource->title }}" class="mb-8 w-full rounded-xl" loading="lazy">
         @endif
 
         <p class="text-ink/80">{{ $resource->description }}</p>

@@ -1,6 +1,6 @@
 @props(['align' => 'end'])
 
-<div x-data="{ open: false }" x-on:click.outside="open = false" class="relative">
+<div x-data="{ open: false }" x-on:click.outside="open = false" x-on:keydown.escape="open = false" class="relative">
     <div x-on:click="open = !open">
         {{ $trigger }}
     </div>

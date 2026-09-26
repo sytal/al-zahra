@@ -663,6 +663,8 @@ npm install -D tailwindcss @tailwindcss/forms tailwindcss-rtl aos
 the phase plan — but the philosophy is: decide the full list up front, run
 one install pass.)
 
+**Addendum (phase 2):** certificate PDFs are generated with `mpdf/mpdf` (native Arabic/Urdu/Persian shaping); `barryvdh/laravel-dompdf` is no longer used for them. Color tokens support opacity modifiers via `color-mix`; use `text-on-brand` on brand backgrounds. Always run `npm run build` before browser verification. See `.claude/memory/project-intro.md` bug patterns 13-22.
+
 ---
 
 ## 25. MEMORY FILE (`memory/project-intro.md`) — TEMPLATE

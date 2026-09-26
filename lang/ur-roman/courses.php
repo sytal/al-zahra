@@ -1,8 +1,10 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'page_title' => 'Courses',
-    'page_intro' => 'Zaban aur zehan par mahaz-e-nazam seekhne ke raaste.',
+    'page_intro' => 'Zaban aur zehan par munazzam seekhne ke raaste.',
     'filter_audience' => 'Audience',
     'filter_level' => 'Level',
     'filter_pricing' => 'Qeemat',

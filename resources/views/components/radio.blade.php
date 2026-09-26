@@ -1,11 +1,11 @@
 @props(['name', 'label' => null, 'value'])
 
-<label class="flex items-center gap-2 text-sm text-ink">
+<label class="flex cursor-pointer items-center gap-2 text-sm text-ink">
     <input
         type="radio"
         name="{{ $name }}"
         value="{{ $value }}"
-        {{ $attributes->merge(['class' => 'border-ink/20 text-brand-primary shadow-sm transition duration-200 ease-in-out focus:ring-brand-primary']) }}
+        {{ $attributes->merge(['class' => 'size-4 border-ink/20 text-brand-primary shadow-sm transition duration-200 ease-in-out focus:ring-brand-primary']) }}
     />
     {{ $label }}
 </label>

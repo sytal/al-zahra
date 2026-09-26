@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'nav_dashboard' => 'Dashboard',
     'nav_my_courses' => 'Mere Courses',
@@ -56,7 +58,7 @@ return [
     'profile_page_title' => 'Profile',
     'profile_avatar_heading' => 'Profile Tasveer',
     'profile_avatar_upload' => 'Upload Karein',
-    'profile_avatar_remove' => 'Hataein',
+    'profile_avatar_remove' => 'Hatayein',
     'profile_avatar_updated' => 'Aap ki profile tasveer update ho gayi hai.',
     'profile_avatar_removed' => 'Aap ki profile tasveer hata di gayi hai.',
     'profile_basic_info_heading' => 'Bunyadi Maloomat',

@@ -1,5 +1,7 @@
 <?php
 
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
 return [
     'page_title' => 'Sawal Poochein',
     'page_intro' => 'Zaban, seekhne, ya nashonuma ke baray mein sawal hai? Seedha poochein ya consultation book karein.',

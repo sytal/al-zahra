@@ -3,8 +3,8 @@
 namespace App\Modules\Certificate\Listeners;
 
 use App\Modules\Certificate\Models\Certificate;
+use App\Modules\Certificate\Services\CertificatePdfRenderer;
 use App\Modules\Course\Events\CourseCompleted;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class IssueCertificateListener implements ShouldQueue
@@ -20,13 +20,9 @@ class IssueCertificateListener implements ShouldQueue
             'issued_at' => now(),
         ]);
 
-        $pdf = Pdf::loadView('certificates.pdf', [
-            'certificate' => $certificate,
-            'user' => $enrollment->user,
-            'course' => $enrollment->course,
-        ]);
+        $pdf = app(CertificatePdfRenderer::class)->render($certificate);
 
-        $certificate->addMediaFromString($pdf->output())
+        $certificate->addMediaFromString($pdf)
             ->usingFileName("certificate-{$certificate->verification_code}.pdf")
             ->toMediaCollection('certificate_pdf');
     }

@@ -39,7 +39,7 @@ class Login extends Component
         }
 
         RateLimiter::clear($this->throttleKey());
-        request()->session()->regenerate();
+        session()->regenerate();
 
         $this->redirectRoute('dashboard', ['locale' => app()->getLocale()], navigate: true);
     }

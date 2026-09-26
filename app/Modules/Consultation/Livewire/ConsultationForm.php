@@ -58,9 +58,9 @@ class ConsultationForm extends Component
             return;
         }
 
-        RateLimiter::hit($key, 3600);
-
         $data = $this->validate();
+
+        RateLimiter::hit($key, 3600);
 
         if (Auth::check()) {
             unset($data['guest_name'], $data['guest_email']);

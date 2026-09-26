@@ -2,6 +2,8 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 import rtl from 'tailwindcss-rtl';
 
+const token = (name) => `color-mix(in srgb, var(--color-${name}) calc(<alpha-value> * 100%), transparent)`;
+
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
@@ -18,12 +20,13 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                'brand-primary': 'var(--color-brand-primary)',
-                'brand-secondary': 'var(--color-brand-secondary)',
-                ink: 'var(--color-ink)',
-                surface: 'var(--color-surface)',
-                success: 'var(--color-success)',
-                danger: 'var(--color-danger)',
+                'brand-primary': token('brand-primary'),
+                'brand-secondary': token('brand-secondary'),
+                ink: token('ink'),
+                surface: token('surface'),
+                success: token('success'),
+                danger: token('danger'),
+                'on-brand': token('on-brand'),
             },
         },
     },

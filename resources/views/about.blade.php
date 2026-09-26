@@ -46,7 +46,7 @@
                     @foreach ($director->social_links as $platform => $url)
                         @if ($url)
                             <a href="{{ $url }}" target="_blank" rel="noopener noreferrer" class="rounded-full border border-ink/10 px-4 py-2 text-sm text-ink/70 transition duration-200 ease-in-out hover:border-brand-primary hover:text-brand-primary">
-                                {{ ucfirst($platform) }}
+                                {{ trans()->has('enums.social.'.$platform) ? __('enums.social.'.$platform) : ucfirst($platform) }}
                             </a>
                         @endif
                     @endforeach

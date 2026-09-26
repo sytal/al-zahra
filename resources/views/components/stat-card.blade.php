@@ -6,6 +6,6 @@
     </span>
     <div>
         <p class="text-2xl font-semibold text-ink">{{ $value }}</p>
-        <p class="text-sm text-ink/60">{{ $label }}</p>
+        <p class="text-sm text-ink/70">{{ $label }}</p>
     </div>
 </x-card>

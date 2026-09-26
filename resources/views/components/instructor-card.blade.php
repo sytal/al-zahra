@@ -8,6 +8,6 @@
     >
     <div>
         <p class="font-semibold text-ink">{{ $instructor->name }}</p>
-        <p class="text-sm text-ink/60">{{ __('common.instructor') }}</p>
+        <p class="text-sm text-ink/70">{{ __('common.instructor') }}</p>
     </div>
 </x-card>

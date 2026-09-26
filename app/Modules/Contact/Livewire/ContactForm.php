@@ -42,9 +42,9 @@ class ContactForm extends Component
             return;
         }
 
-        RateLimiter::hit($key, 3600);
-
         $data = $this->validate();
+
+        RateLimiter::hit($key, 3600);
 
         $service->submit($data);
 

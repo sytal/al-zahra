@@ -11,16 +11,18 @@
             ]" />
             <span>{{ $article->author->name }}</span>
             <span>&middot;</span>
-            <span>{{ $article->published_at?->format('M d, Y') }}</span>
-            <span>&middot;</span>
-            <span>{{ $article->reading_time_minutes }} {{ __('articles.min_read') }}</span>
+            <span>{{ $article->published_at?->translatedFormat('M d, Y') }}</span>
+            @if ($article->reading_time_minutes)
+                <span>&middot;</span>
+                <span>{{ $article->reading_time_minutes }} {{ __('articles.min_read') }}</span>
+            @endif
             @if ($article->category)
                 <x-badge color="brand" :text="$article->category->name" />
             @endif
         </x-slot>
 
         @if ($article->hasMedia('featured_image'))
-            <img src="{{ $article->getFirstMediaUrl('featured_image', 'hero') }}" alt="{{ $article->title }}" class="mb-8 w-full rounded-xl">
+            <img src="{{ $article->getFirstMediaUrl('featured_image', 'hero') }}" alt="{{ $article->title }}" class="mb-8 w-full rounded-xl" loading="lazy">
         @endif
 
         {!! $article->body !!}

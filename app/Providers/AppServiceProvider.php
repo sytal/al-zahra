@@ -51,6 +51,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+        \Livewire\Livewire::addPersistentMiddleware([\App\Http\Middleware\SetLocale::class]);
+
         Livewire::component('articles.article-index', ArticleIndex::class);
         Livewire::component('certificates.certificate-verify', CertificateVerify::class);
         Livewire::component('courses.course-index', CourseIndex::class);

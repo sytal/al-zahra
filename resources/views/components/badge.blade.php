@@ -3,8 +3,8 @@
 @php
 $colors = [
     'brand' => 'bg-brand-primary/10 text-brand-primary',
-    'success' => 'bg-success/10 text-success',
-    'warning' => 'bg-brand-secondary/10 text-brand-secondary',
+    'success' => 'bg-success/15 text-ink',
+    'warning' => 'bg-brand-secondary/20 text-ink',
     'danger' => 'bg-danger/10 text-danger',
     'neutral' => 'bg-ink/10 text-ink',
 ];
