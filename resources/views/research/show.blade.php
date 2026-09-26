@@ -21,7 +21,7 @@
         </x-slot>
 
         @if ($paper->hasMedia('cover_image'))
-            <img src="{{ $paper->getFirstMediaUrl('cover_image') }}" alt="{{ $paper->title }}" class="mb-8 w-full rounded-xl">
+            <img src="{{ $paper->getFirstMediaUrl('cover_image') }}" alt="{{ $paper->title }}" class="mb-8 w-full rounded-xl" loading="lazy">
         @endif
 
         @if ($paper->research_question)

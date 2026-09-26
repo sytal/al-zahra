@@ -22,12 +22,12 @@
             @foreach ($papers as $paper)
                 <x-card hoverable class="flex gap-4">
                     <a href="{{ route('research.show', ['locale' => app()->getLocale(), 'slug' => $paper->slug]) }}" wire:navigate class="flex gap-4">
-                        <img
+                        <img loading="lazy"
                             src="{{ $paper->getFirstMediaUrl('cover_image') ?: asset('images/research-placeholder.svg') }}"
                             alt="{{ $paper->title }}"
                             class="size-24 shrink-0 rounded-lg object-cover"
                         >
-                        <div>
+                        <div class="min-w-0">
                             <div class="mb-1 flex flex-wrap gap-1.5">
                                 @if ($paper->category)
                                     <x-badge color="brand" :text="$paper->category->name" />

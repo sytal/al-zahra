@@ -9,11 +9,11 @@ $tagline = is_array($tagline) ? ($tagline[app()->getLocale()] ?? $tagline['en'] 
     </x-slot>
 
     <!-- 1. Hero -->
-    <section class="bg-gradient-to-br from-brand-primary to-brand-primary/70 text-white" data-aos="fade-up">
+    <section class="bg-gradient-to-br from-brand-primary/40 via-slate-900 to-slate-900 text-white" data-aos="fade-up">
         <div class="p-8 md:p-12 lg:px-16 lg:py-24">
             <div class="mx-auto max-w-lg text-center">
                 <h1 class="text-3xl font-bold md:text-4xl">{{ $tagline }}</h1>
-                <p class="mt-4 text-white/90">{{ __('home.hero_subtext') }}</p>
+                <p class="mt-4 text-white/90 text-pretty">{{ __('home.hero_subtext') }}</p>
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
                     <x-button :href="route('articles.index', app()->getLocale())" variant="secondary" size="lg">{{ __('home.explore_articles') }}</x-button>
                     <x-button :href="route('courses.index', app()->getLocale())" variant="outline" size="lg" class="!border-white !text-white hover:!bg-white/10">{{ __('home.browse_courses') }}</x-button>
@@ -42,15 +42,15 @@ $tagline = is_array($tagline) ? ($tagline[app()->getLocale()] ?? $tagline['en'] 
                     @foreach ($latestArticles as $article)
                         <x-card hoverable class="flex flex-col overflow-hidden !p-0">
                             <a href="{{ route('articles.show', ['locale' => app()->getLocale(), 'slug' => $article->slug]) }}" wire:navigate>
-                                <img
+                                <img loading="lazy"
                                     src="{{ $article->getFirstMediaUrl('featured_image', 'card') ?: asset('images/article-placeholder.svg') }}"
                                     alt="{{ $article->title }}"
-                                    class="aspect-video w-full object-cover"
+                                    class="aspect-video w-full object-cover dark:brightness-75"
                                 >
                                 <div class="p-5">
                                     <h3 class="font-semibold text-ink">{{ $article->title }}</h3>
                                     <p class="mt-1 text-sm text-ink/60">{{ $article->excerpt }}</p>
-                                    <p class="mt-3 text-xs text-ink/40">{{ $article->reading_time_minutes }} {{ __('articles.min_read') }}</p>
+                                    <p class="mt-3 text-xs text-ink/60">{{ $article->reading_time_minutes }} {{ __('articles.min_read') }}</p>
                                 </div>
                             </a>
                         </x-card>
@@ -71,10 +71,10 @@ $tagline = is_array($tagline) ? ($tagline[app()->getLocale()] ?? $tagline['en'] 
                 @foreach ($featuredCourses as $course)
                     <x-card hoverable class="flex flex-col overflow-hidden !p-0">
                         <a href="{{ route('courses.show', ['locale' => app()->getLocale(), 'slug' => $course->slug]) }}" wire:navigate>
-                            <img
+                            <img loading="lazy"
                                 src="{{ $course->getFirstMediaUrl('cover_image', 'card') ?: asset('images/course-placeholder.svg') }}"
                                 alt="{{ $course->title }}"
-                                class="aspect-video w-full object-cover"
+                                class="aspect-video w-full object-cover dark:brightness-75"
                             >
                             <div class="p-5">
                                 <div class="mb-2 flex flex-wrap gap-1.5">
@@ -100,7 +100,7 @@ $tagline = is_array($tagline) ? ($tagline[app()->getLocale()] ?? $tagline['en'] 
                 @foreach ($latestResearch as $paper)
                     <x-card hoverable class="flex gap-4">
                         <a href="{{ route('research.show', ['locale' => app()->getLocale(), 'slug' => $paper->slug]) }}" wire:navigate class="flex gap-4">
-                            <img
+                            <img loading="lazy"
                                 src="{{ $paper->getFirstMediaUrl('cover_image') ?: asset('images/research-placeholder.svg') }}"
                                 alt="{{ $paper->title }}"
                                 class="size-20 shrink-0 rounded-lg object-cover"

@@ -15,7 +15,7 @@
         </x-slot>
 
         @if ($course->hasMedia('cover_image'))
-            <img src="{{ $course->getFirstMediaUrl('cover_image', 'hero') }}" alt="{{ $course->title }}" class="mb-8 w-full rounded-xl">
+            <img src="{{ $course->getFirstMediaUrl('cover_image', 'hero') }}" alt="{{ $course->title }}" class="mb-8 w-full rounded-xl" loading="lazy">
         @endif
 
         <p class="text-lg text-ink/80">{{ $course->short_description }}</p>

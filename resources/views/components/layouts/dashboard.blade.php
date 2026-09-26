@@ -13,21 +13,22 @@
     @livewireStyles
     @stack('head')
 </head>
-<body class="flex min-h-screen bg-surface font-sans text-ink antialiased" x-data="{ sidebarOpen: false }">
+<body class="flex min-h-screen bg-surface font-sans text-ink antialiased" x-data="{ sidebarOpen: false }" x-on:keydown.escape.window="sidebarOpen = false">
     <!-- Mobile sidebar backdrop -->
-    <div x-show="sidebarOpen" x-cloak x-on:click="sidebarOpen = false" class="fixed inset-0 z-40 bg-slate-900/50 md:hidden"></div>
+    <div x-show="sidebarOpen" x-cloak x-transition.opacity.duration.200ms x-on:click="sidebarOpen = false" aria-hidden="true" class="fixed inset-0 z-40 bg-slate-900/50 md:hidden"></div>
 
     <aside
-        class="fixed inset-y-0 start-0 z-50 w-64 -translate-x-full border-e border-ink/10 bg-white dark:bg-surface transition-transform duration-200 ease-in-out md:static md:translate-x-0"
+        id="sidebar" class="fixed inset-y-0 start-0 z-50 w-64 -translate-x-full overflow-y-auto border-e border-ink/10 bg-white dark:bg-surface transition-transform duration-200 ease-in-out rtl:translate-x-full md:static md:shrink-0 md:translate-x-0 md:rtl:translate-x-0"
         x-bind:class="sidebarOpen && '!translate-x-0'"
+        x-on:click="if ($event.target.closest('a')) sidebarOpen = false"
     >
         <div class="flex h-16 items-center px-6">
-            <a href="{{ route('home', app()->getLocale()) }}" wire:navigate class="text-lg font-semibold text-ink">
+            <a href="{{ route('home', app()->getLocale()) }}" wire:navigate class="rounded-sm text-lg font-semibold text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary">
                 {{ config('app.name') }}
             </a>
         </div>
 
-        <nav class="space-y-1 px-3">
+        <nav aria-label="{{ __('polish_shell.dashboard_nav') }}" class="space-y-1 px-3">
             @php
             $links = [
                 ['route' => 'dashboard', 'label' => __('dashboard.nav_dashboard'), 'icon' => 'squares-2x2'],
@@ -43,7 +44,8 @@
                 <a
                     href="{{ route($link['route'], app()->getLocale()) }}"
                     wire:navigate
-                    class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition duration-200 ease-in-out {{ $active ? 'bg-brand-primary/10 text-brand-primary' : 'text-ink/70 hover:bg-surface hover:text-ink' }}"
+                    @if ($active) aria-current="page" @endif
+                    class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition duration-200 ease-in-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary {{ $active ? 'bg-brand-primary/10 text-brand-primary' : 'text-ink/70 hover:bg-ink/5 hover:text-ink' }}"
                 >
                     <x-icon :name="$link['icon']" class="size-5" />
                     {{ $link['label'] }}
@@ -52,7 +54,7 @@
 
             <form method="POST" action="{{ route('logout', app()->getLocale()) }}">
                 @csrf
-                <button type="submit" class="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-ink/70 transition duration-200 ease-in-out hover:bg-surface hover:text-ink">
+                <button type="submit" class="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-ink/70 transition duration-200 ease-in-out hover:bg-surface hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary">
                     <x-icon name="arrow-right-on-rectangle" class="size-5" />
                     {{ __('dashboard.nav_logout') }}
                 </button>
@@ -60,9 +62,9 @@
         </nav>
     </aside>
 
-    <div class="flex min-h-screen flex-1 flex-col md:ms-0">
+    <div class="flex min-h-screen flex-1 flex-col min-w-0">
         <header class="flex h-16 items-center justify-between border-b border-ink/10 bg-white dark:bg-surface px-4 md:justify-end">
-            <button type="button" x-on:click="sidebarOpen = true" class="rounded-sm bg-surface p-2.5 text-ink/70 md:hidden">
+            <button type="button" x-on:click="sidebarOpen = true" x-bind:aria-expanded="sidebarOpen.toString()" aria-controls="sidebar" class="rounded-lg bg-surface p-2.5 text-ink/70 md:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary">
                 <span class="sr-only">{{ __('dashboard.toggle_menu') }}</span>
                 <x-icon name="bars-3" class="size-5" />
             </button>
@@ -73,7 +75,7 @@
             </div>
         </header>
 
-        <main class="flex-1">
+        <main id="main" class="flex-1">
             {{ $slot }}
         </main>
 

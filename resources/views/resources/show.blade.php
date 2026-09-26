@@ -17,7 +17,7 @@
         </x-slot>
 
         @if ($resource->hasMedia('thumbnail'))
-            <img src="{{ $resource->getFirstMediaUrl('thumbnail') }}" alt="{{ $resource->title }}" class="mb-8 w-full rounded-xl">
+            <img src="{{ $resource->getFirstMediaUrl('thumbnail') }}" alt="{{ $resource->title }}" class="mb-8 w-full rounded-xl" loading="lazy">
         @endif
 
         <p class="text-ink/80">{{ $resource->description }}</p>

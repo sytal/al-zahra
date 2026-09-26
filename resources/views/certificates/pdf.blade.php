@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}" dir="{{ in_array(app()->getLocale(), config('app.rtl_locales')) ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="utf-8">
     <title>{{ __('certificates.pdf_title') }}</title>
     <style>
         body {
-            font-family: 'Helvetica', 'Arial', sans-serif;
+            font-family: 'DejaVu Sans', sans-serif;
+            direction: {{ in_array(app()->getLocale(), config('app.rtl_locales')) ? 'rtl' : 'ltr' }};
             color: #1E293B;
             text-align: center;
             padding: 60px;
@@ -46,9 +47,9 @@
     <p class="institute">{{ config('app.name') }}</p>
     <h1>{{ __('certificates.pdf_heading') }}</h1>
     <p>{{ __('certificates.pdf_awarded_to') }}</p>
-    <p class="name">{{ $user->name }}</p>
+    <p class="name" dir="auto">{{ $user->name }}</p>
     <p>{{ __('certificates.pdf_for_completing') }}</p>
-    <p class="course">{{ $course->title }}</p>
+    <p class="course" dir="auto">{{ $course->title }}</p>
 
     <div class="meta">
         <p>{{ __('certificates.pdf_issued_on', ['date' => $certificate->issued_at->format('d M Y')]) }}</p>

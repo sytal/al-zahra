@@ -22,10 +22,10 @@
             @foreach ($articles as $article)
                 <x-card hoverable class="flex flex-col overflow-hidden !p-0">
                     <a href="{{ route('articles.show', ['locale' => app()->getLocale(), 'slug' => $article->slug]) }}" wire:navigate>
-                        <img
+                        <img loading="lazy"
                             src="{{ $article->getFirstMediaUrl('featured_image', 'card') ?: asset('images/article-placeholder.svg') }}"
                             alt="{{ $article->title }}"
-                            class="aspect-video w-full object-cover"
+                            class="aspect-video w-full object-cover dark:brightness-75"
                         >
                         <div class="p-5">
                             @if ($article->category)
@@ -33,7 +33,7 @@
                             @endif
                             <h2 class="font-semibold text-ink">{{ $article->title }}</h2>
                             <p class="mt-1 text-sm text-ink/60">{{ $article->excerpt }}</p>
-                            <p class="mt-3 text-xs text-ink/40">{{ $article->reading_time_minutes }} {{ __('articles.min_read') }}</p>
+                            <p class="mt-3 text-xs text-ink/60">{{ $article->reading_time_minutes }} {{ __('articles.min_read') }}</p>
                         </div>
                     </a>
                 </x-card>

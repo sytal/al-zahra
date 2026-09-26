@@ -22,10 +22,10 @@
             @foreach ($resources as $resource)
                 <x-card hoverable class="flex flex-col overflow-hidden !p-0">
                     <a href="{{ route('resources.show', ['locale' => app()->getLocale(), 'slug' => $resource->slug]) }}" wire:navigate>
-                        <img
+                        <img loading="lazy"
                             src="{{ $resource->getFirstMediaUrl('thumbnail') ?: asset('images/resource-placeholder.svg') }}"
                             alt="{{ $resource->title }}"
-                            class="aspect-video w-full object-cover"
+                            class="aspect-video w-full object-cover dark:brightness-75"
                         >
                         <div class="p-5">
                             <div class="mb-2 flex flex-wrap gap-1.5">

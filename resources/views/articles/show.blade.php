@@ -20,7 +20,7 @@
         </x-slot>
 
         @if ($article->hasMedia('featured_image'))
-            <img src="{{ $article->getFirstMediaUrl('featured_image', 'hero') }}" alt="{{ $article->title }}" class="mb-8 w-full rounded-xl">
+            <img src="{{ $article->getFirstMediaUrl('featured_image', 'hero') }}" alt="{{ $article->title }}" class="mb-8 w-full rounded-xl" loading="lazy">
         @endif
 
         {!! $article->body !!}
