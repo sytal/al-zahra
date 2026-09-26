@@ -29,6 +29,10 @@ Decisions taken (change only if you object):
 - Motion tokens: 150/250/400ms, ease-out for enter, ease-in for exit, spring-lite for hover. Reveal: fade-up 16px, stagger 60ms. Reduced-motion: everything static.
 - Tone: reassuring, plain language, clear primary CTA "Book a consultation" and secondary "Browse courses".
 
+## 1b. New look, not a refresh (owner requirement)
+
+The site must look completely new and unique; old structure, card and hero looks are not preserved (data, i18n keys and wire bindings are). Signature concept "Zahra: radiance": the logo's 8-point star as ornament (dividers, bullets, loader, watermark), teal and gold light glows and light-rays, gold hairline threads, editorial oversized serif numerals and pull-quotes, asymmetric overlapping compositions, bento-grid sections, alternating section backgrounds (light, tinted, sunken, dark teal, pattern), layered cards with gradient borders and pattern fills, content-type-specific card personalities (article editorial, course with level meter, research document-like, resource tactile file card, consultation chat-like), one memorable hero moment per page, micro-interactions everywhere (magnetic primary button, star-burst on success, count-up, animated underlines, confetti-lite on course completion, shimmer sweep), first-class dark mode. All motion reduced-motion safe and hover-gated on touch.
+
 ## 2. Design system deliverables (Phase A, foundation)
 
 | Item | Detail |
