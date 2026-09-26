@@ -760,8 +760,12 @@ relevant sub-agent per step, minimal file reads:
     user-facing text, load it once under `/ur/` or `/fa/` to confirm
     `dir="rtl"` actually applies — an HTTP 200 + a text grep is not a
     verification of layout, only of routing.
-11. Update `memory/progress-log.md` with one bullet line.
-12. Commit (Section 23).
+11. **UI quality gate (MANDATORY for every page or component with a
+    view; see Section 29):** run the design skills in the order given
+    there before the commit. Skipping this step is a checklist failure,
+    same as skipping i18n.
+12. Update `memory/progress-log.md` with one bullet line.
+13. Commit (Section 23).
 
 No step is skipped, but each step touches ONLY the files it needs. If a
 step in this list turns out not to exist as a named sub-agent yet,
@@ -811,3 +815,42 @@ AWS_USE_PATH_STYLE_ENDPOINT=true
 
 Out of scope for now (add post-launch, not part of current phases): backup
 strategy, health-check endpoint, CI/CD pipeline.
+
+---
+
+## 29. DESIGN / ANIMATION / OUTPUT SKILLS: STRICT USAGE RULES
+
+These are mandatory, not suggestions. Skills live in `.claude/skills/`
+(taste-skill, redesign-skill, output-skill, impeccable, emil-design-eng,
+animate, improve-animations, review-animations,
+find-animation-opportunities, animation-vocabulary, token-reducer).
+
+**UI quality gate, in this order, for every new or changed page/component:**
+1. New page from scratch: apply `taste-skill` while building, so the result
+   does not look templated.
+2. Redesigning an existing page: run `redesign-skill` (audit first, then
+   upgrade). Never restyle an existing page without the audit step.
+3. Before commit: `/impeccable audit <target>`, fix every high-severity
+   finding, then `/impeccable polish <target>`. The audit prompt MUST
+   include "check RTL and dark mode" (Sections 8 and 11).
+4. Motion: run `/find-animation-opportunities <target>` first, build only
+   what it approves with `/animate`, then `/review-animations`. Follow
+   Section 10 limits (no decorative motion, respect reduced motion).
+5. Any request for a complete file or module: apply `output-skill`. No
+   placeholder comments, no "rest stays the same", no truncated code.
+
+**Per-page cadence:** audit and polish after each finished page, not in a
+batch at the end of a phase.
+
+**Scope limits:** these skills change presentation only. They must not
+alter routes, models, validation, policies or i18n keys' meaning. Any
+color they introduce must use the Section 8.1 tokens, never raw hex, and
+spacing/direction must use logical (RTL-safe) utilities.
+
+**Token budget:** when a task needs a large corpus (many files, long logs)
+run `/token-reducer` first instead of reading everything. Prefer
+targeted Grep/Read for small lookups. Never paste large logs into chat.
+
+**Do not:** install skills that ship hooks which modify user prompts or
+run on every prompt; never run `npx skills add` or other remote-code
+installers without reading the source first (copy only the needed files).
