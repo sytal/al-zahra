@@ -22,7 +22,7 @@ function userWithRole(string $role = 'student', array $attrs = []): User
     $user = User::factory()->create($attrs);
     $user->assignRole($role);
 
-    return $user;
+    return $user->refresh();
 }
 
 function makeArticle(array $attrs = []): Article

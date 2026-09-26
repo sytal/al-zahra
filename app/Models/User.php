@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Support\Traits\HasUuid;
 use Database\Factories\UserFactory;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -17,7 +19,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 #[Fillable(['name', 'email', 'password', 'preferred_locale', 'phone', 'is_active'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable implements HasMedia, MustVerifyEmail
+class User extends Authenticatable implements FilamentUser, HasMedia, MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, HasRoles, HasUuid, InteractsWithMedia, Notifiable, SoftDeletes;
@@ -35,6 +37,11 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
             'is_active' => 'boolean',
             'last_login_at' => 'datetime',
         ];
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->is_active && $this->hasAnyRole(['director', 'admin', 'editor']);
     }
 
     public function registerMediaCollections(): void

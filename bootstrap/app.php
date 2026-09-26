@@ -15,6 +15,13 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'setlocale' => \App\Http\Middleware\SetLocale::class,
         ]);
+
+        $middleware->redirectGuestsTo(function (Request $request) {
+            $first = $request->segment(1);
+            $locale = in_array($first, config('app.locales'), true) ? $first : config('app.locale');
+
+            return route('login', ['locale' => $locale]);
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
