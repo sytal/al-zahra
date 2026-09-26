@@ -230,3 +230,15 @@ on the previous, not squashed into a single phase branch:
   session should re-audit against the full blueprint before assuming
   so, per the "full docs compliance" habit this project has needed
   enforced more than once.
+
+## Phase 2 known bug patterns (branch phase-2-quality-gaps)
+13. **Stale `public/build` = verifying old CSS/JS.** Run `npm run build` after any view, css or js edit before browser checks. A stale build made login submit as a native GET.
+14. **Opacity utilities on CSS-variable color tokens were silent no-ops** (`text-ink/70`, `bg-brand-primary/10`). Fixed in tailwind.config.js via color-mix. Use `text-on-brand` (not `text-white`) on `bg-brand-primary`; body text at ink/70 minimum.
+15. **Auth middleware redirect needs a locale**: `redirectGuestsTo` in bootstrap/app.php builds `route('login', locale)`. `User` must implement `FilamentUser::canAccessPanel` (role check), else everyone can open /admin outside local.
+16. **Livewire update requests (`/livewire/update`) have no `{locale}` route param**: SetLocale is registered with `Livewire::addPersistentMiddleware` in AppServiceProvider, else route() calls inside Livewire actions (Registered event, verification mail) 500.
+17. **`data-aos` on a Livewire root blanks the page after any morph.** app.js refreshes AOS on the `morphed` hook; still avoid data-aos on Livewire component roots.
+18. **Never `ucfirst()` raw enum/key values in views**: use `__('enums.<group>.'.$x->value)` (lang/*/enums.php). Translatable seeder data must carry all 5 locales (site_tagline was en-only).
+19. **Use `session()` not `request()->session()` in Livewire components** (no session store on Livewire test requests).
+20. **Rate limiter hits happen after `validate()`**, so empty submits do not lock users out.
+21. **Certificate PDFs use mPDF** (dompdf cannot shape Arabic script). Service: app/Modules/Certificate/Services/CertificatePdfRenderer.php. dompdf is now unused.
+22. **Verification tooling**: headless Chrome enforces about 500px minimum width; use the CDP helper (Emulation.setDeviceMetricsOverride) for real 375px. Parallel agents must never `taskkill /IM php.exe` (kills others' servers). `npx skills add` and hook-shipping skills are banned (docs Section 29).

@@ -129,3 +129,4 @@
   accordion, pagination, seo, language-switcher, footer, empty-state,
   breadcrumbs, progress-bar, stat-card, share-buttons, newsletter-form
   (stub), director-profile, instructor-card, detail-layout.
+- Phase 2 quality pass: tests rewritten (100+ passing), branded error pages + JSON errors, hreflang sitemap, RecentActivityWidget, mPDF certificates, design-skill gate applied to all pages (real-browser CDP QA en/ur, light/dark, 375/768/1280), full 5-locale completion incl. validation/auth lang and translated demo content, registration/guest-redirect/panel-access bugs fixed.
