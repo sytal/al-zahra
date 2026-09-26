@@ -113,8 +113,10 @@ document.addEventListener('alpine:init', () => {
         active: initial,
         ids: [],
         init() {
-            this.ids = [...this.$el.querySelectorAll('[role=tab]')].map((b) => b.dataset.tab);
-            if (!this.active) this.active = this.ids[0];
+            this.$nextTick(() => {
+                this.ids = [...this.$el.querySelectorAll('[data-tab]')].map((b) => b.dataset.tab);
+                if (!this.active) this.active = this.ids[0];
+            });
         },
         select(id) { this.active = id; },
         tab(id) {
