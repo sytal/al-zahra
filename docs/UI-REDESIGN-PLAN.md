@@ -1,6 +1,6 @@
 # UI Redesign Plan: Al Zahra Institute
 
-Status: PLAN ONLY. No UI file is changed until this plan is approved.
+Status: APPROVED (owner: demo testimonials, placeholder portrait, go). Execution in progress on this branch.
 Branch: `ui-redesign` (from `all-merged`). Goal: the whole site looks and behaves like a premium educational institute and clinician website: credible, calm, warm, accessible, fast, in 5 languages (ur/fa RTL), light and dark.
 
 ## 0. Ground rules and decisions
@@ -10,7 +10,7 @@ Hard constraints (from docs/CLAUDE.md and Known bug patterns): Tailwind v3 + tai
 Decisions taken (change only if you object):
 | # | Decision | Reason |
 |---|---|---|
-| D1 | No fabricated testimonials or credentials. Trust sections use REAL data: DB counts (articles, papers, courses, learners), Director credentials/interests, publications. A testimonials block exists but is Settings-driven and hidden until the owner adds real ones | fake reviews on a clinician site are misleading |
+| D1 | Trust sections use real data where it exists (DB counts, Director credentials/interests). Testimonials are seeded as DEMO content (Settings key `testimonials`, each item flagged `demo: true`, shown with a small visible "Demo" label, hidden automatically when the list is empty) so the design is complete; the owner replaces or removes them before launch | approved by owner; keeps the block honest |
 | D2 | FAQ, "how a consultation works" steps and service cards are static translated content in lang files (editable by devs), not new DB tables | Part G scope: no new modules |
 | D3 | Original SVG art (logo, patterns, illustrations, empty/error states, portrait placeholder). Stock photos only if CC0/Unsplash/Pexels and recorded in docs/ASSETS.md | no licensing risk, works in dark mode |
 | D4 | Fonts self-hosted via @fontsource (no Google CDN): serif display + sans body + Urdu Naskh/Nastaliq-grade + Persian + Devanagari | privacy, speed, offline |
