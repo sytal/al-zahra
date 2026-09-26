@@ -62,15 +62,15 @@ $socialLinks = \App\Modules\Setting\Models\Setting::where('key', 'social_links')
 
         <div>
             @if ($submitted)
-                <x-card class="text-center">
+                <x-card class="text-center" role="status">
                     <x-icon name="check-circle" class="mx-auto size-10 text-success" />
                     <h2 class="mt-3 text-xl font-semibold text-ink">{{ __('contact.success_title') }}</h2>
                     <p class="mt-1 text-ink/60">{{ __('contact.success_message') }}</p>
                 </x-card>
             @else
                 <form wire:submit="submit" class="space-y-4 rounded-lg border border-ink/10 bg-surface p-6">
-                    <x-input name="name" :label="__('contact.name')" wire:model="name" />
-                    <x-input name="email" type="email" :label="__('contact.email')" wire:model="email" />
+                    <x-input name="name" :label="__('contact.name')" wire:model="name" autocomplete="name" />
+                    <x-input name="email" type="email" :label="__('contact.email')" wire:model="email" autocomplete="email" />
                     <x-input name="subject" :label="__('contact.subject')" wire:model="subject" />
                     <x-textarea name="message" :label="__('contact.message')" wire:model="message" :rows="5" />
 

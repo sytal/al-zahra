@@ -8,7 +8,7 @@
         <p class="mb-6 text-center text-sm text-ink/60">{{ __('auth-pages.confirm_password_intro') }}</p>
 
         <form wire:submit="confirm" class="space-y-4">
-            <x-input name="password" type="password" :label="__('auth-pages.confirm_password_field')" wire:model="password" autofocus />
+            <x-input name="password" type="password" :label="__('auth-pages.confirm_password_field')" wire:model="password" autofocus autocomplete="current-password" />
 
             <x-button type="submit" variant="primary" class="w-full justify-center">
                 {{ __('auth-pages.confirm_password_submit') }}

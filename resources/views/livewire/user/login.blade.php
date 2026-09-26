@@ -10,9 +10,9 @@
             <x-input name="email" type="email" :label="__('auth-pages.login_email')" wire:model="email" autofocus autocomplete="username" />
             <x-input name="password" type="password" :label="__('auth-pages.login_password')" wire:model="password" autocomplete="current-password" />
 
-            <div class="flex items-center justify-between">
+            <div class="flex flex-wrap items-center justify-between gap-2">
                 <x-checkbox name="remember" :label="__('auth-pages.login_remember')" wire:model="remember" />
-                <a href="{{ route('password.request', app()->getLocale()) }}" wire:navigate class="text-sm text-brand-primary hover:underline">
+                <a href="{{ route('password.request', app()->getLocale()) }}" wire:navigate class="text-sm text-brand-primary underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary">
                     {{ __('auth-pages.login_forgot_password') }}
                 </a>
             </div>

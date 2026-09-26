@@ -11,7 +11,7 @@
         <x-card>
             <form wire:submit="verify" class="flex flex-col gap-4 sm:flex-row sm:items-end">
                 <div class="flex-1">
-                    <x-input name="code" :label="__('certificates.code_label')" wire:model="code" placeholder="{{ __('certificates.code_placeholder') }}" />
+                    <x-input name="code" :label="__('certificates.code_label')" wire:model="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="{{ __('certificates.code_placeholder') }}" />
                 </div>
                 <x-button type="submit" variant="primary" class="justify-center sm:mb-0">
                     {{ __('certificates.submit') }}

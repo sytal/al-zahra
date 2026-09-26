@@ -8,10 +8,10 @@
         <p class="mb-6 text-sm text-ink/60">{{ __('auth-pages.verify_email_intro') }}</p>
 
         @if ($resent)
-            <p class="mb-4 text-sm text-success">{{ __('auth-pages.verify_email_resent') }}</p>
+            <p role="status" class="mb-4 rounded-lg border border-success/40 bg-success/10 p-3 text-sm text-ink">{{ __('auth-pages.verify_email_resent') }}</p>
         @endif
 
-        <div class="flex items-center justify-between">
+        <div class="flex flex-wrap items-center justify-between gap-3">
             <x-button wire:click="resend" variant="primary">
                 {{ __('auth-pages.verify_email_resend') }}
             </x-button>

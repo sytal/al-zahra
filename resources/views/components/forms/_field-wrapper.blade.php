@@ -8,6 +8,6 @@
     {{ $slot }}
 
     @error($name)
-        <p class="mt-1 text-sm text-danger">{{ $message }}</p>
+        <p id="{{ $name }}-error" role="alert" class="mt-1.5 text-sm text-danger">{{ $message }}</p>
     @enderror
 </div>
