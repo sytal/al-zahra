@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'page_title' => 'Contact',
     'page_intro' => 'Have a general question or feedback? Send us a message.',
     'name' => 'Name',

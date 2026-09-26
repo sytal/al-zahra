@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'page_title' => 'About',
     'mission_title' => 'Mission',
     'vision_title' => 'Vision',

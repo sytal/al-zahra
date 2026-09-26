@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'home' => 'Back to Home',
     'refresh' => 'Refresh',
     't403' => 'You do not have access to this page',

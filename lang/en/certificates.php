@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'page_title' => 'Verify a Certificate',
     'page_intro' => 'Enter a certificate verification code to confirm it was issued by us.',
     'code_label' => 'Verification Code',

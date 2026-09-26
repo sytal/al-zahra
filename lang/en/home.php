@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'hero_subtext' => 'Evidence-based insights, courses, and research on language, learning, and the mind.',
     'explore_articles' => 'Explore Articles',
     'browse_courses' => 'Browse Courses',

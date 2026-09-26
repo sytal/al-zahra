@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'viewer_title' => 'Lesson',
     'curriculum' => 'Curriculum',
     'attachments' => 'Attachments',

@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'login_title' => 'Log In',
     'login_email' => 'Email',
     'login_password' => 'Password',

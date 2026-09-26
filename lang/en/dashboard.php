@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'nav_dashboard' => 'Dashboard',
     'nav_my_courses' => 'My Courses',
     'nav_consultations' => 'Consultations',

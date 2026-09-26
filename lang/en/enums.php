@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'course_level' => [
         'beginner' => 'Beginner',
         'intermediate' => 'Intermediate',

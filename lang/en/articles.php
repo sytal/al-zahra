@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'page_title' => 'Articles',
     'page_intro' => 'Insights on language, learning, and the mind.',
     'filter_category' => 'Category',

@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'heading' => 'Recent Activity',
     'description' => 'Activity',
     'causer' => 'By',

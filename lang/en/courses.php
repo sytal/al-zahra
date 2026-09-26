@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'page_title' => 'Courses',
     'page_intro' => 'Structured learning paths on language and the mind.',
     'filter_audience' => 'Audience',

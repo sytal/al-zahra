@@ -1,5 +1,6 @@
 <?php
-return [
+
+return [
     'about' => 'About',
     'articles' => 'Articles',
     'courses' => 'Courses',
