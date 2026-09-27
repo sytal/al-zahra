@@ -17,6 +17,7 @@ class CourseRepository implements CourseRepositoryInterface
 
         return $this->cache->remember($key, CacheService::LIST_TTL, fn () => Course::query()
             ->with(['category', 'instructor'])
+            ->withCount('lessons')
             ->where('is_published', true)
             ->when($audience, fn ($query) => $query->where('audience', $audience))
             ->when($level, fn ($query) => $query->where('level', $level))

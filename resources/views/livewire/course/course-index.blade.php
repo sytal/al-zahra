@@ -1,60 +1,91 @@
-<div class="mx-auto max-w-6xl px-4 py-10">
-    <header class="mb-8">
-        <h1 class="text-3xl font-bold text-ink">{{ __('courses.page_title') }}</h1>
-        <p class="mt-2 text-ink/70">{{ __('courses.page_intro') }}</p>
-    </header>
+@php
+$filtered = $audience !== '' || $level !== '' || $pricing !== '' || $search !== '';
+$items = $courses->getCollection();
+$featured = (! $filtered && $courses->currentPage() === 1 && $items->count() >= 3) ? $items->first() : null;
+$rest = $featured ? $items->slice(1) : $items;
+$audienceChips = collect(\App\Support\Enums\CourseAudience::cases())->map(fn ($c) => ['value' => $c->value, 'label' => __('enums.course_audience.'.$c->value)])->all();
+$levelOptions = ['' => __('courses.all_levels')] + collect(\App\Support\Enums\CourseLevel::cases())->mapWithKeys(fn ($c) => [$c->value => __('enums.course_level.'.$c->value)])->all();
+$target = 'audience,level,pricing,search,gotoPage,nextPage,previousPage,setPage';
+@endphp
 
-    <div class="mb-8 flex flex-wrap gap-4">
-        <x-select name="audience" :label="__('courses.filter_audience')" wire:model.live="audience" class="w-full sm:w-44">
-            <option value="">{{ __('courses.all_audiences') }}</option>
-            @foreach (\App\Support\Enums\CourseAudience::cases() as $case)
-                <option value="{{ $case->value }}">{{ __('enums.course_audience.'.$case->value) }}</option>
-            @endforeach
-        </x-select>
+<div>
+    <x-hero variant="banner" illustration="courses" :eyebrow="__('courses_ui.hero_eyebrow')" :title="__('courses.page_title')" :lead="__('courses.page_intro')">
+        <x-slot name="meta">
+            <span class="inline-flex items-center gap-2 rounded-full border bg-surface-raised/80 px-3 py-1.5 font-semibold text-strong">
+                <span class="star-mark text-xs" aria-hidden="true"></span>
+                {{ trans_choice('kit_sections.results', $courses->total(), ['count' => $courses->total()]) }}
+            </span>
+        </x-slot>
+    </x-hero>
 
-        <x-select name="level" :label="__('courses.filter_level')" wire:model.live="level" class="w-full sm:w-44">
-            <option value="">{{ __('courses.all_levels') }}</option>
-            @foreach (\App\Support\Enums\CourseLevel::cases() as $case)
-                <option value="{{ $case->value }}">{{ __('enums.course_level.'.$case->value) }}</option>
-            @endforeach
-        </x-select>
+    <section class="section-tight bg-section-light" aria-label="{{ __('courses.page_title') }}">
+        <div class="container-page">
+            <x-filter-bar
+                sticky
+                chips-model="audience" :chips="$audienceChips" :selected="$audience" :chips-label="__('courses.filter_audience')" :all-label="__('courses.all_audiences')"
+                search-model="search" :search="$search" :search-label="__('courses.search_label')" :placeholder="__('courses_ui.search_placeholder')"
+                :count="$courses->total()" :clear-models="['level', 'pricing']"
+            >
+                <x-select name="level" :label="__('courses.filter_level')" hide-label :options="$levelOptions" :value="$level" wire:model.live="level" class="w-full sm:w-48" />
+                <x-segmented-control name="pricing" :label="__('courses_ui.pricing_label')" :options="['' => __('courses.all_pricing'), 'free' => __('common.free'), 'paid' => __('common.paid')]" :value="$pricing" wire:model.live="pricing" class="sm:self-center" />
+            </x-filter-bar>
 
-        <x-select name="pricing" :label="__('courses.filter_pricing')" wire:model.live="pricing" class="w-full sm:w-36">
-            <option value="">{{ __('courses.all_pricing') }}</option>
-            <option value="free">{{ __('common.free') }}</option>
-            <option value="paid">{{ __('common.paid') }}</option>
-        </x-select>
-
-        <x-input name="search" :label="__('courses.search_label')" wire:model.live.debounce.400ms="search" class="w-full sm:flex-1" />
-    </div>
-
-    @if ($courses->isEmpty())
-        <x-empty-state icon="academic-cap" :title="__('courses.empty_title')" :message="__('courses.empty_message')" />
-    @else
-        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            @foreach ($courses as $course)
-                <x-card hoverable class="flex flex-col overflow-hidden !p-0">
-                    <a href="{{ route('courses.show', ['locale' => app()->getLocale(), 'slug' => $course->slug]) }}" wire:navigate>
-                        <img loading="lazy"
-                            src="{{ $course->getFirstMediaUrl('cover_image', 'card') ?: asset('images/course-placeholder.svg') }}"
-                            alt="{{ $course->title }}"
-                            class="aspect-video w-full object-cover dark:brightness-75"
-                        >
-                        <div class="p-5">
-                            <div class="mb-2 flex flex-wrap gap-1.5">
-                                <x-badge color="brand" :text="__('enums.course_level.'.$course->level->value)" />
-                                <x-badge color="neutral" :text="__('enums.course_audience.'.$course->audience->value)" />
-                                <x-badge :color="$course->is_free ? 'success' : 'warning'" :text="$course->is_free ? __('common.free') : __('common.paid')" />
+            <div class="mt-8" wire:loading.class="opacity-60" wire:target="{{ $target }}">
+                @if ($courses->isEmpty())
+                    <x-empty-state icon="academic-cap" illustration="courses" :title="__('courses.empty_title')" :message="__('courses.empty_message')">
+                        @if ($filtered)
+                            <x-slot name="action">
+                                <x-button variant="outline" icon="x-mark" x-on:click="$wire.set('audience', ''); $wire.set('level', ''); $wire.set('pricing', ''); $wire.set('search', '')">{{ __('courses_ui.clear') }}</x-button>
+                            </x-slot>
+                        @endif
+                    </x-empty-state>
+                @else
+                    @if ($featured)
+                        @php
+                        $fImg = $featured->getFirstMediaUrl('cover_image', 'hero');
+                        $fallback = asset('images/course-placeholder.svg');
+                        $fUrl = route('courses.show', ['locale' => app()->getLocale(), 'slug' => $featured->slug]);
+                        @endphp
+                        <article class="spotlight gradient-border card-surface group relative mb-8 grid min-w-0 overflow-hidden !rounded-panel md:grid-cols-2" x-data="spotlight">
+                            <div class="img-zoom relative aspect-[3/2] min-w-0 bg-surface-sunken md:aspect-auto md:min-h-[20rem]">
+                                <img src="{{ $fImg ?: $fallback }}" alt="{{ $featured->title }}" width="1200" height="630" decoding="async" onerror="this.onerror=null;this.src='{{ $fallback }}'" class="absolute inset-0 size-full object-cover dark:brightness-90">
+                                <span class="absolute start-3 top-3"><x-badge color="accent" variant="solid" icon="sparkles" :text="__('courses_ui.featured')" /></span>
                             </div>
-                            <h2 class="font-semibold text-ink">{{ $course->title }}</h2>
-                            <p class="mt-1 text-sm text-ink/70">{{ $course->short_description }}</p>
-                            <p class="mt-3 text-xs text-ink/70">{{ $course->enrolled_count }} {{ __('courses.students_enrolled') }}</p>
-                        </div>
-                    </a>
-                </x-card>
-            @endforeach
-        </div>
+                            <div class="relative flex min-w-0 flex-col justify-center gap-4 p-6 sm:p-8 lg:p-10">
+                                <span class="star-mark pointer-events-none absolute -end-4 -top-4 text-8xl opacity-15" aria-hidden="true"></span>
+                                <div class="flex flex-wrap items-center gap-3">
+                                    <x-level-meter :level="$featured->level" />
+                                    <x-badge :color="$featured->is_free ? 'success' : 'warning'" :text="$featured->is_free ? __('common.free') : __('common.paid')" />
+                                </div>
+                                <h2 class="heading-2 break-words"><a href="{{ $fUrl }}" wire:navigate class="focus-ring after:absolute after:inset-0">{{ $featured->title }}</a></h2>
+                                <p class="line-clamp-3 text-body">{{ $featured->short_description }}</p>
+                                <ul class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted">
+                                    @if ($featured->lessons_count)<li class="inline-flex items-center gap-1.5"><x-icon name="play-circle" class="size-4" aria-hidden="true" />{{ trans_choice('kit_sections.lessons', $featured->lessons_count, ['count' => $featured->lessons_count]) }}</li>@endif
+                                    @if ($featured->estimated_duration_hours)<li class="inline-flex items-center gap-1.5"><x-icon name="clock" class="size-4" aria-hidden="true" />{{ trans_choice('kit_sections.hours', $featured->estimated_duration_hours, ['count' => $featured->estimated_duration_hours]) }}</li>@endif
+                                    <li class="inline-flex items-center gap-1.5"><x-icon name="users" class="size-4" aria-hidden="true" />{{ trans_choice('kit_sections.learners', (int) $featured->enrolled_count, ['count' => number_format((int) $featured->enrolled_count)]) }}</li>
+                                </ul>
+                                <p class="inline-flex items-center gap-2 font-semibold text-brand-primary"><span class="link-underline">{{ __('courses_ui.start_course') }}</span><x-icon name="arrow-right" class="size-5 rtl:-scale-x-100" aria-hidden="true" /></p>
+                            </div>
+                        </article>
+                    @endif
 
-        <x-pagination :paginator="$courses" />
-    @endif
+                    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        @foreach ($rest as $course)
+                            <x-course-card :course="$course" as="h2" wire:key="course-{{ $course->id }}" />
+                        @endforeach
+                    </div>
+
+                    <div class="mt-10">
+                        <x-pagination :paginator="$courses" />
+                    </div>
+                @endif
+            </div>
+
+            <div class="mt-8 hidden gap-6 sm:grid-cols-2 lg:grid-cols-3" wire:loading.class.remove="hidden" wire:loading.class="grid" wire:target="{{ $target }}" aria-hidden="true">
+                @foreach (range(1, 3) as $i)
+                    <x-course-card skeleton />
+                @endforeach
+            </div>
+        </div>
+    </section>
 </div>

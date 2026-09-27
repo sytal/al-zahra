@@ -1,0 +1,38 @@
+<?php
+
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
+return [
+    'hero_eyebrow' => 'Al Zahra ke saath seekhein',
+    'search_placeholder' => 'Unwan se course talash karein',
+    'pricing_label' => 'Qeemat',
+    'featured' => 'Numayan course',
+    'start_course' => 'Yeh course dekhein',
+    'clear' => 'Filter hatayein',
+    'about' => 'Is course ke baare mein',
+    'facts_title' => 'Course aik nazar mein',
+    'fact_price' => 'Qeemat',
+    'fact_duration' => 'Dorania',
+    'fact_lessons' => 'Asbaq',
+    'fact_level' => 'Satah',
+    'fact_audience' => 'Mukhatib',
+    'fact_learners' => 'Talba',
+    'free_preview' => 'Muft peshgi jaiza',
+    'locked' => 'Kholne ke liye indiraj karein',
+    'no_body' => 'Sabaq ka matn jald dastiyab hoga.',
+    'no_lessons' => 'Asbaq jald shaya kiye jayenge.',
+    'guest_hint' => 'Indiraj ke liye login karein ya account banayein.',
+    'enroll_hint' => 'Indiraj karein aur pehla sabaq foran shuru karein.',
+    'enrolled_hint' => 'Aap is course mein shamil hain.',
+    'faq_title' => 'Aam sawalat',
+    'faq_who_q' => 'Yeh course kin ke liye hai?',
+    'faq_who_a' => 'Yeh :audience ke liye, :level satah par tayyar kiya gaya hai.',
+    'faq_how_q' => 'Main indiraj kaise karoon?',
+    'faq_how_a' => 'Apne account mein login karein aur is page par indiraj ka button dabayein. Phir dashboard se asbaq shuru karein.',
+    'faq_track_q' => 'Apni pesh raft kahan dekhoon?',
+    'faq_track_a' => 'Aap ke dashboard par aap ke courses, pesh raft aur hasil kardah certificates nazar aate hain.',
+    'more_title' => 'Apna seekhne ka safar jari rakhein',
+    'all_courses' => 'Tamam courses',
+    'taught_by' => 'Ustad',
+    'jump' => 'Nisab par jayein',
+];
