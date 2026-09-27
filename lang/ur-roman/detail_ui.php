@@ -1,0 +1,38 @@
+<?php
+
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
+return [
+    'written_by' => 'Musannif',
+    'author_role' => 'Musannif',
+    'about_author' => 'Musannif ke baare mein',
+    'author_blurb' => 'Al Zahra Institute ki zabaan, seekhne aur zehn se mutaalliq library mein hissa daalte hain.',
+    'meet_institute' => 'Institute ke baare mein',
+    'tags' => 'Tags',
+    'previous_article' => 'Pichla mazmoon',
+    'next_article' => 'Agla mazmoon',
+    'print' => 'Print',
+    'empty_body_title' => 'Is mazmoon mein abhi koi mawad nahin',
+    'empty_body' => 'Baraye meharbani jald dobara dekhein.',
+    'back_articles' => 'Tamam mazameen',
+    'back_research' => 'Tamam tehqeeq',
+    'back_resources' => 'Tamam wasail',
+    'published_on' => 'Ishaat',
+    'research_paper' => 'Tehqeeqi maqala',
+    'authors' => 'Musannifeen',
+    'year' => 'Saal',
+    'at_a_glance' => 'Ek nazar mein',
+    'full_paper' => 'Mukammal maqala',
+    'opens_external' => 'Nashir ki website naye tab mein khulti hai.',
+    'opens_pdf' => 'PDF dastaweez, naye tab mein khulti hai.',
+    'paper_unavailable' => 'Mukammal maqala abhi dastiyab nahin.',
+    'about_resource' => 'Is wasile ke baare mein',
+    'resource_type' => 'Qism',
+    'access' => 'Rasai',
+    'downloads' => ':count downloads',
+    'free_note' => 'Muft, fori download.',
+    'paid_note' => 'Yeh muawze wala wasila abhi khareedari ke liye dastiyab nahin.',
+    'no_file' => 'File abhi dastiyab nahin.',
+    'disclaimer_title' => 'Baraye meharbani note karein',
+    'no_description' => 'Abhi koi tafseel shamil nahin ki gayi.',
+];

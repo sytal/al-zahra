@@ -1,0 +1,38 @@
+<?php
+
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
+return [
+    'written_by' => 'نویسنده',
+    'author_role' => 'نویسنده',
+    'about_author' => 'درباره نویسنده',
+    'author_blurb' => 'در کتابخانه مؤسسه الزهرا درباره زبان، یادگیری و ذهن مشارکت دارد.',
+    'meet_institute' => 'درباره مؤسسه',
+    'tags' => 'برچسب‌ها',
+    'previous_article' => 'مقاله قبلی',
+    'next_article' => 'مقاله بعدی',
+    'print' => 'چاپ',
+    'empty_body_title' => 'این مقاله هنوز محتوایی ندارد',
+    'empty_body' => 'لطفاً به زودی دوباره سر بزنید.',
+    'back_articles' => 'همه مقاله‌ها',
+    'back_research' => 'همه پژوهش‌ها',
+    'back_resources' => 'همه منابع',
+    'published_on' => 'انتشار',
+    'research_paper' => 'مقاله پژوهشی',
+    'authors' => 'نویسندگان',
+    'year' => 'سال',
+    'at_a_glance' => 'در یک نگاه',
+    'full_paper' => 'مقاله کامل',
+    'opens_external' => 'وب‌سایت ناشر در تب جدید باز می‌شود.',
+    'opens_pdf' => 'سند پی‌دی‌اف، در تب جدید باز می‌شود.',
+    'paper_unavailable' => 'مقاله کامل هنوز در دسترس نیست.',
+    'about_resource' => 'درباره این منبع',
+    'resource_type' => 'نوع',
+    'access' => 'دسترسی',
+    'downloads' => ':count دانلود',
+    'free_note' => 'رایگان، دانلود فوری.',
+    'paid_note' => 'این منبع پولی هنوز برای خرید در دسترس نیست.',
+    'no_file' => 'فایل هنوز در دسترس نیست.',
+    'disclaimer_title' => 'لطفاً توجه کنید',
+    'no_description' => 'هنوز توضیحی افزوده نشده است.',
+];

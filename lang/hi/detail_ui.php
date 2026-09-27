@@ -1,0 +1,38 @@
+<?php
+
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
+return [
+    'written_by' => 'लेखक',
+    'author_role' => 'लेखक',
+    'about_author' => 'लेखक के बारे में',
+    'author_blurb' => 'अल ज़हरा इंस्टिट्यूट की भाषा, सीखने और मन से जुड़ी लाइब्रेरी में योगदान देते हैं।',
+    'meet_institute' => 'इंस्टिट्यूट के बारे में',
+    'tags' => 'टैग',
+    'previous_article' => 'पिछला लेख',
+    'next_article' => 'अगला लेख',
+    'print' => 'प्रिंट',
+    'empty_body_title' => 'इस लेख में अभी कोई सामग्री नहीं है',
+    'empty_body' => 'कृपया जल्द ही दोबारा देखें।',
+    'back_articles' => 'सभी लेख',
+    'back_research' => 'सभी शोध',
+    'back_resources' => 'सभी संसाधन',
+    'published_on' => 'प्रकाशित',
+    'research_paper' => 'शोध पत्र',
+    'authors' => 'लेखक',
+    'year' => 'वर्ष',
+    'at_a_glance' => 'एक नज़र में',
+    'full_paper' => 'पूरा शोध पत्र',
+    'opens_external' => 'प्रकाशक की साइट नए टैब में खुलती है।',
+    'opens_pdf' => 'PDF दस्तावेज़, नए टैब में खुलता है।',
+    'paper_unavailable' => 'पूरा शोध पत्र अभी उपलब्ध नहीं है।',
+    'about_resource' => 'इस संसाधन के बारे में',
+    'resource_type' => 'प्रकार',
+    'access' => 'उपलब्धता',
+    'downloads' => ':count डाउनलोड',
+    'free_note' => 'मुफ़्त, तुरंत डाउनलोड।',
+    'paid_note' => 'यह सशुल्क संसाधन अभी खरीद के लिए उपलब्ध नहीं है।',
+    'no_file' => 'फ़ाइल अभी उपलब्ध नहीं है।',
+    'disclaimer_title' => 'कृपया ध्यान दें',
+    'no_description' => 'अभी कोई विवरण नहीं जोड़ा गया है।',
+];

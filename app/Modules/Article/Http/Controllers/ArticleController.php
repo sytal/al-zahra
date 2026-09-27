@@ -27,6 +27,14 @@ class ArticleController extends Controller
 
         $related = $this->repository->relatedTo($article);
 
+        $published = \App\Modules\Article\Models\Article::query()->where('is_published', true)->whereNotNull('published_at');
+        $previous = $article->published_at
+            ? (clone $published)->where('published_at', '<', $article->published_at)->latest('published_at')->first(['id', 'title', 'slug'])
+            : null;
+        $next = $article->published_at
+            ? (clone $published)->where('published_at', '>', $article->published_at)->oldest('published_at')->first(['id', 'title', 'slug'])
+            : null;
+
         $seo = [
             'title' => $article->meta_title ?: $article->title,
             'description' => $article->meta_description ?: $article->excerpt,
@@ -35,6 +43,6 @@ class ArticleController extends Controller
             'schema' => SeoSchema::article($article),
         ];
 
-        return view('articles.show', compact('article', 'related', 'seo'));
+        return view('articles.show', compact('article', 'related', 'seo', 'previous', 'next'));
     }
 }

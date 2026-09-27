@@ -1,0 +1,38 @@
+<?php
+
+// Reviewed by AI (Claude); native-speaker review recommended before launch.
+
+return [
+    'written_by' => 'مصنف',
+    'author_role' => 'مصنف',
+    'about_author' => 'مصنف کے بارے میں',
+    'author_blurb' => 'الزہراء انسٹی ٹیوٹ کی زبان، سیکھنے اور ذہن سے متعلق لائبریری میں حصہ ڈالتے ہیں۔',
+    'meet_institute' => 'انسٹی ٹیوٹ کے بارے میں',
+    'tags' => 'ٹیگز',
+    'previous_article' => 'پچھلا مضمون',
+    'next_article' => 'اگلا مضمون',
+    'print' => 'پرنٹ',
+    'empty_body_title' => 'اس مضمون میں ابھی کوئی مواد نہیں',
+    'empty_body' => 'براہ کرم جلد دوبارہ دیکھیں۔',
+    'back_articles' => 'تمام مضامین',
+    'back_research' => 'تمام تحقیق',
+    'back_resources' => 'تمام وسائل',
+    'published_on' => 'اشاعت',
+    'research_paper' => 'تحقیقی مقالہ',
+    'authors' => 'مصنفین',
+    'year' => 'سال',
+    'at_a_glance' => 'ایک نظر میں',
+    'full_paper' => 'مکمل مقالہ',
+    'opens_external' => 'ناشر کی ویب سائٹ نئے ٹیب میں کھلتی ہے۔',
+    'opens_pdf' => 'پی ڈی ایف دستاویز، نئے ٹیب میں کھلتی ہے۔',
+    'paper_unavailable' => 'مکمل مقالہ ابھی دستیاب نہیں۔',
+    'about_resource' => 'اس وسیلے کے بارے میں',
+    'resource_type' => 'قسم',
+    'access' => 'رسائی',
+    'downloads' => ':count ڈاؤن لوڈز',
+    'free_note' => 'مفت، فوری ڈاؤن لوڈ۔',
+    'paid_note' => 'یہ معاوضے والا وسیلہ ابھی خریداری کے لیے دستیاب نہیں۔',
+    'no_file' => 'فائل ابھی دستیاب نہیں۔',
+    'disclaimer_title' => 'براہ کرم نوٹ کریں',
+    'no_description' => 'ابھی کوئی تفصیل شامل نہیں کی گئی۔',
+];
