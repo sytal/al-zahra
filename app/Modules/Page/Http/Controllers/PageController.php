@@ -3,7 +3,10 @@
 namespace App\Modules\Page\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Article\Models\Article;
+use App\Modules\Course\Models\Course;
 use App\Modules\Director\Models\Director;
+use App\Modules\Research\Models\ResearchPaper;
 use App\Modules\Setting\Models\Setting;
 use App\Support\SeoSchema;
 use Illuminate\View\View;
@@ -17,6 +20,9 @@ class PageController extends Controller
 
         $mission = Setting::where('key', 'mission_text')->value('value');
         $vision = Setting::where('key', 'vision_text')->value('value');
+        $hours = Setting::where('key', 'contact_hours')->value('value');
+        $email = Setting::where('key', 'contact_email')->value('value');
+        $phone = Setting::where('key', 'contact_phone')->value('value');
 
         $seo = [
             'title' => __('about.page_title'),
@@ -30,6 +36,14 @@ class PageController extends Controller
             'director' => $director,
             'mission' => is_array($mission) ? ($mission[$locale] ?? $mission['en'] ?? null) : $mission,
             'vision' => is_array($vision) ? ($vision[$locale] ?? $vision['en'] ?? null) : $vision,
+            'hours' => is_array($hours) ? $hours : [],
+            'email' => is_string($email) && $email !== '' ? $email : null,
+            'phone' => is_string($phone) && $phone !== '' ? $phone : null,
+            'stats' => [
+                'articles' => Article::where('is_published', true)->count(),
+                'courses' => Course::where('is_published', true)->count(),
+                'papers' => ResearchPaper::where('is_published', true)->count(),
+            ],
             'seo' => $seo,
         ]);
     }
