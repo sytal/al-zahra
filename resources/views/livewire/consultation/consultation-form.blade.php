@@ -77,7 +77,6 @@ $howSteps = [
                             block
                             size="lg"
                             :options="['free_question' => __('consultation.type_free'), 'paid_booking' => __('consultation.type_paid')]"
-                            :icons="['free_question' => 'chat-bubble-left-ellipsis', 'paid_booking' => 'calendar-days']"
                             wire:model.live="type"
                             :label="__('forms_ui.consult_type_label')"
                         />

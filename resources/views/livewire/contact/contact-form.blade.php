@@ -12,7 +12,9 @@ $settingText = function (string $key) {
 };
 $contactEmail = $settingText('contact_email');
 $contactPhone = $settingText('contact_phone');
-$contactHours = $settingText('contact_hours');
+$hoursRaw = Setting::where('key', 'contact_hours')->value('value');
+$contactHoursArr = is_array($hoursRaw) && count(array_filter($hoursRaw)) ? $hoursRaw : null;
+$contactHours = is_string($hoursRaw) && trim($hoursRaw) !== '' ? trim($hoursRaw) : null;
 $contactAddress = $settingText('contact_address');
 $socialLinks = collect(Setting::where('key', 'social_links')->value('value') ?? [])->filter()->all();
 @endphp
@@ -93,7 +95,9 @@ $socialLinks = collect(Setting::where('key', 'social_links')->value('value') ?? 
                 @if ($contactPhone)
                     <x-contact-info-card type="phone" :label="__('common.phone')" :value="$contactPhone" />
                 @endif
-                @if ($contactHours)
+                @if ($contactHoursArr)
+                    <x-opening-hours :hours="$contactHoursArr" :title="__('forms_ui.hours_label')" />
+                @elseif ($contactHours)
                     <x-contact-info-card type="other" icon="clock" :label="__('forms_ui.hours_label')" :value="$contactHours" />
                 @endif
                 @if ($contactAddress)
@@ -105,7 +109,7 @@ $socialLinks = collect(Setting::where('key', 'social_links')->value('value') ?? 
                         <x-social-links :links="$socialLinks" />
                     </div>
                 @endif
-                @unless ($contactEmail || $contactPhone || $contactHours || $contactAddress || count($socialLinks))
+                @unless ($contactEmail || $contactPhone || $contactHours || $contactHoursArr || $contactAddress || count($socialLinks))
                     <p class="card-surface p-5 text-body">{{ __('forms_ui.contact_form_only') }}</p>
                 @endunless
             </aside>
