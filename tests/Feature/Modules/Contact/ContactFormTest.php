@@ -49,3 +49,19 @@ it('rate limits after five submissions', function () {
 
     expect(ContactMessage::count())->toBe(5);
 });
+
+test('public form pages render a specific localized title and json-ld', function () {
+    foreach (['en', 'ur'] as $locale) {
+        foreach ([
+            ['contact', 'seo_contact_title', 'ContactPage'],
+            ['consultation', 'seo_consult_title', 'WebPage'],
+            ['certificates/verify', 'seo_verify_title', 'WebPage'],
+        ] as [$path, $key, $type]) {
+            $title = trans('forms_ui.'.$key, [], $locale);
+            $html = $this->get("/{$locale}/{$path}")->assertOk()->getContent();
+            expect($html)->toContain('<title>'.e($title).' — '.config('app.name').'</title>')
+                ->and($html)->toContain('"@type":"'.$type.'"')
+                ->and(substr_count($html, '<title>'))->toBe(1);
+        }
+    }
+});

@@ -4,6 +4,8 @@ namespace App\Modules\Certificate\Livewire;
 
 use App\Modules\Certificate\Models\Certificate;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\HtmlString;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -50,15 +52,15 @@ class CertificateVerify extends Component
     public function render()
     {
         $seo = [
-            'title' => __('certificates.page_title'),
+            'title' => __('forms_ui.seo_verify_title'),
             'description' => __('certificates.page_intro'),
             'image' => null,
             'type' => 'website',
-            'schema' => null,
+            'schema' => ['@context' => 'https://schema.org', '@type' => 'WebPage', 'name' => __('forms_ui.seo_verify_title'), 'description' => __('certificates.page_intro'), 'url' => url()->current(), 'inLanguage' => app()->getLocale(), 'isPartOf' => ['@type' => 'WebSite', 'name' => config('app.name'), 'url' => url('/')]],
         ];
 
-        return view('livewire.certificate.certificate-verify', [
-            'seo' => $seo,
-        ]);
+        $seoHead = new HtmlString(Blade::render('<x-seo :title="$t" :description="$d" :type="$ty" :schema="$sc" />', ['t' => $seo['title'], 'd' => $seo['description'], 'ty' => $seo['type'], 'sc' => $seo['schema']]));
+
+        return view('livewire.certificate.certificate-verify', compact('seo'))->layoutData(['seo' => $seoHead]);
     }
 }

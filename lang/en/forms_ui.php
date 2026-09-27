@@ -41,4 +41,7 @@ return [
     'seal_line' => 'has successfully completed',
     'invalid_hint' => 'Check the code against the certificate and try again. Codes are not case sensitive.',
     'verify_privacy' => 'We show only a first name and last initial to protect privacy.',
+    'seo_contact_title' => 'Contact',
+    'seo_consult_title' => 'Ask a Question or Book a Consultation',
+    'seo_verify_title' => 'Verify a Certificate',
 ];

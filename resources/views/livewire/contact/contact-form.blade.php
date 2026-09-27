@@ -19,17 +19,6 @@ $contactAddress = $settingText('contact_address');
 $socialLinks = collect(Setting::where('key', 'social_links')->value('value') ?? [])->filter()->all();
 @endphp
 
-@push('head')
-    <x-seo
-        :title="$seo['title']"
-        :description="$seo['description']"
-        :image="$seo['image']"
-        :type="$seo['type']"
-        :schema="$seo['schema']"
-        :title-tag="false"
-    />
-@endpush
-
 <div>
     <section class="relative isolate overflow-hidden border-b bg-hero-gradient">
         <span class="glow-teal -top-32 end-[-6rem] opacity-80" style="--glow-size: 26rem" aria-hidden="true"></span>

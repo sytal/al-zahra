@@ -1,7 +1,3 @@
-@push('head')
-    <x-seo :title="$seo['title']" :description="$seo['description']" :image="$seo['image']" :type="$seo['type']" :schema="$seo['schema']" :title-tag="false" />
-@endpush
-
 @php
 $displayName = '';
 if ($checked && $certificate) {

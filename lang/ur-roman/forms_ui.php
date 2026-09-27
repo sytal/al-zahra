@@ -43,4 +43,7 @@ return [
     'seal_line' => 'ne kamyabi se mukammal kiya',
     'invalid_hint' => 'Code ko certificate se milayein aur dobara koshish karein. Code mein bare chhote harf ka farq nahi.',
     'verify_privacy' => 'Raazdari ke liye sirf pehla naam aur aakhri naam ka pehla harf dikhaya jata hai.',
+    'seo_contact_title' => 'Rabta',
+    'seo_consult_title' => 'Sawal poochhein ya mashwara book karein',
+    'seo_verify_title' => 'Certificate ki tasdeeq',
 ];
