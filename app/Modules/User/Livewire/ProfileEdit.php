@@ -71,6 +71,7 @@ class ProfileEdit extends Component
         $user->save();
 
         $this->profileStatus = __('dashboard.profile_updated');
+        $this->dispatch('toast', message: $this->profileStatus, type: 'success');
     }
 
     public function updateAvatar(): void
@@ -85,6 +86,7 @@ class ProfileEdit extends Component
 
         $this->reset('avatar');
         $this->avatarStatus = __('dashboard.profile_avatar_updated');
+        $this->dispatch('toast', message: $this->avatarStatus, type: 'success');
     }
 
     public function removeAvatar(): void
@@ -92,6 +94,7 @@ class ProfileEdit extends Component
         Auth::user()->clearMediaCollection('avatar');
 
         $this->avatarStatus = __('dashboard.profile_avatar_removed');
+        $this->dispatch('toast', message: $this->avatarStatus, type: 'info');
     }
 
     public function updatePassword(): void
@@ -107,6 +110,7 @@ class ProfileEdit extends Component
 
         $this->reset('current_password', 'password', 'password_confirmation');
         $this->passwordStatus = __('dashboard.profile_password_updated');
+        $this->dispatch('toast', message: $this->passwordStatus, type: 'success');
     }
 
     public function render()

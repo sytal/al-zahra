@@ -7,6 +7,7 @@ use App\Modules\Course\Models\CourseLesson;
 use App\Modules\Course\Models\Enrollment;
 use App\Modules\Course\Models\LessonProgress;
 use App\Modules\Course\Services\CourseService;
+use App\Support\Enums\EnrollmentStatus;
 use Illuminate\Http\RedirectResponse;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -91,7 +92,7 @@ class LessonViewer extends Component
     {
         $this->enrollment = $service->markLessonComplete(auth()->user(), $this->lesson);
 
-        $this->dispatch('lesson-completed');
+        $this->dispatch('lesson-completed', courseDone: $this->enrollment->status === EnrollmentStatus::COMPLETED);
     }
 
     public function goToNextLesson(): void
@@ -124,6 +125,9 @@ class LessonViewer extends Component
 
         $hasNext = $lessons->firstWhere(fn (CourseLesson $l) => $l->sort_order > $this->lesson->sort_order) !== null;
 
+        $previous = $lessons->last(fn (CourseLesson $l) => $l->sort_order < $this->lesson->sort_order);
+        $position = $lessons->search(fn (CourseLesson $l) => $l->id === $this->lesson->id);
+
         $seo = [
             'title' => $this->lesson->title,
             'description' => $this->course->title,
@@ -137,6 +141,9 @@ class LessonViewer extends Component
             'completedIds' => $completedIds,
             'isCompleted' => $isCompleted,
             'hasNext' => $hasNext,
+            'previous' => $previous,
+            'position' => $position === false ? 0 : $position,
+            'courseDone' => $this->enrollment->status === EnrollmentStatus::COMPLETED,
             'seo' => $seo,
         ]);
     }

@@ -25,7 +25,7 @@ class MyCourses extends Component
     {
         $user = auth()->user();
 
-        $enrollments = Enrollment::with('course')
+        $enrollments = Enrollment::with(['course' => fn ($query) => $query->withCount('lessons')])
             ->where('user_id', $user->id)
             ->when($this->tab === 'in_progress', fn ($query) => $query->where('status', EnrollmentStatus::ACTIVE))
             ->when($this->tab === 'completed', fn ($query) => $query->where('status', EnrollmentStatus::COMPLETED))
@@ -35,6 +35,12 @@ class MyCourses extends Component
         $hasAnyEnrollment = $this->tab === 'all'
             ? $enrollments->isNotEmpty()
             : Enrollment::where('user_id', $user->id)->exists();
+
+        $counts = [
+            'all' => Enrollment::where('user_id', $user->id)->count(),
+            'in_progress' => Enrollment::where('user_id', $user->id)->where('status', EnrollmentStatus::ACTIVE)->count(),
+            'completed' => Enrollment::where('user_id', $user->id)->where('status', EnrollmentStatus::COMPLETED)->count(),
+        ];
 
         $seo = [
             'title' => __('dashboard.my_courses_title'),
@@ -47,6 +53,7 @@ class MyCourses extends Component
         return view('livewire.course.my-courses', [
             'enrollments' => $enrollments,
             'hasAnyEnrollment' => $hasAnyEnrollment,
+            'counts' => $counts,
             'seo' => $seo,
         ]);
     }
