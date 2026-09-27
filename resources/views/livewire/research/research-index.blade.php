@@ -11,7 +11,7 @@
         <span class="light-rays" aria-hidden="true"></span>
         <span class="bg-pattern-neural pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></span>
 
-        <div class="container-page grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-12 lg:py-20">
+        <div class="container-page grid items-center gap-10 pb-10 pt-12 sm:pb-12 sm:pt-16 lg:grid-cols-12 lg:pb-14 lg:pt-20">
             <div class="min-w-0 lg:col-span-7">
                 <p class="eyebrow mb-4 flex items-center gap-2"><span class="star-mark text-sm" aria-hidden="true"></span>{{ __('lists_ui.rs_eyebrow') }}</p>
                 <h1 class="heading-display break-words">{{ __('research.page_title') }}</h1>
@@ -20,11 +20,11 @@
                 <dl class="mt-8 grid max-w-xl grid-cols-1 gap-3 xs:grid-cols-3">
                     <div class="glass rounded-2xl border px-4 py-3">
                         <dt class="text-xs font-semibold text-muted">{{ __('lists_ui.rs_stat_papers') }}</dt>
-                        <dd class="numeral-display !text-4xl" x-data="counter({ to: {{ (int) $stats['total'] }} })" x-text="display">{{ (int) $stats['total'] }}</dd>
+                        <dd class="numeral-display text-gradient-brand !text-4xl" x-data="counter({ to: {{ (int) $stats['total'] }} })" x-text="display">{{ (int) $stats['total'] }}</dd>
                     </div>
                     <div class="glass rounded-2xl border px-4 py-3">
                         <dt class="text-xs font-semibold text-muted">{{ __('lists_ui.rs_stat_topics') }}</dt>
-                        <dd class="numeral-display !text-4xl" x-data="counter({ to: {{ count($chips) }} })" x-text="display">{{ count($chips) }}</dd>
+                        <dd class="numeral-display text-gradient-brand !text-4xl" x-data="counter({ to: {{ count($chips) }} })" x-text="display">{{ count($chips) }}</dd>
                     </div>
                     @if ($yearMin)
                         <div class="glass rounded-2xl border px-4 py-3">
@@ -50,7 +50,7 @@
         <span class="gold-thread absolute inset-x-0 bottom-0" aria-hidden="true"></span>
     </section>
 
-    <x-section variant="tinted" tight id="research-results">
+    <x-section variant="tinted" tight id="research-results" class="!pt-5 sm:!pt-6">
         <x-filter-bar sticky :chips="$chips" chips-model="category" :selected="$category ?? ''" search-model="search" :search="$search"
             :search-label="__('research.search_label')" :placeholder="__('lists_ui.rs_search')" :all-label="__('lists_ui.rs_all')"
             :chips-label="__('lists_ui.rs_chips')" :count="$papers->total()" :clear-models="['year']">

@@ -4,7 +4,7 @@
         [['value' => '', 'label' => __('lists_ui.rc_all_types'), 'icon' => 'squares-2x2', 'count' => (int) $stats['total']]],
         array_map(fn ($c) => ['value' => $c->value, 'label' => __('enums.resource_type.' . $c->value), 'icon' => $typeIcons[$c->value] ?? 'document', 'count' => (int) ($types[$c->value] ?? 0)], \App\Support\Enums\ResourceType::cases())
     );
-    $pricingOpts = ['' => __('lists_ui.rc_all_pricing'), 'free' => __('common.free'), 'paid' => __('common.paid')];
+    $pricingOpts = ['' => __('kit_sections.all'), 'free' => __('common.free'), 'paid' => __('common.paid')];
     $grid = 'grid gap-x-5 gap-y-8 sm:grid-cols-2 xl:grid-cols-3';
 @endphp
 
@@ -47,7 +47,7 @@
         </div>
     </section>
 
-    <x-section variant="sunken" tight id="resources-results" class="!pt-6">
+    <x-section variant="sunken" tight id="resources-results" class="!pt-5 sm:!pt-6">
         <x-filter-bar sticky :chips="$chips" chips-model="category" :selected="$category ?? ''" search-model="search" :search="$search"
             :search-label="__('resources.search_label')" :placeholder="__('lists_ui.rc_search')" :all-label="__('lists_ui.rc_all')"
             :chips-label="__('lists_ui.rc_chips')" :count="$resources->total()" :clear-models="['type', 'pricing']">

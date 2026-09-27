@@ -12,7 +12,7 @@
         <span class="glow-gold bottom-[-9rem] end-[-5rem] opacity-60" style="--glow-size: 22rem" aria-hidden="true"></span>
         <span class="bg-pattern-islamic pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></span>
 
-        <div class="container-page grid items-center gap-8 py-10 sm:py-14 md:grid-cols-12 lg:py-20">
+        <div class="container-page grid items-center gap-8 pb-8 pt-10 sm:pb-10 sm:pt-14 md:grid-cols-12 lg:pb-12 lg:pt-20">
             <div class="min-w-0 md:col-span-7">
                 <p class="eyebrow mb-4 flex items-center gap-2"><span class="star-mark text-sm" aria-hidden="true"></span>{{ __('lists_ui.art_eyebrow') }}</p>
                 <h1 class="heading-display break-words">{{ __('articles.page_title') }}</h1>
@@ -41,7 +41,7 @@
         <span class="gold-thread absolute inset-x-0 bottom-0" aria-hidden="true"></span>
     </section>
 
-    <x-section variant="light" tight id="articles-results">
+    <x-section variant="light" tight id="articles-results" class="!pt-5 sm:!pt-6">
         <x-filter-bar sticky :chips="$chips" chips-model="category" :selected="$category ?? ''" search-model="search" :search="$search"
             :search-label="__('articles.search_label')" :placeholder="__('lists_ui.art_search')" :all-label="__('lists_ui.art_all')"
             :chips-label="__('lists_ui.art_chips')" :count="$articles->total()" />

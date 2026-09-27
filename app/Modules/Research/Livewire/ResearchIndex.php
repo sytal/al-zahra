@@ -5,6 +5,7 @@ namespace App\Modules\Research\Livewire;
 use App\Modules\Category\Models\Category;
 use App\Modules\Research\Repositories\ResearchPaperRepositoryInterface;
 use App\Support\Enums\CategoryType;
+use App\Support\ListSeo;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
@@ -43,12 +44,23 @@ class ResearchIndex extends Component
             'count' => (int) ($counts[$cat->id] ?? 0),
         ])->all();
 
+        $list = $repository->paginatePublished($this->category, $this->search ?: null, 12, $this->year);
+        $seoHead = ListSeo::head(
+            __('lists_ui.seo_rs_title'),
+            __('lists_ui.seo_rs_desc'),
+            $list->first()?->getFirstMediaUrl('cover_image') ?: null,
+            $list->getCollection()->map(fn ($item) => ['name' => (string) $item->title, 'url' => route('research.show', ['locale' => app()->getLocale(), 'slug' => $item->slug])]),
+            $list->currentPage(),
+        );
+
         return view('livewire.research.research-index', [
-            'papers' => $repository->paginatePublished($this->category, $this->search ?: null, 12, $this->year),
+            'papers' => $list,
             'categories' => $categories,
             'chips' => $chips,
             'years' => $stats['years'],
             'stats' => $stats,
-        ]);
+        ])
+            ->title(__('lists_ui.seo_rs_title'))
+            ->layoutData(['seo' => $seoHead]);
     }
 }

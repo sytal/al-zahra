@@ -6,6 +6,7 @@ use App\Modules\Category\Models\Category;
 use App\Modules\Resource\Repositories\ResourceRepositoryInterface;
 use App\Support\Enums\CategoryType;
 use App\Support\Enums\ResourceType;
+use App\Support\ListSeo;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
@@ -50,14 +51,25 @@ class ResourceIndex extends Component
             'count' => (int) ($counts[$cat->id] ?? 0),
         ])->all();
 
+        $list = $repository->paginatePublished($this->category, $this->search ?: null, 12, $type, $pricing);
+        $seoHead = ListSeo::head(
+            __('lists_ui.seo_rc_title'),
+            __('lists_ui.seo_rc_desc'),
+            $list->first()?->getFirstMediaUrl('thumbnail') ?: null,
+            $list->getCollection()->map(fn ($item) => ['name' => (string) $item->title, 'url' => route('resources.show', ['locale' => app()->getLocale(), 'slug' => $item->slug])]),
+            $list->currentPage(),
+        );
+
         return view('livewire.resource.resource-index', [
-            'resources' => $repository->paginatePublished($this->category, $this->search ?: null, 12, $type, $pricing),
+            'resources' => $list,
             'categories' => $categories,
             'chips' => $chips,
             'types' => $stats['types'],
             'stats' => $stats,
             'activeType' => $type,
             'activePricing' => $pricing,
-        ]);
+        ])
+            ->title(__('lists_ui.seo_rc_title'))
+            ->layoutData(['seo' => $seoHead]);
     }
 }

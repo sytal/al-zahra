@@ -8,6 +8,29 @@ use App\Modules\Director\Models\Director;
 
 class SeoSchema
 {
+    /**
+     * @param  iterable<int, array{name: string, url: string}>  $items
+     */
+    public static function collectionPage(string $name, string $description, string $url, iterable $items): array
+    {
+        $elements = [];
+        $position = 1;
+        foreach ($items as $item) {
+            $elements[] = ['@type' => 'ListItem', 'position' => $position++, 'name' => $item['name'], 'url' => $item['url']];
+        }
+
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'CollectionPage',
+            'name' => $name,
+            'description' => $description,
+            'url' => $url,
+            'inLanguage' => app()->getLocale(),
+            'isPartOf' => ['@type' => 'WebSite', 'name' => config('app.name'), 'url' => url('/')],
+            'mainEntity' => ['@type' => 'ItemList', 'numberOfItems' => $position - 1, 'itemListElement' => $elements],
+        ];
+    }
+
     public static function article(Article $article): array
     {
         return [
@@ -57,6 +80,30 @@ class SeoSchema
             '@type' => 'Organization',
             'name' => config('app.name'),
             'url' => url('/'),
+        ];
+    }
+
+    public static function website(string $url, ?string $description = null): array
+    {
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'WebSite',
+            'name' => config('app.name'),
+            'url' => $url,
+            'inLanguage' => app()->getLocale(),
+            'description' => $description,
+        ];
+    }
+
+    public static function graph(array ...$nodes): array
+    {
+        return [
+            '@context' => 'https://schema.org',
+            '@graph' => collect($nodes)->map(function (array $node) {
+                unset($node['@context']);
+
+                return array_filter($node, fn ($v) => $v !== null && $v !== '');
+            })->values()->all(),
         ];
     }
 
