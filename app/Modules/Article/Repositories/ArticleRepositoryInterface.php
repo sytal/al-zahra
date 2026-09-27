@@ -9,6 +9,8 @@ interface ArticleRepositoryInterface
 {
     public function paginatePublished(?int $categoryId = null, ?string $search = null, int $perPage = 12): LengthAwarePaginator;
 
+    public function listStats(): array;
+
     public function findPublishedBySlug(string $slug): ?Article;
 
     public function relatedTo(Article $article, int $limit = 3): iterable;

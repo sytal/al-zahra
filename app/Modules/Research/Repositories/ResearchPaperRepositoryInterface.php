@@ -7,7 +7,9 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface ResearchPaperRepositoryInterface
 {
-    public function paginatePublished(?int $categoryId = null, ?string $search = null, int $perPage = 12): LengthAwarePaginator;
+    public function paginatePublished(?int $categoryId = null, ?string $search = null, int $perPage = 12, ?int $year = null): LengthAwarePaginator;
+
+    public function listStats(): array;
 
     public function findPublishedBySlug(string $slug): ?ResearchPaper;
 

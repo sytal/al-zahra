@@ -30,9 +30,21 @@ class ArticleIndex extends Component
 
     public function render(ArticleRepositoryInterface $repository)
     {
+        $stats = $repository->listStats();
+        $counts = $stats['categories'];
+
+        $categories = Category::where('type', CategoryType::ARTICLE)->get();
+        $chips = $categories->map(fn (Category $cat) => [
+            'value' => $cat->id,
+            'label' => $cat->name,
+            'count' => (int) ($counts[$cat->id] ?? 0),
+        ])->all();
+
         return view('livewire.article.article-index', [
             'articles' => $repository->paginatePublished($this->category, $this->search ?: null),
-            'categories' => Category::where('type', CategoryType::ARTICLE)->get(),
+            'categories' => $categories,
+            'chips' => $chips,
+            'stats' => $stats,
         ]);
     }
 }

@@ -23,6 +23,9 @@ class ResearchIndex extends Component
     #[Url]
     public string $search = '';
 
+    #[Url]
+    public ?int $year = null;
+
     public function updating(): void
     {
         $this->resetPage();
@@ -30,9 +33,22 @@ class ResearchIndex extends Component
 
     public function render(ResearchPaperRepositoryInterface $repository)
     {
+        $stats = $repository->listStats();
+        $counts = $stats['categories'];
+
+        $categories = Category::where('type', CategoryType::RESEARCH)->get();
+        $chips = $categories->map(fn (Category $cat) => [
+            'value' => $cat->id,
+            'label' => $cat->name,
+            'count' => (int) ($counts[$cat->id] ?? 0),
+        ])->all();
+
         return view('livewire.research.research-index', [
-            'papers' => $repository->paginatePublished($this->category, $this->search ?: null),
-            'categories' => Category::where('type', CategoryType::RESEARCH)->get(),
+            'papers' => $repository->paginatePublished($this->category, $this->search ?: null, 12, $this->year),
+            'categories' => $categories,
+            'chips' => $chips,
+            'years' => $stats['years'],
+            'stats' => $stats,
         ]);
     }
 }
