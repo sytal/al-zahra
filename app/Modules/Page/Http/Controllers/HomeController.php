@@ -12,6 +12,7 @@ use App\Modules\Research\Models\ResearchPaper;
 use App\Modules\Research\Repositories\ResearchPaperRepositoryInterface;
 use App\Modules\Setting\Models\Setting;
 use App\Support\CacheService;
+use App\Support\SeoSchema;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -53,14 +54,33 @@ class HomeController extends Controller
             ->filter(fn ($t) => $t['quote'] !== '')
             ->values();
 
+        $tagline = Setting::where('key', 'site_tagline')->value('value');
+        $tagline = is_array($tagline) ? ($tagline[$locale] ?? $tagline['en'] ?? '') : (string) $tagline;
+        $director = Director::where('is_published', true)->first();
+        $description = trim($tagline.' '.__('home.hero_subtext'));
+
+        $seo = [
+            'title' => $tagline !== '' ? $tagline : __('home_ui.eyebrow'),
+            'description' => $description,
+            'image' => $director?->getFirstMediaUrl('cover_photo') ?: null,
+            'type' => 'website',
+            'schema' => SeoSchema::graph(
+                SeoSchema::organization(),
+                SeoSchema::website(url($locale), $description),
+                ...($director ? [SeoSchema::person($director)] : []),
+            ),
+        ];
+
         return view('home', [
+            'seo' => $seo,
+            'tagline' => $tagline,
             'latestArticles' => $latestArticles,
             'featuredCourses' => $featuredCourses,
             'latestResearch' => $latestResearch,
             'stats' => $stats,
             'publications' => $publications,
             'testimonials' => $testimonials,
-            'director' => Director::where('is_published', true)->first(),
+            'director' => $director,
         ]);
     }
 }

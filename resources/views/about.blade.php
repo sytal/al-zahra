@@ -56,7 +56,7 @@ $statRows = [
         <x-section variant="tinted">
             <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
                 <div class="min-w-0">
-                    <x-section-heading :eyebrow="__('about_ui.timeline_eyebrow')" :title="__('about_ui.timeline_title')" :lead="__('about_ui.timeline_lead')" />
+                    <x-section-heading :title="__('about_ui.timeline_title')" :lead="__('about_ui.timeline_lead')" />
                     @if ($creds->isEmpty())
                         <x-empty-state compact icon="academic-cap" :title="__('about_ui.timeline_empty')" />
                     @else
@@ -71,7 +71,7 @@ $statRows = [
                     @endif
                 </div>
                 <div class="min-w-0">
-                    <x-section-heading :eyebrow="__('about_ui.interests_eyebrow')" :title="__('about_ui.interests_title')" />
+                    <x-section-heading :title="__('about_ui.interests_title')" />
                     @if ($interests->isEmpty())
                         <x-empty-state compact icon="beaker" :title="__('about_ui.interests_empty')" />
                     @else
@@ -82,7 +82,7 @@ $statRows = [
                     <dl class="mt-10 grid grid-cols-3 gap-4 text-center">
                         @foreach ($statRows as $s)
                             <div class="card-surface min-w-0 p-4">
-                                <dd dir="ltr" class="font-display text-3xl font-bold text-gradient-brand tabular-nums" x-data="counter({ to: {{ (int) $s['to'] }} })" x-text="display">{{ number_format($s['to']) }}</dd>
+                                <dd dir="ltr" class="font-display text-3xl font-bold text-brand-primary tabular-nums" x-data="counter({ to: {{ (int) $s['to'] }} })" x-text="display">{{ number_format($s['to']) }}</dd>
                                 <dt class="mt-1 text-xs text-body sm:text-sm">{{ $s['label'] }}</dt>
                             </div>
                         @endforeach
@@ -94,7 +94,7 @@ $statRows = [
         {{-- Mission / Vision --}}
         @if ($mission || $vision)
             <x-section variant="light">
-                <x-section-heading align="center" :eyebrow="__('about_ui.mission_eyebrow')" :title="__('about.mission_title').' / '.__('about.vision_title')" />
+                <x-section-heading align="center" :title="__('about.mission_title').' / '.__('about.vision_title')" />
                 <x-bento class="!grid-cols-1 md:!grid-cols-2 lg:!grid-cols-2">
                     @if ($mission)
                         <x-bento.tile tone="brand" icon="flag" :title="__('about.mission_title')" class="!p-8"><p class="text-lg">{{ $mission }}</p></x-bento.tile>
@@ -129,7 +129,7 @@ $statRows = [
 
         {{-- Social / contact --}}
         <x-section variant="light" tight>
-            <x-section-heading align="center" :eyebrow="__('about_ui.contact_eyebrow')" :title="__('about_ui.contact_title')" />
+            <x-section-heading align="center" :title="__('about_ui.contact_title')" />
             <div class="grid items-start gap-6 lg:grid-cols-2">
                 <div class="card-surface min-w-0 space-y-4 p-6">
                     @if ($email)
@@ -153,7 +153,7 @@ $statRows = [
 
         {{-- CTA band --}}
         <x-section variant="light" tight>
-            <x-cta-band :eyebrow="__('about_ui.cta_eyebrow')" :title="__('about_ui.cta_title')" :lead="__('about_ui.cta_lead')"
+            <x-cta-band :title="__('about_ui.cta_title')" :lead="__('about_ui.cta_lead')"
                 :primaryLabel="__('about_ui.cta_book')" :primaryUrl="$consult" :secondaryLabel="__('about_ui.cta_secondary')" :secondaryUrl="$consult" />
         </x-section>
     @else

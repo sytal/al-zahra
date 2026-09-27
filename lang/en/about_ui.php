@@ -2,7 +2,7 @@
 
 return [
     'hero_eyebrow' => 'About the institute',
-    'hero_lead_fallback' => 'Research, teaching and clinical care in neurolinguistics.',
+    'hero_lead_fallback' => 'Research and education in neurolinguistics.',
     'cta_book' => 'Book a consultation',
     'stats_title' => 'Work in numbers',
     'stat_articles' => 'Articles',

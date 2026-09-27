@@ -4,7 +4,7 @@
 
 return [
     'hero_eyebrow' => 'درباره مؤسسه',
-    'hero_lead_fallback' => 'پژوهش، آموزش و مراقبت بالینی در عصب‌زبان‌شناسی.',
+    'hero_lead_fallback' => 'پژوهش و آموزش در عصب‌زبان‌شناسی.',
     'cta_book' => 'رزرو مشاوره',
     'stats_title' => 'کار ما در اعداد',
     'stat_articles' => 'مقاله',

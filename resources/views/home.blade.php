@@ -1,8 +1,5 @@
 @php
 $loc = app()->getLocale();
-$tagline = \App\Modules\Setting\Models\Setting::where('key', 'site_tagline')->value('value');
-$tagline = is_array($tagline) ? ($tagline[$loc] ?? $tagline['en'] ?? '') : (string) $tagline;
-$highlight = str_contains(trim($tagline), ' ') ? \Illuminate\Support\Str::afterLast(rtrim($tagline, '.۔'), ' ') : null;
 $consult = route('consultation.show', $loc);
 $creds = collect($director?->credentials ?? [])->filter()->values();
 $interests = collect($director?->research_interests ?? [])->filter()->values();
@@ -19,10 +16,10 @@ $statRows = [
 
 <x-layouts.public>
     <x-slot name="seo">
-        <x-seo :title="config('app.name')" :description="$tagline" />
+        <x-seo :title="$seo['title']" :description="$seo['description']" :image="$seo['image']" :type="$seo['type']" :schema="$seo['schema']" />
     </x-slot>
 
-    <x-hero variant="home" :title="$tagline" :highlight="$highlight" :eyebrow="__('home_ui.eyebrow')" :lead="__('home.hero_subtext')">
+    <x-hero variant="home" :title="$tagline" :eyebrow="__('home_ui.eyebrow')" :lead="__('home.hero_subtext')">
         <x-slot name="actions">
             <x-button :href="$consult" size="lg" class="magnetic" x-data="magnetic">{{ __('home_ui.cta_book') }}</x-button>
             <x-button :href="route('courses.index', $loc)" variant="outline" size="lg">{{ __('home_ui.cta_courses') }}</x-button>
@@ -48,7 +45,15 @@ $statRows = [
 
     {{-- Trust counters --}}
     <x-section variant="light" tight class="lg:pt-20" :aria-label="__('home_ui.stats_label')">
-        <x-stat-counter :items="$statRows" />
+        <dl class="grid grid-cols-2 gap-x-6 gap-y-10 text-center lg:grid-cols-4">
+            @foreach ($statRows as $row)
+                <div class="relative flex min-w-0 flex-col items-center px-2 {{ ! $loop->last ? 'lg:after:absolute lg:after:end-0 lg:after:top-1/4 lg:after:h-1/2 lg:after:w-px lg:after:bg-[var(--border-strong)]' : '' }}">
+                    <x-icon :name="$row['icon']" class="mb-2 size-6 text-secondary-text" aria-hidden="true" />
+                    <dd dir="ltr" class="order-1 font-display text-4xl font-bold leading-none text-brand-primary tabular-nums sm:text-5xl lg:text-6xl" x-data="counter({ to: {{ (int) $row['to'] }}, locale: '{{ $loc === 'ur-roman' ? 'en' : $loc }}' })" x-text="display">{{ number_format($row['to']) }}</dd>
+                    <dt class="order-2 mt-2 text-balance text-sm font-medium text-body sm:text-base">{{ $row['label'] }}</dt>
+                </div>
+            @endforeach
+        </dl>
     </x-section>
 
     {{-- Director intro --}}
@@ -91,15 +96,15 @@ $statRows = [
     <x-section variant="light">
         <x-section-heading align="center" :eyebrow="__('home_ui.services_eyebrow')" :title="__('home_ui.services_title')" :lead="__('home_ui.services_lead')" />
         <div class="grid gap-5 lg:grid-cols-3 lg:items-stretch" data-aos="fade-up">
-            <x-service-card number="01" icon="chat-bubble-left-ellipsis" :title="__('home_ui.svc_free_title')" :text="__('home_ui.svc_free_text')" :cta="__('home_ui.svc_free_cta')" :url="$consult" />
-            <x-service-card number="02" icon="calendar-days" featured :title="__('home_ui.svc_book_title')" :text="__('home_ui.svc_book_text')" :cta="__('home_ui.svc_book_cta')" :url="$consult" />
-            <x-service-card number="03" icon="academic-cap" :title="__('home_ui.svc_learn_title')" :text="__('home_ui.svc_learn_text')" :cta="__('home_ui.svc_learn_cta')" :url="route('courses.index', $loc)" />
+            <x-service-card icon="chat-bubble-left-ellipsis" :title="__('home_ui.svc_free_title')" :text="__('home_ui.svc_free_text')" :cta="__('home_ui.svc_free_cta')" :url="$consult" />
+            <x-service-card icon="calendar-days" featured :title="__('home_ui.svc_book_title')" :text="__('home_ui.svc_book_text')" :cta="__('home_ui.svc_book_cta')" :url="$consult" />
+            <x-service-card icon="academic-cap" :title="__('home_ui.svc_learn_title')" :text="__('home_ui.svc_learn_text')" :cta="__('home_ui.svc_learn_cta')" :url="route('courses.index', $loc)" />
         </div>
     </x-section>
 
     {{-- Featured courses --}}
     <x-section variant="sunken">
-        <x-section-heading :eyebrow="__('home_ui.courses_eyebrow')" :title="__('home_ui.courses_title')" :lead="__('home_ui.courses_lead')" :url="route('courses.index', $loc)" :linkLabel="__('home_ui.courses_all')" />
+        <x-section-heading :title="__('home_ui.courses_title')" :lead="__('home_ui.courses_lead')" :url="route('courses.index', $loc)" :linkLabel="__('home_ui.courses_all')" />
         @if ($featuredCourses->isEmpty())
             <x-empty-state illustration="courses" :title="__('home_ui.courses_empty')" :message="__('home_ui.courses_empty_text')" />
         @else
@@ -113,7 +118,7 @@ $statRows = [
 
     {{-- Latest articles --}}
     <x-section variant="light">
-        <x-section-heading :eyebrow="__('home_ui.articles_eyebrow')" :title="__('home_ui.articles_title')" :lead="__('home_ui.articles_lead')" :url="route('articles.index', $loc)" :linkLabel="__('home_ui.articles_all')" />
+        <x-section-heading :title="__('home_ui.articles_title')" :lead="__('home_ui.articles_lead')" :url="route('articles.index', $loc)" :linkLabel="__('home_ui.articles_all')" />
         @php $arts = collect($latestArticles->items()); @endphp
         @if ($arts->isEmpty())
             <x-empty-state illustration="articles" :title="__('home_ui.articles_empty')" :message="__('home_ui.articles_empty_text')" />
@@ -135,7 +140,7 @@ $statRows = [
 
     {{-- Research + marquee --}}
     <x-section variant="pattern">
-        <x-section-heading :eyebrow="__('home_ui.research_eyebrow')" :title="__('home_ui.research_title')" :lead="__('home_ui.research_lead')" :url="route('research.index', $loc)" :linkLabel="__('home_ui.research_all')" />
+        <x-section-heading :title="__('home_ui.research_title')" :lead="__('home_ui.research_lead')" :url="route('research.index', $loc)" :linkLabel="__('home_ui.research_all')" />
         @if ($latestResearch->isEmpty())
             <x-empty-state illustration="research" :title="__('home_ui.research_empty')" :message="__('home_ui.research_empty_text')" />
         @else
@@ -153,7 +158,7 @@ $statRows = [
 
     {{-- How a consultation works --}}
     <x-section variant="tinted">
-        <x-section-heading align="center" :eyebrow="__('home_ui.how_eyebrow')" :title="__('home_ui.how_title')" :lead="__('home_ui.how_lead')" />
+        <x-section-heading align="center" :title="__('home_ui.how_title')" :lead="__('home_ui.how_lead')" />
         <x-steps :items="$steps" />
         <div class="mt-10 text-center">
             <x-button :href="$consult" size="lg">{{ __('home_ui.cta_book') }}</x-button>
@@ -163,7 +168,7 @@ $statRows = [
     {{-- Testimonials --}}
     @if ($testimonials->isNotEmpty())
         <x-section variant="light">
-            <x-section-heading align="center" :eyebrow="__('home_ui.testimonials_eyebrow')" :title="__('home_ui.testimonials_title')" />
+            <x-section-heading align="center" :title="__('home_ui.testimonials_title')" />
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 @foreach ($testimonials as $t)
                     <x-testimonial-card :quote="$t['quote']" :name="$t['name']" :role="$t['role']" :demo="$t['demo']" />
@@ -183,7 +188,7 @@ $statRows = [
 
     {{-- CTA + newsletter --}}
     <x-section variant="light">
-        <x-cta-band :eyebrow="__('home_ui.cta_eyebrow')" :title="__('home_ui.cta_title')" :lead="__('home_ui.cta_lead')"
+        <x-cta-band :title="__('home_ui.cta_title')" :lead="__('home_ui.cta_lead')"
             :primaryLabel="__('home_ui.cta_primary')" :primaryUrl="$consult" :secondaryLabel="__('home_ui.cta_secondary')" :secondaryUrl="$consult" />
         <div class="mx-auto mt-14 max-w-xl text-center">
             <x-star-divider class="mb-6" />

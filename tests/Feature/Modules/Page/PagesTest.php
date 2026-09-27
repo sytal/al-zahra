@@ -37,3 +37,18 @@ it('generates the sitemap with published content only', function () {
     expect($xml)->toContain("/en/articles/{$published->slug}")
         ->not->toContain($draft->slug);
 });
+
+it('gives the home page a non-duplicated title and structured data', function (string $locale) {
+    $html = $this->get("/{$locale}")->assertOk()->getContent();
+
+    preg_match('/<title>(.*?)<\/title>/s', $html, $m);
+    $title = html_entity_decode($m[1] ?? '');
+
+    expect(substr_count($title, config('app.name')))->toBe(1)
+        ->and($html)->toContain('application/ld+json')
+        ->toContain('"@graph"')
+        ->toContain('"WebSite"')
+        ->toContain('"Organization"')
+        ->toContain('rel="canonical"');
+    expect(substr_count($html, 'hreflang='))->toBeGreaterThanOrEqual(5);
+})->with(['en', 'ur']);

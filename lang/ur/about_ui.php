@@ -4,7 +4,7 @@
 
 return [
     'hero_eyebrow' => 'انسٹی ٹیوٹ کے بارے میں',
-    'hero_lead_fallback' => 'عصبی لسانیات میں تحقیق، تدریس اور طبی نگہداشت۔',
+    'hero_lead_fallback' => 'عصبی لسانیات میں تحقیق اور تعلیم۔',
     'cta_book' => 'مشاورت بُک کریں',
     'stats_title' => 'کام اعداد میں',
     'stat_articles' => 'مضامین',

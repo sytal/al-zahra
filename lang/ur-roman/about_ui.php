@@ -4,7 +4,7 @@
 
 return [
     'hero_eyebrow' => 'Institute ke bare mein',
-    'hero_lead_fallback' => 'Asabi lisaniyat mein tehqeeq, tadrees aur tibbi nigehdasht.',
+    'hero_lead_fallback' => 'Asabi lisaniyat mein tehqeeq aur taleem.',
     'cta_book' => 'Mushawarat book karein',
     'stats_title' => 'Kaam adad o shumar mein',
     'stat_articles' => 'Mazameen',
