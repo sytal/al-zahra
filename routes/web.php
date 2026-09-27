@@ -7,6 +7,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/'.config('app.locale'));
 
+Route::get('/robots.txt', function () {
+    return response(
+        "User-agent: *\nDisallow: /admin\nDisallow: /*/dashboard\nSitemap: ".config('app.url')."/sitemap.xml\n",
+        200,
+        ['Content-Type' => 'text/plain']
+    );
+});
+
 Route::group([
     'prefix' => '{locale}',
     'where' => ['locale' => implode('|', config('app.locales'))],
