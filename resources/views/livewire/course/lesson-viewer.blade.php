@@ -69,7 +69,7 @@
 
                     <div class="flex items-center gap-3">
                         <div class="h-2 flex-1 overflow-hidden rounded-full bg-surface-sunken" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ $percent }}" aria-label="{{ __('dash_learn_ui.lv_progress') }}">
-                            <div class="h-full rounded-full bg-gradient-to-r from-primary-500 to-secondary transition-[width] duration-slow ease-enter rtl:bg-gradient-to-l motion-reduce:transition-none" style="width: {{ $percent }}%"></div>
+                            <div class="h-full w-full origin-left rounded-full bg-gradient-to-r from-primary-500 to-secondary transition-transform duration-slow ease-enter rtl:origin-right rtl:bg-gradient-to-l motion-reduce:transition-none" style="transform: scaleX({{ $percent / 100 }})"></div>
                         </div>
                         <span class="shrink-0 text-sm font-bold tabular-nums text-strong">{{ $percent }}%</span>
                     </div>

@@ -19,7 +19,6 @@
         $iconBox = 'flex size-11 shrink-0 items-center justify-center rounded-xl bg-tint text-brand-primary';
     @endphp
 
-    <x-toast />
 
     <div
         class="mx-auto w-full max-w-6xl space-y-6 px-4 py-6 md:px-6 md:py-8"
@@ -49,7 +48,7 @@
         </section>
 
         <div class="grid items-start gap-6 lg:grid-cols-[13rem_minmax(0,1fr)] xl:gap-8">
-            <nav aria-label="{{ __('dash_learn_ui.pf_nav') }}" class="sticky top-14 z-sticky -mx-4 border-b border-subtle bg-page/90 px-4 backdrop-blur md:top-16 md:-mx-6 md:px-6 lg:top-24 lg:mx-0 lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+            <nav aria-label="{{ __('dash_learn_ui.pf_nav') }}" class="sticky top-14 z-sticky w-full min-w-0 border-b border-subtle bg-page/90 backdrop-blur md:top-16 lg:top-24 lg:w-auto lg:border-0 lg:bg-transparent lg:backdrop-blur-none">
                 <ul class="no-scrollbar flex gap-1 overflow-x-auto py-2 lg:flex-col lg:overflow-visible lg:py-0">
                     @foreach ($sections as $id => $s)
                         <li class="shrink-0">
@@ -196,7 +195,7 @@
                                 <div x-show="score > 0" x-cloak x-transition.opacity class="space-y-1.5" aria-live="polite">
                                     <div class="flex gap-1.5" aria-hidden="true">
                                         @foreach ([1, 2, 3, 4] as $n)
-                                            <span class="h-1.5 flex-1 rounded-full bg-surface-sunken transition-colors duration-base" x-bind:class="score >= {{ $n }} ? (score <= 1 ? 'bg-danger' : (score === 2 ? 'bg-warning' : (score === 3 ? 'bg-info' : 'bg-success'))) : ''"></span>
+                                            <span class="h-1.5 flex-1 rounded-full transition-colors duration-base" x-bind:class="score >= {{ $n }} ? (score <= 1 ? 'bg-danger' : (score === 2 ? 'bg-warning' : (score === 3 ? 'bg-info' : 'bg-success'))) : 'bg-surface-sunken'"></span>
                                         @endforeach
                                     </div>
                                     <p class="text-xs text-body">{{ __('dash_learn_ui.pf_strength') }}: <span class="font-semibold text-strong" x-text="labels[Math.max(score, 1) - 1]"></span></p>
