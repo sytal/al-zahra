@@ -10,12 +10,6 @@ $target = 'audience,level,pricing,search,gotoPage,nextPage,previousPage,setPage'
 
 <div>
     <x-hero variant="banner" illustration="courses" :eyebrow="__('courses_ui.hero_eyebrow')" :title="__('courses.page_title')" :lead="__('courses.page_intro')">
-        <x-slot name="meta">
-            <span class="inline-flex items-center gap-2 rounded-full border bg-surface-raised/80 px-3 py-1.5 font-semibold text-strong">
-                <span class="star-mark text-xs" aria-hidden="true"></span>
-                {{ trans_choice('kit_sections.results', $courses->total(), ['count' => $courses->total()]) }}
-            </span>
-        </x-slot>
     </x-hero>
 
     <section class="section-tight bg-section-light" aria-label="{{ __('courses.page_title') }}">

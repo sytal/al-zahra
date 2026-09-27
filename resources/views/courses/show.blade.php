@@ -92,7 +92,8 @@ $faq = [
                             <p class="mt-3 text-sm text-body">{{ __('courses_ui.guest_hint') }}</p>
                         @endauth
                     </div>
-                    <h2 class="eyebrow mb-3 mt-6 border-t pt-5">{{ __('courses_ui.facts_title') }}</h2>
+                    <div class="mt-6 border-t pt-5">
+                    <h2 class="eyebrow mb-3">{{ __('courses_ui.facts_title') }}</h2>
                     <dl class="space-y-3">
                         @foreach ($facts as $fact)
                             <div class="flex items-center justify-between gap-3 text-sm">
@@ -101,6 +102,7 @@ $faq = [
                             </div>
                         @endforeach
                     </dl>
+                    </div>
                 </div>
             </aside>
 
@@ -204,7 +206,7 @@ $faq = [
 
         {{-- Mobile sticky CTA --}}
         <div class="pb-safe fixed inset-x-0 bottom-0 z-sticky border-t bg-surface-raised/95 px-4 pt-3 shadow-float backdrop-blur-md lg:hidden" style="--safe-pad: 0.75rem">
-            <div class="mx-auto flex max-w-xl items-center gap-3">
+            <div class="mx-auto flex max-w-xl items-center gap-3 pe-14">
                 <div class="min-w-0 flex-1">
                     <p class="truncate text-sm font-semibold text-strong">{{ $course->title }}</p>
                     <p class="text-xs text-muted">{{ $course->is_free ? __('common.free') : __('common.paid') }}</p>

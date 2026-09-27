@@ -33,4 +33,6 @@ return [
     'all_courses' => 'All courses',
     'taught_by' => 'Taught by',
     'jump' => 'Jump to curriculum',
+    'seo_title' => 'Courses',
+    'seo_desc' => 'Structured courses on language, the brain and communication, taught by Al Zahra Institute for students, parents, teachers and professionals.',
 ];

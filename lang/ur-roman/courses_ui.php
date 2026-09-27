@@ -35,4 +35,6 @@ return [
     'all_courses' => 'Tamam courses',
     'taught_by' => 'Ustad',
     'jump' => 'Nisab par jayein',
+    'seo_title' => 'Courses',
+    'seo_desc' => 'Zabaan, dimagh aur ibtal par munazzam courses, jo Al Zahra Institute ki janib se talba, walidain, asatza aur pesha war afrad ke liye tayyar kiye gaye hain.',
 ];
