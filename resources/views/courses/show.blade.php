@@ -9,7 +9,7 @@ $levelLabel = __('enums.course_level.'.$course->level->value);
 $audienceLabel = __('enums.course_audience.'.$course->audience->value);
 $outcomes = collect($course->learning_outcomes ?? [])->filter()->values();
 $facts = array_filter([
-    ['icon' => 'banknotes', 'label' => __('courses_ui.fact_price'), 'value' => $course->is_free ? __('common.free') : __('common.paid')],
+    ['icon' => 'banknotes', 'label' => __('courses_ui.fact_price'), 'value' => $course->is_free ? __('common.free') : ($course->formattedPrice() ?? __('common.paid'))],
     $course->estimated_duration_hours ? ['icon' => 'clock', 'label' => __('courses_ui.fact_duration'), 'value' => trans_choice('kit_sections.hours', $course->estimated_duration_hours, ['count' => $course->estimated_duration_hours])] : null,
     $lessonCount ? ['icon' => 'play-circle', 'label' => __('courses_ui.fact_lessons'), 'value' => $lessonCount] : null,
     ['icon' => 'chart-bar', 'label' => __('courses_ui.fact_level'), 'value' => $levelLabel],
@@ -44,7 +44,7 @@ $faq = [
                     <div class="mt-4 flex flex-wrap items-center gap-2">
                         <x-badge color="accent" variant="solid" :text="$levelLabel" />
                         <x-badge color="neutral" :text="$audienceLabel" />
-                        <x-badge :color="$course->is_free ? 'success' : 'warning'" variant="solid" :text="$course->is_free ? __('common.free') : __('common.paid')" />
+                        <x-badge :color="$course->is_free ? 'success' : 'warning'" variant="solid" :text="$course->is_free ? __('common.free') : ($course->formattedPrice() ?? __('common.paid'))" />
                     </div>
                     <h1 class="heading-1 mt-4 break-words">{{ $course->title }}</h1>
                     <p class="lead mt-4 max-w-2xl break-words">{{ $course->short_description }}</p>
@@ -74,7 +74,7 @@ $faq = [
                     <div class="mb-5 overflow-hidden rounded-xl lg:hidden">
                         <img src="{{ $cover ?: $fallback }}" alt="" width="1200" height="630" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ $fallback }}'" class="aspect-[16/9] w-full object-cover">
                     </div>
-                    <p class="numeral-display text-4xl text-strong">{{ $course->is_free ? __('common.free') : __('common.paid') }}</p>
+                    <p class="numeral-display text-4xl text-strong">{{ $course->is_free ? __('common.free') : ($course->formattedPrice() ?? __('common.paid')) }}</p>
                     <div class="mt-5">
                         @auth
                             @if ($isEnrolled)
@@ -209,7 +209,7 @@ $faq = [
             <div class="mx-auto flex max-w-xl items-center gap-3 pe-14">
                 <div class="min-w-0 flex-1">
                     <p class="truncate text-sm font-semibold text-strong">{{ $course->title }}</p>
-                    <p class="text-xs text-muted">{{ $course->is_free ? __('common.free') : __('common.paid') }}</p>
+                    <p class="text-xs text-muted">{{ $course->is_free ? __('common.free') : ($course->formattedPrice() ?? __('common.paid')) }}</p>
                 </div>
                 @auth
                     @if ($isEnrolled)

@@ -50,7 +50,7 @@
         <span class="gold-thread absolute inset-x-0 bottom-0" aria-hidden="true"></span>
     </section>
 
-    <x-section variant="tinted" tight id="research-results" class="!pt-5 sm:!pt-6">
+    <x-section variant="tinted" tight id="research-results" data-results class="!pt-5 sm:!pt-6">
         <x-filter-bar sticky :chips="$chips" chips-model="category" :selected="$category ?? ''" search-model="search" :search="$search"
             :search-label="__('research.search_label')" :placeholder="__('lists_ui.rs_search')" :all-label="__('lists_ui.rs_all')"
             :chips-label="__('lists_ui.rs_chips')" :count="$papers->total()" :clear-models="['year']">

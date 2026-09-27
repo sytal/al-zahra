@@ -41,7 +41,7 @@
         <span class="gold-thread absolute inset-x-0 bottom-0" aria-hidden="true"></span>
     </section>
 
-    <x-section variant="light" tight id="articles-results" class="!pt-5 sm:!pt-6">
+    <x-section variant="light" tight id="articles-results" data-results class="!pt-5 sm:!pt-6">
         <x-filter-bar sticky :chips="$chips" chips-model="category" :selected="$category ?? ''" search-model="search" :search="$search"
             :search-label="__('articles.search_label')" :placeholder="__('lists_ui.art_search')" :all-label="__('lists_ui.art_all')"
             :chips-label="__('lists_ui.art_chips')" :count="$articles->total()" />

@@ -13,7 +13,8 @@ class SettingSeeder extends Seeder
             'site_name' => 'Al Zahra Institute',
             'site_tagline' => ['en' => 'Understanding minds, one language at a time.', 'ur' => 'ایک وقت میں ایک زبان، ذہنوں کو سمجھنے کا سفر۔', 'hi' => 'एक-एक भाषा के ज़रिए मन को समझना।', 'fa' => 'فهم ذهن\‌ها، یک زبان در هر گام.', 'ur-roman' => 'Ek waqt mein ek zaban, zehnon ko samajhne ka safar.'],
             'contact_email' => 'hello@alzahra.institute',
-            'contact_phone' => '',
+            'contact_phone' => '+92 21 1234 5678',
+            'contact_address' => ['en' => '12 Garden Road, Clifton, Karachi, Pakistan', 'ur' => '12 گارڈن روڈ، کلفٹن، کراچی، پاکستان', 'hi' => '12 गार्डन रोड, क्लिफ़्टन, कराची, पाकिस्तान', 'fa' => 'کراچی، کلیفتون، جاده گاردن، شماره ۱۲، پاکستان', 'ur-roman' => '12 Garden Road, Clifton, Karachi, Pakistan'],
             'footer_about_text' => ['en' => 'Al Zahra Institute is dedicated to neurolinguistic research and education.', 'ur' => 'الزہرا انسٹی ٹیوٹ عصبی لسانیات کی تحقیق اور تعلیم کے لیے وقف ہے۔', 'hi' => 'अल ज़हरा इंस्टीट्यूट तंत्रिका-भाषाविज्ञान के शोध और शिक्षा के लिए समर्पित है।', 'fa' => 'مؤسسه الزهرا به پژوهش و آموزش در زمینه عصب\‌زبان\‌شناسی اختصاص دارد.', 'ur-roman' => 'Al Zahra Institute neurolinguistics ki tehqeeq aur taleem ke liye waqf hai.'],
             'footer_links' => [
                 ['label' => ['en' => 'About', 'ur' => 'تعارف', 'hi' => 'परिचय', 'fa' => 'درباره ما', 'ur-roman' => 'Taaruf'], 'url' => '/about'],

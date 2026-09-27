@@ -64,6 +64,15 @@ class Course extends Model implements HasMedia
         ];
     }
 
+    public function formattedPrice(): ?string
+    {
+        if ($this->is_free || $this->price === null) {
+            return null;
+        }
+
+        return '$'.number_format((float) $this->price, (float) $this->price === floor((float) $this->price) ? 0 : 2);
+    }
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('cover_image')->singleFile();

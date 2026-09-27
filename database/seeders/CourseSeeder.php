@@ -41,6 +41,8 @@ class CourseSeeder extends Seeder
                 'tr' => ['ur' => 'زبان کی جانچ کی اعلیٰ تکنیکیں', 'hi' => 'भाषा मूल्यांकन की उन्नत तकनीकें', 'fa' => 'فنون پیشرفته ارزیابی زبان', 'ur-roman' => 'Zaban ki jaanch ki aala techniquein'],
                 'audience' => CourseAudience::PROFESSIONALS,
                 'level' => CourseLevel::ADVANCED,
+                'is_free' => false,
+                'price' => 49.00,
             ],
         ];
 
@@ -93,7 +95,8 @@ class CourseSeeder extends Seeder
                     'audience' => $data['audience'],
                     'learning_outcomes' => $outcomeLocales,
                     'estimated_duration_hours' => 6,
-                    'is_free' => true,
+                    'is_free' => $data['is_free'] ?? true,
+                    'price' => $data['price'] ?? null,
                     'is_published' => true,
                 ]
             );

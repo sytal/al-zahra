@@ -31,7 +31,18 @@ $btn = 'relative inline-flex min-h-11 min-w-11 select-none items-center justify-
 $idle = $btn . ' border border-subtle bg-surface-raised text-body [@media(hover:hover)]:hover:border-brand/50 [@media(hover:hover)]:hover:bg-tint [@media(hover:hover)]:hover:text-strong';
 $active = $btn . ' bg-brand text-on-brand shadow-glow';
 $off = $btn . ' cursor-not-allowed border border-subtle bg-surface-sunken text-subtle';
-$scroll = "window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })";
+$scroll = <<<'JS'
+    (function (el) {
+        var target = el.closest('[data-results]') || document.querySelector('[data-results]');
+        var smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (target) {
+            var top = target.getBoundingClientRect().top + window.pageYOffset - 96;
+            window.scrollTo({ top: top, behavior: smooth ? 'smooth' : 'auto' });
+        } else {
+            window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+        }
+    })($el)
+JS;
 @endphp
 
 @if ($paginator->hasPages())

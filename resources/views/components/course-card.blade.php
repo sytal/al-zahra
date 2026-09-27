@@ -24,6 +24,7 @@ progress (0-100 or null; when set shows a progress bar and a Continue action), v
     $audience = data_get($c, 'audience');
     $audienceKey = $audience instanceof \BackedEnum ? $audience->value : $audience;
     $free = (bool) data_get($c, 'is_free', false);
+    $priceLabel = $free ? __('common.free') : (($c instanceof \App\Modules\Course\Models\Course ? $c->formattedPrice() : null) ?? __('common.paid'));
     $learners = data_get($c, 'enrolled_count');
     $lessons = data_get($c, 'lessons_count');
     $hours = data_get($c, 'estimated_duration_hours');
@@ -50,7 +51,7 @@ progress (0-100 or null; when set shows a progress bar and a Continue action), v
             <div class="img-zoom relative aspect-[3/2] w-full overflow-hidden bg-surface-sunken">
                 <img src="{{ $img ?: $fallback }}" alt="{{ $title }}" width="600" height="400" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ $fallback }}'" class="absolute inset-0 size-full object-cover dark:brightness-90">
                 @if ($img)<span class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/35 to-transparent" aria-hidden="true"></span>@endif
-                <span class="absolute end-3 top-3"><x-badge :color="$free ? 'success' : 'warning'" variant="solid" size="sm" :text="$free ? __('common.free') : __('common.paid')" /></span>
+                <span class="absolute end-3 top-3"><x-badge :color="$free ? 'success' : 'warning'" variant="solid" size="sm" :text="$priceLabel" /></span>
                 @if ($level)<span class="glass absolute bottom-3 start-3 !rounded-full px-3 py-1.5"><x-level-meter :level="$level" /></span>@endif
             </div>
             <div class="flex min-w-0 flex-1 flex-col gap-3 p-5">

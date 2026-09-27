@@ -12,7 +12,7 @@ $target = 'audience,level,pricing,search,gotoPage,nextPage,previousPage,setPage'
     <x-hero variant="banner" illustration="courses" :eyebrow="__('courses_ui.hero_eyebrow')" :title="__('courses.page_title')" :lead="__('courses.page_intro')">
     </x-hero>
 
-    <section class="section-tight bg-section-light" aria-label="{{ __('courses.page_title') }}">
+    <section class="section-tight bg-section-light" data-results aria-label="{{ __('courses.page_title') }}">
         <div class="container-page">
             <x-filter-bar
                 sticky
@@ -49,7 +49,7 @@ $target = 'audience,level,pricing,search,gotoPage,nextPage,previousPage,setPage'
                                 <span class="star-mark pointer-events-none absolute -end-4 -top-4 text-8xl opacity-15" aria-hidden="true"></span>
                                 <div class="flex flex-wrap items-center gap-3">
                                     <x-level-meter :level="$featured->level" />
-                                    <x-badge :color="$featured->is_free ? 'success' : 'warning'" :text="$featured->is_free ? __('common.free') : __('common.paid')" />
+                                    <x-badge :color="$featured->is_free ? 'success' : 'warning'" :text="$featured->is_free ? __('common.free') : ($featured->formattedPrice() ?? __('common.paid'))" />
                                 </div>
                                 <h2 class="heading-2 break-words"><a href="{{ $fUrl }}" wire:navigate class="focus-ring after:absolute after:inset-0">{{ $featured->title }}</a></h2>
                                 <p class="line-clamp-3 text-body">{{ $featured->short_description }}</p>
