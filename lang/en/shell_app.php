@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'tagline' => 'Neurolinguistics and speech-language care',
+    'auth_headline' => 'Care and learning, in your language.',
+    'auth_sub' => 'Sign in to follow your courses, consultations and certificates.',
+    'trust_1_title' => 'Led by a clinician',
+    'trust_1_text' => 'Every course and answer comes from a practising neurolinguist.',
+    'trust_2_title' => 'Private by design',
+    'trust_2_text' => 'Your details and questions are never shared or sold.',
+    'trust_3_title' => 'In five languages',
+    'trust_3_text' => 'English, Urdu, Hindi, Persian and Roman Urdu.',
+    'back_home' => 'Back to website',
+    'controls' => 'Language and theme',
+    'collapse' => 'Collapse sidebar',
+    'expand' => 'Expand sidebar',
+    'account_menu' => 'Account menu',
+    'signed_in_as' => 'Signed in as',
+    'view_site' => 'View website',
+    'mobile_nav' => 'Dashboard shortcuts',
+    'footer_note' => 'Your learning space at Al Zahra Institute.',
+    'breadcrumb' => 'Breadcrumb',
+    'rights' => 'All rights reserved.',
+    'page_default' => 'Dashboard',
+];
