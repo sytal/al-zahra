@@ -21,7 +21,8 @@ class ForgotPassword extends Component
 
         $result = Password::sendResetLink(['email' => $this->email]);
 
-        if ($result === Password::RESET_LINK_SENT) {
+        if ($result === Password::RESET_LINK_SENT || $result === Password::INVALID_USER) {
+            $result = Password::RESET_LINK_SENT;
             $this->status = __($result);
             $this->email = '';
         } else {
