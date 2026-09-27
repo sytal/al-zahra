@@ -5,6 +5,7 @@ namespace App\Filament\Resources\NewsletterSubscribers;
 use App\Filament\Resources\NewsletterSubscribers\Pages\ListNewsletterSubscribers;
 use App\Filament\Resources\NewsletterSubscribers\Tables\NewsletterSubscribersTable;
 use App\Modules\Newsletter\Models\NewsletterSubscriber;
+use App\Filament\Concerns\HasAdminNavigation;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -15,7 +16,15 @@ class NewsletterSubscriberResource extends Resource
 {
     protected static ?string $model = NewsletterSubscriber::class;
 
+    use HasAdminNavigation;
+
+    protected static string $labelKey = 'subscriber';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Engagement';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema
     {

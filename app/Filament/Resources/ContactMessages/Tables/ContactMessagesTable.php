@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\ContactMessages\Tables;
 
+use App\Filament\Support\AdminEnum;
 use App\Support\Enums\ContactMessageStatus;
 use Filament\Actions\EditAction;
-use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -16,28 +16,34 @@ class ContactMessagesTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label('Name')
-                    ->searchable(),
+                    ->label(__('admin_ui.l.name'))
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('email')
+                    ->label(__('admin_ui.l.email'))
+                    ->searchable()
+                    ->copyable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('subject')
-                    ->label('Subject')
+                    ->label(__('admin_ui.l.subject'))
+                    ->limit(50)
                     ->searchable(),
-                BadgeColumn::make('status')
-                    ->label('Status')
-                    ->colors([
-                        'gray' => ContactMessageStatus::NEW->value,
-                        'info' => ContactMessageStatus::READ->value,
-                        'success' => ContactMessageStatus::REPLIED->value,
-                    ])
-                    ->formatStateUsing(fn (ContactMessageStatus $state) => ucfirst($state->value)),
+                TextColumn::make('status')
+                    ->label(__('admin_ui.l.status'))
+                    ->badge()
+                    ->formatStateUsing(fn ($state) => AdminEnum::label($state))
+                    ->color(fn ($state) => AdminEnum::color($state))
+                    ->sortable(),
                 TextColumn::make('created_at')
-                    ->label('Received')
+                    ->label(__('admin_ui.l.received'))
                     ->dateTime()
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
                 SelectFilter::make('status')
-                    ->options(collect(ContactMessageStatus::cases())->mapWithKeys(fn ($case) => [$case->value => ucfirst($case->value)])),
+                    ->label(__('admin_ui.l.status'))
+                    ->options(collect(ContactMessageStatus::cases())->mapWithKeys(fn ($case) => [$case->value => AdminEnum::label($case)])->all()),
             ])
             ->recordActions([
                 EditAction::make(),

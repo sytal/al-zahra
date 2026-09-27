@@ -18,11 +18,11 @@ class EditConsultation extends EditRecord
     {
         return [
             Action::make('sendAnswer')
-                ->label('Send Answer')
+                ->label(__('admin_ui.l.send_answer'))
                 ->icon(Heroicon::OutlinedPaperAirplane)
                 ->color('success')
                 ->requiresConfirmation()
-                ->modalDescription('This will save the answer, mark the consultation as answered, and email the requester.')
+                ->modalDescription(__('admin_ui.l.this_will_save_the_answer_mark_the_consu'))
                 ->action(function () {
                     $this->save(shouldRedirect: false, shouldSendSavedNotification: false);
 
@@ -34,7 +34,7 @@ class EditConsultation extends EditRecord
                     SendConsultationAnsweredEmailJob::dispatch($this->record->fresh());
 
                     Notification::make()
-                        ->title('Answer sent')
+                        ->title(__('admin_ui.l.answer_sent'))
                         ->success()
                         ->send();
                 }),

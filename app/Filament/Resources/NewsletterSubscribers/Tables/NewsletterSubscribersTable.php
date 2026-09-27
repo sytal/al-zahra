@@ -17,27 +17,27 @@ class NewsletterSubscribersTable
         return $table
             ->columns([
                 TextColumn::make('email')
-                    ->label('Email')
+                    ->label(__('admin_ui.l.email'))
                     ->searchable(),
                 TextColumn::make('locale')
-                    ->label('Locale')
+                    ->label(__('admin_ui.l.locale'))
                     ->badge(),
                 IconColumn::make('is_confirmed')
-                    ->label('Confirmed')
+                    ->label(__('admin_ui.l.confirmed'))
                     ->boolean(),
                 TextColumn::make('created_at')
-                    ->label('Subscribed At')
+                    ->label(__('admin_ui.l.subscribed_at'))
                     ->dateTime()
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
                 TernaryFilter::make('is_confirmed')
-                    ->label('Confirmed'),
+                    ->label(__('admin_ui.l.confirmed')),
             ])
             ->headerActions([
                 Action::make('exportCsv')
-                    ->label('Export to CSV')
+                    ->label(__('admin_ui.l.export_to_csv'))
                     ->icon('heroicon-o-arrow-down-tray')
                     ->action(function () {
                         $subscribers = NewsletterSubscriber::query()->get();

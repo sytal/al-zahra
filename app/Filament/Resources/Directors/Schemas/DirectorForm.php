@@ -31,45 +31,45 @@ class DirectorForm
                             ->map(fn (string $locale) => Tab::make(strtoupper($locale))
                                 ->schema([
                                     TextInput::make("professional_title.{$locale}")
-                                        ->label('Professional title')
+                                        ->label(__('admin_ui.l.professional_title'))
                                         ->maxLength(255),
                                     TextInput::make("tagline.{$locale}")
-                                        ->label('Tagline')
+                                        ->label(__('admin_ui.l.tagline'))
                                         ->maxLength(255),
                                     Textarea::make("bio_short.{$locale}")
-                                        ->label('Short bio')
+                                        ->label(__('admin_ui.l.short_bio'))
                                         ->rows(3),
                                     RichEditor::make("bio_full.{$locale}")
-                                        ->label('Full bio'),
+                                        ->label(__('admin_ui.l.full_bio')),
                                     Repeater::make("research_interests.{$locale}")
-                                        ->label('Research interests')
+                                        ->label(__('admin_ui.l.research_interests'))
                                         ->simple(
                                             TextInput::make('value')->required()
                                         )
-                                        ->addActionLabel('Add research interest'),
+                                        ->addActionLabel(__('admin_ui.l.add_research_interest')),
                                 ]))
                             ->all()
                     )
                     ->columnSpanFull(),
 
-                Section::make('Credentials')
+                Section::make(__('admin_ui.l.credentials'))
                     ->schema([
                         Repeater::make('credentials')
                             ->simple(
                                 TextInput::make('value')->required()
                             )
-                            ->addActionLabel('Add credential'),
+                            ->addActionLabel(__('admin_ui.l.add_credential')),
                     ]),
 
-                Section::make('Social links')
+                Section::make(__('admin_ui.l.social_links'))
                     ->schema([
                         KeyValue::make('social_links')
-                            ->keyLabel('Platform')
+                            ->keyLabel(__('admin_ui.l.platform'))
                             ->valueLabel('URL')
-                            ->addActionLabel('Add social link'),
+                            ->addActionLabel(__('admin_ui.l.add_social_link')),
                     ]),
 
-                Section::make('Media')
+                Section::make(__('admin_ui.l.media'))
                     ->schema([
                         FileUpload::make('profile_photo')
                             ->image()
@@ -84,7 +84,7 @@ class DirectorForm
                     ]),
 
                 Toggle::make('is_published')
-                    ->label('Published')
+                    ->label(__('admin_ui.l.published'))
                     ->default(false),
             ]);
     }

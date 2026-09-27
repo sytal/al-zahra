@@ -19,14 +19,14 @@ class EditUser extends EditRecord
     {
         return [
             Action::make('sendPasswordReset')
-                ->label('Send password reset')
+                ->label(__('admin_ui.l.send_password_reset'))
                 ->icon('heroicon-o-key')
                 ->requiresConfirmation()
                 ->action(function (): void {
                     Password::sendResetLink(['email' => $this->record->email]);
 
                     Notification::make()
-                        ->title('Password reset email sent')
+                        ->title(__('admin_ui.l.password_reset_email_sent'))
                         ->success()
                         ->send();
                 }),

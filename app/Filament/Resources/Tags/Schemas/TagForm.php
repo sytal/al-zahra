@@ -26,7 +26,7 @@ class TagForm
                             ->map(fn (string $locale) => Tab::make(strtoupper($locale))
                                 ->schema([
                                     TextInput::make("name.{$locale}")
-                                        ->label('Name')
+                                        ->label(__('admin_ui.l.name'))
                                         ->required(fn () => $locale === config('app.fallback_locale'))
                                         ->maxLength(255)
                                         ->live(onBlur: true)

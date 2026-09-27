@@ -8,6 +8,7 @@ use App\Filament\Resources\Tags\Pages\ListTags;
 use App\Filament\Resources\Tags\Schemas\TagForm;
 use App\Filament\Resources\Tags\Tables\TagsTable;
 use App\Modules\Article\Models\Tag;
+use App\Filament\Concerns\HasAdminNavigation;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -18,7 +19,15 @@ class TagResource extends Resource
 {
     protected static ?string $model = Tag::class;
 
+    use HasAdminNavigation;
+
+    protected static string $labelKey = 'tag';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHashtag;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Content';
+
+    protected static ?int $navigationSort = 6;
 
     public static function shouldRegisterNavigation(): bool
     {

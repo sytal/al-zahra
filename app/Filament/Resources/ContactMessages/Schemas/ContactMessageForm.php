@@ -15,30 +15,30 @@ class ContactMessageForm
     {
         return $schema
             ->components([
-                Section::make('Message')
+                Section::make(__('admin_ui.l.message'))
                     ->columns(2)
                     ->schema([
                         TextInput::make('name')
-                            ->label('Name')
+                            ->label(__('admin_ui.l.name'))
                             ->disabled()
                             ->dehydrated(false),
                         TextInput::make('email')
-                            ->label('Email')
+                            ->label(__('admin_ui.l.email'))
                             ->disabled()
                             ->dehydrated(false),
                         TextInput::make('subject')
-                            ->label('Subject')
+                            ->label(__('admin_ui.l.subject'))
                             ->columnSpanFull()
                             ->disabled()
                             ->dehydrated(false),
                         Textarea::make('message')
-                            ->label('Message')
+                            ->label(__('admin_ui.l.message'))
                             ->columnSpanFull()
                             ->rows(6)
                             ->disabled()
                             ->dehydrated(false),
                         Select::make('status')
-                            ->label('Status')
+                            ->label(__('admin_ui.l.status'))
                             ->options(collect(ContactMessageStatus::cases())->mapWithKeys(fn ($case) => [$case->value => ucfirst($case->value)]))
                             ->required(),
                     ]),

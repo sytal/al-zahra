@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Courses\Schemas;
 
+use App\Filament\Support\AdminEnum;
 use App\Filament\Support\TranslatableTabs;
 use App\Modules\Category\Models\Category;
 use App\Support\Enums\CategoryType;
@@ -13,6 +14,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 
@@ -22,8 +24,12 @@ class CourseForm
     {
         return $schema
             ->components([
+                Section::make(__('admin_ui.l.content'))
+                    ->icon('heroicon-o-pencil-square')
+                    ->columnSpanFull()
+                    ->components([
                 TranslatableTabs::make('title_tabs', ['title'], fn (string $locale, string $field) => TextInput::make("{$field}.{$locale}")
-                    ->label('Title')
+                    ->label(__('admin_ui.l.title'))
                     ->required($locale === config('app.fallback_locale', 'en'))
                     ->live(onBlur: true)
                     ->afterStateUpdated(function (string $state, callable $set, callable $get, string $locale) {
@@ -39,7 +45,7 @@ class CourseForm
                     ->unique(ignoreRecord: true),
 
                 Select::make('category_id')
-                    ->label('Category')
+                    ->label(__('admin_ui.l.category'))
                     ->options(fn () => Category::query()
                         ->where('type', CategoryType::COURSE)
                         ->get()
@@ -48,65 +54,84 @@ class CourseForm
                     ->required(),
 
                 Select::make('instructor_id')
-                    ->label('Instructor')
+                    ->label(__('admin_ui.l.instructor'))
                     ->relationship('instructor', 'name')
                     ->searchable()
                     ->preload()
                     ->required(),
 
                 TranslatableTabs::make('short_description_tabs', ['short_description'], fn (string $locale, string $field) => Textarea::make("{$field}.{$locale}")
-                    ->label('Short description')
+                    ->label(__('admin_ui.l.short_description'))
                     ->rows(2)
                     ->required($locale === config('app.fallback_locale', 'en'))),
 
                 TranslatableTabs::make('full_description_tabs', ['full_description'], fn (string $locale, string $field) => Textarea::make("{$field}.{$locale}")
-                    ->label('Full description')
+                    ->label(__('admin_ui.l.full_description'))
                     ->rows(5)
                     ->required($locale === config('app.fallback_locale', 'en'))),
 
+                    ]),
+
+                Section::make(__('admin_ui.l.details'))
+                    ->icon('heroicon-o-adjustments-horizontal')
+                    ->columnSpanFull()
+                    ->components([
                 Select::make('level')
-                    ->label('Level')
-                    ->options(collect(CourseLevel::cases())->mapWithKeys(fn (CourseLevel $level) => [$level->value => ucfirst($level->value)]))
+                    ->label(__('admin_ui.l.level'))
+                    ->options(collect(CourseLevel::cases())->mapWithKeys(fn (CourseLevel $level) => [$level->value => AdminEnum::label($level)]))
                     ->required(),
 
                 Select::make('audience')
-                    ->label('Audience')
-                    ->options(collect(CourseAudience::cases())->mapWithKeys(fn (CourseAudience $audience) => [$audience->value => ucfirst($audience->value)]))
+                    ->label(__('admin_ui.l.audience'))
+                    ->options(collect(CourseAudience::cases())->mapWithKeys(fn (CourseAudience $audience) => [$audience->value => AdminEnum::label($audience)]))
                     ->required(),
 
                 TranslatableTabs::make('learning_outcomes_tabs', ['learning_outcomes'], fn (string $locale, string $field) => Repeater::make("{$field}.{$locale}")
-                    ->label('Learning outcomes')
+                    ->label(__('admin_ui.l.learning_outcomes'))
                     ->simple(TextInput::make('outcome')->required())
                     ->default([])
-                    ->addActionLabel('Add outcome')),
+                    ->addActionLabel(__('admin_ui.l.add_outcome'))),
 
                 TextInput::make('estimated_duration_hours')
-                    ->label('Estimated duration (hours)')
+                    ->label(__('admin_ui.l.estimated_duration_hours'))
                     ->numeric()
                     ->minValue(0),
 
+                    ]),
+
+                Section::make(__('admin_ui.l.media'))
+                    ->icon('heroicon-o-photo')
+                    ->columnSpanFull()
+                    ->components([
                 FileUpload::make('cover_image')
-                    ->label('Cover image')
+                    ->label(__('admin_ui.l.cover_image'))
                     ->image()
                     ->disk('public')
                     ->directory('uploads/courses')
                     ->imageEditor(),
 
+                    ]),
+
+                Section::make(__('admin_ui.l.publishing'))
+                    ->icon('heroicon-o-paper-airplane')
+                    ->columnSpanFull()
+                    ->components([
                 Toggle::make('is_free')
-                    ->label('Free')
+                    ->label(__('admin_ui.l.free'))
                     ->live()
                     ->default(true),
 
                 TextInput::make('price')
-                    ->label('Price')
+                    ->label(__('admin_ui.l.price'))
                     ->numeric()
                     ->prefix('USD')
                     ->visible(fn (callable $get) => ! $get('is_free'))
                     ->required(fn (callable $get) => ! $get('is_free')),
 
                 Toggle::make('is_published')
-                    ->label('Published')
+                    ->label(__('admin_ui.l.published'))
                     ->default(false),
+                    ]),
             ]);
     }
 }

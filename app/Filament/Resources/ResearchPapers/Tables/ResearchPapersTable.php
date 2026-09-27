@@ -23,31 +23,42 @@ class ResearchPapersTable
                 ImageColumn::make('cover_image')
                     ->label('')
                     ->state(fn ($record) => $record->getFirstMediaUrl('cover_image') ?: null)
+                    ->defaultImageUrl(asset('images/research-placeholder.svg'))
                     ->size(50),
 
                 TextColumn::make('title')
-                    ->label('Title')
+                    ->label(__('admin_ui.l.title'))
                     ->formatStateUsing(fn ($record) => $record->getTranslation('title', app()->getLocale()))
                     ->searchable(query: fn ($query, string $search) => $query->where('title', 'like', "%{$search}%"))
                     ->sortable()
                     ->limit(50),
 
                 TextColumn::make('category.name')
-                    ->label('Category')
+                    ->label(__('admin_ui.l.category'))
                     ->formatStateUsing(fn ($state, $record) => $record->category?->getTranslation('name', app()->getLocale())),
 
                 TextColumn::make('published_year')
-                    ->label('Year')
+                    ->label(__('admin_ui.l.year'))
                     ->sortable(),
 
-                IconColumn::make('is_published')
-                    ->label('Status')
-                    ->boolean(),
+                TextColumn::make('is_published')
+                    ->label(__('admin_ui.l.status'))
+                    ->badge()
+                    ->formatStateUsing(fn ($state) => $state ? __('admin_ui.l.published') : __('admin_ui.l.draft'))
+                    ->color(fn ($state) => $state ? 'success' : 'gray')
+                    ->sortable(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
+                SelectFilter::make('category_id')
+                    ->label(__('admin_ui.l.category'))
+                    ->relationship('category', 'name')
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->getTranslation('name', app()->getLocale()))
+                    ->searchable()
+                    ->preload(),
                 SelectFilter::make('is_published')
-                    ->label('Status')
-                    ->options([1 => 'Published', 0 => 'Draft']),
+                    ->label(__('admin_ui.l.status'))
+                    ->options([1 => __('admin_ui.l.published'), 0 => __('admin_ui.l.draft')]),
                 TrashedFilter::make(),
             ])
             ->recordActions([

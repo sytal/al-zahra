@@ -8,6 +8,7 @@ use App\Filament\Resources\Directors\Pages\ListDirectors;
 use App\Filament\Resources\Directors\Schemas\DirectorForm;
 use App\Filament\Resources\Directors\Tables\DirectorsTable;
 use App\Modules\Director\Models\Director;
+use App\Filament\Concerns\HasAdminNavigation;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -20,7 +21,15 @@ class DirectorResource extends Resource
 {
     protected static ?string $model = Director::class;
 
+    use HasAdminNavigation;
+
+    protected static string $labelKey = 'director';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserCircle;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'People';
+
+    protected static ?int $navigationSort = 2;
 
     public static function shouldRegisterNavigation(): bool
     {

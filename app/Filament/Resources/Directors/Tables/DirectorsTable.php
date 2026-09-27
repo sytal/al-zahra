@@ -16,16 +16,22 @@ class DirectorsTable
         return $table
             ->columns([
                 ImageColumn::make('profile_photo')
-                    ->label('Photo')
+                    ->label(__('admin_ui.l.photo'))
                     ->circular()
-                    ->getStateUsing(fn ($record) => $record->getFirstMediaUrl('profile_photo') ?: null),
+                    ->getStateUsing(fn ($record) => $record->getFirstMediaUrl('profile_photo') ?: null)
+                    ->defaultImageUrl(asset('images/avatar-placeholder.svg')),
                 TextColumn::make('full_name')
+                    ->label(__('admin_ui.l.name'))
                     ->searchable()
                     ->sortable(),
-                IconColumn::make('is_published')
-                    ->label('Published')
-                    ->boolean(),
+                TextColumn::make('is_published')
+                    ->label(__('admin_ui.l.status'))
+                    ->badge()
+                    ->formatStateUsing(fn ($state) => $state ? __('admin_ui.l.published') : __('admin_ui.l.draft'))
+                    ->color(fn ($state) => $state ? 'success' : 'gray')
+                    ->sortable(),
             ])
+            ->defaultSort('full_name')
             ->filters([
                 //
             ])

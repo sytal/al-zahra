@@ -8,6 +8,7 @@ use App\Filament\Resources\Resources\Pages\ListResources;
 use App\Filament\Resources\Resources\Schemas\ResourceForm;
 use App\Filament\Resources\Resources\Tables\ResourcesTable;
 use App\Modules\Resource\Models\Resource as ResourceModel;
+use App\Filament\Concerns\HasAdminNavigation;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -20,7 +21,15 @@ class ResourceResource extends Resource
 {
     protected static ?string $model = ResourceModel::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    use HasAdminNavigation;
+
+    protected static string $labelKey = 'resource';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentArrowDown;
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Content';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Schema $schema): Schema
     {

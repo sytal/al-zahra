@@ -27,22 +27,22 @@ class LessonsRelationManager extends RelationManager
         return $schema
             ->components([
                 TranslatableTabs::make('title_tabs', ['title'], fn (string $locale, string $field) => TextInput::make("{$field}.{$locale}")
-                    ->label('Title')
+                    ->label(__('admin_ui.l.title'))
                     ->required($locale === config('app.fallback_locale', 'en'))
                     ->maxLength(255)),
 
                 Select::make('content_type')
-                    ->label('Content type')
+                    ->label(__('admin_ui.l.content_type'))
                     ->options(collect(LessonContentType::cases())->mapWithKeys(fn (LessonContentType $type) => [$type->value => ucfirst($type->value)]))
                     ->required(),
 
                 TextInput::make('duration_minutes')
-                    ->label('Duration (minutes)')
+                    ->label(__('admin_ui.l.duration_minutes'))
                     ->numeric()
                     ->minValue(0),
 
                 Toggle::make('is_preview')
-                    ->label('Free preview'),
+                    ->label(__('admin_ui.l.free_preview')),
             ]);
     }
 
@@ -59,10 +59,10 @@ class LessonsRelationManager extends RelationManager
                     ->badge(),
 
                 TextColumn::make('duration_minutes')
-                    ->label('Duration (min)'),
+                    ->label(__('admin_ui.l.duration_min')),
 
                 IconColumn::make('is_preview')
-                    ->label('Preview')
+                    ->label(__('admin_ui.l.preview'))
                     ->boolean(),
             ])
             ->defaultSort('sort_order')

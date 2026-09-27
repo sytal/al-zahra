@@ -36,7 +36,7 @@ class CategoryForm
                             ->map(fn (string $locale) => Tab::make(strtoupper($locale))
                                 ->schema([
                                     TextInput::make("name.{$locale}")
-                                        ->label('Name')
+                                        ->label(__('admin_ui.l.name'))
                                         ->required(fn () => $locale === config('app.fallback_locale'))
                                         ->maxLength(255)
                                         ->live(onBlur: true)
@@ -46,7 +46,7 @@ class CategoryForm
                                             }
                                         }),
                                     Textarea::make("description.{$locale}")
-                                        ->label('Description')
+                                        ->label(__('admin_ui.l.description'))
                                         ->rows(3),
                                 ]))
                             ->all()

@@ -14,23 +14,23 @@ class CertificatesTable
         return $table
             ->columns([
                 TextColumn::make('verification_code')
-                    ->label('Verification Code')
+                    ->label(__('admin_ui.l.verification_code'))
                     ->searchable()
                     ->copyable(),
                 TextColumn::make('user.name')
-                    ->label('User')
+                    ->label(__('admin_ui.l.user'))
                     ->searchable(),
                 TextColumn::make('course.title')
-                    ->label('Course'),
+                    ->label(__('admin_ui.l.course')),
                 TextColumn::make('issued_at')
-                    ->label('Issued At')
+                    ->label(__('admin_ui.l.issued_at'))
                     ->dateTime()
                     ->sortable(),
             ])
             ->defaultSort('issued_at', 'desc')
             ->recordActions([
                 Action::make('revoke')
-                    ->label('Revoke')
+                    ->label(__('admin_ui.l.revoke'))
                     ->icon('heroicon-o-x-circle')
                     ->color('danger')
                     ->requiresConfirmation()
@@ -39,7 +39,7 @@ class CertificatesTable
                         $record->delete();
 
                         Notification::make()
-                            ->title('Certificate revoked')
+                            ->title(__('admin_ui.l.certificate_revoked'))
                             ->success()
                             ->send();
                     }),

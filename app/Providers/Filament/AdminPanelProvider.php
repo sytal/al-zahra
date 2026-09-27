@@ -3,6 +3,8 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Login;
+use App\Http\Middleware\SetAdminLocale;
+use Filament\Tables\Table;
 use Filament\FontProviders\LocalFontProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -34,6 +36,15 @@ class AdminPanelProvider extends PanelProvider
         return collect(config("theme.filament.$name", []))
             ->map(fn (string $triplet) => "rgb({$triplet})")
             ->all();
+    }
+
+    public function boot(): void
+    {
+        Table::configureUsing(fn (Table $table) => $table
+            ->striped()
+            ->paginationPageOptions([10, 25, 50])
+            ->emptyStateHeading(fn () => __('admin_ui.l.no_records'))
+            ->emptyStateDescription(fn () => __('admin_ui.l.no_records_hint')));
     }
 
     public function panel(Panel $panel): Panel
@@ -80,6 +91,7 @@ class AdminPanelProvider extends PanelProvider
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
+                SetAdminLocale::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
                 PreventRequestForgery::class,

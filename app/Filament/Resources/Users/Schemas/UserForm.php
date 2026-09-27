@@ -23,14 +23,14 @@ class UserForm
                     ->unique(ignoreRecord: true)
                     ->maxLength(255),
                 Select::make('roles')
-                    ->label('Role')
+                    ->label(__('admin_ui.l.role'))
                     ->relationship('roles', 'name')
                     ->options(fn () => Role::query()->pluck('name', 'name'))
                     ->multiple()
                     ->preload()
                     ->required(),
                 Toggle::make('is_active')
-                    ->label('Active')
+                    ->label(__('admin_ui.l.active'))
                     ->default(true),
             ]);
     }

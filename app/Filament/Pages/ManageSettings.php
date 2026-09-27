@@ -25,16 +25,37 @@ class ManageSettings extends Page implements HasForms
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
 
-    protected static ?string $title = 'Settings';
+    protected static string|\UnitEnum|null $navigationGroup = 'Settings';
 
-    protected static ?string $navigationLabel = 'Settings';
+    protected static ?int $navigationSort = 1;
 
     protected string $view = 'filament.pages.manage-settings';
+
+    /** Translatable (per-locale array) keys. */
+    private const TRANSLATED = [
+        'site_name', 'site_tagline', 'footer_about_text', 'mission_text', 'vision_text', 'hero_heading', 'hero_subtext',
+    ];
+
+    private const PLAIN = [
+        'contact_email', 'contact_phone', 'contact_hours', 'footer_links', 'social_links', 'testimonials', 'newsletter_enabled',
+    ];
+
+    private const DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
     /**
      * @var array<string, mixed>
      */
     public ?array $data = [];
+
+    public function getTitle(): string
+    {
+        return __('admin_ui.settings.title');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin_ui.settings.title');
+    }
 
     public static function shouldRegisterNavigation(): bool
     {
@@ -48,110 +69,147 @@ class ManageSettings extends Page implements HasForms
 
     public function mount(): void
     {
-        $keys = [
-            'site_name',
-            'site_tagline',
-            'contact_email',
-            'contact_phone',
-            'footer_about_text',
-            'footer_links',
-            'social_links',
-            'mission_text',
-            'vision_text',
-            'newsletter_enabled',
-        ];
+        $values = Setting::query()->whereIn('key', [...self::TRANSLATED, ...self::PLAIN])->pluck('value', 'key');
+        $empty = collect(config('app.locales'))->mapWithKeys(fn ($l) => [$l => ''])->all();
 
-        $values = Setting::query()->whereIn('key', $keys)->pluck('value', 'key');
+        $data = [];
+        foreach (self::TRANSLATED as $key) {
+            $stored = $values->get($key, []);
+            $data[$key] = array_merge($empty, is_array($stored) ? $stored : ['en' => (string) $stored]);
+        }
 
-        $this->form->fill([
-            'site_name' => $values->get('site_name', collect(config('app.locales'))->mapWithKeys(fn ($l) => [$l => ''])->all()),
-            'site_tagline' => $values->get('site_tagline', collect(config('app.locales'))->mapWithKeys(fn ($l) => [$l => ''])->all()),
-            'contact_email' => $values->get('contact_email'),
-            'contact_phone' => $values->get('contact_phone'),
-            'footer_about_text' => $values->get('footer_about_text', collect(config('app.locales'))->mapWithKeys(fn ($l) => [$l => ''])->all()),
-            'footer_links' => $values->get('footer_links', []),
-            'social_links' => $values->get('social_links', []),
-            'mission_text' => $values->get('mission_text', collect(config('app.locales'))->mapWithKeys(fn ($l) => [$l => ''])->all()),
-            'vision_text' => $values->get('vision_text', collect(config('app.locales'))->mapWithKeys(fn ($l) => [$l => ''])->all()),
-            'newsletter_enabled' => (bool) $values->get('newsletter_enabled', true),
-        ]);
+        $data['contact_email'] = $values->get('contact_email');
+        $data['contact_phone'] = $values->get('contact_phone');
+        $data['contact_hours'] = array_merge(array_fill_keys(self::DAYS, null), (array) $values->get('contact_hours', []));
+        $data['footer_links'] = array_values(array_filter((array) $values->get('footer_links', []), fn ($l) => is_array($l) && isset($l['url'])));
+        $data['social_links'] = (array) $values->get('social_links', []);
+        $data['testimonials'] = array_values((array) $values->get('testimonials', []));
+        $data['newsletter_enabled'] = (bool) $values->get('newsletter_enabled', true);
+
+        $this->form->fill($data);
+    }
+
+    private static function perLocale(string $key, callable $factory): Tabs
+    {
+        return Tabs::make($key.'_tabs')
+            ->tabs(collect(config('app.locales'))
+                ->map(fn (string $locale) => Tab::make(strtoupper($locale))->schema([$factory($locale)]))
+                ->all())
+            ->columnSpanFull();
     }
 
     public function form(Schema $schema): Schema
     {
+        $locales = config('app.locales');
+
         return $schema
             ->components([
-                Section::make('General')
-                    ->schema([
-                        Tabs::make('Site name translations')
-                            ->tabs(
-                                collect(config('app.locales'))
-                                    ->map(fn (string $locale) => Tab::make(strtoupper($locale))
-                                        ->schema([
-                                            TextInput::make("site_name.{$locale}")
-                                                ->label('Site name'),
-                                            TextInput::make("site_tagline.{$locale}")
-                                                ->label('Tagline'),
-                                        ]))
-                                    ->all()
-                            )
-                            ->columnSpanFull(),
-                        TextInput::make('contact_email')
-                            ->label('Contact email')
-                            ->email(),
-                        TextInput::make('contact_phone')
-                            ->label('Contact phone'),
-                    ]),
+                Tabs::make('settings')
+                    ->persistTabInQueryString()
+                    ->columnSpanFull()
+                    ->tabs([
+                        Tab::make(__('admin_ui.settings.brand'))
+                            ->icon('heroicon-o-sparkles')
+                            ->schema([
+                                Section::make(__('admin_ui.settings.brand'))
+                                    ->description(__('admin_ui.settings.brand_help'))
+                                    ->schema([
+                                        self::perLocale('site_name', fn ($l) => TextInput::make("site_name.{$l}")->label(__('admin_ui.settings.site_name'))->maxLength(120)),
+                                        self::perLocale('site_tagline', fn ($l) => TextInput::make("site_tagline.{$l}")->label(__('admin_ui.settings.tagline'))->maxLength(200)),
+                                        Toggle::make('newsletter_enabled')->label(__('admin_ui.settings.newsletter_enabled')),
+                                    ]),
+                            ]),
 
-                Section::make('Footer')
-                    ->schema([
-                        Repeater::make('footer_links')
-                            ->label('Footer links')
-                            ->simple(
-                                TextInput::make('value')->required()
-                            )
-                            ->addActionLabel('Add footer link'),
-                        Tabs::make('Footer about translations')
-                            ->tabs(
-                                collect(config('app.locales'))
-                                    ->map(fn (string $locale) => Tab::make(strtoupper($locale))
-                                        ->schema([
-                                            Textarea::make("footer_about_text.{$locale}")
-                                                ->label('About text')
-                                                ->rows(3),
-                                        ]))
-                                    ->all()
-                            )
-                            ->columnSpanFull(),
-                    ]),
+                        Tab::make(__('admin_ui.settings.contact'))
+                            ->icon('heroicon-o-phone')
+                            ->schema([
+                                Section::make(__('admin_ui.settings.contact'))
+                                    ->columns(2)
+                                    ->schema([
+                                        TextInput::make('contact_email')->label(__('admin_ui.settings.email'))->email()->helperText(__('admin_ui.settings.email_help')),
+                                        TextInput::make('contact_phone')->label(__('admin_ui.settings.phone'))->tel(),
+                                    ]),
+                                Section::make(__('admin_ui.settings.hours'))
+                                    ->description(__('admin_ui.settings.hours_help'))
+                                    ->columns(['default' => 1, 'sm' => 2, 'lg' => 4])
+                                    ->schema(collect(self::DAYS)->map(fn ($d) => TextInput::make("contact_hours.{$d}")
+                                        ->label(__('admin_ui.days.'.$d))
+                                        ->placeholder('09:00 - 17:00'))->all()),
+                                Section::make(__('admin_ui.settings.social'))
+                                    ->schema([
+                                        KeyValue::make('social_links')
+                                            ->hiddenLabel()
+                                            ->keyLabel(__('admin_ui.settings.platform'))
+                                            ->valueLabel('URL')
+                                            ->addActionLabel(__('admin_ui.settings.add_social')),
+                                    ]),
+                            ]),
 
-                Section::make('Mission / Vision')
-                    ->schema([
-                        Tabs::make('Mission/vision translations')
-                            ->tabs(
-                                collect(config('app.locales'))
-                                    ->map(fn (string $locale) => Tab::make(strtoupper($locale))
-                                        ->schema([
-                                            Textarea::make("mission_text.{$locale}")
-                                                ->label('Mission')
-                                                ->rows(3),
-                                            Textarea::make("vision_text.{$locale}")
-                                                ->label('Vision')
-                                                ->rows(3),
-                                        ]))
-                                    ->all()
-                            )
-                            ->columnSpanFull(),
-                    ]),
+                        Tab::make(__('admin_ui.settings.hero'))
+                            ->icon('heroicon-o-home')
+                            ->schema([
+                                Section::make(__('admin_ui.settings.hero'))
+                                    ->description(__('admin_ui.settings.hero_help'))
+                                    ->schema([
+                                        self::perLocale('hero_heading', fn ($l) => TextInput::make("hero_heading.{$l}")->label(__('admin_ui.settings.hero_heading'))->maxLength(160)),
+                                        self::perLocale('hero_subtext', fn ($l) => Textarea::make("hero_subtext.{$l}")->label(__('admin_ui.settings.hero_subtext'))->rows(3)->maxLength(300)),
+                                    ]),
+                            ]),
 
-                Section::make('Social Links')
-                    ->schema([
-                        KeyValue::make('social_links')
-                            ->keyLabel('Platform')
-                            ->valueLabel('URL')
-                            ->addActionLabel('Add social link'),
-                        Toggle::make('newsletter_enabled')
-                            ->label('Newsletter enabled'),
+                        Tab::make(__('admin_ui.settings.testimonials'))
+                            ->icon('heroicon-o-chat-bubble-bottom-center-text')
+                            ->schema([
+                                Section::make(__('admin_ui.settings.testimonials'))
+                                    ->description(__('admin_ui.settings.testimonials_help'))
+                                    ->schema([
+                                        Repeater::make('testimonials')
+                                            ->hiddenLabel()
+                                            ->collapsible()
+                                            ->collapsed()
+                                            ->itemLabel(fn (array $state) => ($state['name']['en'] ?? '') ?: __('admin_ui.settings.testimonial'))
+                                            ->addActionLabel(__('admin_ui.settings.add_testimonial'))
+                                            ->reorderable()
+                                            ->schema([
+                                                Toggle::make('demo')->label(__('admin_ui.settings.demo'))->helperText(__('admin_ui.settings.demo_help')),
+                                                Tabs::make('t_tabs')->columnSpanFull()->tabs(collect($locales)->map(fn (string $l) => Tab::make(strtoupper($l))->schema([
+                                                    Textarea::make("quote.{$l}")->label(__('admin_ui.settings.quote'))->rows(3),
+                                                    TextInput::make("name.{$l}")->label(__('admin_ui.settings.person_name')),
+                                                    TextInput::make("role.{$l}")->label(__('admin_ui.settings.person_role')),
+                                                ]))->all()),
+                                            ]),
+                                    ]),
+                            ]),
+
+                        Tab::make(__('admin_ui.settings.footer'))
+                            ->icon('heroicon-o-link')
+                            ->schema([
+                                Section::make(__('admin_ui.settings.footer'))
+                                    ->schema([
+                                        self::perLocale('footer_about_text', fn ($l) => Textarea::make("footer_about_text.{$l}")->label(__('admin_ui.settings.about_text'))->rows(3)->maxLength(400)),
+                                        Repeater::make('footer_links')
+                                            ->label(__('admin_ui.settings.footer_links'))
+                                            ->reorderable()
+                                            ->collapsible()
+                                            ->itemLabel(fn (array $state) => ($state['label']['en'] ?? '') ?: ($state['url'] ?? ''))
+                                            ->addActionLabel(__('admin_ui.settings.add_link'))
+                                            ->schema([
+                                                TextInput::make('url')->label('URL')->required()->helperText(__('admin_ui.settings.url_help')),
+                                                Tabs::make('l_tabs')->columnSpanFull()->tabs(collect($locales)->map(fn (string $l) => Tab::make(strtoupper($l))->schema([
+                                                    TextInput::make("label.{$l}")->label(__('admin_ui.settings.link_label')),
+                                                ]))->all()),
+                                            ]),
+                                    ]),
+                            ]),
+
+                        Tab::make(__('admin_ui.settings.mission'))
+                            ->icon('heroicon-o-flag')
+                            ->schema([
+                                Section::make(__('admin_ui.settings.mission'))
+                                    ->schema([
+                                        self::perLocale('mission_text', fn ($l) => Textarea::make("mission_text.{$l}")->label(__('admin_ui.settings.mission_label'))->rows(4)),
+                                        self::perLocale('vision_text', fn ($l) => Textarea::make("vision_text.{$l}")->label(__('admin_ui.settings.vision_label'))->rows(4)),
+                                    ]),
+                            ]),
                     ]),
             ])
             ->statePath('data');
@@ -161,14 +219,20 @@ class ManageSettings extends Page implements HasForms
     {
         $data = $this->form->getState();
 
-        foreach ($data as $key => $value) {
+        foreach ([...self::TRANSLATED, ...self::PLAIN] as $key) {
+            if (! array_key_exists($key, $data)) {
+                continue;
+            }
+            $value = $data[$key];
+            if ($key === 'testimonials' || $key === 'footer_links') {
+                $value = array_values((array) $value);
+            }
             Setting::query()->updateOrCreate(['key' => $key], ['value' => $value]);
         }
 
         Notification::make()
-            ->title('Settings saved')
+            ->title(__('admin_ui.settings.saved'))
             ->success()
             ->send();
     }
-
 }

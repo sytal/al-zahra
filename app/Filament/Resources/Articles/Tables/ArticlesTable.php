@@ -24,46 +24,60 @@ class ArticlesTable
                     ->label('')
                     ->state(fn ($record) => $record->getFirstMediaUrl('featured_image', 'thumb') ?: null)
                     ->circular(false)
-                    ->size(50),
+                    ->size(50)
+                    ->defaultImageUrl(asset('images/avatar-placeholder.svg')),
 
                 TextColumn::make('title')
-                    ->label('Title')
+                    ->label(__('admin_ui.l.title'))
                     ->formatStateUsing(fn ($record) => $record->getTranslation('title', app()->getLocale()))
                     ->searchable(query: fn ($query, string $search) => $query->where('title', 'like', "%{$search}%"))
                     ->sortable()
                     ->limit(50),
 
                 TextColumn::make('category.name')
-                    ->label('Category')
+                    ->label(__('admin_ui.l.category'))
                     ->formatStateUsing(fn ($state, $record) => $record->category?->getTranslation('name', app()->getLocale()))
                     ->sortable(),
 
                 TextColumn::make('author.name')
-                    ->label('Author')
+                    ->label(__('admin_ui.l.author'))
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('is_published')
+                    ->label(__('admin_ui.l.status'))
+                    ->badge()
+                    ->formatStateUsing(fn ($state) => $state ? __('admin_ui.l.published') : __('admin_ui.l.draft'))
+                    ->color(fn ($state) => $state ? 'success' : 'gray')
                     ->sortable(),
 
-                IconColumn::make('is_published')
-                    ->label('Status')
-                    ->boolean()
-                    ->trueIcon('heroicon-o-check-circle')
-                    ->falseIcon('heroicon-o-x-circle')
-                    ->trueColor('success')
-                    ->falseColor('gray'),
-
                 TextColumn::make('published_at')
-                    ->label('Published at')
+                    ->label(__('admin_ui.l.published_at'))
                     ->dateTime()
                     ->sortable(),
 
                 TextColumn::make('views_count')
-                    ->label('Views')
+                    ->label(__('admin_ui.l.views'))
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultSort('created_at', 'desc')
             ->filters([
+                SelectFilter::make('category_id')
+                    ->label(__('admin_ui.l.category'))
+                    ->relationship('category', 'name')
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->getTranslation('name', app()->getLocale()))
+                    ->searchable()
+                    ->preload(),
+                SelectFilter::make('author_id')
+                    ->label(__('admin_ui.l.author'))
+                    ->relationship('author', 'name')
+                    ->searchable()
+                    ->preload(),
                 SelectFilter::make('is_published')
-                    ->label('Status')
-                    ->options([1 => 'Published', 0 => 'Draft']),
+                    ->label(__('admin_ui.l.status'))
+                    ->options([1 => __('admin_ui.l.published'), 0 => __('admin_ui.l.draft')]),
                 TrashedFilter::make(),
             ])
             ->recordActions([

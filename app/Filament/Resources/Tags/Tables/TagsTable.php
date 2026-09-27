@@ -14,9 +14,11 @@ class TagsTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label(__('admin_ui.l.name'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('slug')
+                    ->label(__('admin_ui.l.slug'))
                     ->searchable(),
             ])
             ->filters([
