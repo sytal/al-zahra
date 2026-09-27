@@ -11,7 +11,7 @@
 
     <style>
         @media print {
-            header:not([data-keep]), footer, .print-hide { display: none !important; }
+            [data-print-hide], .print-hide { display: none !important; }
             [data-article] { padding: 0 !important; }
             [data-article] .prose-content a { text-decoration: none; color: inherit; }
             [data-article] .prose-content a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; word-break: break-all; }
