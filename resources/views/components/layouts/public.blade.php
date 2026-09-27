@@ -41,6 +41,7 @@ $navItems = [
 
     <x-shell.back-to-top />
 
+    <x-toast />
     @livewireScripts
 </body>
 </html>

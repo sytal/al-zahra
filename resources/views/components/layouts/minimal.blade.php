@@ -27,6 +27,7 @@ $isCentered = $centered ?? request()->routeIs('newsletter.confirm', 'consultatio
 
     <x-loading-bar />
 
+    <x-toast />
     @livewireScripts
 </body>
 </html>

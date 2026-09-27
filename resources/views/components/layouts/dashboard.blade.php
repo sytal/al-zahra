@@ -70,6 +70,7 @@ $topTitle = $title ?? $activeLabel ?? __('shell_app.page_default');
 
     <x-loading-bar />
 
+    <x-toast />
     @livewireScripts
 </body>
 </html>
