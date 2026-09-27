@@ -242,3 +242,26 @@ on the previous, not squashed into a single phase branch:
 20. **Rate limiter hits happen after `validate()`**, so empty submits do not lock users out.
 21. **Certificate PDFs use mPDF** (dompdf cannot shape Arabic script). Service: app/Modules/Certificate/Services/CertificatePdfRenderer.php. dompdf is now unused.
 22. **Verification tooling**: headless Chrome enforces about 500px minimum width; use the CDP helper (Emulation.setDeviceMetricsOverride) for real 375px. Parallel agents must never `taskkill /IM php.exe` (kills others' servers). `npx skills add` and hook-shipping skills are banned (docs Section 29).
+
+## UI redesign (branch ui-redesign, complete)
+Full visual redesign: single-source theme (resources/theme/theme.json, 9 palettes x 11 steps,
+3 presets), self-hosted fonts per script, new "Zahra: radiance" signature look (8-point star
+motif, glows, gradients, bento layouts) applied to every page, component, layout, email,
+certificate PDF and the Filament admin panel. 144 commits. Full responsive matrix (320-1536 +
+landscape, en/ur/fa/hi, light/dark) verified in a real headless-Chrome via a custom CDP helper
+(see scratch memory of that session for cdp.mjs recipe if needed again).
+
+Additional bug patterns found during this pass:
+23. **SQLite needs an explicit busy_timeout.** Default `busy_timeout: null` in config/database.php
+    made any concurrent write ("database is locked") fail immediately instead of waiting, which
+    also froze unrelated web requests when the queue worker held a write lock. Fixed with WAL
+    journal mode, a 10s busy_timeout, and 'IMMEDIATE' transaction_mode.
+24. **Tailwind opacity/color-mix classes are order-sensitive when toggled dynamically.** Never
+    put a static fallback background class and a dynamically-bound background class on the same
+    element — CSS specificity, not DOM/Alpine binding order, decides which wins. Put the
+    "unfilled" state inside the same ternary branch as the dynamic classes.
+25. **Auth "forgot password" must return an identical response for a valid and unknown email**
+    (no email-enumeration oracle) — check any password-reset-style flow for this.
+26. **SEO must be built for list pages too**, not just detail pages — this was missing since the
+    very first build (Section 12 was applied inconsistently). Any new list/index Livewire
+    component needs its own $seo array via layoutData(), not just #[Title].

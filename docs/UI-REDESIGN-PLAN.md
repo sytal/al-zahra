@@ -1,6 +1,6 @@
 # UI Redesign Plan: Al Zahra Institute
 
-Status: APPROVED (owner: demo testimonials, placeholder portrait, go). Execution in progress on this branch.
+Status: DONE. All phases (A foundation, B components/layouts, C pages, admin) complete and committed on branch ui-redesign. See .claude/memory/project-intro.md for the summary and new bug patterns (23-26).
 Branch: `ui-redesign` (from `all-merged`). Goal: the whole site looks and behaves like a premium educational institute and clinician website: credible, calm, warm, accessible, fast, in 5 languages (ur/fa RTL), light and dark.
 
 ## 0. Ground rules and decisions
