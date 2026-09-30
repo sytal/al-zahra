@@ -3,17 +3,23 @@
 namespace App\Modules\Course\Models;
 
 use App\Support\Enums\LessonContentType;
+use App\Support\Traits\HasActivityLog;
 use App\Support\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Support\LogOptions;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 
 class CourseLesson extends Model implements HasMedia
 {
-    use HasTranslations, HasUuid, InteractsWithMedia, SoftDeletes;
+    use HasActivityLog, HasTranslations, HasUuid, InteractsWithMedia, SoftDeletes {
+        HasActivityLog::getActivitylogOptions as private baseActivitylogOptions;
+    }
+
+    protected string $activityLogLabel = 'Lesson';
 
     protected $fillable = [
         'course_id',
@@ -44,5 +50,17 @@ class CourseLesson extends Model implements HasMedia
     public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return $this->baseActivitylogOptions()->logOnly([
+            'title', 'content_type', 'video_url', 'duration_minutes', 'is_preview', 'sort_order',
+        ]);
+    }
+
+    protected function activityLogDescriptionAttributes(): array
+    {
+        return ['course' => $this->course?->title ?? ''];
     }
 }

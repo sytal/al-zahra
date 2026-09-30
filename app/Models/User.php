@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Traits\HasActivityLog;
 use App\Support\Traits\HasUuid;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Support\LogOptions;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
@@ -22,7 +24,11 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable implements FilamentUser, HasMedia, MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, HasRoles, HasUuid, InteractsWithMedia, Notifiable, SoftDeletes;
+    use HasActivityLog, HasFactory, HasRoles, HasUuid, InteractsWithMedia, Notifiable, SoftDeletes {
+        HasActivityLog::getActivitylogOptions as private baseActivitylogOptions;
+    }
+
+    protected string $activityLogLabel = 'User';
 
     /**
      * Get the attributes that should be cast.
@@ -47,5 +53,16 @@ class User extends Authenticatable implements FilamentUser, HasMedia, MustVerify
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('avatar')->singleFile();
+    }
+
+    /**
+     * Never logs 'password' or 'remember_token' — both explicitly excluded
+     * on top of only allow-listing safe, admin-relevant attributes.
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        return $this->baseActivitylogOptions()
+            ->logOnly(['name', 'email', 'preferred_locale', 'phone', 'is_active'])
+            ->logExcept(['password', 'remember_token']);
     }
 }

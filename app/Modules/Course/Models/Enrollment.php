@@ -4,14 +4,20 @@ namespace App\Modules\Course\Models;
 
 use App\Models\User;
 use App\Support\Enums\EnrollmentStatus;
+use App\Support\Traits\HasActivityLog;
 use App\Support\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Activitylog\Support\LogOptions;
 
 class Enrollment extends Model
 {
-    use HasUuid;
+    use HasActivityLog, HasUuid {
+        HasActivityLog::getActivitylogOptions as private baseActivitylogOptions;
+    }
+
+    protected string $activityLogLabel = 'Enrollment';
 
     protected $fillable = [
         'user_id',
@@ -44,5 +50,18 @@ class Enrollment extends Model
     public function lessonProgress(): HasMany
     {
         return $this->hasMany(LessonProgress::class);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return $this->baseActivitylogOptions()->logOnly(['status', 'progress_percent', 'completed_at']);
+    }
+
+    protected function activityLogDescriptionAttributes(): array
+    {
+        return [
+            'title' => $this->user?->name ?? '',
+            'course' => $this->course?->title ?? '',
+        ];
     }
 }

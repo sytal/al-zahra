@@ -2,12 +2,18 @@
 
 namespace App\Modules\Newsletter\Models;
 
+use App\Support\Traits\HasActivityLog;
 use App\Support\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Support\LogOptions;
 
 class NewsletterSubscriber extends Model
 {
-    use HasUuid;
+    use HasActivityLog, HasUuid {
+        HasActivityLog::getActivitylogOptions as private baseActivitylogOptions;
+    }
+
+    protected string $activityLogLabel = 'Newsletter subscriber';
 
     protected $fillable = [
         'email',
@@ -24,5 +30,15 @@ class NewsletterSubscriber extends Model
             'confirmed_at' => 'datetime',
             'unsubscribed_at' => 'datetime',
         ];
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return $this->baseActivitylogOptions()->logOnly(['email', 'locale', 'is_confirmed', 'unsubscribed_at']);
+    }
+
+    protected function activityLogDescriptionAttributes(): array
+    {
+        return ['title' => $this->email];
     }
 }
