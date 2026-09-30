@@ -8,6 +8,7 @@ return [
     'nav_consultations' => 'Consultations',
     'nav_certificates' => 'Certificates',
     'nav_profile' => 'Profile',
+    'nav_activity' => 'Sargarmi',
     'nav_logout' => 'Logout',
     'toggle_menu' => 'Menu Kholein',
     'welcome_back' => 'Khush Amdeed, :name',

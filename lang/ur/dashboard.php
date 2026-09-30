@@ -8,6 +8,7 @@ return [
     'nav_consultations' => 'مشاورتیں',
     'nav_certificates' => 'سرٹیفکیٹس',
     'nav_profile' => 'پروفائل',
+    'nav_activity' => 'سرگرمی',
     'nav_logout' => 'لاگ آؤٹ',
     'toggle_menu' => 'مینو کھولیں',
     'welcome_back' => 'خوش آمدید، :name',

@@ -18,6 +18,7 @@ use App\Modules\Research\Livewire\ResearchIndex;
 use App\Modules\Resource\Livewire\ResourceIndex;
 use App\Modules\User\Listeners\SendWelcomeEmail;
 use App\Modules\User\Livewire\ConfirmPassword;
+use App\Modules\User\Livewire\DashboardActivityIndex;
 use App\Modules\User\Livewire\ForgotPassword;
 use App\Modules\User\Livewire\Login;
 use App\Modules\User\Livewire\ProfileEdit;
@@ -66,6 +67,7 @@ class AppServiceProvider extends ServiceProvider
         Livewire::component('dashboard.consultation-index', DashboardConsultationIndex::class);
         Livewire::component('dashboard.certificate-index', DashboardCertificateIndex::class);
         Livewire::component('dashboard.profile-edit', ProfileEdit::class);
+        Livewire::component('dashboard.activity-index', DashboardActivityIndex::class);
         Livewire::component('user.login', Login::class);
         Livewire::component('user.register', Register::class);
         Livewire::component('user.forgot-password', ForgotPassword::class);

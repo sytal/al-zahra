@@ -6,6 +6,7 @@ return [
     'nav_consultations' => 'Consultations',
     'nav_certificates' => 'Certificates',
     'nav_profile' => 'Profile',
+    'nav_activity' => 'Activity',
     'nav_logout' => 'Logout',
     'toggle_menu' => 'Toggle menu',
     'welcome_back' => 'Welcome back, :name',

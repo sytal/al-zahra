@@ -8,6 +8,7 @@ $links = [
     ['route' => 'dashboard.consultations.index', 'match' => ['dashboard.consultations.*'], 'label' => __('dashboard.nav_consultations'), 'icon' => 'chat-bubble-left-right'],
     ['route' => 'dashboard.certificates.index', 'match' => ['dashboard.certificates.*'], 'label' => __('dashboard.nav_certificates'), 'icon' => 'document-check'],
     ['route' => 'dashboard.profile.edit', 'match' => ['dashboard.profile.*'], 'label' => __('dashboard.nav_profile'), 'icon' => 'user-circle'],
+    ['route' => 'dashboard.activity.index', 'match' => ['dashboard.activity.*'], 'label' => __('dashboard.nav_activity'), 'icon' => 'clock'],
 ];
 $links = array_map(fn ($l) => $l + ['active' => request()->routeIs(...$l['match'])], $links);
 $activeLabel = collect($links)->firstWhere('active', true)['label'] ?? null;

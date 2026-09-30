@@ -8,6 +8,7 @@ return [
     'nav_consultations' => 'परामर्श',
     'nav_certificates' => 'प्रमाणपत्र',
     'nav_profile' => 'प्रोफ़ाइल',
+    'nav_activity' => 'गतिविधि',
     'nav_logout' => 'लॉगआउट',
     'toggle_menu' => 'मेनू खोलें',
     'welcome_back' => 'वापसी पर स्वागत है, :name',

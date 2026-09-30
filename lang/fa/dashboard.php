@@ -8,6 +8,7 @@ return [
     'nav_consultations' => 'مشاوره‌ها',
     'nav_certificates' => 'گواهینامه‌ها',
     'nav_profile' => 'پروفایل',
+    'nav_activity' => 'فعالیت',
     'nav_logout' => 'خروج',
     'toggle_menu' => 'باز کردن منو',
     'welcome_back' => 'خوش برگشتید، :name',
