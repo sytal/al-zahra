@@ -15,14 +15,16 @@ $hasCourses = $inProgress->isNotEmpty();
             <span class="bg-pattern-islamic absolute inset-0 -z-10 opacity-40" aria-hidden="true"></span>
             <span class="star-mark pointer-events-none absolute -end-6 -top-6 text-[9rem] opacity-15 sm:text-[12rem]" aria-hidden="true"></span>
 
-            <div class="flex flex-col gap-6 sm:flex-row sm:items-center">
-                <x-avatar :src="$avatar" :name="$user->name" size="xl" ringed class="shrink-0" />
-                <div class="min-w-0 flex-1 space-y-2">
-                    <p class="eyebrow inline-flex items-center gap-2 text-secondary-text"><span class="star-mark text-sm" aria-hidden="true"></span>{{ __('dashboard.nav_dashboard') }}</p>
-                    <h1 id="dash-greeting" class="heading-2 break-words text-strong">{{ __('dash_home_ui.greet_'.$greetingKey, ['name' => $user->name]) }}</h1>
-                    <p class="max-w-xl text-body">{{ $hasCourses ? __('dash_home_ui.home_lead_learning') : __('dash_home_ui.home_lead_new') }}</p>
+            <div class="flex flex-col gap-6 lg:flex-row lg:items-center">
+                <div class="flex items-center gap-4 lg:flex-1 lg:min-w-0">
+                    <x-avatar :src="$avatar" :name="$user->name" size="xl" ringed class="shrink-0" />
+                    <div class="min-w-0 flex-1 space-y-2">
+                        <p class="eyebrow inline-flex items-center gap-2 text-secondary-text"><span class="star-mark text-sm" aria-hidden="true"></span>{{ __('dashboard.nav_dashboard') }}</p>
+                        <h1 id="dash-greeting" class="heading-2 break-words leading-snug text-strong">{{ __('dash_home_ui.greet_'.$greetingKey, ['name' => $user->name]) }}</h1>
+                        <p class="max-w-xl text-body">{{ $hasCourses ? __('dash_home_ui.home_lead_learning') : __('dash_home_ui.home_lead_new') }}</p>
+                    </div>
                 </div>
-                <div class="flex flex-wrap gap-3 sm:flex-col">
+                <div class="flex flex-wrap gap-3 lg:shrink-0 lg:flex-col">
                     <x-button :href="route('consultation.show', $locale)" variant="secondary" icon="chat-bubble-left-right" magnetic>{{ __('dash_home_ui.qa_ask') }}</x-button>
                     <x-button :href="route('dashboard.courses.index', $locale)" variant="outline" icon="academic-cap">{{ __('dash_home_ui.qa_courses') }}</x-button>
                 </div>
@@ -119,8 +121,8 @@ $hasCourses = $inProgress->isNotEmpty();
                             ['dashboard.certificates.index', 'document-check', 'qa_certificates'],
                             ['certificates.verify.form', 'shield-check', 'qa_verify'],
                         ] as [$route, $icon, $key])
-                            <li>
-                                <a href="{{ route($route, $locale) }}" wire:navigate class="group flex min-h-14 items-center gap-3 rounded-xl px-2 py-2 transition duration-fast active:scale-[0.99] [@media(hover:hover)]:hover:bg-tint">
+                            <li class="min-w-0">
+                                <a href="{{ route($route, $locale) }}" wire:navigate class="group flex min-h-14 w-full items-center gap-3 rounded-xl px-2 py-2 transition duration-fast active:scale-[0.99] [@media(hover:hover)]:hover:bg-tint">
                                     <span class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-tint text-brand-primary"><x-icon :name="$icon" class="size-5" aria-hidden="true" /></span>
                                     <span class="min-w-0 flex-1">
                                         <span class="block truncate text-sm font-semibold text-strong">{{ __('dash_home_ui.'.$key) }}</span>

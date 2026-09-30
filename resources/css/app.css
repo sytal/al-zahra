@@ -483,7 +483,7 @@ html[dir='rtl'] {
     /* Light sources: place inside a `relative isolate overflow-hidden` parent */
     .glow-teal, .glow-gold, .glow-primary, .glow-secondary {
         position: absolute;
-        z-index: -1;
+        z-index: 0;
         width: var(--glow-size, 28rem);
         aspect-ratio: 1;
         max-width: 90vw;
