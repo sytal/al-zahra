@@ -1,7 +1,5 @@
 <?php
 
-use App\Modules\Course\Models\Course;
-
 it('renders full seo on the courses list', function (string $locale) {
     $html = $this->get("/{$locale}/courses?page=1&search=x")->assertOk()->getContent();
 
@@ -15,10 +13,7 @@ it('renders full seo on the courses list', function (string $locale) {
 })->with(['en', 'ur']);
 
 it('keeps course json-ld on the detail page', function () {
-    $course = Course::where('is_published', true)->first();
-    if (! $course) {
-        $this->markTestSkipped('no published course');
-    }
+    $course = makeCourse();
 
     $this->get("/en/courses/{$course->slug}")->assertOk()->assertSee('"@type":"Course"', false);
 });
