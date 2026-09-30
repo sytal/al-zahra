@@ -35,6 +35,20 @@ class ConsultationForm
                         Placeholder::make('created_at')
                             ->label(__('admin_ui.l.requested_at'))
                             ->content(fn ($record) => $record?->created_at?->toDayDateTimeString() ?? '—'),
+                        Placeholder::make('waiting_for')
+                            ->label(__('admin_ui.l.waiting_for'))
+                            ->visible(fn ($record) => $record?->status === ConsultationStatus::PENDING)
+                            ->content(function ($record) {
+                                $hours = $record->created_at->diffInHours(now());
+                                $text = __('admin_ui.l.waiting_duration', ['time' => $record->created_at->diffForHumans(now(), true)]);
+                                $class = match (true) {
+                                    $hours >= 48 => 'text-red-600 dark:text-red-400',
+                                    $hours >= 24 => 'text-amber-600 dark:text-amber-400',
+                                    default => 'text-green-600 dark:text-green-400',
+                                };
+
+                                return new \Illuminate\Support\HtmlString('<span class="font-semibold '.$class.'">'.e($text).'</span>');
+                            }),
                         Textarea::make('question')
                             ->label(__('admin_ui.l.question'))
                             ->columnSpanFull()

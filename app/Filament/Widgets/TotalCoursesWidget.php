@@ -13,6 +13,11 @@ class TotalCoursesWidget extends StatsOverviewWidget
 
     protected static ?int $sort = 2;
 
+    public static function canView(): bool
+    {
+        return auth()->user()?->can('settings.manage') ?? false;
+    }
+
     protected int|string|array $columnSpan = ['default' => 'full', 'md' => 1];
 
     protected function getColumns(): int
