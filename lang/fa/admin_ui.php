@@ -15,6 +15,8 @@ return [
   'articles_desc' => ':count منتشرشده',
   'courses' => 'کل دوره‌ها',
   'courses_desc' => ':count منتشرشده',
+  'instructing' => 'دوره‌هایی که تدریس می‌کنید',
+  'instructing_desc' => 'مجموع :count ثبت‌نام در دوره‌های شما',
   'enrollments' => 'کل ثبت‌نام‌ها',
   'enrollments_desc' => ':count تکمیل‌شده',
   'subscribers' => 'مشترکان خبرنامه',

@@ -9,14 +9,19 @@ use App\Modules\Course\Models\Course;
 use App\Modules\Course\Models\Enrollment;
 use App\Modules\Course\Models\LessonProgress;
 use App\Support\Enums\EnrollmentStatus;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request, string $locale): View
+    public function index(Request $request, string $locale): View|RedirectResponse
     {
         $user = $request->user();
+
+        if ($user->hasAnyRole(['director', 'admin', 'editor'])) {
+            return redirect('/admin');
+        }
 
         $inProgress = Enrollment::with('course')
             ->where('user_id', $user->id)

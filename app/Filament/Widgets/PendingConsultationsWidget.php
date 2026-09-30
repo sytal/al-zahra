@@ -13,6 +13,11 @@ class PendingConsultationsWidget extends StatsOverviewWidget
 {
     use HasSparkline;
 
+    public static function canView(): bool
+    {
+        return auth()->user()?->can('consultations.respond') ?? false;
+    }
+
     protected static ?int $sort = 4;
 
     protected int|string|array $columnSpan = ['default' => 'full', 'md' => 1];

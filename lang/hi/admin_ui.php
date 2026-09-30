@@ -15,6 +15,8 @@ return [
   'articles_desc' => ':count प्रकाशित',
   'courses' => 'कुल पाठ्यक्रम',
   'courses_desc' => ':count प्रकाशित',
+  'instructing' => 'आपके पढ़ाए जा रहे कोर्स',
+  'instructing_desc' => 'आपके कोर्सों में कुल :count नामांकन',
   'enrollments' => 'कुल नामांकन',
   'enrollments_desc' => ':count पूर्ण',
   'subscribers' => 'न्यूज़लेटर सदस्य',

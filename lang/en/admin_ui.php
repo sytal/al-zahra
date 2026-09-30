@@ -15,6 +15,8 @@ return [
   'articles_desc' => ':count published',
   'courses' => 'Total courses',
   'courses_desc' => ':count published',
+  'instructing' => 'Courses you instruct',
+  'instructing_desc' => ':count enrolled across your courses',
   'enrollments' => 'Total enrollments',
   'enrollments_desc' => ':count completed',
   'subscribers' => 'Newsletter subscribers',

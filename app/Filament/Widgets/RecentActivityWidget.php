@@ -13,6 +13,11 @@ class RecentActivityWidget extends TableWidget
 
     protected static ?int $sort = 10;
 
+    public static function canView(): bool
+    {
+        return auth()->user()?->can('settings.manage') || auth()->user()?->can('users.manage');
+    }
+
     public function table(Table $table): Table
     {
         return $table

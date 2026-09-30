@@ -15,6 +15,8 @@ return [
   'articles_desc' => ':count شائع شدہ',
   'courses' => 'کل کورسز',
   'courses_desc' => ':count شائع شدہ',
+  'instructing' => 'آپ کے پڑھائے جانے والے کورسز',
+  'instructing_desc' => 'آپ کے کورسز میں کل :count داخلے',
   'enrollments' => 'کل اندراجات',
   'enrollments_desc' => ':count مکمل',
   'subscribers' => 'نیوز لیٹر سبسکرائبرز',

@@ -41,6 +41,12 @@ class Login extends Component
         RateLimiter::clear($this->throttleKey());
         session()->regenerate();
 
+        if (Auth::user()->hasAnyRole(['director', 'admin', 'editor'])) {
+            $this->redirect('/admin', navigate: false);
+
+            return;
+        }
+
         $this->redirectRoute('dashboard', ['locale' => app()->getLocale()], navigate: true);
     }
 

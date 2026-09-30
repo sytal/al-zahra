@@ -15,6 +15,8 @@ return [
   'articles_desc' => ':count shaya shuda',
   'courses' => 'Kul courses',
   'courses_desc' => ':count shaya shuda',
+  'instructing' => 'Aap ke parhaye jane wale courses',
+  'instructing_desc' => 'Aap ke courses mein kul :count enrollments',
   'enrollments' => 'Kul indarajat',
   'enrollments_desc' => ':count mukammal',
   'subscribers' => 'Newsletter subscribers',
