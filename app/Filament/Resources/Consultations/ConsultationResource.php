@@ -28,6 +28,11 @@ class ConsultationResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return static::canViewAny();
+    }
+
     public static function getNavigationBadge(): ?string
     {
         $count = static::getModel()::query()->where('status', \App\Support\Enums\ConsultationStatus::PENDING)->count();

@@ -30,6 +30,11 @@ class ContactMessageResource extends Resource
 
     protected static ?int $navigationSort = 2;
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return static::canViewAny();
+    }
+
     public static function getNavigationBadge(): ?string
     {
         $count = static::getModel()::query()->where('status', \App\Support\Enums\ContactMessageStatus::NEW)->count();
