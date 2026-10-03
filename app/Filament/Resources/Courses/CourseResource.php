@@ -2,9 +2,11 @@
 
 namespace App\Filament\Resources\Courses;
 
+use App\Filament\Resources\Courses\Pages\CourseDiscussions;
 use App\Filament\Resources\Courses\Pages\CreateCourse;
 use App\Filament\Resources\Courses\Pages\EditCourse;
 use App\Filament\Resources\Courses\Pages\ListCourses;
+use App\Filament\Resources\Courses\Pages\ReviewAssignments;
 use App\Filament\Resources\Courses\RelationManagers\BatchesRelationManager;
 use App\Filament\Resources\Courses\RelationManagers\LessonsRelationManager;
 use App\Filament\Resources\Courses\RelationManagers\ModulesRelationManager;
@@ -64,6 +66,8 @@ class CourseResource extends Resource
             'index' => ListCourses::route('/'),
             'create' => CreateCourse::route('/create'),
             'edit' => EditCourse::route('/{record}/edit'),
+            'review-assignments' => ReviewAssignments::route('/{record}/review-assignments'),
+            'course-discussions' => CourseDiscussions::route('/{record}/course-discussions'),
         ];
     }
 

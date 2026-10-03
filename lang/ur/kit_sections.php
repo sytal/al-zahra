@@ -28,6 +28,8 @@ return [
     'hours' => '{1} :count گھنٹہ|[2,*] :count گھنٹے',
     'learners' => '{1} :count سیکھنے والا|[2,*] :count سیکھنے والے',
     'lessons' => '{1} :count سبق|[2,*] :count اسباق',
+    'modules' => '{1} :count ماڈیول|[2,*] :count ماڈیولز',
+    'blocks' => '{1} :count آئٹم|[2,*] :count آئٹمز',
     'level_label' => 'سطح',
     'link_copied' => 'لنک کاپی ہو گیا',
     'min_read' => 'منٹ کا مطالعہ',

@@ -28,6 +28,8 @@ return [
     'hours' => '{1} :count घंटा|[2,*] :count घंटे',
     'learners' => '{1} :count शिक्षार्थी|[2,*] :count शिक्षार्थी',
     'lessons' => '{1} :count पाठ|[2,*] :count पाठ',
+    'modules' => '{1} :count मॉड्यूल|[2,*] :count मॉड्यूल',
+    'blocks' => '{1} :count आइटम|[2,*] :count आइटम',
     'level_label' => 'स्तर',
     'link_copied' => 'लिंक कॉपी हो गया',
     'min_read' => 'मिनट पढ़ने का समय',

@@ -5,6 +5,21 @@ $fallback = asset('images/course-placeholder.svg');
 $lessons = $course->lessons;
 $lessonCount = $lessons->count();
 $totalMinutes = (int) $lessons->sum('duration_minutes');
+$modules = $course->modules()->with('blocks')->get();
+$moduleCount = $modules->count();
+$blockCount = $modules->sum(fn ($m) => $m->blocks->count());
+$blockTypeIcons = [
+    'reading' => 'book-open',
+    'research_reading' => 'book-open',
+    'practical_quiz' => 'puzzle-piece',
+    'graded_quiz' => 'clipboard-document-check',
+    'case_study' => 'document-magnifying-glass',
+    'research_paper' => 'document-magnifying-glass',
+    'case_analysis' => 'document-magnifying-glass',
+    'discussion' => 'chat-bubble-left-right',
+    'assignment' => 'paper-clip',
+    'research_activity' => 'beaker',
+];
 $levelLabel = __('enums.course_level.'.$course->level->value);
 $audienceLabel = __('enums.course_audience.'.$course->audience->value);
 $outcomes = collect($course->learning_outcomes ?? [])->filter()->values();
@@ -12,6 +27,7 @@ $facts = array_filter([
     ['icon' => 'banknotes', 'label' => __('courses_ui.fact_price'), 'value' => $course->is_free ? __('common.free') : ($course->formattedPrice() ?? __('common.paid'))],
     $course->estimated_duration_hours ? ['icon' => 'clock', 'label' => __('courses_ui.fact_duration'), 'value' => trans_choice('kit_sections.hours', $course->estimated_duration_hours, ['count' => $course->estimated_duration_hours])] : null,
     $lessonCount ? ['icon' => 'play-circle', 'label' => __('courses_ui.fact_lessons'), 'value' => $lessonCount] : null,
+    (! $lessonCount && $moduleCount) ? ['icon' => 'play-circle', 'label' => __('courses_ui.fact_lessons'), 'value' => $blockCount] : null,
     ['icon' => 'chart-bar', 'label' => __('courses_ui.fact_level'), 'value' => $levelLabel],
     ['icon' => 'user-group', 'label' => __('courses_ui.fact_audience'), 'value' => $audienceLabel],
     ['icon' => 'users', 'label' => __('courses_ui.fact_learners'), 'value' => number_format((int) $course->enrolled_count)],
@@ -50,10 +66,10 @@ $faq = [
                     <p class="lead mt-4 max-w-2xl break-words">{{ $course->short_description }}</p>
                     <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-body">
                         <x-level-meter :level="$course->level" />
-                        @if ($lessonCount)<span class="inline-flex items-center gap-1.5"><x-icon name="play-circle" class="size-4" aria-hidden="true" />{{ trans_choice('kit_sections.lessons', $lessonCount, ['count' => $lessonCount]) }}</span>@endif
+                        @if ($lessonCount)<span class="inline-flex items-center gap-1.5"><x-icon name="play-circle" class="size-4" aria-hidden="true" />{{ trans_choice('kit_sections.lessons', $lessonCount, ['count' => $lessonCount]) }}</span>@elseif ($moduleCount)<span class="inline-flex items-center gap-1.5"><x-icon name="play-circle" class="size-4" aria-hidden="true" />{{ trans_choice('kit_sections.modules', $moduleCount, ['count' => $moduleCount]) }}</span>@endif
                         <span class="inline-flex items-center gap-1.5"><x-icon name="users" class="size-4" aria-hidden="true" />{{ trans_choice('kit_sections.learners', (int) $course->enrolled_count, ['count' => number_format((int) $course->enrolled_count)]) }}</span>
                     </div>
-                    @if ($lessonCount)
+                    @if ($lessonCount || $moduleCount)
                         <a href="#curriculum" class="focus-ring link-underline mt-5 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-link">{{ __('courses_ui.jump') }}<x-icon name="arrow-down" class="size-4" aria-hidden="true" /></a>
                     @endif
                 </div>
@@ -133,6 +149,8 @@ $faq = [
                         <h2 id="curr-h" class="heading-2">{{ __('courses.curriculum') }}</h2>
                         @if ($lessonCount)
                             <p class="text-sm text-muted">{{ trans_choice('kit_sections.lessons', $lessonCount, ['count' => $lessonCount]) }}@if ($totalMinutes) &middot; {{ __('polish_public.lesson_minutes', ['count' => $totalMinutes]) }}@endif</p>
+                        @elseif ($moduleCount)
+                            <p class="text-sm text-muted">{{ trans_choice('kit_sections.modules', $moduleCount, ['count' => $moduleCount]) }} &middot; {{ trans_choice('kit_sections.blocks', $blockCount, ['count' => $blockCount]) }}</p>
                         @endif
                     </div>
                     @if ($lessonCount)
@@ -166,6 +184,40 @@ $faq = [
                                                 </p>
                                             @endif
                                         </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @elseif ($moduleCount)
+                        <div x-data="{ open: [] }" class="space-y-3">
+                            @foreach ($modules as $i => $module)
+                                <div class="overflow-hidden rounded-2xl border border-subtle bg-surface-raised transition-[border-color,box-shadow] duration-base" x-bind:class="open.includes({{ $i }}) ? 'border-brand/40 shadow-soft' : 'border-subtle'">
+                                    <h3>
+                                        <button type="button" id="module-h-{{ $i }}" aria-controls="module-p-{{ $i }}" x-bind:aria-expanded="open.includes({{ $i }}).toString()"
+                                            x-on:click="open = open.includes({{ $i }}) ? open.filter(x => x !== {{ $i }}) : [...open, {{ $i }}]"
+                                            class="focus-ring flex min-h-14 w-full items-center gap-3 px-4 py-3 text-start sm:px-5 [@media(hover:hover)]:hover:bg-tint">
+                                            <span class="numeral-display w-8 shrink-0 text-lg text-secondary-text">{{ $i + 1 }}</span>
+                                            <span class="min-w-0 flex-1">
+                                                <span class="block break-words font-semibold leading-snug text-strong">{{ $module->title }}</span>
+                                                <span class="mt-1 block text-xs text-muted">{{ trans_choice('kit_sections.blocks', $module->blocks->count(), ['count' => $module->blocks->count()]) }}</span>
+                                            </span>
+                                            <x-icon name="chevron-down" class="size-5 shrink-0 text-muted transition-transform duration-base ease-enter" x-bind:class="open.includes({{ $i }}) && 'rotate-180'" aria-hidden="true" />
+                                        </button>
+                                    </h3>
+                                    <div id="module-p-{{ $i }}" role="region" aria-labelledby="module-h-{{ $i }}" x-show="open.includes({{ $i }})" x-collapse x-cloak>
+                                        <ul class="break-words px-4 pb-5 ps-12 text-body sm:px-5 sm:ps-16">
+                                            @foreach ($module->blocks as $block)
+                                                <li class="flex min-w-0 items-center gap-2.5 py-1.5 text-sm">
+                                                    <x-icon :name="$blockTypeIcons[$block->type] ?? 'document-text'" class="size-4 shrink-0 text-muted" aria-hidden="true" />
+                                                    <span class="min-w-0 flex-1 truncate">{{ $block->title }}</span>
+                                                    @if ($block->is_preview)
+                                                        <x-badge color="success" size="sm" icon="eye" :text="__('courses_ui.free_preview')" />
+                                                    @elseif (! $isEnrolled)
+                                                        <x-icon name="lock-closed" class="size-4 shrink-0 text-muted" aria-hidden="true" /><span class="sr-only">{{ __('courses_ui.locked') }}</span>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </div>
                                 </div>
                             @endforeach

@@ -26,6 +26,8 @@ return [
     'hours' => '{1} :count hour|[2,*] :count hours',
     'learners' => '{1} :count learner|[2,*] :count learners',
     'lessons' => '{1} :count lesson|[2,*] :count lessons',
+    'modules' => '{1} :count module|[2,*] :count modules',
+    'blocks' => '{1} :count item|[2,*] :count items',
     'level_label' => 'Level',
     'link_copied' => 'Link copied',
     'min_read' => 'min read',

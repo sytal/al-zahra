@@ -28,6 +28,8 @@ return [
     'hours' => '{1} :count ghanta|[2,*] :count ghantay',
     'learners' => '{1} :count seekhnay wala|[2,*] :count seekhnay walay',
     'lessons' => '{1} :count sabaq|[2,*] :count asbaq',
+    'modules' => '{1} :count module|[2,*] :count modules',
+    'blocks' => '{1} :count item|[2,*] :count items',
     'level_label' => 'Satah',
     'link_copied' => 'Link copy ho gaya',
     'min_read' => 'minute ka mutala',

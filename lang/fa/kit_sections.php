@@ -28,6 +28,8 @@ return [
     'hours' => '{1} :count ساعت|[2,*] :count ساعت',
     'learners' => '{1} :count یادگیرنده|[2,*] :count یادگیرنده',
     'lessons' => '{1} :count درس|[2,*] :count درس',
+    'modules' => '{1} :count ماژول|[2,*] :count ماژول',
+    'blocks' => '{1} :count آیتم|[2,*] :count آیتم',
     'level_label' => 'سطح',
     'link_copied' => 'پیوند کپی شد',
     'min_read' => 'دقیقه مطالعه',
