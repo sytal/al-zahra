@@ -147,6 +147,28 @@
                                             @if (!empty($content['due_date']))
                                                 <p class="mt-2 text-xs text-muted">{{ __('course_learn_ui.due_date', ['date' => $content['due_date']]) }}</p>
                                             @endif
+                                            @php $taskAttachments = $block->getMedia('attachments'); @endphp
+                                            @if ($taskAttachments->isNotEmpty())
+                                                <ul class="mt-3 space-y-2">
+                                                    @foreach ($taskAttachments as $media)
+                                                        <li class="text-sm">
+                                                            <a href="{{ $media->getUrl() }}" target="_blank" rel="noopener" class="font-semibold text-brand-primary underline">{{ $media->name }}</a>
+                                                            <span class="block text-xs uppercase text-muted" dir="ltr">{{ $media->extension }} &middot; {{ $media->human_readable_size }}</span>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @elseif (!empty($content['files']))
+                                                {{-- Legacy data: block was created before the admin form stored
+                                                     attachments in Medialibrary (content.files held raw public-disk
+                                                     paths). Keep rendering those until re-saved in the admin. --}}
+                                                <ul class="mt-3 space-y-2">
+                                                    @foreach ((array) $content['files'] as $path)
+                                                        <li class="text-sm">
+                                                            <a href="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($path) }}" target="_blank" rel="noopener" class="font-semibold text-brand-primary underline">{{ basename($path) }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
                                             @php $mark = $progress?->data['mark'] ?? 'not_submitted'; @endphp
                                             <p class="mt-3 text-sm font-semibold text-strong">{{ __('course_learn_ui.status_'.$mark) }}</p>
                                             <form wire:submit="submitAssignment({{ $block->id }})" class="mt-3 space-y-2">

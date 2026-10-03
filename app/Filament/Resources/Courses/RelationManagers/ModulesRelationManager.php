@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Courses\RelationManagers;
 
 use App\Filament\Support\TranslatableTabs;
+use App\Modules\Course\Models\CourseBlock;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -21,6 +22,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Storage;
 
 class ModulesRelationManager extends RelationManager
 {
@@ -60,6 +62,8 @@ class ModulesRelationManager extends RelationManager
                     ->collapsible()
                     ->itemLabel(fn (array $state): ?string => $state['title']['en'] ?? __('admin_ui.l.block'))
                     ->addActionLabel(__('admin_ui.l.add_block'))
+                    ->afterCreate(fn (array $data, CourseBlock $record) => static::syncAssignmentAttachments($data, $record))
+                    ->afterUpdate(fn (array $data, CourseBlock $record) => static::syncAssignmentAttachments($data, $record))
                     ->schema([
                         TextInput::make('title.en')
                             ->label(__('admin_ui.l.title'))
@@ -202,5 +206,36 @@ class ModulesRelationManager extends RelationManager
                     DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    /**
+     * Moves assignment task attachments uploaded via the plain
+     * `content.files` FileUpload into the block's real Medialibrary
+     * `attachments` collection (no filament/spatie-media-library plugin
+     * needed — same manual addMediaFromDisk pattern as
+     * App\Filament\Concerns\SavesMediaLibraryUploads, adapted for a
+     * repeater relationship item instead of a Create/Edit page). Once
+     * transferred, the paths are stripped from the `content` column so
+     * resaving the form never re-adds the same files as duplicate media.
+     */
+    private static function syncAssignmentAttachments(array $data, CourseBlock $record): void
+    {
+        $paths = data_get($data, 'content.files', []);
+
+        if (blank($paths) || ! is_array($paths)) {
+            return;
+        }
+
+        foreach ($paths as $path) {
+            if (! is_string($path) || ! Storage::disk('public')->exists($path)) {
+                continue;
+            }
+
+            $record->addMediaFromDisk($path, 'public')->toMediaCollection('attachments');
+        }
+
+        $content = $record->content ?? [];
+        unset($content['files']);
+        $record->update(['content' => $content]);
     }
 }

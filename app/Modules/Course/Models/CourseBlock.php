@@ -62,11 +62,12 @@ class CourseBlock extends Model implements HasMedia
     }
 
     /**
-     * Admin-uploaded task attachments. NOT wired into the Filament form yet
-     * (content.files keeps its plain JSON-path FileUpload — no
-     * filament/spatie-laravel-media-library-plugin package installed in
-     * this project; see docs/COURSE-BUILDER-DEV-PLAN.md Phase 5 notes).
-     * Collection exists so it can be adopted later without a migration.
+     * Admin-uploaded assignment task attachments. Wired into
+     * ModulesRelationManager's assignment block FileUpload, which moves
+     * uploaded paths into this collection after save via
+     * addMediaFromDisk() (no filament/spatie-laravel-media-library-plugin
+     * package installed in this project; see
+     * docs/COURSE-BUILDER-DEV-PLAN.md Phase 5 notes).
      */
     public function registerMediaCollections(): void
     {
