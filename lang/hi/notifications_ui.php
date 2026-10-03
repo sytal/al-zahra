@@ -15,4 +15,12 @@ return [
     'new_ticket_body' => 'एक छात्र ने नया सपोर्ट टिकट खोला है: ":subject"।',
     'ticket_replied_subject' => 'नया जवाब: :subject',
     'ticket_replied_body' => 'सपोर्ट टिकट ":subject" पर नया जवाब है।',
+    'discussion_reply_subject' => 'नई चर्चा का जवाब',
+    'discussion_reply_body' => 'कोर्स चर्चा पर एक नया जवाब है।',
+    'assignment_passed_subject' => 'आपका असाइनमेंट पास हो गया',
+    'assignment_passed_body' => 'आपके असाइनमेंट की समीक्षा की गई है और इसे पास कर दिया गया है।',
+    'assignment_needs_revision_subject' => 'आपके असाइनमेंट में सुधार की आवश्यकता है',
+    'assignment_needs_revision_body' => 'आपके असाइनमेंट की समीक्षा की गई है और इसमें सुधार की आवश्यकता है। कृपया जांच कर फिर से जमा करें।',
+    'batch_starting_subject' => ':course का बैच कल शुरू हो रहा है',
+    'batch_starting_body' => '":course" का बैच ":batch" कल शुरू हो रहा है। तैयार रहें।',
 ];

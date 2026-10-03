@@ -15,4 +15,12 @@ return [
     'new_ticket_body' => 'Ek student ne naya support ticket khola hai: ":subject".',
     'ticket_replied_subject' => 'Naya reply: :subject',
     'ticket_replied_body' => 'Support ticket ":subject" par naya reply maujood hai.',
+    'discussion_reply_subject' => 'Naya discussion reply',
+    'discussion_reply_body' => 'Course discussion par naya reply aaya hai.',
+    'assignment_passed_subject' => 'Aap ka assignment pass ho gaya',
+    'assignment_passed_body' => 'Aap ke assignment ka jaiza liya gaya hai aur usay pass kar diya gaya hai.',
+    'assignment_needs_revision_subject' => 'Aap ke assignment mein revision darkar hai',
+    'assignment_needs_revision_body' => 'Aap ke assignment ka jaiza liya gaya hai aur usay revision ki zaroorat hai. Barah e karam check kar ke dobara submit karen.',
+    'batch_starting_subject' => 'Aap ka :course ka batch kal shuru ho raha hai',
+    'batch_starting_body' => '":course" ka batch ":batch" kal shuru ho raha hai. Tayyar rahen.',
 ];

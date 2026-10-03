@@ -15,4 +15,12 @@ return [
     'new_ticket_body' => 'ایک طالب علم نے نیا سپورٹ ٹکٹ کھولا ہے: ":subject"۔',
     'ticket_replied_subject' => 'نیا جواب: :subject',
     'ticket_replied_body' => 'سپورٹ ٹکٹ ":subject" پر نیا جواب موجود ہے۔',
+    'discussion_reply_subject' => 'نئی ڈسکشن کا جواب',
+    'discussion_reply_body' => 'کورس ڈسکشن پر ایک نیا جواب موجود ہے۔',
+    'assignment_passed_subject' => 'آپ کا اسائنمنٹ پاس ہو گیا',
+    'assignment_passed_body' => 'آپ کے اسائنمنٹ کا جائزہ لیا گیا ہے اور اسے پاس کر دیا گیا ہے۔',
+    'assignment_needs_revision_subject' => 'آپ کے اسائنمنٹ میں نظرثانی درکار ہے',
+    'assignment_needs_revision_body' => 'آپ کے اسائنمنٹ کا جائزہ لیا گیا ہے اور اس میں نظرثانی درکار ہے۔ براہ کرم چیک کر کے دوبارہ جمع کریں۔',
+    'batch_starting_subject' => ':course کا بیچ کل شروع ہو رہا ہے',
+    'batch_starting_body' => '":course" کا بیچ ":batch" کل شروع ہو رہا ہے۔ تیار رہیں۔',
 ];

@@ -8,9 +8,12 @@ use App\Modules\Course\Models\CourseBlockProgress;
 use App\Modules\Course\Models\CourseDiscussionReply;
 use App\Modules\Course\Models\CourseModule;
 use App\Modules\Course\Models\Enrollment;
+use App\Modules\Course\Notifications\DiscussionReplyPosted;
 use App\Modules\Course\Services\CourseCompletionService;
 use App\Support\Enums\EnrollmentStatus;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -203,12 +206,17 @@ class CourseLearn extends Component
             return;
         }
 
-        CourseDiscussionReply::create([
+        $reply = CourseDiscussionReply::create([
             'course_block_id' => $block->id,
             'user_id' => auth()->id(),
             'author_id' => auth()->id(),
             'body' => $body,
         ]);
+
+        Notification::send(
+            User::permission('consultations.respond')->get(),
+            new DiscussionReplyPosted($reply, postedByStudent: true),
+        );
 
         $this->discussionBody[$blockId] = '';
 

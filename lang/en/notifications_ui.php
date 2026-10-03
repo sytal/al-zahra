@@ -15,4 +15,12 @@ return [
     'new_ticket_body' => 'A student opened a new support ticket: ":subject".',
     'ticket_replied_subject' => 'New reply on: :subject',
     'ticket_replied_body' => 'There is a new reply on the support ticket ":subject".',
+    'discussion_reply_subject' => 'New discussion reply',
+    'discussion_reply_body' => 'There is a new reply on a course discussion.',
+    'assignment_passed_subject' => 'Your assignment was marked Pass',
+    'assignment_passed_body' => 'Your assignment submission has been reviewed and marked Pass.',
+    'assignment_needs_revision_subject' => 'Your assignment needs revision',
+    'assignment_needs_revision_body' => 'Your assignment submission has been reviewed and needs revision. Please check and resubmit.',
+    'batch_starting_subject' => 'Your batch for :course starts tomorrow',
+    'batch_starting_body' => 'The batch ":batch" for ":course" starts tomorrow. Make sure you are ready.',
 ];

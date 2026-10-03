@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('course_batch_id')->constrained()->cascadeOnDelete();
             $table->foreignId('enrollment_id')->unique()->constrained()->cascadeOnDelete();
-            $table->string('roll_number')->unique();
+            $table->string('roll_number')->nullable()->unique();
             $table->string('status');
             $table->unsignedInteger('waitlist_position')->nullable();
             $table->timestamps();

@@ -1,6 +1,7 @@
 <?php
 
 use App\Modules\Course\Exceptions\EnrollmentCapExceededException;
+use App\Modules\Course\Models\CourseBatch;
 use App\Modules\Course\Models\Enrollment;
 use App\Modules\Course\Notifications\EnrollmentStatusChanged;
 use App\Modules\Course\Services\EnrollmentService;
@@ -71,4 +72,39 @@ it('frees a slot when leaving a course, allowing a new enrollment', function () 
 
     expect($enrollmentThree->exists)->toBeTrue();
     expect(Enrollment::activeCourseCount($user))->toBe(2);
+});
+
+it('promotes the earliest waitlisted enrollment when a seat frees up', function () {
+    Notification::fake();
+
+    $course = makeCourse();
+    $batch = CourseBatch::create([
+        'course_id' => $course->id,
+        'label' => 'Batch 1',
+        'starts_at' => now()->addWeek(),
+        'seats' => 1,
+    ]);
+
+    $studentOne = userWithRole('student');
+    $studentTwo = userWithRole('student');
+
+    $service = app(EnrollmentService::class);
+    $enrollmentOne = $service->enroll($studentOne, $course, $batch);
+    $enrollmentTwo = $service->enroll($studentTwo, $course, $batch);
+
+    expect($enrollmentOne->batchEnrollment->status)->toBe('enrolled');
+    expect($enrollmentTwo->batchEnrollment->status)->toBe('waitlisted');
+
+    $service->leave($enrollmentOne);
+    $enrollmentTwo->refresh();
+
+    expect($enrollmentTwo->batchEnrollment->status)->toBe('enrolled');
+    expect($enrollmentTwo->batchEnrollment->roll_number)->not->toBeNull();
+    expect($enrollmentTwo->batchEnrollment->waitlist_position)->toBeNull();
+
+    Notification::assertSentTo(
+        $studentTwo,
+        EnrollmentStatusChanged::class,
+        fn ($notification) => $notification->status === 'enrolled'
+    );
 });

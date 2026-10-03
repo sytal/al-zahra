@@ -78,11 +78,46 @@ class EnrollmentService
     public function leave(Enrollment $enrollment): Enrollment
     {
         if ($enrollment->status !== EnrollmentStatus::COMPLETED) {
+            $freedBatchEnrollment = $enrollment->batchEnrollment;
+            $batch = ($freedBatchEnrollment && $freedBatchEnrollment->status === 'enrolled')
+                ? $enrollment->batch
+                : null;
+
             $enrollment->left_at = now();
             $enrollment->save();
+
+            if ($batch) {
+                $this->promoteFromWaitlist($batch);
+            }
         }
 
         return $enrollment;
+    }
+
+    /**
+     * Promotes the earliest waitlisted enrollment for a batch into the
+     * freed seat: flips status to enrolled, assigns a roll number, clears
+     * the waitlist position, and notifies the student (Phase 4/7).
+     */
+    public function promoteFromWaitlist(CourseBatch $batch): void
+    {
+        $next = $batch->batchEnrollments()
+            ->where('status', 'waitlisted')
+            ->orderBy('waitlist_position')
+            ->first();
+
+        if (! $next) {
+            return;
+        }
+
+        $next->status = 'enrolled';
+        $next->roll_number = $this->nextRollNumber($batch);
+        $next->waitlist_position = null;
+        $next->save();
+
+        $enrollment = $next->enrollment;
+
+        Notification::send($enrollment->user, new EnrollmentStatusChanged($enrollment, 'enrolled'));
     }
 
     protected function assignBatchSeat(Enrollment $enrollment, CourseBatch $batch): void

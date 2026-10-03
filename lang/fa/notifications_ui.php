@@ -15,4 +15,12 @@ return [
     'new_ticket_body' => 'یک دانش‌آموز تیکت پشتیبانی جدیدی باز کرده است: ":subject".',
     'ticket_replied_subject' => 'پاسخ جدید: :subject',
     'ticket_replied_body' => 'پاسخ جدیدی برای تیکت پشتیبانی ":subject" وجود دارد.',
+    'discussion_reply_subject' => 'پاسخ جدید در بحث',
+    'discussion_reply_body' => 'پاسخ جدیدی برای یک بحث دوره وجود دارد.',
+    'assignment_passed_subject' => 'تکلیف شما قبول شد',
+    'assignment_passed_body' => 'تکلیف شما بررسی شده و قبول شده است.',
+    'assignment_needs_revision_subject' => 'تکلیف شما نیاز به اصلاح دارد',
+    'assignment_needs_revision_body' => 'تکلیف شما بررسی شده و نیاز به اصلاح دارد. لطفاً بررسی و دوباره ارسال کنید.',
+    'batch_starting_subject' => 'گروه شما برای :course فردا شروع می‌شود',
+    'batch_starting_body' => 'گروه ":batch" برای ":course" فردا شروع می‌شود. آماده باشید.',
 ];

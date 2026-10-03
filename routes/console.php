@@ -9,3 +9,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::command('sitemap:generate')->dailyAt('02:00');
+Schedule::command('courses:batch-reminders')->dailyAt('08:00');
