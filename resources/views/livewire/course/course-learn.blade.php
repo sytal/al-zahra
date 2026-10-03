@@ -137,7 +137,7 @@
                                                 @endforeach
                                             </div>
                                             <form wire:submit="postDiscussionReply({{ $block->id }})" class="mt-4 space-y-2">
-                                                <x-textarea wire:model="discussionBody.{{ $block->id }}" rows="3" :placeholder="__('course_learn_ui.reply_placeholder')" />
+                                                <x-textarea name="discussion-reply-{{ $block->id }}" wire:model="discussionBody.{{ $block->id }}" rows="3" :placeholder="__('course_learn_ui.reply_placeholder')" />
                                                 <x-button type="submit" variant="primary" icon="paper-airplane">{{ __('course_learn_ui.post_reply') }}</x-button>
                                             </form>
                                         @break
