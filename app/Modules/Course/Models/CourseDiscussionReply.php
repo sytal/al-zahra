@@ -4,6 +4,7 @@ namespace App\Modules\Course\Models;
 
 use App\Models\User;
 use App\Support\Traits\HasActivityLog;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Activitylog\Support\LogOptions;
@@ -36,6 +37,16 @@ class CourseDiscussionReply extends Model
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    /**
+     * Restrict a discussion thread to the given student only -- every
+     * student sees just their own replies with the admin (Known bug
+     * pattern: discussion is private student<->admin, never shared).
+     */
+    public function scopeForStudent(Builder $query, int $userId): Builder
+    {
+        return $query->where('user_id', $userId);
     }
 
     public function getActivitylogOptions(): LogOptions

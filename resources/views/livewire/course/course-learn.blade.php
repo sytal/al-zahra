@@ -129,7 +129,7 @@
                                         @case('discussion')
                                             <p class="text-body">{{ $content['prompt'] ?? '' }}</p>
                                             <div class="mt-4 space-y-3">
-                                                @foreach ($block->discussionReplies()->where('user_id', auth()->id())->oldest()->get() as $reply)
+                                                @foreach ($block->discussionReplies()->forStudent(auth()->id())->oldest()->get() as $reply)
                                                     <div class="rounded-xl border border-subtle p-3 text-sm {{ $reply->author_id === auth()->id() ? 'bg-tint' : 'bg-surface-sunken' }}">
                                                         <p class="font-semibold text-strong">{{ $reply->author_id === auth()->id() ? __('course_learn_ui.you') : __('course_learn_ui.instructor') }}</p>
                                                         <p class="mt-1 text-body">{{ $reply->body }}</p>
