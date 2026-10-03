@@ -8,6 +8,12 @@ $totalMinutes = (int) $lessons->sum('duration_minutes');
 $modules = $course->modules()->with('blocks')->get();
 $moduleCount = $modules->count();
 $blockCount = $modules->sum(fn ($m) => $m->blocks->count());
+// Prefer the new module/block curriculum whenever it exists -- a course
+// migrated to modules keeps its old flat lessons as leftover data, but
+// the lessons view must not take precedence over the course-builder UI.
+if ($moduleCount) {
+    $lessonCount = 0;
+}
 $blockTypeIcons = [
     'reading' => 'book-open',
     'research_reading' => 'book-open',
