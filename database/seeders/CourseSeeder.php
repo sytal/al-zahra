@@ -54,8 +54,6 @@ class CourseSeeder extends Seeder
                 'tr' => ['ur' => 'زبان کی جانچ کی اعلیٰ تکنیکیں', 'hi' => 'भाषा मूल्यांकन की उन्नत तकनीकें', 'fa' => 'فنون پیشرفته ارزیابی زبان', 'ur-roman' => 'Zaban ki jaanch ki aala techniquein'],
                 'audience' => CourseAudience::PROFESSIONALS,
                 'level' => CourseLevel::ADVANCED,
-                'is_free' => false,
-                'price' => 49.00,
                 // Module/block mix 3 (deliberately different set): reading, graded_quiz, research_paper, practical_quiz, discussion
                 'modules' => [
                     ['title' => 'Assessment Theory', 'blocks' => ['reading', 'graded_quiz']],
@@ -69,9 +67,7 @@ class CourseSeeder extends Seeder
                 'tr' => ['ur' => 'بچوں میں زبان کے عارضے کی اسکریننگ', 'hi' => 'बाल भाषा विकार जांच', 'fa' => 'غربالگری اختلالات زبانی کودکان', 'ur-roman' => 'Bachon mein zaban ke arze ki screening'],
                 'audience' => CourseAudience::PROFESSIONALS,
                 'level' => CourseLevel::INTERMEDIATE,
-                'is_free' => false,
-                'price' => 29.00,
-                // Scenario: paid, self-paced (no batch at all)
+                // Scenario: free, self-paced (no batch at all)
                 'modules' => [
                     ['title' => 'Screening Basics', 'blocks' => ['reading', 'practical_quiz']],
                     ['title' => 'Tools and Checklists', 'blocks' => ['case_study', 'assignment']],
