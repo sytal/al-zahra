@@ -38,7 +38,9 @@ $facts = array_filter([
     ['icon' => 'user-group', 'label' => __('courses_ui.fact_audience'), 'value' => $audienceLabel],
     ['icon' => 'users', 'label' => __('courses_ui.fact_learners'), 'value' => number_format((int) $course->enrolled_count)],
 ]);
-$learnUrl = route('dashboard.courses.learn', ['locale' => $locale, 'course' => $course->slug]);
+$learnUrl = $moduleCount
+    ? route('dashboard.courses.study', ['locale' => $locale, 'course' => $course->slug])
+    : route('dashboard.courses.learn', ['locale' => $locale, 'course' => $course->slug]);
 $enrollUrl = route('courses.enroll', ['locale' => $locale, 'slug' => $course->slug]);
 $faq = [
     ['q' => __('courses_ui.faq_who_q'), 'a' => __('courses_ui.faq_who_a', ['audience' => $audienceLabel, 'level' => $levelLabel])],

@@ -84,7 +84,9 @@
                             $total = (int) ($course->lessons_count ?? 0);
                             $doneCount = $isDone ? $total : (int) round($total * $enrollment->progress_percent / 100);
                             $cover = $course->getFirstMediaUrl('cover_image', 'card');
-                            $learnUrl = route('dashboard.courses.learn', ['locale' => $locale, 'course' => $course->slug]);
+                            $learnUrl = $course->modules()->exists()
+                                ? route('dashboard.courses.study', ['locale' => $locale, 'course' => $course->slug])
+                                : route('dashboard.courses.learn', ['locale' => $locale, 'course' => $course->slug]);
                         @endphp
                         <li class="min-w-0" wire:key="enr-{{ $enrollment->id }}">
                             <article class="card-surface card-hover group relative flex h-full flex-col overflow-hidden {{ $isDone ? 'gradient-border-gold' : '' }}">

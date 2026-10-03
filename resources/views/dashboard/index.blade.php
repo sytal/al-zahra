@@ -58,8 +58,11 @@ $hasCourses = $inProgress->isNotEmpty();
                             @foreach ($inProgress as $enrollment)
                                 @php
                                 $pd = $progressData[$enrollment->id] ?? ['total' => 0, 'done' => 0, 'next' => null];
-                                $learn = route('dashboard.courses.learn', ['locale' => $locale, 'course' => $enrollment->course->slug]);
-                                $nextUrl = $pd['next'] ? route('dashboard.courses.lesson', ['locale' => $locale, 'course' => $enrollment->course->slug, 'lesson' => $pd['next']->uuid]) : $learn;
+                                $hasModules = $enrollment->course->modules()->exists();
+                                $learn = $hasModules
+                                    ? route('dashboard.courses.study', ['locale' => $locale, 'course' => $enrollment->course->slug])
+                                    : route('dashboard.courses.learn', ['locale' => $locale, 'course' => $enrollment->course->slug]);
+                                $nextUrl = (! $hasModules && $pd['next']) ? route('dashboard.courses.lesson', ['locale' => $locale, 'course' => $enrollment->course->slug, 'lesson' => $pd['next']->uuid]) : $learn;
                                 @endphp
                                 <article class="card-surface card-hover group relative flex min-w-0 flex-col gap-4 overflow-hidden p-5">
                                     <span class="glow-teal opacity-40" style="--glow-size: 10rem; inset-inline-end: -3rem; top: -4rem" aria-hidden="true"></span>
