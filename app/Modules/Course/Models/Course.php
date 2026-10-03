@@ -99,6 +99,16 @@ class Course extends Model implements HasMedia
         return $this->hasMany(CourseLesson::class);
     }
 
+    public function modules(): HasMany
+    {
+        return $this->hasMany(CourseModule::class)->orderBy('sort_order');
+    }
+
+    public function batches(): HasMany
+    {
+        return $this->hasMany(CourseBatch::class);
+    }
+
     /**
      * Explicit cache invalidation on save/delete (docs/CLAUDE.md Section 13).
      * Only the slug-detail key is forgotten here since list-cache keys are
