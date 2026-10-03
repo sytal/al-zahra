@@ -99,6 +99,62 @@ class CourseForm
 
                     ]),
 
+                Section::make(__('admin_ui.l.prerequisites'))
+                    ->icon('heroicon-o-clipboard-document-check')
+                    ->columnSpanFull()
+                    ->components([
+                Repeater::make('prerequisites')
+                    ->label(__('admin_ui.l.prerequisites'))
+                    ->simple(TextInput::make('prerequisite')->required())
+                    ->default([])
+                    ->addActionLabel(__('admin_ui.l.add_prerequisite')),
+                    ]),
+
+                Section::make(__('admin_ui.l.course_resources'))
+                    ->icon('heroicon-o-paper-clip')
+                    ->columnSpanFull()
+                    ->components([
+                Repeater::make('course_resources')
+                    ->label(__('admin_ui.l.course_resources'))
+                    ->schema([
+                        TextInput::make('label')
+                            ->label(__('admin_ui.l.label'))
+                            ->required(),
+
+                        Select::make('kind')
+                            ->label(__('admin_ui.l.kind'))
+                            ->options([
+                                'file' => __('admin_ui.enum.file'),
+                                'link' => __('admin_ui.enum.link'),
+                                'note' => __('admin_ui.enum.note'),
+                            ])
+                            ->native(false)
+                            ->live()
+                            ->required(),
+
+                        FileUpload::make('file')
+                            ->label(__('admin_ui.l.resource_file'))
+                            ->disk('public')
+                            ->directory('uploads/courses/resources')
+                            ->visible(fn (callable $get) => $get('kind') === 'file')
+                            ->required(fn (callable $get) => $get('kind') === 'file'),
+
+                        TextInput::make('url')
+                            ->label(__('admin_ui.l.external_url'))
+                            ->url()
+                            ->visible(fn (callable $get) => $get('kind') === 'link')
+                            ->required(fn (callable $get) => $get('kind') === 'link'),
+
+                        Textarea::make('note')
+                            ->label(__('admin_ui.l.note'))
+                            ->rows(2)
+                            ->visible(fn (callable $get) => $get('kind') === 'note')
+                            ->required(fn (callable $get) => $get('kind') === 'note'),
+                    ])
+                    ->default([])
+                    ->addActionLabel(__('admin_ui.l.add_resource')),
+                    ]),
+
                 Section::make(__('admin_ui.l.media'))
                     ->icon('heroicon-o-photo')
                     ->columnSpanFull()

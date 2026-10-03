@@ -42,6 +42,8 @@ class Course extends Model implements HasMedia
         'enrolled_count',
         'meta_title',
         'meta_description',
+        'prerequisites',
+        'course_resources',
     ];
 
     public array $translatable = [
@@ -61,6 +63,8 @@ class Course extends Model implements HasMedia
             'is_free' => 'boolean',
             'is_published' => 'boolean',
             'price' => 'decimal:2',
+            'prerequisites' => 'array',
+            'course_resources' => 'array',
         ];
     }
 
