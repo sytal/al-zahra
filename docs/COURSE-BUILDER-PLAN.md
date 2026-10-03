@@ -320,15 +320,15 @@ picks which of these two modes when creating the block, per activity.
     of this up automatically — nothing here needs a separate "course
     activity" screen, it already flows into the one activity log.
 
-## PART E — One remaining open point
+## PART E — Resolved
 
-1. **Voluntary "leave a course early":** Part C point 6 assumes a student
-   can only free up one of their 2 enrollment slots by *finishing* a
-   course — there is no button to drop/abandon an unfinished course. If
-   you want students to be able to voluntarily leave an unfinished course
-   (to free a slot without completing it), say so — it's a small addition
-   (one button + an "unenrolled" state) on top of what's planned, not a
-   blocker to starting the rest.
+1. **Voluntary "leave a course early": confirmed, add it.** A student can
+   click "Leave this course" on an in-progress (not yet completed) course
+   from My Courses. This immediately frees one of their 2 enrollment
+   slots. Their progress on that course is kept (not deleted) in case
+   they re-enroll later — re-enrolling resumes where they left off rather
+   than starting over. Leaving does not affect certificate/completed
+   courses (those are already outside the 2-slot cap and cannot be
+   "left").
 
-Everything else in this document reflects your answers and is ready to
-build against.
+This document is final and ready to build against.
