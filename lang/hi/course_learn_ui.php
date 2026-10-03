@@ -1,0 +1,36 @@
+<?php
+
+// TODO: verify native translation
+
+return [
+    'already_completed' => 'यह कोर्स पूरा हो चुका है — अपने सर्टिफिकेट में देखें।',
+    'locked_hint' => 'इस ब्लॉक को अनलॉक करने के लिए ऊपर वाला ब्लॉक पूरा करें।',
+    'mark_done' => 'पूर्ण के रूप में चिह्नित करें',
+    'modules' => 'मॉड्यूल',
+    'submit_quiz' => 'उत्तर जमा करें',
+    'quiz_score' => 'आपका स्कोर: :score%',
+    'you' => 'आप',
+    'instructor' => 'प्रशिक्षक',
+    'reply_placeholder' => 'अपना जवाब लिखें...',
+    'post_reply' => 'जवाब भेजें',
+    'due_date' => 'नियत तारीख :date',
+    'submit_assignment' => 'जमा करें',
+    'status_not_submitted' => 'जमा नहीं हुआ',
+    'status_submitted' => 'जमा हुआ — समीक्षा की प्रतीक्षा',
+    'status_pass' => 'समीक्षा पूर्ण — पास',
+    'status_needs_revision' => 'समीक्षा पूर्ण — पुनः कार्य आवश्यक',
+    'type_reading' => 'रीडिंग',
+    'type_research_reading' => 'शोध रीडिंग',
+    'type_practical_quiz' => 'प्रैक्टिकल क्विज़',
+    'type_graded_quiz' => 'ग्रेडेड क्विज़',
+    'type_case_study' => 'केस स्टडी',
+    'type_research_paper' => 'शोध पत्र',
+    'type_case_analysis' => 'केस विश्लेषण',
+    'type_discussion' => 'चर्चा',
+    'type_assignment' => 'असाइनमेंट',
+    'type_research_activity' => 'शोध गतिविधि',
+    'leave_course' => 'यह कोर्स छोड़ें',
+    'leave_confirm' => 'छोड़ने से एक स्लॉट खाली हो जाता है। आपकी प्रगति सुरक्षित रहती है — फिर से नामांकन करने पर वहीं से जारी होगा।',
+    'enrollment_cap_title' => 'आप एक समय में केवल 2 कोर्स में नामांकित हो सकते हैं।',
+    'enrollment_cap_body' => 'नया कोर्स लेने के लिए अपना कोई एक चालू कोर्स पूरा करें।',
+];

@@ -1,0 +1,36 @@
+<?php
+
+// TODO: verify native translation
+
+return [
+    'already_completed' => 'این دوره قبلاً تکمیل شده است — در گواهینامه‌های خود ببینید.',
+    'locked_hint' => 'برای باز کردن این بخش، بخش قبلی را تکمیل کنید.',
+    'mark_done' => 'علامت‌گذاری به عنوان انجام‌شده',
+    'modules' => 'ماژول‌ها',
+    'submit_quiz' => 'ارسال پاسخ‌ها',
+    'quiz_score' => 'امتیاز شما: :score%',
+    'you' => 'شما',
+    'instructor' => 'مدرس',
+    'reply_placeholder' => 'پاسخ خود را بنویسید...',
+    'post_reply' => 'ارسال پاسخ',
+    'due_date' => 'مهلت :date',
+    'submit_assignment' => 'ارسال',
+    'status_not_submitted' => 'ارسال نشده',
+    'status_submitted' => 'ارسال‌شده — در انتظار بررسی',
+    'status_pass' => 'بررسی‌شده — قبول',
+    'status_needs_revision' => 'بررسی‌شده — نیاز به بازبینی',
+    'type_reading' => 'مطالعه',
+    'type_research_reading' => 'مطالعه پژوهشی',
+    'type_practical_quiz' => 'آزمون عملی',
+    'type_graded_quiz' => 'آزمون نمره‌دار',
+    'type_case_study' => 'مطالعه موردی',
+    'type_research_paper' => 'مقاله پژوهشی',
+    'type_case_analysis' => 'تحلیل موردی',
+    'type_discussion' => 'بحث',
+    'type_assignment' => 'تکلیف',
+    'type_research_activity' => 'فعالیت پژوهشی',
+    'leave_course' => 'ترک این دوره',
+    'leave_confirm' => 'ترک کردن یک جای خالی آزاد می‌کند. پیشرفت شما حفظ می‌شود — ثبت‌نام دوباره از همان‌جا ادامه می‌یابد.',
+    'enrollment_cap_title' => 'شما می‌توانید حداکثر در ۲ دوره به‌طور همزمان ثبت‌نام کنید.',
+    'enrollment_cap_body' => 'برای ثبت‌نام در دوره جدید، یکی از دوره‌های جاری خود را تکمیل کنید.',
+];

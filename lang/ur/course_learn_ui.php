@@ -1,0 +1,36 @@
+<?php
+
+// TODO: verify native translation
+
+return [
+    'already_completed' => 'یہ کورس مکمل ہو چکا ہے — اپنے سرٹیفکیٹس میں دیکھیں۔',
+    'locked_hint' => 'اس بلاک کو کھولنے کے لیے پچھلا بلاک مکمل کریں۔',
+    'mark_done' => 'مکمل نشان زد کریں',
+    'modules' => 'ماڈیولز',
+    'submit_quiz' => 'جوابات جمع کریں',
+    'quiz_score' => 'آپ کا سکور: :score%',
+    'you' => 'آپ',
+    'instructor' => 'انسٹرکٹر',
+    'reply_placeholder' => 'اپنا جواب لکھیں...',
+    'post_reply' => 'جواب بھیجیں',
+    'due_date' => 'آخری تاریخ :date',
+    'submit_assignment' => 'جمع کریں',
+    'status_not_submitted' => 'جمع نہیں ہوا',
+    'status_submitted' => 'جمع شدہ — جائزے کا انتظار',
+    'status_pass' => 'جائزہ مکمل — پاس',
+    'status_needs_revision' => 'جائزہ مکمل — دوبارہ کام درکار',
+    'type_reading' => 'مطالعہ',
+    'type_research_reading' => 'تحقیقی مطالعہ',
+    'type_practical_quiz' => 'عملی کوئز',
+    'type_graded_quiz' => 'گریڈڈ کوئز',
+    'type_case_study' => 'کیس اسٹڈی',
+    'type_research_paper' => 'تحقیقی مقالہ',
+    'type_case_analysis' => 'کیس تجزیہ',
+    'type_discussion' => 'گفتگو',
+    'type_assignment' => 'اسائنمنٹ',
+    'type_research_activity' => 'تحقیقی سرگرمی',
+    'leave_course' => 'یہ کورس چھوڑ دیں',
+    'leave_confirm' => 'چھوڑنے سے ایک سلاٹ خالی ہو جاتا ہے۔ آپ کی پیش رفت محفوظ رہتی ہے — دوبارہ داخلہ لینے پر وہیں سے جاری ہوگا۔',
+    'enrollment_cap_title' => 'آپ ایک وقت میں صرف 2 کورسز میں داخل ہو سکتے ہیں۔',
+    'enrollment_cap_body' => 'نیا کورس لینے کے لیے اپنا کوئی ایک جاری کورس مکمل کریں۔',
+];
