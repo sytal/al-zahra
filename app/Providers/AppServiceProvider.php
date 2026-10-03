@@ -50,7 +50,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Schema::defaultStringLength(191);
+        // 191 (the usual Laravel/utf8mb4 fix) is still too long for this
+        // MySQL server's key-length limit once 2+ string columns land in
+        // the same composite index (e.g. the stock failed_jobs
+        // [connection, queue, failed_at] index: 191*4 bytes x2 > 1000).
+        // 100 keeps every such index safely under that limit.
+        Schema::defaultStringLength(100);
 
         \Livewire\Livewire::addPersistentMiddleware([\App\Http\Middleware\SetLocale::class]);
 
