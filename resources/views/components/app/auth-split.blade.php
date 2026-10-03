@@ -57,12 +57,10 @@ $trust = [
                 <a href="{{ route('home', $locale) }}" wire:navigate class="focus-ring inline-flex items-center rounded-lg {{ $centered ? '' : 'lg:hidden' }}" aria-label="{{ config('app.name') }}">
                     <x-app.brand />
                 </a>
-                @unless ($centered)
-                    <a href="{{ route('home', $locale) }}" wire:navigate class="link-underline hidden items-center gap-2 text-sm font-medium text-body transition duration-fast hover:text-strong lg:inline-flex">
-                        <x-icon name="arrow-left" class="size-4 rtl:-scale-x-100" />
-                        {{ __('shell_app.back_home') }}
-                    </a>
-                @endunless
+                <a href="{{ route('home', $locale) }}" wire:navigate class="link-underline inline-flex items-center gap-2 text-sm font-medium text-body transition duration-fast hover:text-strong {{ $centered ? '' : 'hidden lg:inline-flex' }}">
+                    <x-icon name="arrow-left" class="size-4 rtl:-scale-x-100" />
+                    {{ __('shell_app.back_home') }}
+                </a>
                 <div class="flex items-center gap-1" role="group" aria-label="{{ __('shell_app.controls') }}">
                     <x-theme-toggle />
                     <x-language-switcher />

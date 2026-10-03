@@ -4,7 +4,7 @@ use App\Modules\Setting\Models\Setting;
 $settingText = function (string $key) {
     $v = Setting::where('key', $key)->value('value');
     if (is_array($v)) {
-        $v = implode(', ', array_filter($v, 'is_scalar'));
+        $v = $v[app()->getLocale()] ?? $v['en'] ?? reset($v);
     }
     $v = is_scalar($v) ? trim((string) $v) : '';
 
