@@ -3,8 +3,10 @@
 namespace App\Modules\Course\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Course\Exceptions\EnrollmentCapExceededException;
 use App\Modules\Course\Repositories\CourseRepositoryInterface;
 use App\Modules\Course\Services\CourseService;
+use App\Modules\Course\Services\EnrollmentService;
 use App\Support\SeoSchema;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,6 +17,7 @@ class CourseController extends Controller
     public function __construct(
         private readonly CourseRepositoryInterface $repository,
         private readonly CourseService $service,
+        private readonly EnrollmentService $enrollmentService,
     ) {}
 
     public function show(Request $request, string $locale, string $slug): View
@@ -39,7 +42,19 @@ class CourseController extends Controller
     {
         $course = $this->repository->findPublishedBySlug($slug) ?? abort(404);
 
-        $this->service->enroll($request->user(), $course);
+        // If the course has exactly one batch, it is the obvious/only
+        // choice and gets auto-selected (docs/COURSE-BUILDER-PLAN.md
+        // Part C point 5). Courses with 0 or 2+ batches enroll self-paced
+        // here; a batch picker for 2+ open batches is not built yet.
+        $batch = $course->batches()->count() === 1 ? $course->batches()->first() : null;
+
+        try {
+            $this->enrollmentService->enroll($request->user(), $course, $batch);
+        } catch (EnrollmentCapExceededException $e) {
+            return redirect()
+                ->route('courses.show', ['locale' => $locale, 'slug' => $course->slug])
+                ->with('error', $e->getMessage());
+        }
 
         return redirect()
             ->route('courses.show', ['locale' => $locale, 'slug' => $course->slug])

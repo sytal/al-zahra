@@ -284,4 +284,12 @@ $faq = [
             </div>
         </div>
     </div>
+
+    @if (session('success') || session('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', () => window.dispatchEvent(new CustomEvent('toast', {
+                detail: { type: '{{ session('success') ? 'success' : 'danger' }}', message: @json(session('success') ?? session('error')) },
+            })));
+        </script>
+    @endif
 </x-layouts.public>
