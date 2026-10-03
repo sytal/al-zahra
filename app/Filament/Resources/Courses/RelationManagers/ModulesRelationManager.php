@@ -158,7 +158,7 @@ class ModulesRelationManager extends RelationManager
 
                         FileUpload::make('content.files')
                             ->label(__('admin_ui.l.files'))
-                            ->disk('public')
+                            ->disk('public_media')
                             ->directory('uploads/courses/assignments')
                             ->multiple()
                             ->visible(fn (callable $get) => $get('type') === 'assignment'),
@@ -227,11 +227,11 @@ class ModulesRelationManager extends RelationManager
         }
 
         foreach ($paths as $path) {
-            if (! is_string($path) || ! Storage::disk('public')->exists($path)) {
+            if (! is_string($path) || ! Storage::disk('public_media')->exists($path)) {
                 continue;
             }
 
-            $record->addMediaFromDisk($path, 'public')->toMediaCollection('attachments');
+            $record->addMediaFromDisk($path, 'public_media')->toMediaCollection('attachments');
         }
 
         $content = $record->content ?? [];

@@ -26,12 +26,12 @@ class CreateDirector extends CreateRecord
     protected function afterCreate(): void
     {
         if ($this->profilePhotoPath) {
-            $this->record->addMediaFromDisk($this->profilePhotoPath, config('filesystems.default'))
+            $this->record->addMediaFromDisk($this->profilePhotoPath, 'public_media')
                 ->toMediaCollection('profile_photo');
         }
 
         if ($this->coverPhotoPath) {
-            $this->record->addMediaFromDisk($this->coverPhotoPath, config('filesystems.default'))
+            $this->record->addMediaFromDisk($this->coverPhotoPath, 'public_media')
                 ->toMediaCollection('cover_photo');
         }
     }

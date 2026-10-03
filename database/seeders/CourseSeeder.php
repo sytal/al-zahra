@@ -8,7 +8,6 @@ use App\Modules\Course\Models\Course;
 use App\Support\Enums\CategoryType;
 use App\Support\Enums\CourseAudience;
 use App\Support\Enums\CourseLevel;
-use App\Support\Enums\LessonContentType;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -23,229 +22,144 @@ class CourseSeeder extends Seeder
             return;
         }
 
-        $courses = [
-            [
-                'title' => 'Foundations of Bilingual Development',
-                'tr' => ['ur' => 'دو لسانی نشوونما کی بنیادیں', 'hi' => 'द्विभाषी विकास की बुनियाद', 'fa' => 'مبانی رشد دوزبانگی', 'ur-roman' => 'Do lisani nashonuma ki bunyadein'],
-                'audience' => CourseAudience::PARENTS,
-                'level' => CourseLevel::BEGINNER,
-                // Module/block mix 1: reading, discussion, practical_quiz, case_study, assignment, research_activity
-                'modules' => [
-                    ['title' => 'Getting Started', 'blocks' => ['reading', 'discussion']],
-                    ['title' => 'Applying the Ideas', 'blocks' => ['practical_quiz', 'case_study']],
-                    ['title' => 'Putting It Into Practice', 'blocks' => ['assignment', 'research_activity']],
-                ],
-            ],
-            [
-                'title' => 'Neurolinguistics for Educators',
-                'tr' => ['ur' => 'اساتذہ کے لیے اعصابی لسانیات', 'hi' => 'शिक्षकों के लिए तंत्रिका भाषाविज्ञान', 'fa' => 'زبان‌شناسی عصبی برای معلمان', 'ur-roman' => 'Asatiza ke liye asabi lisaniyat'],
-                'audience' => CourseAudience::TEACHERS,
-                'level' => CourseLevel::INTERMEDIATE,
-                // Module/block mix 2 (deliberately different set): research_reading, graded_quiz, discussion, case_analysis, research_activity, assignment
-                'modules' => [
-                    ['title' => 'The Research Base', 'blocks' => ['research_reading']],
-                    ['title' => 'Checking Understanding', 'blocks' => ['graded_quiz', 'discussion']],
-                    ['title' => 'Classroom Scenarios', 'blocks' => ['case_analysis']],
-                    ['title' => 'Independent Work', 'blocks' => ['research_activity', 'assignment']],
-                ],
-            ],
-            [
-                'title' => 'Advanced Language Assessment Techniques',
-                'tr' => ['ur' => 'زبان کی جانچ کی اعلیٰ تکنیکیں', 'hi' => 'भाषा मूल्यांकन की उन्नत तकनीकें', 'fa' => 'فنون پیشرفته ارزیابی زبان', 'ur-roman' => 'Zaban ki jaanch ki aala techniquein'],
-                'audience' => CourseAudience::PROFESSIONALS,
-                'level' => CourseLevel::ADVANCED,
-                // Module/block mix 3 (deliberately different set): reading, graded_quiz, research_paper, practical_quiz, discussion
-                'modules' => [
-                    ['title' => 'Assessment Theory', 'blocks' => ['reading', 'graded_quiz']],
-                    ['title' => 'Research Literature', 'blocks' => ['research_paper']],
-                    ['title' => 'Live Practice', 'blocks' => ['practical_quiz', 'discussion']],
-                ],
-                'batch' => ['seats' => 2],
-            ],
-            [
-                'title' => 'Child Language Disorders Screening',
-                'tr' => ['ur' => 'بچوں میں زبان کے عارضے کی اسکریننگ', 'hi' => 'बाल भाषा विकार जांच', 'fa' => 'غربالگری اختلالات زبانی کودکان', 'ur-roman' => 'Bachon mein zaban ke arze ki screening'],
-                'audience' => CourseAudience::PROFESSIONALS,
-                'level' => CourseLevel::INTERMEDIATE,
-                // Scenario: free, self-paced (no batch at all)
-                'modules' => [
-                    ['title' => 'Screening Basics', 'blocks' => ['reading', 'practical_quiz']],
-                    ['title' => 'Tools and Checklists', 'blocks' => ['case_study', 'assignment']],
-                ],
-            ],
-            [
-                'title' => 'Research Methods in Speech Therapy',
-                'tr' => ['ur' => 'اسپیچ تھراپی میں تحقیقی طریقے', 'hi' => 'स्पीच थेरेपी में शोध विधियाँ', 'fa' => 'روش‌های پژوهش در گفتاردرمانی', 'ur-roman' => 'Speech therapy mein tehqeeqi tareeqe'],
-                'audience' => CourseAudience::PROFESSIONALS,
-                'level' => CourseLevel::ADVANCED,
-                // Scenario: free, WITH a batch that is already full at seed time (waitlist path testable immediately)
-                'modules' => [
-                    ['title' => 'Designing a Study', 'blocks' => ['research_reading', 'graded_quiz']],
-                    ['title' => 'Ethics and Rigor', 'blocks' => ['discussion', 'research_paper']],
-                ],
-                'batch' => ['seats' => 1, 'fill' => true],
-            ],
+        $courses = $this->loadCourseData();
+        $titles = require base_path('database/seeders/data/course_titles_tr.php');
+
+        // One designated course keeps a small open batch and another a
+        // batch already filled at seed time, so the batch/waitlist paths
+        // (docs/COURSE-BUILDER-PLAN.md Part C point 5) stay observable
+        // right after seeding without manual setup. Every course is free
+        // per the standing "no paid courses for now" instruction.
+        $batchSlugs = [
+            Str::slug($courses[2]['title']) => ['seats' => 2],
+            Str::slug($courses[9]['title']) => ['seats' => 1, 'fill' => true],
         ];
 
-        $short = [
-            'ur' => 'ایک عملی، ثبوت پر مبنی کورس۔',
-            'hi' => 'एक व्यावहारिक, प्रमाण-आधारित पाठ्यक्रम।',
-            'fa' => 'یک دوره کاربردی و مبتنی بر شواهد.',
-            'ur-roman' => 'Aik amli, saboot par mabni course.',
-        ];
-        $full = [
-            'ur' => '<p>کورس کی مکمل تفصیل ڈائریکٹر کے جائزے کے بعد شامل کی جائے گی۔</p>',
-            'hi' => '<p>पाठ्यक्रम का पूरा विवरण निदेशक की समीक्षा के बाद जोड़ा जाएगा।</p>',
-            'fa' => '<p>توضیحات کامل دوره پس از بازبینی مدیر افزوده خواهد شد.</p>',
-            'ur-roman' => '<p>Course ki mukammal tafseel director ke jaize ke baad shamil ki jayegi.</p>',
-        ];
-        $outcomes = [
-            'ur' => ['بنیادی تصورات کو سمجھنا', 'تکنیکوں کو حقیقی ماحول میں استعمال کرنا', 'نتائج کا تنقیدی جائزہ لینا'],
-            'hi' => ['मूल अवधारणाओं को समझना', 'तकनीकों को वास्तविक परिस्थितियों में लागू करना', 'परिणामों का आलोचनात्मक मूल्यांकन करना'],
-            'fa' => ['درک مفاهیم پایه', 'به‌کارگیری فنون در محیط‌های واقعی', 'ارزیابی انتقادی نتایج'],
-            'ur-roman' => ['Bunyadi tasawwurat ko samajhna', 'Techniquon ko haqeeqi mahol mein istemal karna', 'Nataij ka tanqeedi jaiza lena'],
-        ];
-        $prerequisites = [
-            'en' => ['Basic literacy in the language of instruction', 'Access to a computer with internet'],
-        ];
-        $courseResources = [
-            ['label' => 'Reference glossary', 'kind' => 'note', 'value' => 'Key terms used throughout the course.'],
-            ['label' => 'Institute resource library', 'kind' => 'link', 'value' => 'https://alzahra.institute/resources'],
-        ];
-        $lessonWord = ['ur' => 'سبق', 'hi' => 'पाठ', 'fa' => 'درس', 'ur-roman' => 'Sabaq'];
-        $lessonBody = [
-            'ur' => '<p>سبق کا مواد جلد شامل کیا جائے گا۔</p>',
-            'hi' => '<p>पाठ की सामग्री जल्द जोड़ी जाएगी।</p>',
-            'fa' => '<p>محتوای درس به‌زودی افزوده می‌شود.</p>',
-            'ur-roman' => '<p>Sabaq ka mawad jald shamil kiya jayega.</p>',
-        ];
-        $moduleWord = ['ur' => 'ماڈیول', 'hi' => 'मॉड्यूल', 'fa' => 'ماژول', 'ur-roman' => 'Module'];
-        $moduleDescWord = [
-            'ur' => 'اس ماڈیول میں عملی مشقیں شامل ہیں۔',
-            'hi' => 'इस मॉड्यूल में व्यावहारिक अभ्यास शामिल हैं।',
-            'fa' => 'این ماژول شامل تمرین‌های کاربردی است.',
-            'ur-roman' => 'Is module mein amli mashqain shamil hain.',
-        ];
-        $blockWord = ['ur' => 'بلاک', 'hi' => 'ब्लॉक', 'fa' => 'بلوک', 'ur-roman' => 'Block'];
-
-        foreach ($courses as $data) {
+        foreach ($courses as $index => $data) {
             $slug = Str::slug($data['title']);
-            $shortLocales = ['en' => $data['title'].' — a practical, evidence-based course.'];
-            $fullLocales = ['en' => '<p>Full course description pending director review.</p>'];
-            $outcomeLocales = ['en' => ['Understand core concepts', 'Apply techniques in real settings', 'Evaluate outcomes critically']];
-            foreach ($data['tr'] as $locale => $translated) {
-                $shortLocales[$locale] = $translated.': '.$short[$locale];
-                $fullLocales[$locale] = $full[$locale];
-                $outcomeLocales[$locale] = $outcomes[$locale];
-            }
+            $tr = $titles[$data['title']] ?? [];
+
+            $titleLocales = ['en' => $data['title']] + $tr;
+            $shortLocales = ['en' => $data['short_desc']] + $this->translatedShortDesc($tr);
+            $fullLocales = ['en' => '<p>'.$data['short_desc'].'</p>'] + $this->translatedFullDesc($tr);
+            $outcomeLocales = ['en' => $data['outcomes']] + $this->translatedOutcomes($tr);
 
             $course = Course::firstOrCreate(
                 ['slug' => $slug],
                 [
                     'category_id' => $category?->id,
                     'instructor_id' => $instructor->id,
-                    'title' => ['en' => $data['title']] + $data['tr'],
+                    'title' => $titleLocales,
                     'short_description' => $shortLocales,
                     'full_description' => $fullLocales,
-                    'level' => $data['level'],
-                    'audience' => $data['audience'],
+                    'level' => CourseLevel::from($data['level']),
+                    'audience' => CourseAudience::from($data['audience']),
                     'learning_outcomes' => $outcomeLocales,
                     'estimated_duration_hours' => 6,
-                    'is_free' => $data['is_free'] ?? true,
-                    'price' => $data['price'] ?? null,
+                    'is_free' => true,
+                    'price' => null,
                     'is_published' => true,
-                    'prerequisites' => $prerequisites['en'],
-                    'course_resources' => $courseResources,
+                    'prerequisites' => ['Basic literacy in the language of instruction', 'Access to a computer with internet'],
+                    'course_resources' => [
+                        ['label' => 'Reference glossary', 'kind' => 'note', 'value' => 'Key terms used throughout the course.'],
+                        ['label' => 'Institute resource library', 'kind' => 'link', 'value' => 'https://alzahra.institute/resources'],
+                    ],
                 ]
             );
 
-            if ($course->lessons()->count() === 0) {
-                for ($i = 1; $i <= 5; $i++) {
-                    $lessonTitles = ['en' => "Lesson {$i}: ".$data['title']];
-                    foreach ($data['tr'] as $locale => $translated) {
-                        $lessonTitles[$locale] = "{$lessonWord[$locale]} {$i}: {$translated}";
-                    }
-
-                    $course->lessons()->create([
-                        'title' => $lessonTitles,
-                        'content_type' => LessonContentType::TEXT,
-                        'body' => ['en' => '<p>Lesson content placeholder.</p>'] + $lessonBody,
-                        'duration_minutes' => 15,
-                        'is_preview' => $i === 1,
-                        'sort_order' => $i,
-                    ]);
-                }
-            }
-
             if ($course->modules()->count() === 0) {
-                foreach ($data['modules'] as $moduleIndex => $moduleData) {
-                    $moduleNumber = $moduleIndex + 1;
-                    $moduleTitles = ['en' => "Module {$moduleNumber}: {$moduleData['title']}"];
-                    $moduleDescriptions = ['en' => "This module covers {$moduleData['title']} through a mix of hands-on activities."];
-                    foreach ($data['tr'] as $locale => $translated) {
-                        $moduleTitles[$locale] = "{$moduleWord[$locale]} {$moduleNumber}: {$moduleData['title']}";
-                        $moduleDescriptions[$locale] = $moduleDescWord[$locale];
-                    }
-
-                    $module = $course->modules()->create([
-                        'title' => $moduleTitles,
-                        'description' => $moduleDescriptions,
-                        'sort_order' => $moduleNumber,
-                    ]);
-
-                    foreach ($moduleData['blocks'] as $blockIndex => $type) {
-                        $blockNumber = $blockIndex + 1;
-                        $blockTitles = ['en' => $this->blockLabel($type)];
-                        foreach ($data['tr'] as $locale => $translated) {
-                            $blockTitles[$locale] = "{$blockWord[$locale]} {$blockNumber}: ".$this->blockLabel($type);
-                        }
-
-                        $module->blocks()->create([
-                            'type' => $type,
-                            'title' => $blockTitles,
-                            'is_preview' => $moduleIndex === 0 && $blockIndex === 0,
-                            'sort_order' => $blockNumber,
-                            'estimated_minutes' => 20,
-                            'content' => $this->blockContent($type),
-                        ]);
-                    }
-                }
+                $this->createModules($course, $data, $tr);
             }
 
-            if (($data['batch'] ?? null) && $course->batches()->count() === 0) {
-                $batchConfig = $data['batch'];
-                $batch = $course->batches()->create([
-                    'label' => 'Batch 1',
-                    'starts_at' => now()->addWeek()->toDateString(),
-                    'ends_at' => now()->addWeeks(9)->toDateString(),
-                    'seats' => $batchConfig['seats'],
-                ]);
-
-                // Demo-only scenario: fill every seat so the waitlist path
-                // (docs/COURSE-BUILDER-PLAN.md Part C point 5) is
-                // observable right after seeding, not just after manual
-                // testing.
-                if ($batchConfig['fill'] ?? false) {
-                    for ($seat = 1; $seat <= $batchConfig['seats']; $seat++) {
-                        $fillerUser = User::factory()->create(['name' => "Demo Enrollee {$seat}"]);
-                        $enrollment = \App\Modules\Course\Models\Enrollment::create([
-                            'user_id' => $fillerUser->id,
-                            'course_id' => $course->id,
-                            'status' => 'active',
-                            'enrolled_at' => now(),
-                            'course_batch_id' => $batch->id,
-                        ]);
-                        $batch->batchEnrollments()->create([
-                            'enrollment_id' => $enrollment->id,
-                            'status' => 'enrolled',
-                            'roll_number' => 'B1-'.str_pad((string) $seat, 4, '0', STR_PAD_LEFT),
-                        ]);
-                    }
-                }
+            if (($batchSlugs[$slug] ?? null) && $course->batches()->count() === 0) {
+                $this->createBatch($course, $batchSlugs[$slug]);
             }
         }
 
-        $this->seedDemoCompletion();
+        $this->seedDemoCompletion($courses[0]['title']);
+    }
+
+    /**
+     * @return array<int, array<string, mixed>>
+     */
+    private function loadCourseData(): array
+    {
+        $courses = [];
+        for ($batch = 1; $batch <= 5; $batch++) {
+            $courses = array_merge($courses, require base_path("database/seeders/data/courses_batch_{$batch}.php"));
+        }
+
+        return $courses;
+    }
+
+    private function createModules(Course $course, array $data, array $tr): void
+    {
+        $moduleWord = ['ur' => 'ماڈیول', 'hi' => 'मॉड्यूल', 'fa' => 'ماژول', 'ur-roman' => 'Module'];
+        $blockWord = ['ur' => 'بلاک', 'hi' => 'ब्लॉक', 'fa' => 'بلوک', 'ur-roman' => 'Block'];
+
+        foreach ($data['modules'] as $moduleIndex => $moduleData) {
+            $moduleNumber = $moduleIndex + 1;
+            $moduleTitles = ['en' => "Module {$moduleNumber}: {$moduleData['title']}"];
+            $moduleDescriptions = ['en' => "This module covers {$moduleData['title']}."];
+            foreach (array_keys($tr) as $locale) {
+                $moduleTitles[$locale] = "{$moduleWord[$locale]} {$moduleNumber}: {$moduleData['title']}";
+                $moduleDescriptions[$locale] = $moduleTitles[$locale];
+            }
+
+            $module = $course->modules()->create([
+                'title' => $moduleTitles,
+                'description' => $moduleDescriptions,
+                'sort_order' => $moduleNumber,
+            ]);
+
+            foreach ($moduleData['blocks'] as $blockIndex => $blockData) {
+                $blockNumber = $blockIndex + 1;
+                $label = $this->blockLabel($blockData['type']);
+                $blockTitles = ['en' => $label];
+                foreach (array_keys($tr) as $locale) {
+                    $blockTitles[$locale] = "{$blockWord[$locale]} {$blockNumber}: {$label}";
+                }
+
+                $module->blocks()->create([
+                    'type' => $blockData['type'],
+                    'title' => $blockTitles,
+                    'is_preview' => $moduleIndex === 0 && $blockIndex === 0,
+                    'sort_order' => $blockNumber,
+                    'estimated_minutes' => 20,
+                    'content' => $blockData['content'],
+                ]);
+            }
+        }
+    }
+
+    private function createBatch(Course $course, array $batchConfig): void
+    {
+        $batch = $course->batches()->create([
+            'label' => 'Batch 1',
+            'starts_at' => now()->addWeek()->toDateString(),
+            'ends_at' => now()->addWeeks(9)->toDateString(),
+            'seats' => $batchConfig['seats'],
+        ]);
+
+        // Demo-only scenario: fill every seat so the waitlist path is
+        // observable right after seeding, not just after manual testing.
+        if ($batchConfig['fill'] ?? false) {
+            for ($seat = 1; $seat <= $batchConfig['seats']; $seat++) {
+                $fillerUser = User::factory()->create(['name' => "Demo Enrollee {$seat}"]);
+                $enrollment = \App\Modules\Course\Models\Enrollment::create([
+                    'user_id' => $fillerUser->id,
+                    'course_id' => $course->id,
+                    'status' => 'active',
+                    'enrolled_at' => now(),
+                    'course_batch_id' => $batch->id,
+                ]);
+                $batch->batchEnrollments()->create([
+                    'enrollment_id' => $enrollment->id,
+                    'status' => 'enrolled',
+                    'roll_number' => 'B1-'.str_pad((string) $seat, 4, '0', STR_PAD_LEFT),
+                ]);
+            }
+        }
     }
 
     /**
@@ -254,10 +168,10 @@ class CourseSeeder extends Seeder
      * observable immediately after seeding without manually finishing a
      * course first.
      */
-    private function seedDemoCompletion(): void
+    private function seedDemoCompletion(string $firstCourseTitle): void
     {
         $student = User::where('email', 'student@alzahra.institute')->first();
-        $course = Course::where('slug', 'foundations-of-bilingual-development')->first();
+        $course = Course::where('slug', Str::slug($firstCourseTitle))->first();
 
         if (! $student || ! $course) {
             return;
@@ -283,6 +197,48 @@ class CourseSeeder extends Seeder
         app(\App\Modules\Course\Services\CourseCompletionService::class)->finalize($enrollment->fresh());
     }
 
+    private function translatedShortDesc(array $tr): array
+    {
+        $locales = [];
+        foreach (array_keys($tr) as $locale) {
+            $locales[$locale] = $tr[$locale];
+        }
+
+        return $locales;
+    }
+
+    private function translatedFullDesc(array $tr): array
+    {
+        $full = [
+            'ur' => '<p>کورس کی مکمل تفصیل جلد شامل کی جائے گی۔</p>',
+            'hi' => '<p>पाठ्यक्रम का पूरा विवरण जल्द जोड़ा जाएगा।</p>',
+            'fa' => '<p>توضیحات کامل دوره به‌زودی افزوده خواهد شد.</p>',
+            'ur-roman' => '<p>Course ki mukammal tafseel jald shamil ki jayegi.</p>',
+        ];
+        $locales = [];
+        foreach (array_keys($tr) as $locale) {
+            $locales[$locale] = $full[$locale] ?? $full['ur-roman'];
+        }
+
+        return $locales;
+    }
+
+    private function translatedOutcomes(array $tr): array
+    {
+        $outcomes = [
+            'ur' => ['بنیادی تصورات کو سمجھنا', 'تکنیکوں کو حقیقی ماحول میں استعمال کرنا', 'نتائج کا تنقیدی جائزہ لینا'],
+            'hi' => ['मूल अवधारणाओं को समझना', 'तकनीकों को वास्तविक परिस्थितियों में लागू करना', 'परिणामों का आलोचनात्मक मूल्यांकन करना'],
+            'fa' => ['درک مفاهیم پایه', 'به‌کارگیری فنون در محیط‌های واقعی', 'ارزیابی انتقادی نتایج'],
+            'ur-roman' => ['Bunyadi tasawwurat ko samajhna', 'Techniquon ko haqeeqi mahol mein istemal karna', 'Nataij ka tanqeedi jaiza lena'],
+        ];
+        $locales = [];
+        foreach (array_keys($tr) as $locale) {
+            $locales[$locale] = $outcomes[$locale] ?? $outcomes['ur-roman'];
+        }
+
+        return $locales;
+    }
+
     private function blockLabel(string $type): string
     {
         return match ($type) {
@@ -297,59 +253,6 @@ class CourseSeeder extends Seeder
             'assignment' => 'Assignment',
             'research_activity' => 'Research Activity',
             default => Str::headline($type),
-        };
-    }
-
-    private function blockContent(string $type): array
-    {
-        return match ($type) {
-            'reading', 'research_reading' => [
-                'body' => '<p>Reading content placeholder — to be completed by the course author.</p>',
-            ],
-            'practical_quiz' => [
-                'questions' => [
-                    [
-                        'question' => 'Which strategy best supports the concept covered in this module?',
-                        'options' => [
-                            ['text' => 'Option A', 'correct' => true],
-                            ['text' => 'Option B', 'correct' => false],
-                        ],
-                        'explanation' => 'Option A aligns with the evidence discussed in the reading.',
-                    ],
-                ],
-            ],
-            'graded_quiz' => [
-                'questions' => [
-                    [
-                        'question' => 'Select the statement that best reflects best practice.',
-                        'options' => [
-                            ['text' => 'Statement A', 'correct' => true],
-                            ['text' => 'Statement B', 'correct' => false],
-                        ],
-                        'explanation' => 'Statement A is supported by the module literature.',
-                    ],
-                ],
-                'pass_percent' => 70,
-            ],
-            'case_study', 'research_paper', 'case_analysis' => [
-                'body' => '<p>Case write-up placeholder — to be completed by the course author.</p>',
-                'links' => [
-                    ['url' => 'https://alzahra.institute/resources', 'reference' => 'Al Zahra Institute Resource Library'],
-                ],
-            ],
-            'discussion' => [
-                'prompt' => 'Share your reflections on this topic and respond to at least one peer.',
-            ],
-            'assignment' => [
-                'instructions' => '<p>Complete the task described and submit your work for review.</p>',
-                'files' => [],
-                'due_date' => null,
-            ],
-            'research_activity' => [
-                'prompt' => 'Investigate a real-world example and summarize your findings.',
-                'requires_submission' => true,
-            ],
-            default => [],
         };
     }
 }

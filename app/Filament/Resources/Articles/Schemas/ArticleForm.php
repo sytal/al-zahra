@@ -93,7 +93,7 @@ class ArticleForm
                             FileUpload::make('featured_image')
                                 ->label(__('admin_ui.l.featured_image'))
                                 ->image()
-                                ->disk('public')
+                                ->disk('public_media')
                                 ->directory('uploads/articles')
                                 ->dehydrated()
                                 ->imageEditor()

@@ -47,6 +47,18 @@ return [
             'report' => false,
         ],
 
+        // Writes directly into /public/media -- served natively by the
+        // webserver, no `storage:link` symlink required. Used as the
+        // default Medialibrary disk (see config/media-library.php).
+        'public_media' => [
+            'driver' => 'local',
+            'root' => public_path('media'),
+            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/media',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

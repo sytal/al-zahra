@@ -89,7 +89,7 @@ class ResearchPaperForm
 
                 FileUpload::make('paper_file')
                     ->label(__('admin_ui.l.paper_file_pdf'))
-                    ->disk('public')
+                    ->disk('public_media')
                     ->directory('uploads/research-papers')
                     ->acceptedFileTypes(['application/pdf'])
                     ->visible(fn (callable $get) => $get('full_paper_type') === FullPaperType::PDF_UPLOAD->value),
@@ -125,7 +125,7 @@ class ResearchPaperForm
                 FileUpload::make('cover_image')
                     ->label(__('admin_ui.l.cover_image'))
                     ->image()
-                    ->disk('public')
+                    ->disk('public_media')
                     ->directory('uploads/research-papers/covers'),
 
                     ]),

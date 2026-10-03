@@ -68,14 +68,14 @@ class ResourceForm
 
                 FileUpload::make('resource_file')
                     ->label(__('admin_ui.l.resource_file'))
-                    ->disk('public')
+                    ->disk('public_media')
                     ->directory('uploads/resources/files')
                     ->required(),
 
                 FileUpload::make('thumbnail')
                     ->label(__('admin_ui.l.thumbnail'))
                     ->image()
-                    ->disk('public')
+                    ->disk('public_media')
                     ->directory('uploads/resources/thumbnails'),
 
                     ]),

@@ -30,12 +30,12 @@ trait SavesMediaLibraryUploads
                 continue;
             }
 
-            if (! Storage::disk('public')->exists($path)) {
+            if (! Storage::disk('public_media')->exists($path)) {
                 continue;
             }
 
             $this->record
-                ->addMediaFromDisk($path, 'public')
+                ->addMediaFromDisk($path, 'public_media')
                 ->toMediaCollection($collection);
         }
     }

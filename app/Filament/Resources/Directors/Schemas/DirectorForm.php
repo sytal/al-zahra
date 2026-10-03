@@ -73,12 +73,12 @@ class DirectorForm
                     ->schema([
                         FileUpload::make('profile_photo')
                             ->image()
-                            ->disk(config('filesystems.default'))
+                            ->disk('public_media')
                             ->directory('temp-uploads')
                             ->visibility('public'),
                         FileUpload::make('cover_photo')
                             ->image()
-                            ->disk(config('filesystems.default'))
+                            ->disk('public_media')
                             ->directory('temp-uploads')
                             ->visibility('public'),
                     ]),

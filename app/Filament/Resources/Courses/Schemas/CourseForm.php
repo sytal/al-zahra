@@ -134,7 +134,7 @@ class CourseForm
 
                         FileUpload::make('file')
                             ->label(__('admin_ui.l.resource_file'))
-                            ->disk('public')
+                            ->disk('public_media')
                             ->directory('uploads/courses/resources')
                             ->visible(fn (callable $get) => $get('kind') === 'file')
                             ->required(fn (callable $get) => $get('kind') === 'file'),
@@ -162,7 +162,7 @@ class CourseForm
                 FileUpload::make('cover_image')
                     ->label(__('admin_ui.l.cover_image'))
                     ->image()
-                    ->disk('public')
+                    ->disk('public_media')
                     ->directory('uploads/courses')
                     ->imageEditor(),
 

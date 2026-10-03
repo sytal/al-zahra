@@ -12,16 +12,16 @@ class DirectorSeeder extends Seeder
     {
         $user = User::where('email', 'director@alzahra.institute')->first();
 
-        Director::firstOrCreate(
+        $director = Director::firstOrCreate(
             ['user_id' => $user?->id],
             [
-                'full_name' => 'Dr. Al Zahra Director',
-                'professional_title' => ['en' => 'Neurolinguist & Language Researcher', 'ur' => 'ماہرِ عصبی لسانیات اور زبان کی محقق', 'hi' => 'तंत्रिका-भाषाविद् और भाषा शोधकर्ता', 'fa' => 'عصب\‌زبان\‌شناس و پژوهشگر زبان', 'ur-roman' => 'Neurolinguist aur zaban ki muhaqqiq'],
-                'tagline' => ['en' => 'Helping minds understand language, one insight at a time.', 'ur' => 'ذہنوں کو زبان سمجھنے میں مدد، ایک بصیرت کے ساتھ۔', 'hi' => 'हर अंतर्दृष्टि के साथ मन को भाषा समझने में मदद।', 'fa' => 'کمک به ذهن\‌ها برای فهم زبان، با هر بینش تازه.', 'ur-roman' => 'Zehnon ko zaban samajhne mein madad, ek basirat ke sath.'],
-                'bio_short' => ['en' => 'A researcher and educator dedicated to making neurolinguistics accessible to everyone.', 'ur' => 'ایک محقق اور معلم جو عصبی لسانیات کو سب کے لیے قابل رسائی بنانے کے لیے وقف ہیں۔', 'hi' => 'एक शोधकर्ता और शिक्षक, जो तंत्रिका-भाषाविज्ञान को सबके लिए सुलभ बनाने के लिए समर्पित हैं।', 'fa' => 'پژوهشگر و مربی\‌ای که خود را وقف در دسترس قرار دادن عصب\‌زبان\‌شناسی برای همگان کرده است.', 'ur-roman' => 'Ek muhaqqiq aur muallim jo neurolinguistics ko sab ke liye dastiyab banane ke liye waqf hain.'],
-                'bio_full' => ['en' => 'Full biography to be finalized with the director, placeholder content pending real copy.', 'ur' => 'مکمل سوانح ڈائریکٹر کے ساتھ حتمی کی جائے گی، فی الحال عارضی متن ہے۔', 'hi' => 'पूरी जीवनी निदेशक के साथ अंतिम की जाएगी, फ़िलहाल यह अस्थायी पाठ है।', 'fa' => 'زندگی\‌نامه کامل با مدیر نهایی خواهد شد و فعلاً متن موقت است.', 'ur-roman' => 'Mukammal sawaneh director ke sath final kiya jayega, filhal aarzi matan hai.'],
+                'full_name' => 'Dr. Syyeda Arrabah Naqvi',
+                'professional_title' => ['en' => 'Lecturer in Literature & Language', 'ur' => 'لیکچرار برائے ادب و زبان', 'hi' => 'साहित्य एवं भाषा व्याख्याता', 'fa' => 'مدرس ادبیات و زبان', 'ur-roman' => 'Lecturer baraye adab o zaban'],
+                'tagline' => ['en' => 'Known for her strategic mindset, disciplined leadership, and calm decision-making.', 'ur' => 'وہ اپنی حکمتِ عملی پر مبنی سوچ، نظم و ضبط پر مبنی قیادت، اور پرسکون فیصلہ سازی کے لیے معروف ہیں۔', 'hi' => 'वे अपनी रणनीतिक सोच, अनुशासित नेतृत्व और शांत निर्णय-क्षमता के लिए जानी जाती हैं।', 'fa' => 'او به‌خاطر ذهنیت راهبردی، رهبری منظم و تصمیم‌گیری آرام خود شناخته شده است.', 'ur-roman' => 'Wo apni strategic soch, nazm o zabt par mabni qiyadat, aur pursukoon faisla-sazi ke liye maroof hain.'],
+                'bio_short' => ['en' => 'A lecturer in literature and language whose published research explores the relationship between the brain and language, known for her strategic mindset, disciplined leadership, and calm decision-making.', 'ur' => 'ادب اور زبان کی لیکچرار، جن کی تحقیق دماغ اور زبان کے تعلق پر مرکوز ہے، اپنی حکمتِ عملی پر مبنی سوچ، نظم و ضبط پر مبنی قیادت اور پرسکون فیصلہ سازی کے لیے معروف ہیں۔', 'hi' => 'साहित्य और भाषा की व्याख्याता, जिनका शोध मस्तिष्क-भाषा संबंध पर केंद्रित है, अपनी रणनीतिक सोच, अनुशासित नेतृत्व और शांत निर्णय-क्षमता के लिए जानी जाती हैं।', 'fa' => 'مدرس ادبیات و زبان که پژوهش او بر رابطه مغز و زبان متمرکز است و به‌خاطر ذهنیت راهبردی، رهبری منظم و تصمیم‌گیری آرام شناخته شده است.', 'ur-roman' => 'Adab aur zaban ki lecturer, jin ki tehqeeq dimagh aur zaban ke talluq par markoz hai, apni strategic soch, nazm o zabt par mabni qiyadat aur pursukoon faisla-sazi ke liye maroof hain.'],
+                'bio_full' => ['en' => 'Dr. Syyeda Arrabah Naqvi is a lecturer in literature and language whose published research in neurolinguistics explores the relationship between the brain and language. She is known for her strategic mindset, disciplined leadership, and calm decision-making, qualities that inform both her teaching practice and her leadership at Al Zahra Institute.', 'ur' => 'ڈاکٹر سیدہ عربہ نقوی ادب اور زبان کی لیکچرار ہیں جن کی عصبی لسانیات میں شائع شدہ تحقیق دماغ اور زبان کے تعلق کا جائزہ لیتی ہے۔ وہ اپنی حکمتِ عملی پر مبنی سوچ، نظم و ضبط پر مبنی قیادت اور پرسکون فیصلہ سازی کے لیے معروف ہیں، جو ان کی تدریس اور الزہرا انسٹی ٹیوٹ میں قیادت دونوں کی رہنمائی کرتی ہیں۔', 'hi' => 'डॉ. सैयदा अराबाह नक़वी साहित्य और भाषा की व्याख्याता हैं, जिनका तंत्रिका-भाषाविज्ञान में प्रकाशित शोध मस्तिष्क और भाषा के संबंध की पड़ताल करता है। वे अपनी रणनीतिक सोच, अनुशासित नेतृत्व और शांत निर्णय-क्षमता के लिए जानी जाती हैं, जो उनके शिक्षण और अल ज़हरा इंस्टिट्यूट में नेतृत्व दोनों को दिशा देती हैं।', 'fa' => 'دکتر سیده عربه نقوی مدرس ادبیات و زبان است که پژوهش منتشرشده او در زبان‌شناسی عصبی به بررسی رابطه مغز و زبان می‌پردازد. او به‌خاطر ذهنیت راهبردی، رهبری منظم و تصمیم‌گیری آرام خود شناخته شده است، ویژگی‌هایی که هم بر شیوه تدریس و هم بر رهبری او در مؤسسه الزهرا تأثیر می‌گذارد.', 'ur-roman' => 'Dr. Syyeda Arrabah Naqvi adab aur zaban ki lecturer hain jin ki neurolinguistics mein shaya shuda tehqeeq dimagh aur zaban ke talluq ka jaiza leti hai. Wo apni strategic soch, nazm o zabt par mabni qiyadat aur pursukoon faisla-sazi ke liye maroof hain, jo un ki tadrees aur Al Zahra Institute mein qiyadat dono ki rehnumai karti hain.'],
                 'credentials' => ['PhD in Neurolinguistics'],
-                'research_interests' => ['en' => ['Language acquisition', 'Bilingual cognition'], 'ur' => ['زبان کا حصول', 'دو لسانی ادراک'], 'hi' => ['भाषा अर्जन', 'द्विभाषी संज्ञान'], 'fa' => ['اکتساب زبان', 'شناخت دوزبانه'], 'ur-roman' => ['Zaban ka husool', 'Do lisani idrak']],
+                'research_interests' => ['en' => ['Neurolinguistics', 'Brain–Language Relationships'], 'ur' => ['عصبی لسانیات', 'دماغ اور زبان کا تعلق'], 'hi' => ['तंत्रिका-भाषाविज्ञान', 'मस्तिष्क-भाषा संबंध'], 'fa' => ['عصب‌زبان‌شناسی', 'رابطه مغز و زبان'], 'ur-roman' => ['Neurolinguistics', 'Dimagh aur zaban ka talluq']],
                 'social_links' => [
                     'linkedin' => 'https://linkedin.com/in/alzahra-director',
                     'researchgate' => 'https://researchgate.net/profile/alzahra-director',
@@ -31,5 +31,10 @@ class DirectorSeeder extends Seeder
                 'is_published' => true,
             ]
         );
+
+        $photoPath = base_path('database/seeders/data/director.png');
+        if (file_exists($photoPath) && $director->getFirstMedia('profile_photo') === null) {
+            $director->addMedia($photoPath)->preservingOriginal()->toMediaCollection('profile_photo');
+        }
     }
 }
