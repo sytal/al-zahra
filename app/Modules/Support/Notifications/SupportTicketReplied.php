@@ -29,7 +29,7 @@ class SupportTicketReplied extends Notification implements ShouldQueue
     protected function url(): string
     {
         return $this->repliedByStaff
-            ? route('dashboard.support.index')
+            ? route('dashboard.support.index', app()->getLocale())
             : route('filament.admin.resources.support-tickets.edit', $this->ticket);
     }
 
