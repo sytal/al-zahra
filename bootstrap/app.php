@@ -5,6 +5,16 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 
+// Laravel's own .env loader (LoadEnvironmentVariables) only runs later,
+// inside $app->handleRequest() -- after this file has already finished
+// building $app and config/*.php has already been evaluated (config
+// files read env() the moment they're included). APP_PUBLIC_PATH below
+// needs to be known before that config evaluation happens, so load .env
+// ourselves, right now, before anything else in this file reads it.
+if (is_file($envPath = dirname(__DIR__).'/.env') && class_exists(\Dotenv\Dotenv::class)) {
+    \Dotenv\Dotenv::createImmutable(dirname(__DIR__))->safeLoad();
+}
+
 $app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
