@@ -6,7 +6,9 @@ use App\Modules\Course\Events\CourseCompleted;
 use App\Modules\Course\Models\CourseBlock;
 use App\Modules\Course\Models\CourseBlockProgress;
 use App\Modules\Course\Models\Enrollment;
+use App\Modules\Course\Notifications\CourseCompletedNotification;
 use App\Support\Enums\EnrollmentStatus;
+use Illuminate\Support\Facades\Notification;
 
 /**
  * Final submission lock (docs/COURSE-BUILDER-DEV-PLAN.md Phase 5): once the
@@ -65,6 +67,8 @@ class CourseCompletionService
         $enrollment->save();
 
         CourseCompleted::dispatch($enrollment);
+
+        Notification::send($enrollment->user, new CourseCompletedNotification($enrollment));
 
         return $enrollment;
     }

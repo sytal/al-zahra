@@ -2,8 +2,26 @@
 
 use App\Modules\Course\Exceptions\EnrollmentCapExceededException;
 use App\Modules\Course\Models\Enrollment;
+use App\Modules\Course\Notifications\EnrollmentStatusChanged;
 use App\Modules\Course\Services\EnrollmentService;
 use App\Support\Enums\EnrollmentStatus;
+use Illuminate\Support\Facades\Notification;
+
+it('notifies the student with an enrolled status when enrolling', function () {
+    Notification::fake();
+
+    $user = userWithRole('student');
+    $course = makeCourse();
+
+    $service = app(EnrollmentService::class);
+    $service->enroll($user, $course);
+
+    Notification::assertSentTo(
+        $user,
+        EnrollmentStatusChanged::class,
+        fn ($notification) => $notification->status === 'enrolled'
+    );
+});
 
 it('blocks a 3rd active enrollment with the exact cap message', function () {
     $user = userWithRole('student');

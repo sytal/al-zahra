@@ -2,9 +2,13 @@
 
 namespace App\Modules\Support\Livewire;
 
+use App\Models\User;
 use App\Modules\Support\Models\SupportTicket;
 use App\Modules\Support\Models\SupportTicketMessage;
+use App\Modules\Support\Notifications\NewSupportTicketNotification;
+use App\Modules\Support\Notifications\SupportTicketReplied;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -51,6 +55,8 @@ class DashboardSupportIndex extends Component
             'body' => $data['body'],
         ]);
 
+        Notification::send(User::permission('contact.manage')->get(), new NewSupportTicketNotification($ticket));
+
         $this->reset(['subject', 'body']);
         $this->dispatch('close-modal', 'support-ticket-new');
     }
@@ -69,6 +75,8 @@ class DashboardSupportIndex extends Component
         ]);
 
         $ticket->update(['status' => 'open']);
+
+        Notification::send(User::permission('contact.manage')->get(), new SupportTicketReplied($ticket, repliedByStaff: false));
 
         $this->reset('reply');
     }

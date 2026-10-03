@@ -3,11 +3,13 @@
 namespace App\Filament\Resources\SupportTickets\Pages;
 
 use App\Filament\Resources\SupportTickets\SupportTicketResource;
+use App\Modules\Support\Notifications\SupportTicketReplied;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification as NotificationFacade;
 
 class EditSupportTicket extends EditRecord
 {
@@ -37,6 +39,8 @@ class EditSupportTicket extends EditRecord
                     ]);
 
                     $this->record->update(['status' => 'answered']);
+
+                    NotificationFacade::send($this->record->user, new SupportTicketReplied($this->record, repliedByStaff: true));
 
                     Notification::make()
                         ->title(__('admin_ui.l.reply_sent'))

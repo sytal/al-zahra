@@ -8,7 +8,9 @@ use App\Modules\Course\Models\Course;
 use App\Modules\Course\Models\CourseBatch;
 use App\Modules\Course\Models\CourseBatchEnrollment;
 use App\Modules\Course\Models\Enrollment;
+use App\Modules\Course\Notifications\EnrollmentStatusChanged;
 use App\Support\Enums\EnrollmentStatus;
+use Illuminate\Support\Facades\Notification;
 
 /**
  * Enrollment lifecycle for modules+blocks courses (docs/COURSE-BUILDER-PLAN.md
@@ -59,6 +61,11 @@ class EnrollmentService
         if ($batch) {
             $this->assignBatchSeat($enrollment, $batch);
         }
+
+        Notification::send($user, new EnrollmentStatusChanged(
+            $enrollment,
+            $enrollment->batchEnrollment?->status === 'waitlisted' ? 'waitlisted' : 'enrolled',
+        ));
 
         return $enrollment;
     }
