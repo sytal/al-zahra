@@ -46,6 +46,19 @@ Each of the four sections is genuinely independent — admin can write the
 "About" paragraph today, come back tomorrow and add Prerequisites, in any
 order, and the page remembers.
 
+### The one rule that applies to everything below: nothing is mandatory, nothing is uniform
+
+No content-block type is required in any course, no two courses have to
+look alike, and there is no "standard template" the admin is forced into.
+One course might be five Readings and a Graded Quiz. Another might be
+all Case Studies and Assignments with zero quizzes. A third might use
+every block type at least once. **The admin picks exactly which block
+types exist, how many of each, and in what order, independently for every
+single course.** The menu in Step 3 is a toolbox, not a checklist to
+complete — the builder never says "you're missing a Discussion block" or
+forces a minimum. This applies to modules too: a course can have 1 module
+or 20, and a module can have 1 block or 50.
+
 ### Step 2 — Modules
 
 Before adding content, the admin is asked once, plainly:
@@ -143,15 +156,22 @@ label/icon on the module list so students know it's academic/research
 material rather than a general lesson.
 
 ### 5. Discussion
-Kept intentionally simple, matching how the rest of the course already
-works (no new live-chat or forum system being built right now): a
-Discussion block is a Reading-style block that poses a **question or
-prompt** for the learner to think about ("How would you apply this with a
-bilingual 4-year-old?") — the student reads it as part of their progress,
-marks it done, and moves on. If a real back-and-forth discussion
-feature (students replying to each other) is wanted later, that is a
-separate, bigger feature — flagged under "Open questions" below, not
-built as part of this plan.
+**Confirmed: student-and-admin only, never student-to-student.** This is
+a private back-and-forth thread tied to that exact block, the same shape
+as the site's existing Consultation feature, just scoped to one module
+instead of standing alone:
+- Admin writes an opening question or prompt when creating the block
+  ("How would you apply this with a bilingual 4-year-old?").
+- The student reads it and types a reply. The admin sees every student's
+  reply (grouped by course → module → student) and can respond back.
+  Each student only ever sees their OWN thread with the admin — never any
+  other student's replies, exactly like today's Consultations are
+  private per person.
+- The block counts as "done" for the student once they've posted at
+  least one reply — an admin response is not required to unlock the next
+  block, since the admin may reply later.
+- On the admin side, unanswered discussion replies show up the same way
+  pending consultations do today — a count, a list, oldest-first.
 
 ### 9. Assignment
 - Admin writes the task instructions (rich text) and can **attach any
@@ -159,11 +179,17 @@ built as part of this plan.
   needs), each with its own label.
 - Admin can optionally set a due date.
 - The student reads the instructions, downloads any attached files, and
-  **uploads their own file(s) back** as their submitted work. A status
-  shows: Not submitted → Submitted → (if the admin reviews it) Reviewed.
-- This is the one block type where the admin later sees a simple list of
-  "who submitted what" per course, for their own records — it does not
-  auto-grade.
+  **uploads their own file(s) back** as their submitted work.
+- **Confirmed: the admin marks and checks it.** Status flow is:
+  Not submitted → Submitted → Reviewed, and on Reviewed the admin leaves
+  a **Pass/Needs revision** mark plus an optional written comment the
+  student can see (e.g. "Good analysis, but add a source for paragraph 2
+  — please resubmit"). If marked "Needs revision," the student can
+  re-upload and it goes back to Submitted for another look. The block
+  only counts as "done" toward course completion once the admin marks it
+  Pass (exact pass/fail-vs-numeric-score question is in Open Questions).
+- Admin's view: a simple reviewable list per course — "who submitted
+  what, submitted when, current status" — oldest/unreviewed first.
 
 ### 10. Research Activity
 A lighter version of Assignment: the admin gives an example or a
@@ -194,38 +220,64 @@ picks which of these two modes when creating the block, per activity.
    certificate-on-100%-completion logic (already built) extends naturally
    — "100% complete" now means every block across every module is done,
    not just every lesson in a flat list.
-5. **Batches / start dates:** the admin can set an optional **"Next batch
-   starts on [date]"** banner on the course page (and an optional
-   "Enrollment closes on [date]"), shown as a highlighted strip above the
-   Enroll button. This does not have to gate enrollment (self-paced
-   courses can ignore it) — it is announcement-only unless the admin later
-   wants real batch/cohort enrollment limits (see open questions).
+5. **Batches, with real seats (confirmed, not just an announcement):**
+   a course can optionally have one or more **batches/intakes**, each with
+   its own start date and a **seat limit** the admin sets (e.g. "Batch 1 —
+   Starts Jan 15 — 30 seats"). On the course page, if batches exist, the
+   student picks a batch when enrolling (if there's only one open batch,
+   it's pre-selected, one click). The Enroll button shows live seats left
+   ("12 of 30 seats left") and switches to **"Join Waitlist"** once a
+   batch is full (exact full-batch behavior is in Open Questions below).
+   A course with no batches at all stays fully self-paced,
+   exactly like today — batches are opt-in per course, matching the
+   "nothing is mandatory" rule above.
 
 ---
 
-## PART D — Open questions (need your decision before building)
+## PART D — Decisions already made
 
-1. **Block order lock:** should a student be forced to finish block 1
-   before block 2 unlocks (strict order), or can they jump around freely
-   within a module? Recommendation: lock by default (matches how
-   "Mark complete → Next Lesson" already works today), with free
-   preview blocks always open regardless.
-2. **Discussion — simple or real:** confirmed above as a simple
-   read-a-prompt block for now. If you actually want students replying to
-   each other (a real discussion thread), say so — it's a materially
-   bigger feature (new data model, moderation, notifications) and belongs
-   in its own plan, not bundled here.
-3. **Assignment grading:** should the admin be able to mark an assignment
-   Pass/Fail or give a score, or is "submitted / not submitted" enough for
-   now? Plan above assumes just a submission list, not grading.
-4. **Batches — announcement only, or real seats?** Plan above is a simple
-   date banner. If you want enrollment capped per batch ("only 30 seats
-   this intake") that is a bigger feature (waitlists, intake-specific
-   progress) — flag if that's actually wanted.
-5. **Retroactive migration:** today's existing 3 seeded courses have flat
-   lessons, no modules. When this is built, do existing lessons become
-   "Module 1" automatically, or do you want to manually re-organize the
-   2-3 demo courses by hand afterward? Either is fine, just needs a choice.
+1. **Block order lock:** confirmed — locked by default, a student must
+   finish block 1 before block 2 unlocks, same logic as today's
+   "Mark complete → Next Lesson." Free-preview blocks stay open
+   regardless of lock state (a guest/non-enrolled visitor can always open
+   them). An admin cannot create ambiguity here — order lock applies
+   uniformly within a module, not block-by-block.
+2. **Discussion:** confirmed private, student-with-admin-only (see Part B,
+   section 5) — never student-to-student.
+3. **Assignment:** confirmed the admin marks and checks every submission
+   (see Part B, section 9) — this is not just a submission log.
+4. **Batches:** confirmed real seat capacity, not just a date banner (see
+   Part C, point 5) — optional per course, never forced.
+5. **Database/seeders:** confirmed build order — write the new migrations
+   for modules + every block type FIRST, get the schema right, then write
+   fresh seeders against that new structure (not a patch of the old flat
+   lessons). The 3 existing demo courses get properly re-seeded with real
+   modules and a mix of block types as part of this work, not migrated
+   automatically from their current flat lesson lists and not left for
+   manual admin cleanup — this is a seeder-rewrite, done once, properly.
 
-Nothing above blocks writing the plan — these are flagged so building
-doesn't start on a wrong assumption.
+## PART E — Still open (need a short answer before building starts)
+
+1. **Assignment grading scale:** Part B confirms "Pass / Needs revision"
+   as the default assumption. Is a simple two-state mark enough, or do
+   you want a numeric score (e.g. out of 100) as well? Pass/Needs-revision
+   is simpler to build and to use — recommended unless you have a reason
+   to need numeric grades (e.g. for a transcript/report later).
+2. **Full-batch behavior:** when a batch's seats are all taken, should the
+   site (a) show "Waitlist" and let people join a waiting list the admin
+   can see and move people off later, or (b) simply show "Full" with no
+   further action possible until the admin raises the seat count or opens
+   a new batch? Waitlist is more work to build (needs its own small admin
+   view) — recommended to start with (b) "Full, no waitlist" and add a
+   waitlist later only if you find you actually need it.
+3. **Graded Quiz pass mark:** confirmed configurable per quiz, but what
+   should the DEFAULT be when an admin creates a new one and doesn't
+   change it — 60%? 70%? 80%? (Only matters for the starting default; the
+   admin can always change it per quiz.)
+4. **Course Resources visibility:** Part A says these are visible to
+   everyone, even non-enrolled visitors (to help them decide to enroll).
+   Confirm that's right, or should Course Resources only unlock after
+   enrolling, same as the module content?
+
+Everything else in this document reflects your answers and is ready to
+build against once these four are answered.
