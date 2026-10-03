@@ -16,7 +16,8 @@ beforeEach(function () {
 it('enrolls the demo student in two courses with consistent progress', function () {
     $this->seed(EnrollmentSeeder::class);
 
-    expect(Enrollment::count())->toBe(2);
+    $student = App\Models\User::where('email', 'student@alzahra.institute')->first();
+    expect(Enrollment::where('user_id', $student->id)->count())->toBe(2);
     expect(LessonProgress::count())->toBe(1);
 
     $started = Enrollment::has('lessonProgress')->firstOrFail();
@@ -29,6 +30,7 @@ it('is idempotent when run twice', function () {
     $this->seed(EnrollmentSeeder::class);
     $this->seed(EnrollmentSeeder::class);
 
-    expect(Enrollment::count())->toBe(2);
+    $student = App\Models\User::where('email', 'student@alzahra.institute')->first();
+    expect(Enrollment::where('user_id', $student->id)->count())->toBe(2);
     expect(LessonProgress::count())->toBe(1);
 });

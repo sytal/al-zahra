@@ -62,7 +62,32 @@ class CourseSeeder extends Seeder
                     ['title' => 'Research Literature', 'blocks' => ['research_paper']],
                     ['title' => 'Live Practice', 'blocks' => ['practical_quiz', 'discussion']],
                 ],
-                'batch' => true,
+                'batch' => ['seats' => 2],
+            ],
+            [
+                'title' => 'Child Language Disorders Screening',
+                'tr' => ['ur' => 'بچوں میں زبان کے عارضے کی اسکریننگ', 'hi' => 'बाल भाषा विकार जांच', 'fa' => 'غربالگری اختلالات زبانی کودکان', 'ur-roman' => 'Bachon mein zaban ke arze ki screening'],
+                'audience' => CourseAudience::PROFESSIONALS,
+                'level' => CourseLevel::INTERMEDIATE,
+                'is_free' => false,
+                'price' => 29.00,
+                // Scenario: paid, self-paced (no batch at all)
+                'modules' => [
+                    ['title' => 'Screening Basics', 'blocks' => ['reading', 'practical_quiz']],
+                    ['title' => 'Tools and Checklists', 'blocks' => ['case_study', 'assignment']],
+                ],
+            ],
+            [
+                'title' => 'Research Methods in Speech Therapy',
+                'tr' => ['ur' => 'اسپیچ تھراپی میں تحقیقی طریقے', 'hi' => 'स्पीच थेरेपी में शोध विधियाँ', 'fa' => 'روش‌های پژوهش در گفتاردرمانی', 'ur-roman' => 'Speech therapy mein tehqeeqi tareeqe'],
+                'audience' => CourseAudience::PROFESSIONALS,
+                'level' => CourseLevel::ADVANCED,
+                // Scenario: free, WITH a batch that is already full at seed time (waitlist path testable immediately)
+                'modules' => [
+                    ['title' => 'Designing a Study', 'blocks' => ['research_reading', 'graded_quiz']],
+                    ['title' => 'Ethics and Rigor', 'blocks' => ['discussion', 'research_paper']],
+                ],
+                'batch' => ['seats' => 1, 'fill' => true],
             ],
         ];
 
@@ -191,15 +216,75 @@ class CourseSeeder extends Seeder
                 }
             }
 
-            if (($data['batch'] ?? false) && $course->batches()->count() === 0) {
-                $course->batches()->create([
+            if (($data['batch'] ?? null) && $course->batches()->count() === 0) {
+                $batchConfig = $data['batch'];
+                $batch = $course->batches()->create([
                     'label' => 'Batch 1',
                     'starts_at' => now()->addWeek()->toDateString(),
                     'ends_at' => now()->addWeeks(9)->toDateString(),
-                    'seats' => 2,
+                    'seats' => $batchConfig['seats'],
                 ]);
+
+                // Demo-only scenario: fill every seat so the waitlist path
+                // (docs/COURSE-BUILDER-PLAN.md Part C point 5) is
+                // observable right after seeding, not just after manual
+                // testing.
+                if ($batchConfig['fill'] ?? false) {
+                    for ($seat = 1; $seat <= $batchConfig['seats']; $seat++) {
+                        $fillerUser = User::factory()->create(['name' => "Demo Enrollee {$seat}"]);
+                        $enrollment = \App\Modules\Course\Models\Enrollment::create([
+                            'user_id' => $fillerUser->id,
+                            'course_id' => $course->id,
+                            'status' => 'active',
+                            'enrolled_at' => now(),
+                            'course_batch_id' => $batch->id,
+                        ]);
+                        $batch->batchEnrollments()->create([
+                            'enrollment_id' => $enrollment->id,
+                            'status' => 'enrolled',
+                            'roll_number' => 'B1-'.str_pad((string) $seat, 4, '0', STR_PAD_LEFT),
+                        ]);
+                    }
+                }
             }
         }
+
+        $this->seedDemoCompletion();
+    }
+
+    /**
+     * Demo-only: give the seeded student account one already-completed
+     * course with an issued certificate, so "view your certificate" is
+     * observable immediately after seeding without manually finishing a
+     * course first.
+     */
+    private function seedDemoCompletion(): void
+    {
+        $student = User::where('email', 'student@alzahra.institute')->first();
+        $course = Course::where('slug', 'foundations-of-bilingual-development')->first();
+
+        if (! $student || ! $course) {
+            return;
+        }
+
+        $enrollment = \App\Modules\Course\Models\Enrollment::firstOrCreate(
+            ['user_id' => $student->id, 'course_id' => $course->id],
+            ['status' => 'active', 'enrolled_at' => now()->subWeek()]
+        );
+
+        if ($enrollment->status === \App\Support\Enums\EnrollmentStatus::COMPLETED) {
+            return;
+        }
+
+        $blocks = $course->modules()->with('blocks')->get()->flatMap->blocks;
+        foreach ($blocks as $block) {
+            \App\Modules\Course\Models\CourseBlockProgress::firstOrCreate(
+                ['enrollment_id' => $enrollment->id, 'course_block_id' => $block->id],
+                ['status' => 'done', 'completed_at' => now()->subDay()]
+            );
+        }
+
+        app(\App\Modules\Course\Services\CourseCompletionService::class)->finalize($enrollment->fresh());
     }
 
     private function blockLabel(string $type): string

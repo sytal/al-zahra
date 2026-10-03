@@ -14,7 +14,7 @@ beforeEach(function () {
 it('gives every demo course at least one module with a non-uniform block-type mix', function () {
     $courses = Course::with('modules.blocks')->get();
 
-    expect($courses)->toHaveCount(3);
+    expect($courses)->toHaveCount(5);
 
     $typeSetsPerCourse = [];
 
@@ -30,7 +30,7 @@ it('gives every demo course at least one module with a non-uniform block-type mi
 
     // Prove the block-type mix differs across courses (no two courses share the exact same set).
     $unique = collect($typeSetsPerCourse)->map(fn ($set) => implode(',', $set))->unique();
-    expect($unique)->toHaveCount(3);
+    expect($unique)->toHaveCount(5);
 });
 
 it('seeds a batch with a small seat count for the waitlist path', function () {
@@ -43,5 +43,5 @@ it('seeds a batch with a small seat count for the waitlist path', function () {
 it('is idempotent when run twice', function () {
     $this->seed(CourseSeeder::class);
 
-    expect(Course::count())->toBe(3);
+    expect(Course::count())->toBe(5);
 });
