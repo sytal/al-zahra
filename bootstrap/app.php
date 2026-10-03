@@ -5,7 +5,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 
-return Application::configure(basePath: dirname(__DIR__))
+$app = Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
@@ -57,3 +57,16 @@ return Application::configure(basePath: dirname(__DIR__))
             ], $status);
         });
     })->create();
+
+// On cPanel-style split hosting (public/ as a sibling of a separate
+// backend/ folder instead of a subfolder), set APP_PUBLIC_PATH in .env to
+// the real public folder's absolute path so public_path() -- and anything
+// built on it, like the public_media disk -- points at the actual
+// web-accessible folder instead of backend/public (which wouldn't exist
+// in that layout). Left unset, this is a no-op and behaves like a normal
+// single-folder Laravel install.
+if ($publicPath = env('APP_PUBLIC_PATH')) {
+    $app->usePublicPath($publicPath);
+}
+
+return $app;
