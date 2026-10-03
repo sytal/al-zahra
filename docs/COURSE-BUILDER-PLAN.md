@@ -226,11 +226,53 @@ picks which of these two modes when creating the block, per activity.
    Starts Jan 15 — 30 seats"). On the course page, if batches exist, the
    student picks a batch when enrolling (if there's only one open batch,
    it's pre-selected, one click). The Enroll button shows live seats left
-   ("12 of 30 seats left") and switches to **"Join Waitlist"** once a
-   batch is full (exact full-batch behavior is in Open Questions below).
-   A course with no batches at all stays fully self-paced,
+   ("12 of 30 seats left") and switches to **"Full — Join Waitlist"**
+   once a batch is full: the Enroll button becomes a Waitlist button, the
+   student joins a simple ordered waitlist, and the admin has a view per
+   batch of who's waiting, in order, with a one-click "move to enrolled"
+   action if a seat opens up (someone drops, or the admin raises the
+   seat count). A course with no batches at all stays fully self-paced,
    exactly like today — batches are opt-in per course, matching the
    "nothing is mandatory" rule above.
+6. **Enrollment limit — at most 2 courses in progress at once:** a
+   student can be actively enrolled in **at most 2 courses simultaneously**.
+   "Actively enrolled" means not yet 100% complete — the moment a course
+   is finished and the certificate is issued, it stops counting toward
+   this limit, freeing a slot. If a student already has 2 in-progress
+   courses and tries to enroll in a 3rd, the Enroll button is replaced
+   with a clear message: *"You can be enrolled in up to 2 courses at a
+   time. Finish one of your current courses to enroll in a new one."*
+   with links to their 2 in-progress courses so they know exactly what
+   to finish. *(Assumption, flag if wrong: there's no "drop/leave a
+   course early" button — the only way to free a slot is finishing one.
+   Say so if you want a voluntary leave option too; it's a small addition
+   on top of this.)*
+7. **End of course — a real "you're done" screen, not a dead end:**
+   whatever the last block in the last module is, once the student
+   finishes it, they land on a dedicated **course-complete screen** —
+   not just silence or a greyed-out "next" button. It clearly says the
+   course has ended and shows their completion percentage for it. If
+   every block is done, this percentage is 100% and the flow continues
+   into point 8 below. If the admin's course structure allows an "end"
+   before every block is strictly done (e.g. optional content), the
+   screen still shows the real percentage honestly rather than forcing
+   100%.
+8. **Final submission is one-way — confirmed:** once a course reaches
+   100% and the student finally submits/completes it, they land on a
+   **terminal completion screen**: final score (if the course had any
+   graded quizzes/assignments — combined into one summary number) and a
+   **Download Certificate** button. After this point, the student can
+   **no longer re-enter or re-view the course's lessons, quizzes, case
+   studies, or anything else inside it** — the only thing that remains
+   accessible from "My Courses" for that course, forever, is this
+   completion screen (score + certificate download). This is a
+   deliberate one-way door: completed means closed, not "completed but
+   still browsable." *(Note: this is a firmer rule than typical course
+   platforms, which usually let you revisit finished material — confirmed
+   per your instruction, not a mistake on my part. Per-block retake
+   options like the Graded Quiz retake toggle in Part B still apply WHILE
+   a course is in progress — this rule only kicks in after the whole
+   course is finally submitted.)*
 
 ---
 
@@ -255,29 +297,38 @@ picks which of these two modes when creating the block, per activity.
    modules and a mix of block types as part of this work, not migrated
    automatically from their current flat lesson lists and not left for
    manual admin cleanup — this is a seeder-rewrite, done once, properly.
+6. **Assignment grading:** confirmed Pass / Needs revision (two-state),
+   not a numeric score.
+7. **Full batches:** confirmed Full status + Waitlist (see Part C, point
+   5) — not a hard block with nothing the student can do.
+8. **Course intro content (About/Goals/Prerequisites/Resources):**
+   confirmed fully visible to everyone, no enrollment needed — only the
+   module/block content itself is locked behind enrollment.
+9. **Graded Quiz default pass mark:** set to **70%** as the starting
+   default for every new Graded Quiz block — the admin can change it per
+   quiz at any time, this only affects what a freshly-created quiz starts
+   at.
+10. **Activity log — everywhere, properly:** confirmed. Every new piece
+    of this feature gets the same `HasActivityLog` treatment already
+    applied site-wide (docs/RBAC-AUDIT.md, the 16 models already logged):
+    module created/reordered/deleted, every block type created/edited/
+    deleted, every student block-completion, every quiz attempt and
+    score, every discussion reply (both sides), every assignment
+    submission and every admin mark, every batch created and every seat
+    taken/waitlisted, and the final course-completion + certificate
+    issuance. The admin's Recent Activity view (already built) picks all
+    of this up automatically — nothing here needs a separate "course
+    activity" screen, it already flows into the one activity log.
 
-## PART E — Still open (need a short answer before building starts)
+## PART E — One remaining open point
 
-1. **Assignment grading scale:** Part B confirms "Pass / Needs revision"
-   as the default assumption. Is a simple two-state mark enough, or do
-   you want a numeric score (e.g. out of 100) as well? Pass/Needs-revision
-   is simpler to build and to use — recommended unless you have a reason
-   to need numeric grades (e.g. for a transcript/report later).
-2. **Full-batch behavior:** when a batch's seats are all taken, should the
-   site (a) show "Waitlist" and let people join a waiting list the admin
-   can see and move people off later, or (b) simply show "Full" with no
-   further action possible until the admin raises the seat count or opens
-   a new batch? Waitlist is more work to build (needs its own small admin
-   view) — recommended to start with (b) "Full, no waitlist" and add a
-   waitlist later only if you find you actually need it.
-3. **Graded Quiz pass mark:** confirmed configurable per quiz, but what
-   should the DEFAULT be when an admin creates a new one and doesn't
-   change it — 60%? 70%? 80%? (Only matters for the starting default; the
-   admin can always change it per quiz.)
-4. **Course Resources visibility:** Part A says these are visible to
-   everyone, even non-enrolled visitors (to help them decide to enroll).
-   Confirm that's right, or should Course Resources only unlock after
-   enrolling, same as the module content?
+1. **Voluntary "leave a course early":** Part C point 6 assumes a student
+   can only free up one of their 2 enrollment slots by *finishing* a
+   course — there is no button to drop/abandon an unfinished course. If
+   you want students to be able to voluntarily leave an unfinished course
+   (to free a slot without completing it), say so — it's a small addition
+   (one button + an "unenrolled" state) on top of what's planned, not a
+   blocker to starting the rest.
 
 Everything else in this document reflects your answers and is ready to
-build against once these four are answered.
+build against.
