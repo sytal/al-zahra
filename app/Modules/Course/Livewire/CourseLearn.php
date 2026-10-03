@@ -8,6 +8,7 @@ use App\Modules\Course\Models\CourseBlockProgress;
 use App\Modules\Course\Models\CourseDiscussionReply;
 use App\Modules\Course\Models\CourseModule;
 use App\Modules\Course\Models\Enrollment;
+use App\Modules\Course\Services\CourseCompletionService;
 use App\Support\Enums\EnrollmentStatus;
 use Illuminate\Http\RedirectResponse;
 use Livewire\Attributes\Layout;
@@ -56,9 +57,10 @@ class CourseLearn extends Component
         }
 
         if ($enrollment->status === EnrollmentStatus::COMPLETED) {
-            return redirect()
-                ->route('dashboard.courses.index', ['locale' => app()->getLocale()])
-                ->with('status', __('course_learn_ui.already_completed'));
+            return redirect()->route('dashboard.courses.complete', [
+                'locale' => app()->getLocale(),
+                'course' => $course->slug,
+            ]);
         }
 
         $this->course = $course;
@@ -222,9 +224,10 @@ class CourseLearn extends Component
     }
 
     /**
-     * Assignment submission — stores the uploaded file in the block's
-     * `assignment_submissions` media collection and sets status to
-     * "submitted" (admin reviews and marks Pass/Needs revision separately).
+     * Assignment submission — stores the uploaded file in the progress
+     * row's `submission` media collection (Spatie Medialibrary, consistent
+     * with Course/CourseLesson) and sets status to "submitted" (admin
+     * reviews and marks Pass/Needs revision separately).
      */
     public function submitAssignment(int $blockId): void
     {
@@ -243,26 +246,29 @@ class CourseLearn extends Component
         $progress->status = $progress->status === 'done' ? 'done' : 'unlocked';
         $progress->save();
 
-        // File is kept on the progress row's data as a stored path (no
-        // dedicated HasMedia model wired to CourseBlockProgress yet).
-        $path = $this->assignmentUpload->store('assignment-submissions/'.$this->enrollment->id, 'public');
-        $data['submission_path'] = $path;
-        $progress->data = $data;
-        $progress->save();
+        $progress->addMedia($this->assignmentUpload->getRealPath())
+            ->usingName($this->assignmentUpload->getClientOriginalName())
+            ->usingFileName($this->assignmentUpload->getClientOriginalName())
+            ->toMediaCollection('submission');
 
         $this->assignmentUpload = null;
     }
 
     protected function recomputeCourseProgress(): void
     {
-        $totalBlocks = CourseBlock::whereIn('course_module_id', $this->course->modules()->pluck('id'))->count();
+        $blockIds = CourseBlock::whereIn('course_module_id', $this->course->modules()->pluck('id'))->pluck('id');
+        $totalBlocks = $blockIds->count();
         $doneBlocks = CourseBlockProgress::where('enrollment_id', $this->enrollment->id)
             ->where('status', 'done')
-            ->whereIn('course_block_id', CourseBlock::whereIn('course_module_id', $this->course->modules()->pluck('id'))->pluck('id'))
+            ->whereIn('course_block_id', $blockIds)
             ->count();
 
         $this->enrollment->progress_percent = $totalBlocks > 0 ? (int) round($doneBlocks / $totalBlocks * 100) : 0;
         $this->enrollment->save();
+
+        if ($totalBlocks > 0 && $doneBlocks === $totalBlocks) {
+            app(CourseCompletionService::class)->finalize($this->enrollment);
+        }
     }
 
     public function render()

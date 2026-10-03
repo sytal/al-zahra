@@ -31,4 +31,11 @@ return [
     'leave_confirm' => 'Leaving frees a slot for another course. Your progress is kept — re-enrolling resumes where you left off.',
     'enrollment_cap_title' => 'You can be enrolled in up to 2 courses at a time.',
     'enrollment_cap_body' => 'Finish one of your current courses to enroll in a new one.',
+    'complete_title' => 'Course completed',
+    'complete_body' => 'Congratulations — you have finished this course.',
+    'complete_score' => 'Final score: :score%',
+    'complete_score_none' => 'This course had no graded components.',
+    'complete_download_certificate' => 'Download certificate',
+    'complete_certificate_preparing' => 'Your certificate is still being prepared — check back shortly.',
+    'complete_back_to_courses' => 'Back to my courses',
 ];

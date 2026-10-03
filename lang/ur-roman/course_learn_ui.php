@@ -31,4 +31,11 @@ return [
     'leave_confirm' => 'Chornay se ek slot khaali ho jata hai. Aap ki progress mehfooz rehti hai — dobara enroll karne par wahin se shuru hoga.',
     'enrollment_cap_title' => 'Aap ek waqt mein sirf 2 courses mein enroll ho sakte hain.',
     'enrollment_cap_body' => 'Naya course lene ke liye apna koi ek jaari course mukammal karein.',
+    'complete_title' => 'Course mukammal ho gaya',
+    'complete_body' => 'Mubarak ho — aap ne yeh course mukammal kar liya hai.',
+    'complete_score' => 'Final score: :score%',
+    'complete_score_none' => 'Is course mein koi graded hissa nahi tha.',
+    'complete_download_certificate' => 'Certificate download karein',
+    'complete_certificate_preparing' => 'Aap ka certificate abhi tayyar ho raha hai — thori dair baad dobara dekhein.',
+    'complete_back_to_courses' => 'Mere courses par wapas jaayein',
 ];

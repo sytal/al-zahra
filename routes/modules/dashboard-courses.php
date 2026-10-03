@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Course\Livewire\CourseCompleteScreen;
 use App\Modules\Course\Livewire\CourseLearn;
 use App\Modules\Course\Livewire\LessonViewer;
 use App\Modules\Course\Livewire\MyCourses;
@@ -14,3 +15,4 @@ Route::get('/dashboard/courses/{course:slug}/learn/{lesson:uuid}', LessonViewer:
 // flat-lesson LessonViewer above, which stays for the old course_lessons data.
 Route::get('/dashboard/courses/{course:slug}/study', CourseLearn::class)->name('dashboard.courses.study');
 Route::get('/dashboard/courses/{course:slug}/study/{module:uuid}', CourseLearn::class)->name('dashboard.courses.study-module');
+Route::get('/dashboard/courses/{course:slug}/complete', CourseCompleteScreen::class)->name('dashboard.courses.complete');

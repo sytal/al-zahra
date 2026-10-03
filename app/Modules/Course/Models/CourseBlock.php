@@ -9,11 +9,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Support\LogOptions;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Translatable\HasTranslations;
 
-class CourseBlock extends Model
+class CourseBlock extends Model implements HasMedia
 {
-    use HasActivityLog, HasTranslations, HasUuid, SoftDeletes {
+    use HasActivityLog, HasTranslations, HasUuid, InteractsWithMedia, SoftDeletes {
         HasActivityLog::getActivitylogOptions as private baseActivitylogOptions;
     }
 
@@ -57,6 +59,18 @@ class CourseBlock extends Model
     public function progressFor(Enrollment $enrollment): ?CourseBlockProgress
     {
         return $this->progress()->where('enrollment_id', $enrollment->id)->first();
+    }
+
+    /**
+     * Admin-uploaded task attachments. NOT wired into the Filament form yet
+     * (content.files keeps its plain JSON-path FileUpload — no
+     * filament/spatie-laravel-media-library-plugin package installed in
+     * this project; see docs/COURSE-BUILDER-DEV-PLAN.md Phase 5 notes).
+     * Collection exists so it can be adopted later without a migration.
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('attachments');
     }
 
     public function getActivitylogOptions(): LogOptions
