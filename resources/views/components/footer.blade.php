@@ -67,8 +67,8 @@ $linkClass = 'link-underline inline-flex min-h-11 items-center text-body/85 tran
             </div>
         @endunless
 
-        <div class="grid gap-10 pb-10 pt-4 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8 {{ $minimal ? 'pt-10' : '' }}">
-            <div class="min-w-0 space-y-5 sm:col-span-2 lg:col-span-4">
+        <div class="grid gap-10 pb-10 pt-4 sm:grid-cols-2 md:grid-cols-12 md:gap-8 {{ $minimal ? 'pt-10' : '' }}">
+            <div class="min-w-0 space-y-5 sm:col-span-2 md:col-span-4">
                 <a href="{{ route('home', $locale) }}" wire:navigate class="inline-block rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-secondary" aria-label="{{ config('app.name') }}">
                     <x-brand.logo style="direction:ltr" class="me-3 h-11 w-auto overflow-visible" />
                 </a>
@@ -102,7 +102,7 @@ $linkClass = 'link-underline inline-flex min-h-11 items-center text-body/85 tran
             </div>
 
             @unless ($minimal)
-                <nav class="min-w-0 lg:col-span-2" aria-labelledby="footer-explore">
+                <nav class="min-w-0 md:col-span-2" aria-labelledby="footer-explore">
                     <h2 id="footer-explore" class="flex items-center gap-2 text-sm font-semibold text-strong"><span class="star-mark text-xs" aria-hidden="true"></span>{{ __('shell_public.col_explore') }}</h2>
                     <ul class="mt-3 space-y-0.5 text-sm">
                         @foreach ($exploreLinks as [$href, $label])
@@ -111,7 +111,7 @@ $linkClass = 'link-underline inline-flex min-h-11 items-center text-body/85 tran
                     </ul>
                 </nav>
 
-                <nav class="min-w-0 lg:col-span-3" aria-labelledby="footer-institute">
+                <nav class="min-w-0 md:col-span-3" aria-labelledby="footer-institute">
                     <h2 id="footer-institute" class="flex items-center gap-2 text-sm font-semibold text-strong"><span class="star-mark text-xs" aria-hidden="true"></span>{{ __('shell_public.col_institute') }}</h2>
                     <ul class="mt-3 space-y-0.5 text-sm">
                         @foreach ($instituteLinks as [$href, $label])
@@ -120,7 +120,7 @@ $linkClass = 'link-underline inline-flex min-h-11 items-center text-body/85 tran
                     </ul>
                 </nav>
 
-                <nav class="min-w-0 lg:col-span-3" aria-labelledby="footer-account">
+                <nav class="min-w-0 md:col-span-3" aria-labelledby="footer-account">
                     <h2 id="footer-account" class="flex items-center gap-2 text-sm font-semibold text-strong"><span class="star-mark text-xs" aria-hidden="true"></span>{{ __('shell_public.col_account') }}</h2>
                     <ul class="mt-3 space-y-0.5 text-sm">
                         @guest
