@@ -4,6 +4,7 @@ return [
     'nav_dashboard' => 'Dashboard',
     'nav_my_courses' => 'My Courses',
     'nav_consultations' => 'Consultations',
+    'nav_support' => 'Help',
     'nav_certificates' => 'Certificates',
     'nav_profile' => 'Profile',
     'nav_activity' => 'Activity',
@@ -42,6 +43,21 @@ return [
     'consultations_answer' => 'Answer',
     'consultations_not_answered_yet' => 'Not answered yet.',
     'close' => 'Close',
+
+    // Support tickets (Phase 8)
+    'support_page_title' => 'Help',
+    'support_lead' => 'Reach out to our team and track replies here.',
+    'support_ask_new' => 'New Ticket',
+    'no_support_tickets_yet' => 'No support tickets yet.',
+    'support_empty_message' => 'Raise a ticket and our team will get back to you.',
+    'support_col_subject' => 'Subject',
+    'support_col_status' => 'Status',
+    'support_col_date' => 'Date',
+    'support_view' => 'View',
+    'support_form_subject' => 'Subject',
+    'support_form_message' => 'Message',
+    'support_form_reply' => 'Reply',
+    'support_send' => 'Send',
 
     // Certificates index (C15)
     'certificates_page_title' => 'My Certificates',

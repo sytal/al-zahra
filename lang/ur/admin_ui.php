@@ -138,6 +138,12 @@ return [
     'question' => 'سوال',
     'received' => 'موصول',
     'request' => 'درخواست',
+    'thread' => 'گفتگو',
+    'staff' => 'عملہ',
+    'send_reply' => 'جواب بھیجیں',
+    'reply' => 'جواب',
+    'reply_sent' => 'جواب بھیج دیا گیا',
+    'this_will_save_the_reply_and_mark_the_tic' => 'یہ جواب محفوظ کرے گا اور ٹکٹ کو جواب شدہ نشان زد کرے گا۔',
     'requested_at' => 'درخواست کا وقت',
     'waiting_for' => 'انتظار کی مدت',
     'waiting_duration' => ':time سے منتظر',
@@ -176,6 +182,8 @@ return [
   'enum' => [
     'pending' => 'زیر التوا',
     'answered' => 'جواب دیا گیا',
+    'open' => 'کھلا',
+    'closed' => 'بند',
     'scheduled' => 'مقرر',
     'completed' => 'مکمل',
     'cancelled' => 'منسوخ',
@@ -243,6 +251,10 @@ return [
     'certificate' => [
       'one' => 'سرٹیفکیٹ',
       'many' => 'سرٹیفکیٹس',
+    ],
+    'support_ticket' => [
+      'one' => 'سپورٹ ٹکٹ',
+      'many' => 'سپورٹ ٹکٹس',
     ],
     'consultation' => [
       'one' => 'مشاورت',

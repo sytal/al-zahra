@@ -6,11 +6,14 @@
 use App\Modules\Certificate\Http\Controllers\CertificateDownloadController;
 use App\Modules\Certificate\Livewire\DashboardCertificateIndex;
 use App\Modules\Consultation\Livewire\DashboardConsultationIndex;
+use App\Modules\Support\Livewire\DashboardSupportIndex;
 use App\Modules\User\Livewire\DashboardActivityIndex;
 use App\Modules\User\Livewire\ProfileEdit;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard/consultations', DashboardConsultationIndex::class)->name('dashboard.consultations.index');
+
+Route::get('/dashboard/support', DashboardSupportIndex::class)->name('dashboard.support.index');
 
 Route::get('/dashboard/activity', DashboardActivityIndex::class)->name('dashboard.activity.index');
 

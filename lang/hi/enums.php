@@ -27,6 +27,11 @@ return [
         'completed' => 'पूर्ण',
         'cancelled' => 'रद्द',
     ],
+    'support_status' => [
+        'open' => 'खुला',
+        'answered' => 'उत्तर दिया गया',
+        'closed' => 'बंद',
+    ],
     'social' => [
         'linkedin' => 'LinkedIn',
         'researchgate' => 'ResearchGate',

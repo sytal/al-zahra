@@ -6,6 +6,7 @@ return [
     'nav_dashboard' => 'داشبورد',
     'nav_my_courses' => 'دوره‌های من',
     'nav_consultations' => 'مشاوره‌ها',
+    'nav_support' => 'پشتیبانی',
     'nav_certificates' => 'گواهینامه‌ها',
     'nav_profile' => 'پروفایل',
     'nav_activity' => 'فعالیت',
@@ -44,6 +45,21 @@ return [
     'consultations_answer' => 'پاسخ',
     'consultations_not_answered_yet' => 'هنوز پاسخ داده نشده است.',
     'close' => 'بستن',
+
+    // Support tickets (Phase 8)
+    'support_page_title' => 'پشتیبانی',
+    'support_lead' => 'با تیم ما تماس بگیرید و پاسخ‌ها را اینجا پیگیری کنید.',
+    'support_ask_new' => 'تیکت جدید',
+    'no_support_tickets_yet' => 'هنوز هیچ تیکت پشتیبانی وجود ندارد.',
+    'support_empty_message' => 'یک تیکت ثبت کنید، تیم ما با شما تماس خواهد گرفت.',
+    'support_col_subject' => 'موضوع',
+    'support_col_status' => 'وضعیت',
+    'support_col_date' => 'تاریخ',
+    'support_view' => 'مشاهده',
+    'support_form_subject' => 'موضوع',
+    'support_form_message' => 'پیام',
+    'support_form_reply' => 'پاسخ',
+    'support_send' => 'ارسال',
 
     // Certificates index (C15)
     'certificates_page_title' => 'گواهینامه‌های من',

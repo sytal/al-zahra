@@ -6,6 +6,7 @@ return [
     'nav_dashboard' => 'ڈیش بورڈ',
     'nav_my_courses' => 'میرے کورسز',
     'nav_consultations' => 'مشاورتیں',
+    'nav_support' => 'مدد',
     'nav_certificates' => 'سرٹیفکیٹس',
     'nav_profile' => 'پروفائل',
     'nav_activity' => 'سرگرمی',
@@ -44,6 +45,21 @@ return [
     'consultations_answer' => 'جواب',
     'consultations_not_answered_yet' => 'ابھی جواب نہیں دیا گیا۔',
     'close' => 'بند کریں',
+
+    // Support tickets (Phase 8)
+    'support_page_title' => 'مدد',
+    'support_lead' => 'ہماری ٹیم سے رابطہ کریں اور جوابات یہاں دیکھیں۔',
+    'support_ask_new' => 'نیا ٹکٹ',
+    'no_support_tickets_yet' => 'ابھی تک کوئی سپورٹ ٹکٹ نہیں۔',
+    'support_empty_message' => 'ٹکٹ بنائیں، ہماری ٹیم آپ سے رابطہ کرے گی۔',
+    'support_col_subject' => 'موضوع',
+    'support_col_status' => 'حیثیت',
+    'support_col_date' => 'تاریخ',
+    'support_view' => 'دیکھیں',
+    'support_form_subject' => 'موضوع',
+    'support_form_message' => 'پیغام',
+    'support_form_reply' => 'جواب',
+    'support_send' => 'بھیجیں',
 
     // Certificates index (C15)
     'certificates_page_title' => 'میرے سرٹیفکیٹس',

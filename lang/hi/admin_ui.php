@@ -137,6 +137,12 @@ return [
     'question' => 'प्रश्न',
     'received' => 'प्राप्त',
     'request' => 'अनुरोध',
+    'thread' => 'थ्रेड',
+    'staff' => 'स्टाफ',
+    'send_reply' => 'उत्तर भेजें',
+    'reply' => 'उत्तर',
+    'reply_sent' => 'उत्तर भेजा गया',
+    'this_will_save_the_reply_and_mark_the_tic' => 'यह उत्तर सहेजेगा और टिकट को उत्तरित चिह्नित करेगा।',
     'requested_at' => 'अनुरोध का समय',
     'waiting_for' => 'प्रतीक्षा',
     'waiting_duration' => ':time से प्रतीक्षारत',
@@ -175,6 +181,8 @@ return [
   'enum' => [
     'pending' => 'लंबित',
     'answered' => 'उत्तर दिया गया',
+    'open' => 'खुला',
+    'closed' => 'बंद',
     'scheduled' => 'निर्धारित',
     'completed' => 'पूर्ण',
     'cancelled' => 'रद्द',
@@ -242,6 +250,10 @@ return [
     'certificate' => [
       'one' => 'प्रमाणपत्र',
       'many' => 'प्रमाणपत्र',
+    ],
+    'support_ticket' => [
+      'one' => 'सहायता टिकट',
+      'many' => 'सहायता टिकट',
     ],
     'consultation' => [
       'one' => 'परामर्श',

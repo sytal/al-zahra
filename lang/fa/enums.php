@@ -27,6 +27,11 @@ return [
         'completed' => 'تکمیل‌شده',
         'cancelled' => 'لغو شده',
     ],
+    'support_status' => [
+        'open' => 'باز',
+        'answered' => 'پاسخ داده شد',
+        'closed' => 'بسته',
+    ],
     'social' => [
         'linkedin' => 'LinkedIn',
         'researchgate' => 'ResearchGate',

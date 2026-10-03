@@ -27,6 +27,11 @@ return [
         'completed' => 'Mukammal',
         'cancelled' => 'Mansookh',
     ],
+    'support_status' => [
+        'open' => 'Khula',
+        'answered' => 'Jawab diya gaya',
+        'closed' => 'Band',
+    ],
     'social' => [
         'linkedin' => 'LinkedIn',
         'researchgate' => 'ResearchGate',

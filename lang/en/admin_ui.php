@@ -133,6 +133,12 @@ return [
     'received' => 'Received',
     'reference' => 'Reference',
     'request' => 'Request',
+    'thread' => 'Thread',
+    'staff' => 'Staff',
+    'send_reply' => 'Send reply',
+    'reply' => 'Reply',
+    'reply_sent' => 'Reply sent',
+    'this_will_save_the_reply_and_mark_the_tic' => 'This will save the reply and mark the ticket as answered.',
     'requested_at' => 'Requested at',
     'requires_submission' => 'Requires a submission',
     'waiting_for' => 'Waiting for',
@@ -175,6 +181,8 @@ return [
   'enum' => [
     'pending' => 'Pending',
     'answered' => 'Answered',
+    'open' => 'Open',
+    'closed' => 'Closed',
     'scheduled' => 'Scheduled',
     'completed' => 'Completed',
     'cancelled' => 'Cancelled',
@@ -246,6 +254,10 @@ return [
     'consultation' => [
       'one' => 'Consultation',
       'many' => 'Consultations',
+    ],
+    'support_ticket' => [
+      'one' => 'Support ticket',
+      'many' => 'Support tickets',
     ],
     'contact_message' => [
       'one' => 'Contact message',

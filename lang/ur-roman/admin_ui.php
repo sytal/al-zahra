@@ -138,6 +138,12 @@ return [
     'question' => 'Sawal',
     'received' => 'Mausool',
     'request' => 'Darkhwast',
+    'thread' => 'Guftagu',
+    'staff' => 'Amla',
+    'send_reply' => 'Jawab bhejein',
+    'reply' => 'Jawab',
+    'reply_sent' => 'Jawab bhej diya gaya',
+    'this_will_save_the_reply_and_mark_the_tic' => 'Yeh jawab mehfooz karega aur ticket ko jawab shuda nishan zad karega.',
     'requested_at' => 'Darkhwast ka waqt',
     'waiting_for' => 'Intezar ki muddat',
     'waiting_duration' => ':time se intezar mein',
@@ -176,6 +182,8 @@ return [
   'enum' => [
     'pending' => 'Zer-e-iltawa',
     'answered' => 'Jawab diya gaya',
+    'open' => 'Khula',
+    'closed' => 'Band',
     'scheduled' => 'Muqarrar',
     'completed' => 'Mukammal',
     'cancelled' => 'Mansookh',
@@ -243,6 +251,10 @@ return [
     'certificate' => [
       'one' => 'Certificate',
       'many' => 'Certificates',
+    ],
+    'support_ticket' => [
+      'one' => 'Support ticket',
+      'many' => 'Support tickets',
     ],
     'consultation' => [
       'one' => 'Mushawarat',

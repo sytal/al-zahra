@@ -137,6 +137,12 @@ return [
     'question' => 'پرسش',
     'received' => 'دریافت‌شده',
     'request' => 'درخواست',
+    'thread' => 'رشته',
+    'staff' => 'کارمند',
+    'send_reply' => 'ارسال پاسخ',
+    'reply' => 'پاسخ',
+    'reply_sent' => 'پاسخ ارسال شد',
+    'this_will_save_the_reply_and_mark_the_tic' => 'این پاسخ را ذخیره می‌کند و تیکت را پاسخ‌داده‌شده علامت می‌زند.',
     'requested_at' => 'زمان درخواست',
     'waiting_for' => 'مدت انتظار',
     'waiting_duration' => ':time در انتظار',
@@ -175,6 +181,8 @@ return [
   'enum' => [
     'pending' => 'در انتظار',
     'answered' => 'پاسخ داده شد',
+    'open' => 'باز',
+    'closed' => 'بسته',
     'scheduled' => 'زمان‌بندی‌شده',
     'completed' => 'تکمیل‌شده',
     'cancelled' => 'لغوشده',
@@ -242,6 +250,10 @@ return [
     'certificate' => [
       'one' => 'گواهی',
       'many' => 'گواهی‌ها',
+    ],
+    'support_ticket' => [
+      'one' => 'تیکت پشتیبانی',
+      'many' => 'تیکت‌های پشتیبانی',
     ],
     'consultation' => [
       'one' => 'مشاوره',

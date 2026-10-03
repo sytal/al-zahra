@@ -6,6 +6,7 @@ return [
     'nav_dashboard' => 'Dashboard',
     'nav_my_courses' => 'Mere Courses',
     'nav_consultations' => 'Consultations',
+    'nav_support' => 'Madad',
     'nav_certificates' => 'Certificates',
     'nav_profile' => 'Profile',
     'nav_activity' => 'Sargarmi',
@@ -44,6 +45,21 @@ return [
     'consultations_answer' => 'Jawab',
     'consultations_not_answered_yet' => 'Abhi jawab nahi mila.',
     'close' => 'Band Karein',
+
+    // Support tickets (Phase 8)
+    'support_page_title' => 'Madad',
+    'support_lead' => 'Hamari team se raabta karein aur jawabat yahan dekhein.',
+    'support_ask_new' => 'Naya Ticket',
+    'no_support_tickets_yet' => 'Abhi tak koi support ticket nahi.',
+    'support_empty_message' => 'Ticket banayein, hamari team aap se raabta karegi.',
+    'support_col_subject' => 'Mozu',
+    'support_col_status' => 'Haisiyat',
+    'support_col_date' => 'Tareekh',
+    'support_view' => 'Dekhein',
+    'support_form_subject' => 'Mozu',
+    'support_form_message' => 'Paigham',
+    'support_form_reply' => 'Jawab',
+    'support_send' => 'Bhejein',
 
     // Certificates index (C15)
     'certificates_page_title' => 'Mere Certificates',

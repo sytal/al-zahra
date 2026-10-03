@@ -27,6 +27,11 @@ return [
         'completed' => 'مکمل',
         'cancelled' => 'منسوخ',
     ],
+    'support_status' => [
+        'open' => 'کھلا',
+        'answered' => 'جواب دیا گیا',
+        'closed' => 'بند',
+    ],
     'social' => [
         'linkedin' => 'LinkedIn',
         'researchgate' => 'ResearchGate',

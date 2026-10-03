@@ -25,6 +25,11 @@ return [
         'completed' => 'Completed',
         'cancelled' => 'Cancelled',
     ],
+    'support_status' => [
+        'open' => 'Open',
+        'answered' => 'Answered',
+        'closed' => 'Closed',
+    ],
     'social' => [
         'linkedin' => 'LinkedIn',
         'researchgate' => 'ResearchGate',

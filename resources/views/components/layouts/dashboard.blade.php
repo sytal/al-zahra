@@ -6,6 +6,7 @@ $links = [
     ['route' => 'dashboard', 'match' => ['dashboard'], 'label' => __('dashboard.nav_dashboard'), 'icon' => 'squares-2x2'],
     ['route' => 'dashboard.courses.index', 'match' => ['dashboard.courses.*'], 'label' => __('dashboard.nav_my_courses'), 'icon' => 'academic-cap'],
     ['route' => 'dashboard.consultations.index', 'match' => ['dashboard.consultations.*'], 'label' => __('dashboard.nav_consultations'), 'icon' => 'chat-bubble-left-right'],
+    ['route' => 'dashboard.support.index', 'match' => ['dashboard.support.*'], 'label' => __('dashboard.nav_support'), 'icon' => 'lifebuoy'],
     ['route' => 'dashboard.certificates.index', 'match' => ['dashboard.certificates.*'], 'label' => __('dashboard.nav_certificates'), 'icon' => 'document-check'],
     ['route' => 'dashboard.profile.edit', 'match' => ['dashboard.profile.*'], 'label' => __('dashboard.nav_profile'), 'icon' => 'user-circle'],
     ['route' => 'dashboard.activity.index', 'match' => ['dashboard.activity.*'], 'label' => __('dashboard.nav_activity'), 'icon' => 'clock'],
